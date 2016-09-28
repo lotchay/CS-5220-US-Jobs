@@ -51,14 +51,14 @@ public class SchemaGeneration {
 				
 				out.write( line );
                 out.newLine();
-			}
+			}									
+		}
+		
+		scanner.close();
+		
+		if ( out != null ) {
 			
-			scanner.close();
-			
-			if ( out != null ) {
-				
-				out.close();
-			}
+			out.close();
 		}
 
 		System.exit( 0 );
