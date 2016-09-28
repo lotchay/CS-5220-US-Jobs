@@ -13,7 +13,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class User implements Serializable{
+public class User implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -22,9 +23,14 @@ public class User implements Serializable{
 	private Integer id;
 	
 	//login info
-	private String email;
+	private String username;
+	
 	private String password;
 	
+	private boolean enabled = true;
+	
+	private String email;
+		
 	//user type either 0 for seeker, 1 for employer
 	private int userType;
 	
@@ -52,6 +58,22 @@ public class User implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	public String getPassword() {
