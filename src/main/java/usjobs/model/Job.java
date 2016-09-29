@@ -2,6 +2,7 @@ package usjobs.model;
 
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -26,6 +27,22 @@ public class Job implements Serializable {
 	
 	@Column(name = "job_title")
 	private String jobTitle;
+	
+	@Column(name = "job_description")
+	private String jobDescription;
+	
+	private String employer;
+	
+	private String location;
+	
+	private String salary;
+	
+	@Column(name = "date_posted")
+	private Date datePosted;
+	
+	@Column(name = "date_closed")
+	private Date dateClosed;
+	
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "applied",
@@ -56,8 +73,53 @@ public class Job implements Serializable {
 	public void setUsersApplied(List<User> usersApplied) {
 		this.usersApplied = usersApplied;
 	}
-	
-	
-	
 
+	public String getJobDescription() {
+		return jobDescription;
+	}
+
+	public void setJobDescription(String jobDescription) {
+		this.jobDescription = jobDescription;
+	}
+
+	public String getEmployer() {
+		return employer;
+	}
+
+	public void setEmployer(String employer) {
+		this.employer = employer;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getSalary() {
+		return salary;
+	}
+
+	public void setSalary(String salary) {
+		this.salary = salary;
+	}
+
+	public Date getDatePosted() {
+		return datePosted;
+	}
+
+	public void setDatePosted(Date datePosted) {
+		this.datePosted = datePosted;
+	}
+
+	public Date getDateClosed() {
+		return dateClosed;
+	}
+
+	public void setDateClosed(Date dateClosed) {
+		this.dateClosed = dateClosed;
+	}
+	
 }
