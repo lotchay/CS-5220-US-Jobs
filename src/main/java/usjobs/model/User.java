@@ -5,10 +5,12 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -39,6 +41,12 @@ public class User implements Serializable {
 	
 	@Column(name = "last_name")
 	private String lastName;
+	
+	private String address;
+	
+	@ElementCollection
+	@OrderBy("asc")
+	private List<String> phones;
 	
 	//jobs applied to
 	@ManyToMany(mappedBy = "usersApplied", cascade = CascadeType.ALL)
@@ -116,4 +124,20 @@ public class User implements Serializable {
 		this.appliedJobs = appliedJobs;
 	}
 
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public List<String> getPhones() {
+		return phones;
+	}
+
+	public void setPhones(List<String> phones) {
+		this.phones = phones;
+	}
+	
 }
