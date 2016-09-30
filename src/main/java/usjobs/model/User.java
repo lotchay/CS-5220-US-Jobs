@@ -55,13 +55,7 @@ public class User implements Serializable {
 	@Column(name = "last_name")
 	private String lastName;
 	
-	@ElementCollection
-	@CollectionTable(
-		name="user_addresses",
-		joinColumns = @JoinColumn(name = "user_id")
-	)
-	@Column(name="address")
-	private List<String> addresses;
+	private String address;
 	
 	@ElementCollection
 	@CollectionTable(
@@ -148,12 +142,12 @@ public class User implements Serializable {
 		this.appliedJobs = appliedJobs;
 	}
 
-	public List<String> getAddresses() {
-		return addresses;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAddresses(List<String> addresses) {
-		this.addresses = addresses;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public List<String> getPhones() {
