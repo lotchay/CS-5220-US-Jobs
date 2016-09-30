@@ -34,6 +34,11 @@ public class User implements Serializable {
 	
 	private boolean enabled = true;
 	
+	private boolean reported;
+	
+	@Column(name="supress_contact")
+	private boolean supressContact;
+	
 	private String email;
 		
 	@ElementCollection
@@ -50,7 +55,13 @@ public class User implements Serializable {
 	@Column(name = "last_name")
 	private String lastName;
 	
-	private String address;
+	@ElementCollection
+	@CollectionTable(
+		name="user_addresses",
+		joinColumns = @JoinColumn(name = "user_id")
+	)
+	@Column(name="address")
+	private List<String> addresses;
 	
 	@ElementCollection
 	@CollectionTable(
@@ -67,6 +78,11 @@ public class User implements Serializable {
 
 	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
 	List<Resume> resumes;
+	
+	private String experience;
+	
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	List<Degree> degrees;
 	
 	public Integer getId() {
 		return id;
@@ -132,12 +148,12 @@ public class User implements Serializable {
 		this.appliedJobs = appliedJobs;
 	}
 
-	public String getAddress() {
-		return address;
+	public List<String> getAddresses() {
+		return addresses;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAddresses(List<String> addresses) {
+		this.addresses = addresses;
 	}
 
 	public List<String> getPhones() {
@@ -162,5 +178,37 @@ public class User implements Serializable {
 
 	public void setResumes(List<Resume> resumes) {
 		this.resumes = resumes;
+	}
+
+	public List<Degree> getDegrees() {
+		return degrees;
+	}
+
+	public void setDegrees(List<Degree> degrees) {
+		this.degrees = degrees;
+	}
+
+	public String getExperience() {
+		return experience;
+	}
+
+	public void setExperience(String experience) {
+		this.experience = experience;
+	}
+
+	public boolean isReported() {
+		return reported;
+	}
+
+	public void setReported(boolean reported) {
+		this.reported = reported;
+	}
+
+	public boolean isSupressContact() {
+		return supressContact;
+	}
+
+	public void setSupressContact(boolean supressContact) {
+		this.supressContact = supressContact;
 	}
 }
