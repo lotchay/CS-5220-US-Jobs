@@ -12,7 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "jobs")
@@ -28,6 +31,7 @@ public class Job implements Serializable {
 	private String jobTitle;
 	
 	@Column(name = "job_description")
+	@Type(type="text")
 	private String jobDescription;
 	
 	private String employer;
@@ -35,6 +39,8 @@ public class Job implements Serializable {
 	private String location;
 	
 	private String salary;
+	
+	private String website;
 	
 	@Column(name = "date_posted")
 	private Date datePosted;
@@ -54,12 +60,9 @@ public class Job implements Serializable {
 			inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> usersFavorited;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "resumes_submit",
-			joinColumns = @JoinColumn(name = "job_id"),
-			inverseJoinColumns = @JoinColumn(name = "resume_id"))
-	private List<Resume> resumes;
-
+	@OneToMany(mappedBy="jobApplied", cascade = CascadeType.ALL)
+	List<Application> applications;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -140,11 +143,19 @@ public class Job implements Serializable {
 		this.usersFavorited = usersFavorited;
 	}
 
-	public List<Resume> getResumes() {
-		return resumes;
+	public String getWebsite() {
+		return website;
 	}
 
-	public void setResumes(List<Resume> resumes) {
-		this.resumes = resumes;
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
+	public List<Application> getApplications() {
+		return applications;
+	}
+
+	public void setApplications(List<Application> applications) {
+		this.applications = applications;
 	}
 }

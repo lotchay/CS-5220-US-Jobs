@@ -11,10 +11,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "users")
@@ -73,11 +76,15 @@ public class User implements Serializable {
 	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
 	List<Resume> resumes;
 	
+	@Type(type="text")
 	private String experience;
 	
 	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
 	List<Degree> degrees;
 	
+	@Column(name="job_titles")
+	private String jobTitles;
+		
 	public Integer getId() {
 		return id;
 	}
@@ -204,5 +211,13 @@ public class User implements Serializable {
 
 	public void setSupressContact(boolean supressContact) {
 		this.supressContact = supressContact;
+	}
+
+	public String getJobTitles() {
+		return jobTitles;
+	}
+
+	public void setJobTitles(String jobTitles) {
+		this.jobTitles = jobTitles;
 	}
 }
