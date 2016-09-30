@@ -4,12 +4,15 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
@@ -33,8 +36,13 @@ public class User implements Serializable {
 	
 	private String email;
 		
-	//user type either 0 for seeker, 1 for employer
-	private int userType;
+	@ElementCollection
+	@CollectionTable(
+		name="user_roles",
+		joinColumns = @JoinColumn(name = "user_id")
+	)
+	@Column(name="role")
+	private List<String> userRoles;
 	
 	@Column(name = "first_name")
 	private String firstName;
@@ -45,6 +53,11 @@ public class User implements Serializable {
 	private String address;
 	
 	@ElementCollection
+	@CollectionTable(
+		name="user_phones",
+		joinColumns = @JoinColumn(name = "user_id")
+	)
+	@Column(name="phone")
 	@OrderBy("asc")
 	private List<String> phones;
 	
@@ -52,6 +65,9 @@ public class User implements Serializable {
 	@ManyToMany(mappedBy = "usersApplied", cascade = CascadeType.ALL)
 	private List<Job> appliedJobs;
 
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	List<Resume> resumes;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -90,14 +106,6 @@ public class User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public int getUserType() {
-		return userType;
-	}
-
-	public void setUserType(int userType) {
-		this.userType = userType;
 	}
 
 	public String getFirstName() {
@@ -139,5 +147,12 @@ public class User implements Serializable {
 	public void setPhones(List<String> phones) {
 		this.phones = phones;
 	}
-	
+
+	public List<String> getUserRoles() {
+		return userRoles;
+	}
+
+	public void setUserRoles(List<String> userRoles) {
+		this.userRoles = userRoles;
+	}
 }

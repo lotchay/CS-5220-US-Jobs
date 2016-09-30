@@ -43,12 +43,23 @@ public class Job implements Serializable {
 	@Column(name = "date_closed")
 	private Date dateClosed;
 	
-	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "applied",
-			joinColumns = @JoinColumn(name = "user_id"),
-			inverseJoinColumns = @JoinColumn(name = "job_id"))
+			joinColumns = @JoinColumn(name = "job_id"),
+			inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> usersApplied;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "favorites",
+			joinColumns = @JoinColumn(name = "job_id"),
+			inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private List<User> usersFavorited;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "resumes_submit",
+			joinColumns = @JoinColumn(name = "job_id"),
+			inverseJoinColumns = @JoinColumn(name = "resume_id"))
+	private List<Resume> resumes;
 
 	public Integer getId() {
 		return id;
@@ -120,6 +131,14 @@ public class Job implements Serializable {
 
 	public void setDateClosed(Date dateClosed) {
 		this.dateClosed = dateClosed;
+	}
+
+	public List<User> getUsersFavorited() {
+		return usersFavorited;
+	}
+
+	public void setUsersFavorited(List<User> usersFavorited) {
+		this.usersFavorited = usersFavorited;
 	}
 	
 }
