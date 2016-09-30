@@ -41,6 +41,8 @@ public class Job implements Serializable {
 	
 	private String salary;
 	
+	private String website;
+	
 	@Column(name = "date_posted")
 	private Date datePosted;
 	
@@ -140,5 +142,21 @@ public class Job implements Serializable {
 
 	public void setUsersFavorited(List<User> usersFavorited) {
 		this.usersFavorited = usersFavorited;
-	}	
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
+	public List<Application> getApplications() {
+		return applications;
+	}
+
+	public void setApplications(List<Application> applications) {
+		this.applications = applications;
+	}
 }
