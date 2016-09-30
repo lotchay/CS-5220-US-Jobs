@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -34,7 +35,9 @@ public class Job implements Serializable {
 	@Type(type="text")
 	private String jobDescription;
 	
-	private String employer;
+	@ManyToOne
+	@JoinColumn(name = "employer_id")
+	private Employer company;
 	
 	private String location;
 	
@@ -63,6 +66,17 @@ public class Job implements Serializable {
 	@OneToMany(mappedBy="jobApplied", cascade = CascadeType.ALL)
 	List<Application> applications;
 	
+	@OneToMany(mappedBy="jobReviewed", cascade = CascadeType.ALL)
+	List<JobReview> jobReviews;
+	
+	public List<JobReview> getJobReviews() {
+		return jobReviews;
+	}
+
+	public void setJobReviews(List<JobReview> jobReviews) {
+		this.jobReviews = jobReviews;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -95,12 +109,12 @@ public class Job implements Serializable {
 		this.jobDescription = jobDescription;
 	}
 
-	public String getEmployer() {
-		return employer;
+	public Employer getCompany() {
+		return company;
 	}
 
-	public void setEmployer(String employer) {
-		this.employer = employer;
+	public void setCompany(Employer company) {
+		this.company = company;
 	}
 
 	public String getLocation() {

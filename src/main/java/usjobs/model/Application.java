@@ -39,7 +39,7 @@ public class Application {
 	private String coverLetter;
 	
 	@ManyToOne
-	@JoinColumn(name="job_applied")
+	@JoinColumn(name="job_id")
 	private Job jobApplied;
 	
 	@OneToOne
