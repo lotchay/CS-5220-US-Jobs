@@ -140,5 +140,12 @@ public class Job implements Serializable {
 	public void setUsersFavorited(List<User> usersFavorited) {
 		this.usersFavorited = usersFavorited;
 	}
-	
+
+	public List<Resume> getResumes() {
+		return resumes;
+	}
+
+	public void setResumes(List<Resume> resumes) {
+		this.resumes = resumes;
+	}
 }

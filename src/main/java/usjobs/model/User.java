@@ -155,4 +155,12 @@ public class User implements Serializable {
 	public void setUserRoles(List<String> userRoles) {
 		this.userRoles = userRoles;
 	}
+
+	public List<Resume> getResumes() {
+		return resumes;
+	}
+
+	public void setResumes(List<Resume> resumes) {
+		this.resumes = resumes;
+	}
 }

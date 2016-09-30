@@ -90,4 +90,12 @@ public class Resume implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public List<Job> getJobs() {
+		return jobs;
+	}
+
+	public void setJobs(List<Job> jobs) {
+		this.jobs = jobs;
+	}
 }
