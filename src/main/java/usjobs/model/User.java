@@ -11,7 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
@@ -82,7 +81,7 @@ public class User implements Serializable {
 	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
 	List<Degree> degrees;
 	
-	@Column(name="job_titles")
+	@Column(name="job_title")
 	private String jobTitles;
 		
 	public Integer getId() {
