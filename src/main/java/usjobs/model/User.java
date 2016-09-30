@@ -83,6 +83,12 @@ public class User implements Serializable {
 	
 	@Column(name="job_title")
 	private String jobTitles;
+	
+	@OneToMany(mappedBy="userPosted", cascade = CascadeType.ALL)
+	List<JobReview> jobsReviewed;
+	
+	@OneToMany(mappedBy="userPosted", cascade = CascadeType.ALL)
+	List<EmployerReview> employersReviewed;
 		
 	public Integer getId() {
 		return id;
@@ -219,4 +225,21 @@ public class User implements Serializable {
 	public void setJobTitles(String jobTitles) {
 		this.jobTitles = jobTitles;
 	}
+
+	public List<JobReview> getJobsReviewed() {
+		return jobsReviewed;
+	}
+
+	public void setJobsReviewed(List<JobReview> jobsReviewed) {
+		this.jobsReviewed = jobsReviewed;
+	}
+
+	public List<EmployerReview> getEmployersReviewed() {
+		return employersReviewed;
+	}
+
+	public void setEmployersReviewed(List<EmployerReview> employersReviewed) {
+		this.employersReviewed = employersReviewed;
+	}
+	
 }
