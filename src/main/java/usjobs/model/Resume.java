@@ -40,9 +40,6 @@ public class Resume implements Serializable {
 	@JoinColumn(name="user_id")
 	private User user;
 	
-	@ManyToMany(mappedBy = "resumes", cascade = CascadeType.ALL)
-	private List<Job> jobs;
-
 	public Integer getId() {
 		return id;
 	}
@@ -89,13 +86,5 @@ public class Resume implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public List<Job> getJobs() {
-		return jobs;
-	}
-
-	public void setJobs(List<Job> jobs) {
-		this.jobs = jobs;
 	}
 }

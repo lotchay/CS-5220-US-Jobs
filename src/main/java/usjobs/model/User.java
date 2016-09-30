@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
@@ -79,6 +81,7 @@ public class User implements Serializable {
 	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
 	List<Resume> resumes;
 	
+	@Type(type="text")
 	private String experience;
 	
 	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
