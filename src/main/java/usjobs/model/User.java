@@ -4,12 +4,15 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
@@ -31,10 +34,20 @@ public class User implements Serializable {
 	
 	private boolean enabled = true;
 	
+	private boolean reported;
+	
+	@Column(name="supress_contact")
+	private boolean supressContact;
+	
 	private String email;
 		
-	//user type either 0 for seeker, 1 for employer
-	private int userType;
+	@ElementCollection
+	@CollectionTable(
+		name="user_roles",
+		joinColumns = @JoinColumn(name = "user_id")
+	)
+	@Column(name="role")
+	private List<String> userRoles;
 	
 	@Column(name = "first_name")
 	private String firstName;
@@ -42,9 +55,20 @@ public class User implements Serializable {
 	@Column(name = "last_name")
 	private String lastName;
 	
-	private String address;
+	@ElementCollection
+	@CollectionTable(
+		name="user_addresses",
+		joinColumns = @JoinColumn(name = "user_id")
+	)
+	@Column(name="address")
+	private List<String> addresses;
 	
 	@ElementCollection
+	@CollectionTable(
+		name="user_phones",
+		joinColumns = @JoinColumn(name = "user_id")
+	)
+	@Column(name="phone")
 	@OrderBy("asc")
 	private List<String> phones;
 	
@@ -52,6 +76,14 @@ public class User implements Serializable {
 	@ManyToMany(mappedBy = "usersApplied", cascade = CascadeType.ALL)
 	private List<Job> appliedJobs;
 
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	List<Resume> resumes;
+	
+	private String experience;
+	
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	List<Degree> degrees;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -92,14 +124,6 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public int getUserType() {
-		return userType;
-	}
-
-	public void setUserType(int userType) {
-		this.userType = userType;
-	}
-
 	public String getFirstName() {
 		return firstName;
 	}
@@ -124,12 +148,12 @@ public class User implements Serializable {
 		this.appliedJobs = appliedJobs;
 	}
 
-	public String getAddress() {
-		return address;
+	public List<String> getAddresses() {
+		return addresses;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAddresses(List<String> addresses) {
+		this.addresses = addresses;
 	}
 
 	public List<String> getPhones() {
@@ -139,5 +163,52 @@ public class User implements Serializable {
 	public void setPhones(List<String> phones) {
 		this.phones = phones;
 	}
-	
+
+	public List<String> getUserRoles() {
+		return userRoles;
+	}
+
+	public void setUserRoles(List<String> userRoles) {
+		this.userRoles = userRoles;
+	}
+
+	public List<Resume> getResumes() {
+		return resumes;
+	}
+
+	public void setResumes(List<Resume> resumes) {
+		this.resumes = resumes;
+	}
+
+	public List<Degree> getDegrees() {
+		return degrees;
+	}
+
+	public void setDegrees(List<Degree> degrees) {
+		this.degrees = degrees;
+	}
+
+	public String getExperience() {
+		return experience;
+	}
+
+	public void setExperience(String experience) {
+		this.experience = experience;
+	}
+
+	public boolean isReported() {
+		return reported;
+	}
+
+	public void setReported(boolean reported) {
+		this.reported = reported;
+	}
+
+	public boolean isSupressContact() {
+		return supressContact;
+	}
+
+	public void setSupressContact(boolean supressContact) {
+		this.supressContact = supressContact;
+	}
 }
