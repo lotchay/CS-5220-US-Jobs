@@ -27,6 +27,10 @@ public class JobReview implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "job_id")
 	private Job jobReviewed;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User userPosted;
 
 	
 	public Integer getId() {
@@ -52,6 +56,13 @@ public class JobReview implements Serializable {
 	public void setJobReviewed(Job jobReviewed) {
 		this.jobReviewed = jobReviewed;
 	}
-	
+
+	public User getUserPosted() {
+		return userPosted;
+	}
+
+	public void setUserPosted(User userPosted) {
+		this.userPosted = userPosted;
+	}
 	
 }
