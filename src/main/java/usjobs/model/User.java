@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -16,11 +18,17 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
 
 import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "users")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="user_type")
+@DiscriminatorValue("USER")
 public class User implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -41,9 +49,6 @@ public class User implements Serializable {
 	private boolean enabled = true;
 	
 	private boolean reported;
-	
-	@Column(name="supress_contact")
-	private boolean supressContact;
 	
 	private String email;
 		
@@ -71,29 +76,7 @@ public class User implements Serializable {
 	)
 	@Column(name="phone")
 	@OrderBy("asc")
-	private List<String> phones;
-	
-	//jobs applied to
-	@ManyToMany(mappedBy = "usersApplied", cascade = CascadeType.ALL)
-	private List<Job> appliedJobs;
-
-	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
-	private List<Resume> resumes;
-	
-	@Type(type="text")
-	private String experience;
-	
-	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
-	private List<Degree> degrees;
-	
-	@Column(name="job_title")
-	private String jobTitle;
-	
-	@OneToMany(mappedBy="userPosted", cascade = CascadeType.ALL)
-	private List<JobReview> jobsReviewed;
-	
-	@OneToMany(mappedBy="userPosted", cascade = CascadeType.ALL)
-	private List<EmployerReview> employersReviewed;
+	private List<String> phones;	
 		
 	public Integer getId() {
 		return id;
@@ -151,14 +134,6 @@ public class User implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public List<Job> getAppliedJobs() {
-		return appliedJobs;
-	}
-
-	public void setAppliedJobs(List<Job> appliedJobs) {
-		this.appliedJobs = appliedJobs;
-	}
-
 	public Address getAddress() {
 		return address;
 	}
@@ -183,68 +158,11 @@ public class User implements Serializable {
 		this.userRoles = userRoles;
 	}
 
-	public List<Resume> getResumes() {
-		return resumes;
-	}
-
-	public void setResumes(List<Resume> resumes) {
-		this.resumes = resumes;
-	}
-
-	public List<Degree> getDegrees() {
-		return degrees;
-	}
-
-	public void setDegrees(List<Degree> degrees) {
-		this.degrees = degrees;
-	}
-
-	public String getExperience() {
-		return experience;
-	}
-
-	public void setExperience(String experience) {
-		this.experience = experience;
-	}
-
 	public boolean isReported() {
 		return reported;
 	}
 
 	public void setReported(boolean reported) {
 		this.reported = reported;
-	}
-
-	public boolean isSupressContact() {
-		return supressContact;
-	}
-
-	public void setSupressContact(boolean supressContact) {
-		this.supressContact = supressContact;
-	}
-
-	public String getJobTitles() {
-		return jobTitle;
-	}
-
-	public void setJobTitles(String jobTitles) {
-		this.jobTitle = jobTitles;
-	}
-
-	public List<JobReview> getJobsReviewed() {
-		return jobsReviewed;
-	}
-
-	public void setJobsReviewed(List<JobReview> jobsReviewed) {
-		this.jobsReviewed = jobsReviewed;
-	}
-
-	public List<EmployerReview> getEmployersReviewed() {
-		return employersReviewed;
-	}
-
-	public void setEmployersReviewed(List<EmployerReview> employersReviewed) {
-		this.employersReviewed = employersReviewed;
-	}
-	
+	}	
 }
