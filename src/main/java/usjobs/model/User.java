@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
@@ -32,10 +31,13 @@ public class User implements Serializable {
 	private Integer id;
 	
 	//login info
+	@Column(unique = true, nullable = false)
 	private String username;
 	
+	@Column(nullable = false)
 	private String password;
 	
+	@Column(nullable = false)
 	private boolean enabled = true;
 	
 	private boolean reported;
@@ -85,7 +87,7 @@ public class User implements Serializable {
 	private List<Degree> degrees;
 	
 	@Column(name="job_title")
-	private String jobTitles;
+	private String jobTitle;
 	
 	@OneToMany(mappedBy="userPosted", cascade = CascadeType.ALL)
 	private List<JobReview> jobsReviewed;
@@ -222,11 +224,11 @@ public class User implements Serializable {
 	}
 
 	public String getJobTitles() {
-		return jobTitles;
+		return jobTitle;
 	}
 
 	public void setJobTitles(String jobTitles) {
-		this.jobTitles = jobTitles;
+		this.jobTitle = jobTitles;
 	}
 
 	public List<JobReview> getJobsReviewed() {
