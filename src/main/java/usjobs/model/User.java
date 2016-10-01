@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
@@ -75,22 +76,22 @@ public class User implements Serializable {
 	private List<Job> appliedJobs;
 
 	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
-	List<Resume> resumes;
+	private List<Resume> resumes;
 	
 	@Type(type="text")
 	private String experience;
 	
 	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
-	List<Degree> degrees;
+	private List<Degree> degrees;
 	
 	@Column(name="job_title")
 	private String jobTitles;
 	
 	@OneToMany(mappedBy="userPosted", cascade = CascadeType.ALL)
-	List<JobReview> jobsReviewed;
+	private List<JobReview> jobsReviewed;
 	
 	@OneToMany(mappedBy="userPosted", cascade = CascadeType.ALL)
-	List<EmployerReview> employersReviewed;
+	private List<EmployerReview> employersReviewed;
 		
 	public Integer getId() {
 		return id;

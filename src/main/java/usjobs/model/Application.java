@@ -1,5 +1,7 @@
 package usjobs.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +16,7 @@ import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name="applications")
-public class Application {
+public class Application implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	

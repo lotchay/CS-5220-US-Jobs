@@ -1,5 +1,7 @@
 package usjobs.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +14,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="contacts")
-public class Contact {
+public class Contact implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@Column(name="contact_id")
 	@GeneratedValue
@@ -31,9 +36,9 @@ public class Contact {
 	
 	private String email;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="employer_id")
-	private User employer;
+	private Employer employer;
 
 	public Integer getId() {
 		return id;
@@ -83,11 +88,11 @@ public class Contact {
 		this.email = email;
 	}
 
-	public User getEmployer() {
+	public Employer getEmployer() {
 		return employer;
 	}
 
-	public void setEmployer(User employer) {
+	public void setEmployer(Employer employer) {
 		this.employer = employer;
 	}
 }

@@ -64,10 +64,10 @@ public class Job implements Serializable {
 	private List<User> usersFavorited;
 	
 	@OneToMany(mappedBy="jobApplied", cascade = CascadeType.ALL)
-	List<Application> applications;
+	private List<Application> applications;
 	
 	@OneToMany(mappedBy="jobReviewed", cascade = CascadeType.ALL)
-	List<JobReview> jobReviews;
+	private List<JobReview> jobReviews;
 	
 	public List<JobReview> getJobReviews() {
 		return jobReviews;
