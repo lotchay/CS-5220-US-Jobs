@@ -2,8 +2,6 @@ package usjobs.model;
 
 import java.io.Serializable;
 import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -14,15 +12,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-
-
-import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "users")
@@ -49,6 +42,9 @@ public class User implements Serializable {
 	private boolean enabled = true;
 	
 	private boolean reported;
+	
+	@Column(name="supress_contact")
+	private boolean supressContact;
 	
 	private String email;
 		
@@ -164,5 +160,13 @@ public class User implements Serializable {
 
 	public void setReported(boolean reported) {
 		this.reported = reported;
-	}	
+	}
+
+	public boolean isSupressContact() {
+		return supressContact;
+	}
+
+	public void setSupressContact(boolean supressContact) {
+		this.supressContact = supressContact;
+	}
 }
