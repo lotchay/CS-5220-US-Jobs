@@ -16,10 +16,7 @@ import org.hibernate.annotations.Type;
 @DiscriminatorValue("SEEKER")
 public class JobSeeker extends User implements Serializable{
 	private static final long serialVersionUID = 1L;
-	
-	@Column(name="supress_contact")
-	private boolean supressContact;
-	
+		
 	//jobs applied to
 	@ManyToMany(mappedBy = "usersApplied", cascade = CascadeType.ALL)
 	private List<JobPosting> appliedJobs;
@@ -74,14 +71,6 @@ public class JobSeeker extends User implements Serializable{
 		this.experience = experience;
 	}
 	
-	public boolean isSupressContact() {
-		return supressContact;
-	}
-
-	public void setSupressContact(boolean supressContact) {
-		this.supressContact = supressContact;
-	}
-
 	public String getCurrentJobTitle() {
 		return currentJobTitle;
 	}
