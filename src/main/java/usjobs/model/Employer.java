@@ -8,7 +8,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +24,10 @@ public class Employer implements Serializable {
 	@GeneratedValue
 	private Integer id;
 	
+	@OneToOne
+	@JoinColumn(name = "user_id")
+	private User userLoginId;
+	
 	@Column(name = "employer_name")
 	private String employerName;
 	
@@ -34,6 +40,9 @@ public class Employer implements Serializable {
 	
 	@OneToMany(mappedBy = "employerReviewed", cascade = CascadeType.ALL)
 	private List<EmployerReview> employerReviews;
+	
+	@OneToMany(mappedBy = "employer", cascade = CascadeType.ALL)
+	private List<Contact> contacts;
 
 	public Integer getId() {
 		return id;
@@ -74,8 +83,20 @@ public class Employer implements Serializable {
 	public void setEmployerReviews(List<EmployerReview> employerReviews) {
 		this.employerReviews = employerReviews;
 	}
-	
-	
-	
 
+	public List<Contact> getContacts() {
+		return contacts;
+	}
+
+	public void setContacts(List<Contact> contacts) {
+		this.contacts = contacts;
+	}
+
+	public User getUserLoginId() {
+		return userLoginId;
+	}
+
+	public void setUserLoginId(User userLoginId) {
+		this.userLoginId = userLoginId;
+	}
 }

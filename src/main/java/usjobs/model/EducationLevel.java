@@ -1,6 +1,6 @@
 package usjobs.model;
 
 public enum EducationLevel {
-	AA, AS, AAS, BA, BS, BFA, BAS, MA, MS, MBA, MFA, PHD, JD, MD
+	HSD, GED, AA, AS, AAS, BA, BS, BFA, BAS, MA, MS, MBA, MFA, PHD, JD, MD
 }
 
