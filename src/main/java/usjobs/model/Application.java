@@ -41,7 +41,7 @@ public class Application implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="job_id")
-	private Job jobApplied;
+	private JobPosting jobApplied;
 	
 	@OneToOne
 	@JoinColumn(name="resume_id")
@@ -95,11 +95,11 @@ public class Application implements Serializable {
 		this.coverLetter = coverLetter;
 	}
 
-	public Job getJobApplied() {
+	public JobPosting getJobApplied() {
 		return jobApplied;
 	}
 
-	public void setJobApplied(Job jobApplied) {
+	public void setJobApplied(JobPosting jobApplied) {
 		this.jobApplied = jobApplied;
 	}
 
