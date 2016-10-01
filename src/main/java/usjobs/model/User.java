@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -57,7 +58,8 @@ public class User implements Serializable {
 	@Column(name = "last_name")
 	private String lastName;
 	
-	private String address;
+	@Embedded
+	private Address address;
 	
 	@ElementCollection
 	@CollectionTable(
@@ -154,11 +156,11 @@ public class User implements Serializable {
 		this.appliedJobs = appliedJobs;
 	}
 
-	public String getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 
