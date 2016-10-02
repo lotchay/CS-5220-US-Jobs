@@ -19,61 +19,61 @@ import javax.persistence.InheritanceType;
 
 @Entity
 @Table(name = "users")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="user_type")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "user_type")
 @DiscriminatorValue("USER")
 public class User implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@Column(name = "user_id")
 	@GeneratedValue
 	private Integer id;
-	
+
 	//login info
 	@Column(unique = true, nullable = false)
 	private String username;
-	
+
 	@Column(nullable = false)
 	private String password;
-	
+
 	@Column(nullable = false)
 	private boolean enabled = true;
-	
+
 	private boolean reported;
-	
-	@Column(name="supress_contact")
+
+	@Column(name = "supress_contact")
 	private boolean supressContact;
-	
+
 	private String email;
-		
+
 	@ElementCollection
 	@CollectionTable(
-		name="user_roles",
+		name = "user_roles",
 		joinColumns = @JoinColumn(name = "user_id")
 	)
-	@Column(name="role")
+	@Column(name = "role")
 	private List<String> userRoles;
-	
+
 	@Column(name = "first_name")
 	private String firstName;
-	
+
 	@Column(name = "last_name")
 	private String lastName;
-	
+
 	@Embedded
 	private Address address;
-	
+
 	@ElementCollection
 	@CollectionTable(
-		name="user_phones",
+		name = "user_phones",
 		joinColumns = @JoinColumn(name = "user_id")
 	)
-	@Column(name="phone")
+	@Column(name = "phone")
 	@OrderBy("asc")
-	private List<String> phones;	
-		
+	private List<String> phones;
+
 	public Integer getId() {
 		return id;
 	}
@@ -89,7 +89,7 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public String getUsername() {
 		return username;
 	}
@@ -169,4 +169,5 @@ public class User implements Serializable {
 	public void setSupressContact(boolean supressContact) {
 		this.supressContact = supressContact;
 	}
+
 }

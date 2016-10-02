@@ -4,21 +4,21 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Contact{
-	
-	@Column(name="contact_first_name")
+public class Contact {
+
+	@Column(name = "contact_first_name")
 	private String firstName;
 
-	@Column(name="contact_last_name")
+	@Column(name = "contact_last_name")
 	private String lastName;
 
-	@Column(name="contact_title")
+	@Column(name = "contact_title")
 	private String jobTitle;
-	
-	@Column(name="contact_phone")
+
+	@Column(name = "contact_phone")
 	private String phone;
-	
-	@Column(name="contact_email")
+
+	@Column(name = "contact_email")
 	private String email;
 
 	public String getFirstName() {
@@ -60,4 +60,5 @@ public class Contact{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 }

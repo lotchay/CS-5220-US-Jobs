@@ -22,57 +22,58 @@ import org.hibernate.annotations.Type;
 @Entity
 @Table(name = "jobs")
 public class JobPosting implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@Column(name = "job_id")
 	@GeneratedValue
 	private Integer id;
-	
+
 	@Column(name = "job_title")
 	private String jobTitle;
-	
+
 	@Column(name = "job_description")
-	@Type(type="text")
+	@Type(type = "text")
 	private String jobDescription;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "employer_id")
 	private Employer company;
-	
+
 	private String location;
-	
+
 	private String salary;
-	
+
 	private String website;
-	
+
 	@Column(name = "date_posted")
 	private Date datePosted;
-	
+
 	@Column(name = "date_closed")
 	private Date dateClosed;
-	
+
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "applied",
 			joinColumns = @JoinColumn(name = "job_id"),
 			inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> usersApplied;
-	
+
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "favorites",
 			joinColumns = @JoinColumn(name = "job_id"),
 			inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> usersFavorited;
-	
-	@OneToMany(mappedBy="jobApplied", cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "jobApplied", cascade = CascadeType.ALL)
 	private List<Application> applications;
-	
-	@OneToMany(mappedBy="jobReviewed", cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "jobReviewed", cascade = CascadeType.ALL)
 	private List<JobReview> jobReviews;
-	
+
 	@Embedded
 	private Contact pointOfContact;
-	
+
 	public List<JobReview> getJobReviews() {
 		return jobReviews;
 	}
@@ -184,4 +185,5 @@ public class JobPosting implements Serializable {
 	public void setPointOfContact(Contact pointOfContact) {
 		this.pointOfContact = pointOfContact;
 	}
+
 }

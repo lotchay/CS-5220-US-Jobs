@@ -14,29 +14,30 @@ import org.hibernate.annotations.Type;
 
 @Entity
 @DiscriminatorValue("SEEKER")
-public class JobSeeker extends User implements Serializable{
+public class JobSeeker extends User implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-		
+
 	//jobs applied to
 	@ManyToMany(mappedBy = "usersApplied", cascade = CascadeType.ALL)
 	private List<JobPosting> appliedJobs;
-	
-	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Resume> resumes;
-	
-	@Type(type="text")
+
+	@Type(type = "text")
 	private String experience;
-		
-	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Degree> degrees;
-		
-	@Column(name="current_job_title")
+
+	@Column(name = "current_job_title")
 	private String currentJobTitle;
-		
-	@OneToMany(mappedBy="userPosted", cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "userPosted", cascade = CascadeType.ALL)
 	private List<JobReview> jobsReviewed;
-		
-	@OneToMany(mappedBy="userPosted", cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "userPosted", cascade = CascadeType.ALL)
 	private List<EmployerReview> employersReviewed;
 
 	public List<JobPosting> getAppliedJobs() {
@@ -46,7 +47,7 @@ public class JobSeeker extends User implements Serializable{
 	public void setAppliedJobs(List<JobPosting> appliedJobs) {
 		this.appliedJobs = appliedJobs;
 	}
-	
+
 	public List<Resume> getResumes() {
 		return resumes;
 	}
@@ -70,7 +71,7 @@ public class JobSeeker extends User implements Serializable{
 	public void setExperience(String experience) {
 		this.experience = experience;
 	}
-	
+
 	public String getCurrentJobTitle() {
 		return currentJobTitle;
 	}
@@ -94,4 +95,5 @@ public class JobSeeker extends User implements Serializable{
 	public void setEmployersReviewed(List<EmployerReview> employersReviewed) {
 		this.employersReviewed = employersReviewed;
 	}
+	
 }

@@ -14,37 +14,37 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name="applications")
+@Table(name = "applications")
 public class Application implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue
-	@Column(name="app_id")
+	@Column(name = "app_id")
 	private Integer id;
-	
-	@Column(name="first_name")
+
+	@Column(name = "first_name")
 	private String firstName;
-	
-	@Column(name="last_name")
+
+	@Column(name = "last_name")
 	private String lastName;
-	
+
 	private String email;
-	
-	@Column(name="phone_number")
+
+	@Column(name = "phone_number")
 	private String phoneNumber;
-	
-	@Column(name="cover_letter")
-	@Type(type="text")
+
+	@Column(name = "cover_letter")
+	@Type(type = "text")
 	private String coverLetter;
-	
+
 	@ManyToOne
-	@JoinColumn(name="job_id")
+	@JoinColumn(name = "job_id")
 	private JobPosting jobApplied;
-	
+
 	@OneToOne
-	@JoinColumn(name="resume_id")
+	@JoinColumn(name = "resume_id")
 	private Resume resume;
 
 	public Integer getId() {
@@ -110,4 +110,5 @@ public class Application implements Serializable {
 	public void setResume(Resume resume) {
 		this.resume = resume;
 	}
+
 }

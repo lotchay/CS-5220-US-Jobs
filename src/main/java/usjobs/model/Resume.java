@@ -14,29 +14,29 @@ import javax.persistence.Table;
 @Entity
 @Table(name="resumes")
 public class Resume implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@Column(name="resume_id")
+	@Column(name = "resume_id")
 	@GeneratedValue
 	private Integer id;
-	
+
 	private String name;
-	
+
 	@Column(name = "upload_date")
 	private Date uploadDate;
-	
-	@Column(name="file_name")
+
+	@Column(name = "file_name")
 	private String fileName;
-	
-	@Column(name="file_data")
+
+	@Column(name = "file_data")
 	private byte[] fileData;
-	
+
 	@ManyToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -84,4 +84,5 @@ public class Resume implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
 }

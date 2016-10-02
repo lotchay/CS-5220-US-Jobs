@@ -16,17 +16,17 @@ import javax.persistence.Table;
 
 @Entity
 @DiscriminatorValue("EMPLOYER")
-public class Employer extends User implements Serializable{
-	
+public class Employer extends User implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Column(name = "employer_website")
 	private String employerWebsite;
-	
+
 	//list of jobs by employer
 	@OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
 	private List<JobPosting> jobsPosted;
-	
+
 	@OneToMany(mappedBy = "employerReviewed", cascade = CascadeType.ALL)
 	private List<EmployerReview> employerReviews;
 
@@ -53,4 +53,5 @@ public class Employer extends User implements Serializable{
 	public void setEmployerReviews(List<EmployerReview> employerReviews) {
 		this.employerReviews = employerReviews;
 	}
+	
 }
