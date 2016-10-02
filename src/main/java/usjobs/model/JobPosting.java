@@ -20,7 +20,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name = "jobs")
+@Table(name = "job_postings")
 public class JobPosting implements Serializable {
 
 	private static final long serialVersionUID = 1L;
