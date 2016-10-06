@@ -53,8 +53,8 @@ public class JobPosting implements Serializable {
 	@Column(name = "date_closed")
 	private Date dateClosed;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "applied",
+	@ManyToMany
+	@JoinTable(name = "jobs_applied",
 			joinColumns = @JoinColumn(name = "job_id"),
 			inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> usersApplied;

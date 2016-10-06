@@ -21,7 +21,7 @@ import javax.persistence.InheritanceType;
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "user_type")
-@DiscriminatorValue("USER")
+@DiscriminatorValue("ADMIN")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
