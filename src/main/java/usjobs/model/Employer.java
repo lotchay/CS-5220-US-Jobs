@@ -19,10 +19,10 @@ public class Employer extends User implements Serializable {
 	private String employerWebsite;
 
 	//list of jobs by employer
-	@OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "company", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<JobPosting> jobsPosted;
 
-	@OneToMany(mappedBy = "employerReviewed", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "employerReviewed", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<EmployerReview> employerReviews;
 
 	public String getEmployerWebsite() {

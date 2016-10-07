@@ -42,6 +42,9 @@ public class User implements Serializable {
 	private boolean enabled = true;
 
 	private boolean reported;
+	
+	@Column(name = "admin")
+	private boolean isAdmin;
 
 	@Column(name = "supress_contact")
 	private boolean supressContact;
@@ -169,5 +172,13 @@ public class User implements Serializable {
 	public void setSupressContact(boolean supressContact) {
 		this.supressContact = supressContact;
 	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}	
 
 }

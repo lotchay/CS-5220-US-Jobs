@@ -59,16 +59,16 @@ public class JobPosting implements Serializable {
 			inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> usersApplied;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "favorites",
 			joinColumns = @JoinColumn(name = "job_id"),
 			inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> usersFavorited;
 
-	@OneToMany(mappedBy = "jobApplied", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "jobApplied", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Application> applications;
 
-	@OneToMany(mappedBy = "jobReviewed", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "jobReviewed", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<JobReview> jobReviews;
 
 	@Embedded
