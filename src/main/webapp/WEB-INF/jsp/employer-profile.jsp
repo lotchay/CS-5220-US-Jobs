@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>User CP</title>
 
-<link href="../css/bower.css" rel="stylesheet" />
+<link href="../css/vendor/bower.css" rel="stylesheet" />
 <link href="../css/us-jobs.css" rel="stylesheet" />
 <link href="../bower_components/font-awesome/css/font-awesome.css"
 	rel="stylesheet" />
@@ -16,14 +16,19 @@
 	<jsp:include page="header.jsp" />
 	<div class="row animated fadeIn">
 		<div class="col col-md-2 col-md-offset-2">
-			<ul class="list-group">
-				<li class="list-group-item"><a href="#">Update Company Profile</a></li>
-				<li class="list-group-item"><a href="#">Add a New Job Listing</a></li>
-				<li class="list-group-item"><a href="#">Your Job Listings</a></li>
+			<ul id="options-list" class="list-group">
+				<li id="profile" class="list-group-item"><a href="#">Update
+						Profile</a></li>
+				<li id="company" class="list-group-item"><a href="#">Company
+						Description</a></li>
+				<li id="newJob" class="list-group-item"><a href="#">Add a
+						New Job Listing</a></li>
+				<li id="job" class="list-group-item"><a href="#">Your Job
+						Listings</a></li>
 			</ul>
 		</div>
-		<div class="col col-md-6">
-			<div class="panel panel-info">
+		<div id="detail" class="col col-md-6">
+			<div id="profileDetail" class="panel panel-info">
 				<div class="panel-heading">
 					<h3 class="panel-title">Update Profile</h3>
 				</div>
@@ -31,8 +36,11 @@
 					<form class="form-horizontal">
 						<fieldset>
 							<div class="form-group">
-								<label for="inputEmail" class="col-lg-2 control-label">Username</label>
-								<div class="col-lg-10">Your Username</div>
+								<label for="username" class="col-lg-2 control-label">Username</label>
+								<div class="col-lg-10">
+									<input type="text" class="form-control" id="username"
+										value="Username goes here" disabled>
+								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputPassword" class="col-lg-2 control-label">Password</label>
@@ -42,17 +50,40 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="inputPassword" class="col-lg-2 control-label">Email</label>
+								<label for="email" class="col-lg-2 control-label">Email</label>
 								<div class="col-lg-10">
-									<input type="password" class="form-control" id="email"
+									<input type="email" class="form-control" id="email"
 										placeholder="email">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="inputPassword" class="col-lg-2 control-label">Address</label>
+								<label for="address" class="col-lg-2 control-label">Address</label>
 								<div class="col-lg-10">
-									<input type="password" class="form-control" id="address"
+									<input type="text" class="form-control" id="address"
 										placeholder="address">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="phone" class="col-lg-2 control-label">Phone</label>
+								<div class="col-lg-10">
+									<input type="number" class="form-control" id="phone"
+										placeholder="Phone #">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Contact Sharing</label>
+								<div class="col-lg-10">
+									<div class="radio">
+										<label> <input type="radio" name="contact-sharing"
+											id="enableSharing" value="option1" checked="">
+											Enabled
+										</label>
+									</div>
+									<div class="radio">
+										<label> <input type="radio" name="contact-sharing"
+											id="disableSharing" value="option2"> Disabled
+										</label>
+									</div>
 								</div>
 							</div>
 							<div class="form-group">
@@ -65,9 +96,28 @@
 					</form>
 				</div>
 			</div>
+			<div id="companyDetail" class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">Company Description</h3>
+				</div>
+				<div class="panel-body">TODO</div>
+			</div>
+			<div id="newJobDetail" class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">Post a New Job</h3>
+				</div>
+				<div class="panel-body">TODO</div>
+			</div>
+			<div id="jobDetail" class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">Your Job Listings</h3>
+				</div>
+				<div class="panel-body">TODO</div>
+			</div>
 		</div>
 	</div>
 </body>
 
-<script src="../js/bower.js"></script>
+<script src="../js/vendor/bower.js"></script>
+<script src="../js/list-detail.js"></script>
 </html>

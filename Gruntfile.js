@@ -3,8 +3,8 @@ module.exports = function(grunt) {
 		bower_concat: {
 			all: {
 				dest: {
-					'js': 'src/main/webapp/WEB-INF/js/bower.js',
-					'css': 'src/main/webapp/WEB-INF/css/bower.css',
+					'js': 'src/main/webapp/WEB-INF/js/vendor/bower.js',
+					'css': 'src/main/webapp/WEB-INF/css/vendor/bower.css',
 					'eot': 'src/main/webapp/WEB-INF/fonts/glyphicons-halflings-regular.eot',
 					'svg': 'src/main/webapp/WEB-INF/fonts/glyphicons-halflings-regular.svg',
 					'ttf': 'src/main/webapp/WEB-INF/fonts/glyphicons-halflings-regular.ttf',

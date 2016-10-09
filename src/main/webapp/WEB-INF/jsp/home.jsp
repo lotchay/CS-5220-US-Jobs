@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>CS-5220-Group-Project</title>
 
-<link href="../css/bower.css" rel="stylesheet" />
+<link href="../css/vendor/bower.css" rel="stylesheet" />
 <link href="../css/us-jobs.css" rel="stylesheet" />
 <link href="../bower_components/font-awesome/css/font-awesome.css"
 	rel="stylesheet" />
@@ -47,9 +47,10 @@
 					<h4 class="list-group-item-heading">Client Success Team
 						Account Manager</h4>
 					<h6>SpinFusion - Denver, CO</h6>
-					<p class="list-group-item-text">Bachelor’s degree in HIT, CS or
-						equivalent degree of schedule fields in healthcare or technology.
-						SpinFusion was founded with the vision that if software can...</p>
+					<p class="list-group-item-text">Bachelor’s degree in HIT, CS
+						or equivalent degree of schedule fields in healthcare or
+						technology. SpinFusion was founded with the vision that if
+						software can...</p>
 				</a> <a href="#" class="list-group-item">
 					<h4 class="list-group-item-heading">Mobile Developer</h4>
 					<h6>GoSpotCheck - Denver, CO</h6>
@@ -101,5 +102,5 @@
 	</div>
 </body>
 
-<script src="../js/bower.js"></script>
+<script src="../js/vendor/bower.js"></script>
 </html>
