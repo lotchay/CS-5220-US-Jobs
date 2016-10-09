@@ -3,7 +3,7 @@
 ## Build the front-end packages
 * Install node: [https://nodejs.org/en/] ([https://nodejs.org/en/])
 * cd into this project's root directory
-* `npm install --dev`
+* `npm install --only=dev`
 * `npm install -g bower` (mac users prefix this command with `sudo`)
 * `npm install -g grunt-cli` (mac/linux user prefix this command with `sudo`)
 * `bower install`
