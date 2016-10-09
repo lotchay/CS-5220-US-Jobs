@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -8,71 +8,97 @@
 <title>CS-5220-Group-Project</title>
 
 <link href="../css/bower.css" rel="stylesheet" />
-<link href="../bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href="../css/us-jobs.css" rel="stylesheet" />
+<link href="../bower_components/font-awesome/css/font-awesome.css"
+	rel="stylesheet" />
 </head>
 <body>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Brand</a>
-    </div>
+	<jsp:include page="header.jsp" />
+	<div class="row">
+		<div class="col col-md-8 col-md-offset-2 jumbotron">
+			<h1>U.S. Jobs</h1>
+			<p>We all go to college in the hopes of landing good and
+				high-paying jobs. Unfortunately, there are too many job websites out
+				there such as Monster and CareerBuilder that mostly contain
+				employment agencies’ listings designed to pool for candidates
+				instead of bonafide employers listing real job openings. There are
+				just too many unemployed recent college grads. Therefore, we want to
+				create a website where recent college grads and college students can
+				easily connect with bonafide employers with legit job openings
+				without jumping through hoops.</p>
+			<p>
+				<a class="btn btn-primary btn-lg">Learn more</a>
+			</p>
+		</div>
+	</div>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-    <h1 class="animated fadeInLeft">Welcome to U.S. Jobs!<i class="fa fa-search-plus" aria-hidden="true"></i></h1>
-    <ul>
-        <li><a href="#">U.S. Jobs</a></li>
-    </ul>
-    <div class="modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        <p>One fine body…</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+	<div class="row">
+		<div class="col col-md-8 col-md-offset-2">
+			<h1 class="text-primary">Trending Jobs</h1>
+			<hr />
+			<div class="list-group">
+				<a href="#" class="list-group-item">
+					<h4 class="list-group-item-heading">Systems Engineer</h4>
+					<h6>ViaSat - 61 reviews - Denver, CO</h6>
+					<p class="list-group-item-text">Bachelors of Science in EE, CS,
+						or relevant engineering field or equivalent experience. Are you
+						inspired by a job that challenges you to be proactive, lead...</p>
+				</a> <a href="#" class="list-group-item">
+					<h4 class="list-group-item-heading">Client Success Team
+						Account Manager</h4>
+					<h6>SpinFusion - Denver, CO</h6>
+					<p class="list-group-item-text">Bachelor’s degree in HIT, CS or
+						equivalent degree of schedule fields in healthcare or technology.
+						SpinFusion was founded with the vision that if software can...</p>
+				</a> <a href="#" class="list-group-item">
+					<h4 class="list-group-item-heading">Mobile Developer</h4>
+					<h6>GoSpotCheck - Denver, CO</h6>
+					<p class="list-group-item-text">WHAT YOU'LL DO * As a Mobile
+						Developer on the Rep Services Team, you will continue to pave the
+						way in engineering the best tool on the market for the deskless...</p>
+				</a> <a href="#" class="list-group-item">
+					<h4 class="list-group-item-heading">Mobile Developer</h4>
+					<h6>GoSpotCheck - Denver, CO</h6>
+					<p class="list-group-item-text">WHAT YOU'LL DO * As a Mobile
+						Developer on the Rep Services Team, you will continue to pave the
+						way in engineering the best tool on the market for the deskless...</p>
+				</a> <a href="#" class="list-group-item">
+					<h4 class="list-group-item-heading">Mobile Developer</h4>
+					<h6>GoSpotCheck - Denver, CO</h6>
+					<p class="list-group-item-text">WHAT YOU'LL DO * As a Mobile
+						Developer on the Rep Services Team, you will continue to pave the
+						way in engineering the best tool on the market for the deskless...</p>
+				</a> <a href="#" class="list-group-item">
+					<h4 class="list-group-item-heading">Mobile Developer</h4>
+					<h6>GoSpotCheck - Denver, CO</h6>
+					<p class="list-group-item-text">WHAT YOU'LL DO * As a Mobile
+						Developer on the Rep Services Team, you will continue to pave the
+						way in engineering the best tool on the market for the deskless...</p>
+				</a> <a href="#" class="list-group-item">
+					<h4 class="list-group-item-heading">Mobile Developer</h4>
+					<h6>GoSpotCheck - Denver, CO</h6>
+					<p class="list-group-item-text">WHAT YOU'LL DO * As a Mobile
+						Developer on the Rep Services Team, you will continue to pave the
+						way in engineering the best tool on the market for the deskless...</p>
+				</a> <a href="#" class="list-group-item">
+					<h4 class="list-group-item-heading">Mobile Developer</h4>
+					<h6>GoSpotCheck - Denver, CO</h6>
+					<p class="list-group-item-text">WHAT YOU'LL DO * As a Mobile
+						Developer on the Rep Services Team, you will continue to pave the
+						way in engineering the best tool on the market for the deskless...</p>
+				</a> <a href="#" class="list-group-item">
+					<h4 class="list-group-item-heading">Mobile Developer</h4>
+					<h6>GoSpotCheck - Denver, CO</h6>
+					<p class="list-group-item-text">WHAT YOU'LL DO * As a Mobile
+						Developer on the Rep Services Team, you will continue to pave the
+						way in engineering the best tool on the market for the deskless...</p>
+				</a>
+			</div>
+			<div class="btn-container row col col-md-2 col-md-offset-5">
+				<button class="btn btn-singleton btn-info">Show More</button>
+			</div>
+		</div>
+	</div>
 </body>
 
 <script src="../js/bower.js"></script>
