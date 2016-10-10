@@ -2,8 +2,6 @@ package usjobs.model;
 
 import java.io.Serializable;
 import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -14,70 +12,71 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
-
-import org.hibernate.annotations.Type;
-
 @Entity
 @Table(name = "users")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="user_type")
-@DiscriminatorValue("USER")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "user_type")
+@DiscriminatorValue("ADMIN")
 public class User implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@Column(name = "user_id")
 	@GeneratedValue
 	private Integer id;
-	
+
 	//login info
 	@Column(unique = true, nullable = false)
 	private String username;
-	
+
 	@Column(nullable = false)
 	private String password;
-	
+
 	@Column(nullable = false)
 	private boolean enabled = true;
-	
+
 	private boolean reported;
 	
+	@Column(name = "admin")
+	private boolean isAdmin;
+
+	@Column(name = "supress_contact")
+	private boolean supressContact;
+
 	private String email;
-		
+
 	@ElementCollection
 	@CollectionTable(
-		name="user_roles",
+		name = "user_roles",
 		joinColumns = @JoinColumn(name = "user_id")
 	)
-	@Column(name="role")
+	@Column(name = "role")
 	private List<String> userRoles;
-	
+
 	@Column(name = "first_name")
 	private String firstName;
-	
+
 	@Column(name = "last_name")
 	private String lastName;
-	
+
 	@Embedded
 	private Address address;
-	
+
 	@ElementCollection
 	@CollectionTable(
-		name="user_phones",
+		name = "user_phones",
 		joinColumns = @JoinColumn(name = "user_id")
 	)
-	@Column(name="phone")
+	@Column(name = "phone")
 	@OrderBy("asc")
-	private List<String> phones;	
-		
+	private List<String> phones;
+
 	public Integer getId() {
 		return id;
 	}
@@ -93,7 +92,7 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public String getUsername() {
 		return username;
 	}
@@ -164,5 +163,22 @@ public class User implements Serializable {
 
 	public void setReported(boolean reported) {
 		this.reported = reported;
+	}
+
+	public boolean isSupressContact() {
+		return supressContact;
+	}
+
+	public void setSupressContact(boolean supressContact) {
+		this.supressContact = supressContact;
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}	
+
 }

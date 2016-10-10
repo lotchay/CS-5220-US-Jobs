@@ -12,22 +12,22 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "employer_reviews")
-public class EmployerReview implements Serializable{
-	
+public class EmployerReview implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@Column(name = "employer_review_id")
 	@GeneratedValue
 	private Integer id;
-	
+
 	@Column(name = "employer_review")
 	private String employerReview;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "employer_id")
 	private Employer employerReviewed;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User userPosted;

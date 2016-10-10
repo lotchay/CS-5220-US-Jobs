@@ -7,27 +7,22 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 @Entity
 @DiscriminatorValue("EMPLOYER")
-public class Employer extends User implements Serializable{
-	
+public class Employer extends User implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Column(name = "employer_website")
 	private String employerWebsite;
-	
+
 	//list of jobs by employer
-	@OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "company", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<JobPosting> jobsPosted;
-	
-	@OneToMany(mappedBy = "employerReviewed", cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "employerReviewed", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<EmployerReview> employerReviews;
 
 	public String getEmployerWebsite() {
@@ -53,4 +48,5 @@ public class Employer extends User implements Serializable{
 	public void setEmployerReviews(List<EmployerReview> employerReviews) {
 		this.employerReviews = employerReviews;
 	}
+	
 }

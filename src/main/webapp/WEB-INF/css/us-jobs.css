@@ -1,0 +1,9 @@
+@CHARSET "ISO-8859-1";
+
+nav.navbar {
+	margin-bottom: 30px;
+}
+
+div.btn-container {
+	margin: 15px;
+}

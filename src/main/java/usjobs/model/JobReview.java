@@ -13,26 +13,25 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "job_reviews")
 public class JobReview implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@Column(name = "job_review_id")
 	@GeneratedValue
 	private Integer id;
-	
+
 	@Column(name = "job_review")
 	private String jobReview;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "job_id")
 	private JobPosting jobReviewed;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User userPosted;
 
-	
 	public Integer getId() {
 		return id;
 	}
@@ -64,5 +63,5 @@ public class JobReview implements Serializable {
 	public void setUserPosted(User userPosted) {
 		this.userPosted = userPosted;
 	}
-	
+
 }
