@@ -25,7 +25,11 @@ import javax.persistence.InheritanceType;
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	public User() {
+		
+	}
+	
 	@Id
 	@Column(name = "user_id")
 	@GeneratedValue
@@ -64,17 +68,17 @@ public class User implements Serializable {
 
 	@Column(name = "last_name")
 	private String lastName;
-
+	
 	@Embedded
 	private Address address;
-
+	
 	@ElementCollection
 	@CollectionTable(
 		name = "user_phones",
 		joinColumns = @JoinColumn(name = "user_id")
 	)
 	@Column(name = "phone")
-	@OrderBy("asc")
+	@OrderBy("phone asc")
 	private List<String> phones;
 
 	public Integer getId() {
@@ -133,21 +137,8 @@ public class User implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public Address getAddress() {
-		return address;
-	}
+	
 
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public List<String> getPhones() {
-		return phones;
-	}
-
-	public void setPhones(List<String> phones) {
-		this.phones = phones;
-	}
 
 	public List<String> getUserRoles() {
 		return userRoles;
@@ -179,6 +170,23 @@ public class User implements Serializable {
 
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public List<String> getPhones() {
+		return phones;
+	}
+
+	public void setPhones(List<String> phones) {
+		this.phones = phones;
 	}	
+
 
 }
