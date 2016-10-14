@@ -188,37 +188,37 @@ create sequence hibernate_sequence minvalue 80;
         references users;
 
     insert into users (user_type, user_id, city, state, street,
-                       zip, email, enabled, first_name,
+                       zip, email, enabled, first_name, admin,
                        last_name, password, reported, username,
                        current_job_title, experience, supress_contact) values
                       ('SEEKER', 1, 'New Brunswick', 'NJ', '467 Durham Court',
-                       '08901', 'loc.truong@testemail.com', true, 'Loc',
+                       '08901', 'loc.truong@testemail.com', true, 'Loc', false,
                        'Truong', 'password@1', false, 'loc',
                        'Software Engineering', '4 years', false);
 
     insert into users (user_type, user_id, city, state, street,
-                       zip, email, enabled, first_name,
+                       zip, email, enabled, first_name, admin,
                        last_name, password, reported, username,
                        current_job_title, experience, supress_contact) values
                       ('SEEKER', 2, 'Henderson', 'KY', '398 Augusta Drive',
                        '42420', 'steve.shim@testemail.com', true, 'Steve',
-                       'Shim', 'password@1', false, 'steve',
+                       false, 'Shim', 'password@1', false, 'steve',
                        'Software Engineering', '5 years', false);
 
     insert into users (user_type, user_id, city, state, street,
-                       zip, email, enabled, first_name,
+                       zip, email, enabled, first_name, admin,
                        last_name, password, reported, username,
                        employer_website, supress_contact) values
                       ('EMPLOYER', 3, 'Cambridge', 'MA', '852 Ridge Road',
                        '02138', 'jordan.ton@testemail.com', true, 'Jordan',
-                       'Ton', 'password@1', false, 'jordan',
+                       false, 'Ton', 'password@1', false, 'jordan',
                        'www.google.com/career', false);
 
     insert into users (user_type, user_id, city, state, street,
-                       zip, email, enabled, first_name,
+                       zip, email, enabled, first_name, admin,
                        last_name, password, reported, username,
                        employer_website, supress_contact) values
                       ('EMPLOYER', 4, 'Hackensack', 'NJ', '225 Woodland Avenue',
                        '07601', 'james.sunthonlap@testemail.com', true, 'James',
-                       'Sunthonlap', 'password@1', false, 'james',
-                       'www.nasa.gov/career', false);          
+                       false, 'Sunthonlap', 'password@1', false, 'james',
+                       'www.nasa.gov/career', false);
