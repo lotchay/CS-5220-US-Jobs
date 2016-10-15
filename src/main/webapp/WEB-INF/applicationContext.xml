@@ -35,4 +35,4 @@
 
     <context:component-scan base-package="usjobs.model" />
 
-</beans> 
+</beans>

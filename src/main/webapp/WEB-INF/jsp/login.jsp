@@ -7,9 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Login</title>
 
-<link href="../css/vendor/bower.css" rel="stylesheet" />
-<link href="../css/us-jobs.css" rel="stylesheet" />
-<link href="../bower_components/font-awesome/css/font-awesome.css"
+<link href="css/vendor/bower.css" rel="stylesheet" />
+<link href="css/us-jobs.css" rel="stylesheet" />
+<link href="bower_components/font-awesome/css/font-awesome.css"
 	rel="stylesheet" />
 </head>
 <body>
@@ -51,5 +51,5 @@
 	</div>
 </body>
 
-<script src="../js/vendor/bower.js"></script>
+<script src="js/vendor/bower.js"></script>
 </html>
