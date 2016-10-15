@@ -1,7 +1,10 @@
 package usjobs.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -14,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
@@ -24,169 +28,172 @@ import javax.persistence.InheritanceType;
 @DiscriminatorValue("ADMIN")
 public class User implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	public User() {
-		
-	}
-	
-	@Id
-	@Column(name = "user_id")
-	@GeneratedValue
-	private Integer id;
+    private static final long serialVersionUID = 1L;
 
-	//login info
-	@Column(unique = true, nullable = false)
-	private String username;
+    @Id
+    @Column(name = "user_id")
+    @GeneratedValue
+    private Integer id;
 
-	@Column(nullable = false)
-	private String password;
+    // login info
+    @Column(unique = true, nullable = false)
+    private String username;
 
-	@Column(nullable = false)
-	private boolean enabled = true;
+    @Column(nullable = false)
+    private String password;
 
-	private boolean reported;
-	
-	@Column(name = "admin")
-	private boolean isAdmin;
+    // This field is used to validate password during registration.
+    // It is not stored in the database
+    @Transient
+    private String password2;
 
-	@Column(name = "supress_contact")
-	private boolean supressContact;
+    @Column(nullable = false)
+    private boolean enabled = true;
 
-	private String email;
+    private boolean reported;
 
-	@ElementCollection
-	@CollectionTable(
-		name = "user_roles",
-		joinColumns = @JoinColumn(name = "user_id")
-	)
-	@Column(name = "role")
-	private List<String> userRoles;
+    @Column(name = "supress_contact")
+    private boolean supressContact;
 
-	@Column(name = "first_name")
-	private String firstName;
+    private String email;
 
-	@Column(name = "last_name")
-	private String lastName;
-	
-	@Embedded
-	private Address address;
-	
-	@ElementCollection
-	@CollectionTable(
-		name = "user_phones",
-		joinColumns = @JoinColumn(name = "user_id")
-	)
-	@Column(name = "phone")
-	@OrderBy("phone asc")
-	private List<String> phones;
+    // Anyone who is not ROLE_ADMIN or ROLE_EMPLOYER has ROLE_SEEKER
+    @ElementCollection
+    @CollectionTable(name = "authorities",
+        joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "role")
+    private Set<String> userRoles;
 
-	public Integer getId() {
-		return id;
-	}
+    @Column(name = "first_name")
+    private String firstName;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @Column(name = "last_name")
+    private String lastName;
 
-	public String getEmail() {
-		return email;
-	}
+    @Embedded
+    private Address address;
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    @ElementCollection
+    @CollectionTable(name = "user_phones",
+        joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "phone")
+    @OrderBy("phone asc")
+    private List<String> phones;
 
-	public String getUsername() {
-		return username;
-	}
+    public User() {
+        userRoles = new HashSet<String>();
+    }
+    
+    public boolean isAdmin() {
+        return userRoles.contains( "ROLE_ADMIN" );
+    }
+    
+    public boolean isEmployer() {
+        return userRoles.contains( "ROLE_EMPLOYER" );
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public boolean isEnabled() {
-		return enabled;
-	}
+    public void setId( Integer id ) {
+        this.id = id;
+    }
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setEmail( String email ) {
+        this.email = email;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public void setUsername( String username ) {
+        this.username = username;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public boolean isEnabled() {
+        return enabled;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public void setEnabled( boolean enabled ) {
+        this.enabled = enabled;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	
+    public void setPassword( String password ) {
+        this.password = password;
+    }
 
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public List<String> getUserRoles() {
-		return userRoles;
-	}
+    public void setFirstName( String firstName ) {
+        this.firstName = firstName;
+    }
 
-	public void setUserRoles(List<String> userRoles) {
-		this.userRoles = userRoles;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public boolean isReported() {
-		return reported;
-	}
+    public void setLastName( String lastName ) {
+        this.lastName = lastName;
+    }
 
-	public void setReported(boolean reported) {
-		this.reported = reported;
-	}
+    public Set<String> getUserRoles() {
+        return userRoles;
+    }
 
-	public boolean isSupressContact() {
-		return supressContact;
-	}
+    public void setUserRoles( Set<String> userRoles ) {
+        this.userRoles = userRoles;
+    }
 
-	public void setSupressContact(boolean supressContact) {
-		this.supressContact = supressContact;
-	}
+    public boolean isReported() {
+        return reported;
+    }
 
-	public boolean isAdmin() {
-		return isAdmin;
-	}
+    public void setReported( boolean reported ) {
+        this.reported = reported;
+    }
 
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
-	}
+    public boolean isSupressContact() {
+        return supressContact;
+    }
 
-	public Address getAddress() {
-		return address;
-	}
+    public void setSupressContact( boolean supressContact ) {
+        this.supressContact = supressContact;
+    }
 
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+    public Address getAddress() {
+        return address;
+    }
 
-	public List<String> getPhones() {
-		return phones;
-	}
+    public void setAddress( Address address ) {
+        this.address = address;
+    }
 
-	public void setPhones(List<String> phones) {
-		this.phones = phones;
-	}	
+    public List<String> getPhones() {
+        return phones;
+    }
 
+    public void setPhones( List<String> phones ) {
+        this.phones = phones;
+    }
+
+    public String getPassword2() {
+        return password2;
+    }
+
+    public void setPassword2( String password2 ) {
+        this.password2 = password2;
+    }
 
 }
