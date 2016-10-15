@@ -12,6 +12,11 @@ create sequence hibernate_sequence start 1 increment 1
         primary key (app_id)
     )
 
+    create table authorities (
+        user_id int4 not null,
+        role varchar(255)
+    )
+
     create table degrees (
         degree_id int4 not null,
         education_level varchar(255),
@@ -82,11 +87,6 @@ create sequence hibernate_sequence start 1 increment 1
         phone varchar(255)
     )
 
-    create table user_roles (
-        user_id int4 not null,
-        role varchar(255)
-    )
-
     create table users (
         user_type varchar(31) not null,
         user_id int4 not null,
@@ -97,7 +97,6 @@ create sequence hibernate_sequence start 1 increment 1
         email varchar(255),
         enabled boolean not null,
         first_name varchar(255),
-        admin boolean,
         last_name varchar(255),
         password varchar(255) not null,
         reported boolean not null,
@@ -121,6 +120,11 @@ create sequence hibernate_sequence start 1 increment 1
         add constraint FKbhnfs5wwy14wdm2f1wam8qkhf 
         foreign key (resume_id) 
         references resumes
+
+    alter table authorities 
+        add constraint FKk91upmbueyim93v469wj7b2qh 
+        foreign key (user_id) 
+        references users
 
     alter table degrees 
         add constraint FKbl34awt7dptaxwwwifbj1sn1q 
@@ -179,10 +183,5 @@ create sequence hibernate_sequence start 1 increment 1
 
     alter table user_phones 
         add constraint FKnup2o0u3x7dudj4ky81oiio13 
-        foreign key (user_id) 
-        references users
-
-    alter table user_roles 
-        add constraint FKhfh9dx7w3ubf1co1vdev94g3f 
         foreign key (user_id) 
         references users

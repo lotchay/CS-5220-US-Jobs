@@ -12,6 +12,11 @@ create sequence hibernate_sequence minvalue 80;
         primary key (app_id)
     );
 
+    create table authorities (
+        user_id int4 not null,
+        role varchar(255)
+    );
+
     create table degrees (
         degree_id int4 not null,
         education_level varchar(255),
@@ -82,11 +87,6 @@ create sequence hibernate_sequence minvalue 80;
         phone varchar(255)
     );
 
-    create table user_roles (
-        user_id int4 not null,
-        role varchar(255)
-    );
-
     create table users (
         user_type varchar(31) not null,
         user_id int4 not null,
@@ -97,7 +97,6 @@ create sequence hibernate_sequence minvalue 80;
         email varchar(255),
         enabled boolean not null,
         first_name varchar(255),
-        admin boolean,
         last_name varchar(255),
         password varchar(255) not null,
         reported boolean not null,
@@ -121,6 +120,11 @@ create sequence hibernate_sequence minvalue 80;
         add constraint FKbhnfs5wwy14wdm2f1wam8qkhf
         foreign key (resume_id)
         references resumes;
+
+    alter table authorities
+        add constraint FKk91upmbueyim93v469wj7b2qh
+        foreign key (user_id)
+        references users;
 
     alter table degrees
         add constraint FKbl34awt7dptaxwwwifbj1sn1q
@@ -182,43 +186,54 @@ create sequence hibernate_sequence minvalue 80;
         foreign key (user_id)
         references users;
 
-    alter table user_roles
-        add constraint FKhfh9dx7w3ubf1co1vdev94g3f
-        foreign key (user_id)
-        references users;
-
     insert into users (user_type, user_id, city, state, street,
-                       zip, email, enabled, first_name, admin,
+                       zip, email, enabled, first_name,
                        last_name, password, reported, username,
                        current_job_title, experience, supress_contact) values
                       ('SEEKER', 1, 'New Brunswick', 'NJ', '467 Durham Court',
-                       '08901', 'loc.truong@testemail.com', true, 'Loc', false,
+                       '08901', 'loc.truong@testemail.com', true, 'Loc',
                        'Truong', 'password@1', false, 'loc',
                        'Software Engineering', '4 years', false);
 
     insert into users (user_type, user_id, city, state, street,
-                       zip, email, enabled, first_name, admin,
+                       zip, email, enabled, first_name,
                        last_name, password, reported, username,
                        current_job_title, experience, supress_contact) values
                       ('SEEKER', 2, 'Henderson', 'KY', '398 Augusta Drive',
                        '42420', 'steve.shim@testemail.com', true, 'Steve',
-                       false, 'Shim', 'password@1', false, 'steve',
+                       'Shim', 'password@1', false, 'steve',
                        'Software Engineering', '5 years', false);
 
     insert into users (user_type, user_id, city, state, street,
-                       zip, email, enabled, first_name, admin,
+                       zip, email, enabled, first_name,
                        last_name, password, reported, username,
                        employer_website, supress_contact) values
                       ('EMPLOYER', 3, 'Cambridge', 'MA', '852 Ridge Road',
                        '02138', 'jordan.ton@testemail.com', true, 'Jordan',
-                       false, 'Ton', 'password@1', false, 'jordan',
+                       'Ton', 'password@1', false, 'jordan',
                        'www.google.com/career', false);
 
     insert into users (user_type, user_id, city, state, street,
-                       zip, email, enabled, first_name, admin,
+                       zip, email, enabled, first_name,
                        last_name, password, reported, username,
                        employer_website, supress_contact) values
                       ('EMPLOYER', 4, 'Hackensack', 'NJ', '225 Woodland Avenue',
                        '07601', 'james.sunthonlap@testemail.com', true, 'James',
-                       false, 'Sunthonlap', 'password@1', false, 'james',
+                       'Sunthonlap', 'password@1', false, 'james',
                        'www.nasa.gov/career', false);
+
+    insert into users (user_type, user_id, city, state, street,
+                       zip, email, enabled, first_name,
+                       last_name, password, reported, username,
+                       current_job_title, supress_contact) values
+                      ('ADMIN', 5, 'LA', 'CA', '5154 State University Drive',
+                       '90032', 'cy.sun@csula.edu', true, 'Chengyu',
+                       'Sun', 'password@1', false, 'cysun',
+                       'System Administrator', false);
+
+    insert into authorities values
+    	(1, 'ROLE_SEEKER'),
+    	(2, 'ROLE_SEEKER'),
+    	(3, 'ROLE_EMPLOYER'),
+    	(4, 'ROLE_EMPLOYER'),
+    	(5, 'ROLE_ADMIN');
