@@ -5,12 +5,12 @@
         http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
     version="3.0" id="usjobs">
 
-    <display-name>U.S. Jobs</display-name>
+    <display-name>US Jobs</display-name>
 
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
-    
+
     <servlet>
         <servlet-name>usjobs</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -20,11 +20,11 @@
     <servlet-mapping>
         <servlet-name>usjobs</servlet-name>
         <url-pattern>*.html</url-pattern>
-    </servlet-mapping>    
+    </servlet-mapping>
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener> 
+    </listener>
 
     <filter>
         <filter-name>jpaFilter</filter-name>  
@@ -34,6 +34,16 @@
     <filter-mapping>  
         <filter-name>jpaFilter</filter-name>  
         <url-pattern>/*</url-pattern>  
+    </filter-mapping>
+
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
     </filter-mapping>
     
 </web-app>
