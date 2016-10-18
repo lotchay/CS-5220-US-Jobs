@@ -7,3 +7,10 @@ nav.navbar {
 div.btn-container {
 	margin: 15px;
 }
+
+div.job-listing-preview {
+	white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

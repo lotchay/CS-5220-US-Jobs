@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import usjobs.model.JobPosting;
+import usjobs.model.JobSeeker;
 import usjobs.model.User;
+import usjobs.model.dao.JobPostingDao;
 import usjobs.model.dao.UserDao;
 
 @Controller
@@ -22,6 +25,9 @@ public class UserController {
 
     @Autowired
     private UserDao userDao;
+    
+    @Autowired
+    private JobPostingDao jobPostingDao;
     
     @RequestMapping("/user/list.html")
     public String list( ModelMap models ) {
@@ -81,5 +87,4 @@ public class UserController {
         // Redirect to user list
         return "redirect:list.html";
     }
-    
 }
