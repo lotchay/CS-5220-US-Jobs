@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>User CP</title>
+<title>Employer Profile</title>
 
 <link href="css/vendor/bower.css" rel="stylesheet" />
 <link href="css/us-jobs.css" rel="stylesheet" />
@@ -13,7 +15,7 @@
 	rel="stylesheet" />
 </head>
 <body>
-	<jsp:include page="header.jsp" />
+	<jsp:include page="../header.jsp" />
 	<div class="row animated fadeIn">
 		<div class="col col-md-2 col-md-offset-2">
 			<ul id="options-list" class="list-group">
@@ -106,13 +108,85 @@
 				<div class="panel-heading">
 					<h3 class="panel-title">Post a New Job</h3>
 				</div>
-				<div class="panel-body">TODO</div>
+				<div class="panel-body">
+					<form:form modelAttribute="newJob" class="form-horizontal"
+						action="addJob.html?employerId=3">
+						<fieldset>
+							<div class="form-group">
+								<label for="title" class="col-lg-2 control-label">Title</label>
+								<div class="col-lg-10">
+									<form:input type="text" class="form-control" path="jobTitle"
+										id="title" placeholder="Job Title" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="website" class="col-lg-2 control-label">Website</label>
+								<div class="col-lg-10">
+									<form:input type="text" class="form-control" path="website"
+										id="website" placeholder="Job posting website" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="location" class="col-lg-2 control-label">Location</label>
+								<div class="col-lg-10">
+									<form:input type="text" class="form-control" path="location"
+										id="location" placeholder="Job Location" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="description" class="col-lg-2 control-label">Description</label>
+								<div class="col-lg-10">
+									<form:textarea class="form-control" path="jobDescription"
+										rows="3" id="description" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="salary" class="col-lg-2 control-label">Salary</label>
+								<div class="col-lg-10">
+									<form:input type="text" class="form-control" path="salary"
+										id="salary" placeholder="Job Salary" />
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-lg-10 col-lg-offset-2">
+									<button type="reset" class="btn btn-default">Cancel</button>
+									<button type="submit" class="btn btn-primary">Submit</button>
+								</div>
+							</div>
+						</fieldset>
+					</form:form>
+				</div>
 			</div>
 			<div id="jobDetail" class="panel panel-info">
 				<div class="panel-heading">
 					<h3 class="panel-title">Your Job Listings</h3>
 				</div>
-				<div class="panel-body">TODO</div>
+				<div class="panel-body">
+					<table class="table table-striped table-hover">
+						<tr class="info">
+							<th>Title</th>
+							<th></th>
+						</tr>
+						<c:forEach items="${jobPostings}" var="jobPosting">
+							<tr>
+								<td>${jobPosting.jobTitle }</td>
+								<td>
+									<form class="form-btn-container" action="editJob.html" method="get">
+										<input type="hidden" name="employerId" value="3"/>
+										<input type="hidden" name="jobId" value="${jobPosting.id }" />
+										<button type="submit" class="btn btn-sm btn-success">Edit</button>
+									</form>
+
+									<form class="form-btn-container"
+										action="deleteJob.html?employerId=3&jobId=${jobPosting.id }"
+										method="post">
+										<button type="submit" class="btn btn-sm btn-danger">Delete</button>
+									</form>
+								</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>

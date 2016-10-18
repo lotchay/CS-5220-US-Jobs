@@ -14,3 +14,7 @@ div.job-listing-preview {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+form.form-btn-container {
+	display:inline-block;
+}

@@ -21,6 +21,15 @@ public class JobPostingDaoImpl implements JobPostingDao {
 	}
 	
 	@Override
+	public List<JobPosting> getJobPostings(int id) {
+		String query = "FROM JobPosting WHERE employer_id = :id";
+		return em.createQuery(query, JobPosting.class)
+				.setParameter("id", id)
+				.getResultList();
+	}
+	
+	
+	@Override
 	public JobPosting getJobPosting(int id) {
 		return em.find(JobPosting.class, id);
 	}

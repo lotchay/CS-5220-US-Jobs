@@ -13,7 +13,7 @@ public class HomeController {
 	@Autowired
 	private JobPostingDao jobPostingDao;
 	
-	@RequestMapping( {"/index.html","/home.html"} )
+	@RequestMapping( value={"/index.html", "/home.html"} )
 	public String home(ModelMap models) {
 		models.put("jobPostings", jobPostingDao.getJobPostings());
 		return "home";

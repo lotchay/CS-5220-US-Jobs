@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -9,12 +10,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="home.html">U.S. Jobs</a>
+      <a class="navbar-brand" href="${pageContext.request.contextPath}/home.html">U.S. Jobs</a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
       <ul class="nav navbar-nav">
-        <li><a href="#">Main</a></li>
+        <li><a href="${pageContext.request.contextPath}/home.html">Main</a></li>
         <li><a href="#">Link</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -37,10 +38,10 @@
         <button type="submit" class="btn btn-default">Search</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="login.html">Login</a></li>
+        <li><a href="${pageContext.request.contextPath}/login.html">Login</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="register.html">Register</a></li>
+        <li><a href="${pageContext.request.contextPath}/register.html">Register</a></li>
       </ul>
     </div>
   </div>

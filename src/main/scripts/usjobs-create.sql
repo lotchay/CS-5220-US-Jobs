@@ -208,20 +208,20 @@ create sequence hibernate_sequence minvalue 80;
     insert into users (user_type, user_id, city, state, street,
                        zip, email, enabled, first_name,
                        last_name, password, reported, username,
-                       employer_website, supress_contact) values
+                       employer_website, employer_name, supress_contact) values
                       ('EMPLOYER', 3, 'Cambridge', 'MA', '852 Ridge Road',
                        '02138', 'jordan.ton@testemail.com', true, 'Jordan',
                        'Ton', 'password@1', false, 'jordan',
-                       'www.google.com/career', false);
+                       'www.google.com/career', 'Google', false);
 
     insert into users (user_type, user_id, city, state, street,
                        zip, email, enabled, first_name,
                        last_name, password, reported, username,
-                       employer_website, supress_contact) values
+                       employer_website, employer_name, supress_contact) values
                       ('EMPLOYER', 4, 'Hackensack', 'NJ', '225 Woodland Avenue',
                        '07601', 'james.sunthonlap@testemail.com', true, 'James',
                        'Sunthonlap', 'password@1', false, 'james',
-                       'www.nasa.gov/career', false);
+                       'www.nasa.gov/career', 'NASA', false);
 
     insert into users (user_type, user_id, city, state, street,
                        zip, email, enabled, first_name,

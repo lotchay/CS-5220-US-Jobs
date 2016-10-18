@@ -8,6 +8,8 @@ public interface JobPostingDao {
 	
 	List<JobPosting> getJobPostings();
 	
+	List<JobPosting> getJobPostings(int id);
+	
 	JobPosting getJobPosting(int id);
 	
 	void delete(JobPosting jobPosting);

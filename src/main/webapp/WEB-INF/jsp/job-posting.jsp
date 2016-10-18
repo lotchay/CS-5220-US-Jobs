@@ -8,9 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Job Posting ${jobPosting.jobTitle}</title>
 
-<link href="css/vendor/bower.css" rel="stylesheet" />
-<link href="css/us-jobs.css" rel="stylesheet" />
-<link href="bower_components/font-awesome/css/font-awesome.css"
+<link href="../css/vendor/bower.css" rel="stylesheet" />
+<link href="../css/us-jobs.css" rel="stylesheet" />
+<link href="../bower_components/font-awesome/css/font-awesome.css"
 	rel="stylesheet" />
 </head>
 <body>
@@ -20,10 +20,13 @@
 			<h3>${jobPosting.jobTitle }</h3>
 			<p>${jobPosting.jobDescription }</p>
 			<div class="container">
-				<input type="hidden" id="jobid" name="jobid"
-					value="${jobPosting.id }" /> 
-					<button type="button" id="favorite"class="btn btn-info">Favorite</button> 
-					<button type="button" id="apply" class="btn btn-info">Apply</button>
+				<form method="post" action="favorite.html?userid=1&jobid=${jobPosting.id}">
+					<button type="submit" id="favorite" class="btn btn-info">Favorite</button>
+				</form>
+				<br/>
+				<form method="post" action="apply.html?userid=1&jobid=${jobPosting.id}">
+					<button type="submit" id="apply" class="btn btn-info">Apply</button>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -34,7 +37,7 @@
 	</div>
 </body>
 
-<script src="js/vendor/bower.js"></script>
-<script src="js/job-posting.js"></script>
+<script src="../js/vendor/bower.js"></script>
+<script src="../js/job-posting.js"></script>
 
 </html>
