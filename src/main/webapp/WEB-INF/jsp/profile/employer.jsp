@@ -9,9 +9,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Employer Profile</title>
 
-<link href="css/vendor/bower.css" rel="stylesheet" />
-<link href="css/us-jobs.css" rel="stylesheet" />
-<link href="bower_components/font-awesome/css/font-awesome.css"
+<link href="../css/vendor/bower.css" rel="stylesheet" />
+<link href="../css/us-jobs.css" rel="stylesheet" />
+<link href="../bower_components/font-awesome/css/font-awesome.css"
 	rel="stylesheet" />
 </head>
 <body>
@@ -110,7 +110,7 @@
 				</div>
 				<div class="panel-body">
 					<form:form modelAttribute="newJob" class="form-horizontal"
-						action="addJob.html?employerId=${user.id}">
+						action="addJob.html?employerId=${user.id}" method="post">
 						<fieldset>
 							<div class="form-group">
 								<label for="title" class="col-lg-2 control-label">Title</label>
@@ -192,6 +192,6 @@
 	</div>
 </body>
 
-<script src="js/vendor/bower.js"></script>
-<script src="js/list-detail.js"></script>
+<script src="../js/vendor/bower.js"></script>
+<script src="../js/list-detail.js"></script>
 </html>

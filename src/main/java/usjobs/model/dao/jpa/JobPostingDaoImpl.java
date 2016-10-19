@@ -38,15 +38,8 @@ public class JobPostingDaoImpl implements JobPostingDao {
 	
 	@Override
 	@Transactional
-	@PreAuthorize ("hasRole('ROLE_ADMIN')")
+	@PreAuthorize ("hasRole('ROLE_ADMIN') or principal.username == #jobPosting.company.username")
 	public void delete(JobPosting jobPosting) {
-		em.remove(jobPosting);
-	}
-	
-	@Override
-	@Transactional
-	@PreAuthorize ("hasRole('ROLE_ADMIN') or #jobPosting.company.id == #employerId")
-	public void delete(JobPosting jobPosting, int employerId) {
 		em.remove(jobPosting);
 	}
 	
@@ -62,6 +55,7 @@ public class JobPostingDaoImpl implements JobPostingDao {
 	
 	@Override
 	@Transactional
+	@PreAuthorize ("hasRole('ROLE_ADMIN') or principal.username == #jobPosting.company.username")
 	public JobPosting save(JobPosting jobPosting) {
 		return em.merge(jobPosting);
 	}
