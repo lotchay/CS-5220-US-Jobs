@@ -15,7 +15,6 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import usjobs.model.Employer;
 import usjobs.model.JobPosting;
-import usjobs.model.JobSeeker;
 import usjobs.model.User;
 import usjobs.model.dao.JobPostingDao;
 import usjobs.model.dao.UserDao;
