@@ -14,6 +14,8 @@ public interface JobPostingDao {
 	
 	void delete(JobPosting jobPosting);
 	
+	void delete(JobPosting jobPosting, int employerId);
+	
 	List<JobPosting> searchJobs(String searchTerm);
 	
 	JobPosting save(JobPosting jobPosting);

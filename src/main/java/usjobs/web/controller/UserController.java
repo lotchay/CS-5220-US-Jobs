@@ -125,12 +125,10 @@ public class UserController {
 
 	@RequestMapping(value = "/deleteJob.html", method = RequestMethod.POST)
 	public String deleteJob(@RequestParam int employerId, @RequestParam int jobId) {
-		/*
-		 * need to set a restriction where only the employer that owns the job
-		 * or an admin can delete this job
-		 */
 		JobPosting jobPosting = jobPostingDao.getJobPosting(jobId);
-		jobPostingDao.delete(jobPosting);
+		logger.info("job id: " + jobPosting.getCompany().getId());
+		logger.info("employerid: " + employerId);
+		jobPostingDao.delete(jobPosting, employerId);
 		return "redirect:profile.html?id=" + employerId;
 	}
 

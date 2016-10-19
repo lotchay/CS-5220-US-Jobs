@@ -110,7 +110,7 @@
 				</div>
 				<div class="panel-body">
 					<form:form modelAttribute="newJob" class="form-horizontal"
-						action="addJob.html?employerId=3">
+						action="addJob.html?employerId=${user.id}">
 						<fieldset>
 							<div class="form-group">
 								<label for="title" class="col-lg-2 control-label">Title</label>
@@ -178,7 +178,7 @@
 									</form>
 
 									<form class="form-btn-container"
-										action="deleteJob.html?employerId=3&jobId=${jobPosting.id }"
+										action="deleteJob.html?employerId=${user.id}&jobId=${jobPosting.id }"
 										method="post">
 										<button type="submit" class="btn btn-sm btn-danger">Delete</button>
 									</form>
