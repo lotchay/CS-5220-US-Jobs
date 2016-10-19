@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,12 +26,20 @@
             <td>${user.lastName}</td>
             <td>${user.email}</td>
             <td>
-                <a href="view/${user.id}.html">View</a> |
+                <security:authorize access="hasRole('ROLE_ADMIN') or principal.username == '${user.username}'">
+                <a href="view/${user.id}.html">View</a> &nbsp; | &nbsp;&nbsp;
                 <a href="edit.html?id=${user.id}">Edit</a>
+                </security:authorize> 
             </td>            
         </tr>
         </c:forEach>
     </table>
-    <p><a href="add.html">Add New User</a></p>        
+    <security:authorize access="hasRole('ROLE_ADMIN')">
+    <p><a href="add.html">Add New User</a></p>
+    </security:authorize> 
+    <form action="<c:url value='/logout' />" method="POST">
+        <input name="_csrf" type="hidden" value="${_csrf.token}" />
+        <input name="submit" type="submit" value="Logout" />
+    </form>        
 </body>
 </html>

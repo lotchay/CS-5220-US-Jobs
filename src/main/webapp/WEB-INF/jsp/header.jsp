@@ -42,6 +42,9 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Register</a></li>
       </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="user/list.html">User Management</a></li>
+      </ul>
     </div>
   </div>
 </nav>

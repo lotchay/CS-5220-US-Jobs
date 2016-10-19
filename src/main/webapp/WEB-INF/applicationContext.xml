@@ -40,12 +40,18 @@
     
     <security:authentication-manager>
         <security:authentication-provider>
-            <security:jdbc-user-service data-source-ref="dataSource" />
+            <security:jdbc-user-service data-source-ref="dataSource" 
+                authorities-by-username-query="select u.username, a.role
+                from users u, authorities a where u.username = ? and u.user_id =
+                a.user_id" />
         </security:authentication-provider>
     </security:authentication-manager>
 
     <security:http auto-config="true" use-expressions="true">
-        <security:intercept-url pattern="/users.html" access="hasRole('ROLE_ADMIN')" />
+        <security:logout logout-success-url="/" />
+        <security:intercept-url pattern="/user/**" access="authenticated" />
     </security:http>    
+
+    <security:global-method-security pre-post-annotations="enabled" />
 
 </beans>
