@@ -44,7 +44,7 @@
 			</form>
 			<security:authorize access="isAuthenticated()">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Welcome, <security:authentication
+					<li><a href="profile.html">Welcome, <security:authentication
 								property="principal.username" /></a></li>
 					<li><a href="logout">Logout</a></li>
 				</ul>

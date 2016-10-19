@@ -167,7 +167,7 @@
 							<th>Title</th>
 							<th></th>
 						</tr>
-						<c:forEach items="${jobPostings}" var="jobPosting">
+						<c:forEach items="${user.jobsPosted}" var="jobPosting">
 							<tr>
 								<td>${jobPosting.jobTitle }</td>
 								<td>

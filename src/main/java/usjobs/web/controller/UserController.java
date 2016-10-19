@@ -2,7 +2,10 @@ package usjobs.web.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,7 +25,9 @@ import usjobs.model.dao.UserDao;
 @Controller
 @SessionAttributes({"user", "editJob"})
 public class UserController {
-
+	
+	private static final Logger logger = Logger.getLogger(UserController.class);
+	
     @Autowired
     private UserDao userDao;
     
@@ -94,12 +99,15 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/profile.html")
-    public String getProfile(@RequestParam int id, ModelMap models) {
-    	User user = userDao.getUser(id);
+    public String getProfile(ModelMap models) {
+    	UserDetails details = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	User user = userDao.getUser(details.getUsername());
     	if (user.isAdmin()) {
     		return "profile/admin";
     	} else if (user.isEmployer()) {
-    		models.put("jobPostings", jobPostingDao.getJobPostings(id));
+    		Employer employer = (Employer) user;
+    		employer.setJobsPosted(jobPostingDao.getJobPostings(user.getId()));
+    		models.put("user", employer);
     		models.put("newJob", new JobPosting());
     		return "profile/employer";
     	} else {
