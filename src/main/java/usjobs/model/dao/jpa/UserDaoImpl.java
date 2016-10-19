@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,12 +20,14 @@ public class UserDaoImpl implements UserDao  {
 	private EntityManager entityManager;
 
 	@Override
+	@PostAuthorize ("hasRole('ROLE_ADMIN') or principal.username == returnObject.username")
 	public User getUser( Integer id ) {
 				
 		return entityManager.find( User.class, id );
 	}
 
 	@Override
+	@PostAuthorize ("hasRole('ROLE_ADMIN') or principal.username == returnObject.username")
 	public User getUser( String username ) {
 		
 		return entityManager.find( User.class, username );
@@ -37,6 +41,7 @@ public class UserDaoImpl implements UserDao  {
 
 	@Override
 	@Transactional
+	@PreAuthorize ("hasRole('ROLE_ADMIN') or principal.username == #user.username")
 	public User saveUser( User user ) {
 		
 		return entityManager.merge( user );
