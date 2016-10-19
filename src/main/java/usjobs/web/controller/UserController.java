@@ -139,7 +139,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/editJob.html", method = RequestMethod.POST)
-	public String editJob(@RequestParam int employerId, @ModelAttribute JobPosting editJob, SessionStatus sessionStatus) {
+	public String editJobForm(@RequestParam int employerId, @ModelAttribute JobPosting editJob, SessionStatus sessionStatus) {
 		jobPostingDao.save(editJob);
 		sessionStatus.setComplete();
 		return "redirect:profile.html?id=" + employerId;
