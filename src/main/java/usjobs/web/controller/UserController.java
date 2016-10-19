@@ -133,17 +133,12 @@ public class UserController {
 
 	@RequestMapping(value = "/user/editJob.html", method = RequestMethod.GET)
 	public String editJobForm(@RequestParam int employerId, @RequestParam int jobId, ModelMap models) {
-		/**
-		 * We want to make sure that the employer with the correct id can edit
-		 * this and also that an admin can do it but no one else. still need to
-		 * implement.
-		 */
 		models.put("editJob", jobPostingDao.getJobPosting(jobId));
 		return "job-edit";
 	}
 
 	@RequestMapping(value = "/user/editJob.html", method = RequestMethod.POST)
-	public String editJobForm(@RequestParam int employerId, @ModelAttribute JobPosting editJob, SessionStatus sessionStatus) {
+	public String editJobForm(@RequestParam int employerId, @ModelAttribute("editJob") JobPosting editJob, SessionStatus sessionStatus) {
 		jobPostingDao.save(editJob);
 		sessionStatus.setComplete();
 		return "redirect:profile.html?id=" + employerId;
