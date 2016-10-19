@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -37,63 +37,16 @@
 			<h1 class="text-primary">Trending Jobs</h1>
 			<hr />
 			<div class="list-group">
-				<a href="#" class="list-group-item">
-					<h4 class="list-group-item-heading">Systems Engineer</h4>
-					<h6>ViaSat - 61 reviews - Denver, CO</h6>
-					<p class="list-group-item-text">Bachelors of Science in EE, CS,
-						or relevant engineering field or equivalent experience. Are you
-						inspired by a job that challenges you to be proactive, lead...</p>
-				</a> <a href="#" class="list-group-item">
-					<h4 class="list-group-item-heading">Client Success Team
-						Account Manager</h4>
-					<h6>SpinFusion - Denver, CO</h6>
-					<p class="list-group-item-text">Bachelor’s degree in HIT, CS
-						or equivalent degree of schedule fields in healthcare or
-						technology. SpinFusion was founded with the vision that if
-						software can...</p>
-				</a> <a href="#" class="list-group-item">
-					<h4 class="list-group-item-heading">Mobile Developer</h4>
-					<h6>GoSpotCheck - Denver, CO</h6>
-					<p class="list-group-item-text">WHAT YOU'LL DO * As a Mobile
-						Developer on the Rep Services Team, you will continue to pave the
-						way in engineering the best tool on the market for the deskless...</p>
-				</a> <a href="#" class="list-group-item">
-					<h4 class="list-group-item-heading">Mobile Developer</h4>
-					<h6>GoSpotCheck - Denver, CO</h6>
-					<p class="list-group-item-text">WHAT YOU'LL DO * As a Mobile
-						Developer on the Rep Services Team, you will continue to pave the
-						way in engineering the best tool on the market for the deskless...</p>
-				</a> <a href="#" class="list-group-item">
-					<h4 class="list-group-item-heading">Mobile Developer</h4>
-					<h6>GoSpotCheck - Denver, CO</h6>
-					<p class="list-group-item-text">WHAT YOU'LL DO * As a Mobile
-						Developer on the Rep Services Team, you will continue to pave the
-						way in engineering the best tool on the market for the deskless...</p>
-				</a> <a href="#" class="list-group-item">
-					<h4 class="list-group-item-heading">Mobile Developer</h4>
-					<h6>GoSpotCheck - Denver, CO</h6>
-					<p class="list-group-item-text">WHAT YOU'LL DO * As a Mobile
-						Developer on the Rep Services Team, you will continue to pave the
-						way in engineering the best tool on the market for the deskless...</p>
-				</a> <a href="#" class="list-group-item">
-					<h4 class="list-group-item-heading">Mobile Developer</h4>
-					<h6>GoSpotCheck - Denver, CO</h6>
-					<p class="list-group-item-text">WHAT YOU'LL DO * As a Mobile
-						Developer on the Rep Services Team, you will continue to pave the
-						way in engineering the best tool on the market for the deskless...</p>
-				</a> <a href="#" class="list-group-item">
-					<h4 class="list-group-item-heading">Mobile Developer</h4>
-					<h6>GoSpotCheck - Denver, CO</h6>
-					<p class="list-group-item-text">WHAT YOU'LL DO * As a Mobile
-						Developer on the Rep Services Team, you will continue to pave the
-						way in engineering the best tool on the market for the deskless...</p>
-				</a> <a href="#" class="list-group-item">
-					<h4 class="list-group-item-heading">Mobile Developer</h4>
-					<h6>GoSpotCheck - Denver, CO</h6>
-					<p class="list-group-item-text">WHAT YOU'LL DO * As a Mobile
-						Developer on the Rep Services Team, you will continue to pave the
-						way in engineering the best tool on the market for the deskless...</p>
-				</a>
+				<c:forEach items="${jobPostings}" var="jobPosting">
+					<a href="job/view.html?jobid=${jobPosting.id}"
+						class="list-group-item">
+						<h4 class="list-group-item-heading">${jobPosting.jobTitle}</h4>
+						<h6>${jobPosting.company.employerName}</h6>
+						<div class="job-listing-preview">
+							<p class="list-group-item-text">${jobPosting.jobDescription }</p>
+						</div>
+					</a>
+				</c:forEach>
 			</div>
 			<div class="btn-container row col col-md-2 col-md-offset-5">
 				<button class="btn btn-singleton btn-info">Show More</button>

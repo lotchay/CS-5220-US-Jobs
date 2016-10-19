@@ -14,7 +14,10 @@ import javax.persistence.OneToMany;
 public class Employer extends User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	@Column(name = "employer_name")
+	private String employerName;
+	
 	@Column(name = "employer_website")
 	private String employerWebsite;
 
@@ -24,6 +27,14 @@ public class Employer extends User implements Serializable {
 
 	@OneToMany(mappedBy = "employerReviewed", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<EmployerReview> employerReviews;
+	
+	public String getEmployerName() {
+		return employerName;
+	}
+
+	public void setEmployerName(String employerName) {
+		this.employerName = employerName;
+	}
 
 	public String getEmployerWebsite() {
 		return employerWebsite;

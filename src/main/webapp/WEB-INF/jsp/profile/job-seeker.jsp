@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>User CP</title>
+<title>Job Seeker Profile</title>
 
 <link href="css/vendor/bower.css" rel="stylesheet" />
 <link href="css/us-jobs.css" rel="stylesheet" />
@@ -13,7 +13,7 @@
 	rel="stylesheet" />
 </head>
 <body>
-	<jsp:include page="header.jsp" />
+	<jsp:include page="../header.jsp" />
 	<div class="row animated fadeIn">
 		<div class="col col-md-2 col-md-offset-2">
 			<ul id="options-list" class="list-group">

@@ -96,6 +96,7 @@ create sequence hibernate_sequence minvalue 80;
         zip varchar(255),
         email varchar(255),
         enabled boolean not null,
+        employer_name varchar(255),
         first_name varchar(255),
         last_name varchar(255),
         password varchar(255) not null,
@@ -207,20 +208,20 @@ create sequence hibernate_sequence minvalue 80;
     insert into users (user_type, user_id, city, state, street,
                        zip, email, enabled, first_name,
                        last_name, password, reported, username,
-                       employer_website, supress_contact) values
+                       employer_website, employer_name, supress_contact) values
                       ('EMPLOYER', 3, 'Cambridge', 'MA', '852 Ridge Road',
                        '02138', 'jordan.ton@testemail.com', true, 'Jordan',
                        'Ton', 'password@1', false, 'jordan',
-                       'www.google.com/career', false);
+                       'www.google.com/career', 'Google', false);
 
     insert into users (user_type, user_id, city, state, street,
                        zip, email, enabled, first_name,
                        last_name, password, reported, username,
-                       employer_website, supress_contact) values
+                       employer_website, employer_name, supress_contact) values
                       ('EMPLOYER', 4, 'Hackensack', 'NJ', '225 Woodland Avenue',
                        '07601', 'james.sunthonlap@testemail.com', true, 'James',
                        'Sunthonlap', 'password@1', false, 'james',
-                       'www.nasa.gov/career', false);
+                       'www.nasa.gov/career', 'NASA', false);
 
     insert into users (user_type, user_id, city, state, street,
                        zip, email, enabled, first_name,
@@ -237,3 +238,66 @@ create sequence hibernate_sequence minvalue 80;
     	(3, 'ROLE_EMPLOYER'),
     	(4, 'ROLE_EMPLOYER'),
     	(5, 'ROLE_ADMIN');
+
+    insert into job_postings (job_id, date_closed, date_posted, job_description, job_title, location, contact_email, contact_first_name, contact_title, contact_last_name, contact_phone, salary, website, employer_id)
+	  values (1, null, null, 'We are looking for a full-stack engineer with solid front end experience. You must be passionate about APIs and services, and competent in the data that support them. You will be developing, supporting and enhancing Web and internal applications.',
+            'Software Engineer', 'Dallas, TX', 'joe@nasa.hr.gov', 'joe', 'software engineer', 'smith', '999-955-5555', '200000', 'www.nasa.gov', 4);
+
+    insert into job_postings (job_id, date_closed, date_posted, job_description, job_title, location, contact_email, contact_first_name, contact_title, contact_last_name, contact_phone, salary, website, employer_id)
+	  values (2, null, null, 'Qualifications:
+            SolidWorks (SCWP preferred)
+            BSME preferred or CSWP with strong skills
+            3-5 years Machine Design
+            Strong GD&T
+            Assembly & Tooling design
+            Knowledge of EPDM
+            Responsibilities:
+
+            Create detailed solid models of assemblies
+            Participate in configuration meetings
+            Follow drawings thru final release',
+            'Mechanical Engineer', 'Los Angeles, CA', 'joe@nasa.hr.gov', 'joe', 'Engineering Boss', 'smith', '999-955-5555', '120000', 'www.nasa.gov', 4);
+
+
+    insert into job_postings (job_id, date_closed, date_posted, job_description, job_title, location, contact_email, contact_first_name, contact_title, contact_last_name, contact_phone, salary, website, employer_id)
+	  values (3, null, null, 'Analytical Linguists work across Google to drive improvements in quality, classification,
+            information structure, and natural language understanding and generation. As an Analytical Linguist you
+            will work both on complex projects spanning multiple products, groups, and disciplines, and on tightly
+            focused efforts to produce specific product components or answer specific research questions. Analytical
+            Linguists work in many different areas and arrive with a wide variety of skills—your specialization might
+            involve natural language processing and understanding, phonology, phonetics, syntax, semantics, ontology,
+            program management, human subject research, experimental design, statistics, corpus linguistics, large scale
+            data acquisition, or any combination. This team is part of some of the most groundbreaking and exciting work
+            at Google. It''s our goal to use insights from linguistics and related fields to constantly improve our products.
+
+            As an Analytical Linguist on the Text Classification team, you will collaborate with software engineers, product
+            managers and language experts to build high-quality text classifiers for the display advertising ecosystem.
+            You will develop taxonomies and category sets, working closely with key stakeholders to understand product r
+            equirements. You will set data labeling policies, and design, build, and curate labeled cross-language datasets
+            for classifier training and evaluation. You will build and evaluate custom classifiers using state-of-the-art machine
+            learning tools and techniques to help Google better understand the web and its users.
+
+			      Users come first at Google. Nowhere is this more important than on our Advertising & Commerce team: we believe
+            that ads and commercial information can be highly useful to our users if, and only if, that information is relevant
+            to what our users wish to find or do. Hundreds of thousands of advertisers worldwide use AdWords to promote their
+            products; hundreds of thousands of publishers use AdSense to serve relevant ads on their website; and business
+            around the world use our commerce products (like Google Offers, Google Shopping, and Google Wallet) to support
+            their online businesses and bring users into their offline stores. We build and maintain the platforms that have made
+            Google what it is today, and are constantly innovating to deliver the most effective advertising and commerce opportunities of tomorrow.',
+            'Linguist, Text Classification', 'Los Angeles, TX', 'kelly@google.com', 'Kelly', 'HR', 'Smith', '999-955-5555', '88888', 'www.google.com', 3);
+
+    insert into job_postings (job_id, date_closed, date_posted, job_description, job_title, location, contact_email, contact_first_name, contact_title, contact_last_name, contact_phone, salary, website, employer_id)
+	  values (4, null, null, 'YouTube''s Technology Solutions Organization is a global organization dedicated to developing and managing the company''s
+            largest and most strategic partnerships. We work closely with the YouTube product, engineering, and content teams to address
+            our partners'' most pressing and complex technology challenges. You''ll lead deployments, optimize implementations, and handle
+            integrations to build strong, successful, long-term partnerships.
+
+			      As the Head of Content Operations for YouTube, you will manage and lead a team of technically savvy, operations partner liaisons to support
+            entertainment and content industry partners, in order to onboard content in a scalable manner. You will collaborate with multiple internal
+            stakeholders including Business Development, Product Management, and Engineering to lead and define industry workflow development while
+            providing technical and operations support to our networks and digital content providers.
+
+			      YouTube has grown into a community used by over 1 billion people across the globe to access information, share video, and shape culture. 
+            The YouTube team helps budding creators build careers, creates products like YouTube Kids, YouTube Music, and YouTube Gaming, and engages
+            communities around shared passions and global conversations. Together, we empower the world to create, broadcast, and share.',
+            'Head of Content Operations, YouTube', 'Los Angeles, TX', 'kelly@google.com', 'Kelly', 'HR', 'Smith', '999-955-5555', '88888', 'www.google.com', 3);

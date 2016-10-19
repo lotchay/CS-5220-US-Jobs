@@ -27,13 +27,13 @@
     </listener>
 
     <filter>
-        <filter-name>jpaFilter</filter-name>  
-        <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>  
-    </filter>  
+        <filter-name>jpaFilter</filter-name>
+        <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+    </filter>
 
-    <filter-mapping>  
-        <filter-name>jpaFilter</filter-name>  
-        <url-pattern>/*</url-pattern>  
+    <filter-mapping>
+        <filter-name>jpaFilter</filter-name>
+        <url-pattern>/*</url-pattern>
     </filter-mapping>
 
     <filter>
@@ -45,5 +45,5 @@
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
+
 </web-app>
