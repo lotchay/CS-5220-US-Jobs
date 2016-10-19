@@ -185,5 +185,13 @@ public class JobPosting implements Serializable {
 	public void setPointOfContact(Contact pointOfContact) {
 		this.pointOfContact = pointOfContact;
 	}
+	
+	public void addUsersFavorited(User user) {
+		usersFavorited.add(user);
+	}
+	
+	public void addUsersApplied(User user) {
+		usersApplied.add(user);
+	}
 
 }
