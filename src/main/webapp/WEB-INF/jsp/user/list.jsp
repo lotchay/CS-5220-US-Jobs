@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>List All Users</title>
+<title>US Jobs - Users</title>
 </head>
 <body>
+    <h2><a href="../index.html">US Jobs</a></h2>
     <h1>User Management</h1>
     
     <table border="8" cellspacing="8" cellpadding="8" bgcolor="#99ccff" width="80%" height="100px">
