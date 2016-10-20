@@ -2,12 +2,10 @@ package usjobs.web.controller;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,26 +14,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import usjobs.model.Employer;
-import usjobs.model.JobPosting;
-import usjobs.model.JobSeeker;
+import usjobs.web.validator.UserValidator;
 import usjobs.model.User;
-import usjobs.model.dao.JobPostingDao;
 import usjobs.model.dao.UserDao;
-import usjobs.util.Security;
 
 @Controller
 @SessionAttributes("user")
 public class UserController {
-	
-	private static final Logger logger = Logger.getLogger(UserController.class);
-	
+		
     @Autowired
     private UserDao userDao;
     
     @Autowired
-    private JobPostingDao jobPostingDao;
-    
+    private UserValidator userValidator;
+       
     @RequestMapping("/user/list.html")
     public String list( ModelMap models ) {
         
@@ -65,10 +57,25 @@ public class UserController {
     }
     
     @RequestMapping(value = "/user/add.html", method = RequestMethod.POST)
-    public String add( @ModelAttribute User user ) {
-                
+    public String add( @ModelAttribute User user, BindingResult result, 
+        SessionStatus status ) {
+        
+        // Validate user's input
+        userValidator.validate( user, result );
+        
+        if ( result.hasErrors() ) {
+            return "user/add";
+        }
+        
+        // Allow admin user to add other admin users
+        user.getUserRoles().add( "ROLE_ADMIN" );
+        user.setEnabled( true );
+        
         // Save the user to database
         user = userDao.saveUser( user );
+        
+        // Remove all the session attributes when done
+        status.setComplete();
         
         // Redirect to user list
         return "redirect:list.html";
@@ -94,4 +101,5 @@ public class UserController {
         // Redirect to user list
         return "redirect:list.html";
     }
+    
 }
