@@ -24,7 +24,6 @@ import usjobs.model.dao.UserDao;
 import usjobs.util.Security;
 
 @Controller
-@SessionAttributes({"newJob", "editJob"})
 public class JobController {
 
 	private static final Logger logger = LoggerFactory.getLogger(JobController.class);
@@ -58,32 +57,5 @@ public class JobController {
 		jobPosting.addUsersApplied(user);
 		jobPostingDao.jobFavoritedOrApplied(jobPosting);
 		return "redirect:view.html?jobid=" + jobid;
-	}
-    
-	@RequestMapping(value = "/user/addJob.html", method = RequestMethod.POST)
-	public String addJob(@RequestParam int employerId, @ModelAttribute("newJob") JobPosting newJob, SessionStatus session) {
-		jobPostingDao.save(newJob);
-		session.setComplete();
-		return "redirect:profile.html?id=" + employerId;
-	}
-
-	@RequestMapping(value = "/user/deleteJob.html", method = RequestMethod.POST)
-	public String deleteJob(@RequestParam int employerId, @RequestParam int jobId) {
-		JobPosting jobPosting = jobPostingDao.getJobPosting(jobId);
-		jobPostingDao.delete(jobPosting);
-		return "redirect:profile.html?id=" + employerId;
-	}
-
-	@RequestMapping(value = "/user/editJob.html", method = RequestMethod.GET)
-	public String editJobForm(@RequestParam int employerId, @RequestParam int jobId, ModelMap models) {
-		models.put("editJob", jobPostingDao.getJobPosting(jobId));
-		return "job-edit";
-	}
-
-	@RequestMapping(value = "/user/editJob.html", method = RequestMethod.POST)
-	public String editJobForm(@RequestParam int employerId, @ModelAttribute("editJob") JobPosting editJob, SessionStatus sessionStatus) {
-		jobPostingDao.save(editJob);
-		sessionStatus.setComplete();
-		return "redirect:profile.html?id=" + employerId;
 	}
 }

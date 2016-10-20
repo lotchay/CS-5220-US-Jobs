@@ -22,6 +22,9 @@ public class JobSeeker extends User implements Serializable {
 	@ManyToMany(mappedBy = "usersApplied", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<JobPosting> appliedJobs;
 
+	@ManyToMany(mappedBy = "usersFavorited", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private List<JobPosting> favoritedJobs;
+	
 	@OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Resume> resumes;
 
@@ -46,6 +49,14 @@ public class JobSeeker extends User implements Serializable {
 
 	public void setAppliedJobs(List<JobPosting> appliedJobs) {
 		this.appliedJobs = appliedJobs;
+	}
+	
+	public List<JobPosting> getFavoritedJobs() {
+		return favoritedJobs;
+	}
+
+	public void setFavoritedJobs(List<JobPosting> favoritedJobs) {
+		this.favoritedJobs = favoritedJobs;
 	}
 
 	public List<Resume> getResumes() {

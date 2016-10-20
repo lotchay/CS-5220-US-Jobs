@@ -18,6 +18,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import usjobs.model.Employer;
 import usjobs.model.JobPosting;
+import usjobs.model.JobSeeker;
 import usjobs.model.User;
 import usjobs.model.dao.JobPostingDao;
 import usjobs.model.dao.UserDao;
@@ -92,29 +93,5 @@ public class UserController {
         
         // Redirect to user list
         return "redirect:list.html";
-    }
-    
-    /**
-     * Return the correct profile page for the user depending on if they are
-     * an employer, seeker, or admin.
-     * @return
-     */
-    @RequestMapping(value = "/user/profile.html", method = RequestMethod.GET)
-    public String getProfile(ModelMap models) {
-    	UserDetails details = Security.getUserDetails();
-    	User user = userDao.getUser(details.getUsername());
-    	if (user.isAdmin()) {
-    		return "profile/admin";
-    	} else if (user.isEmployer()) {
-    		Employer employer = (Employer) user;
-    		employer.setJobsPosted(jobPostingDao.getJobPostings(user.getId()));
-    		models.put("user", employer);
-    		JobPosting newJob = new JobPosting();
-    		newJob.setCompany(employer);
-    		models.put("newJob", newJob);
-    		return "profile/employer";
-    	} else {
-    		return "profile/job-seeker";
-    	}
     }
 }
