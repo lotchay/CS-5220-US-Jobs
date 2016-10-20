@@ -193,5 +193,8 @@ public class JobPosting implements Serializable {
 	public void addUsersApplied(User user) {
 		usersApplied.add(user);
 	}
-
+	
+	public void removeUsersFavorited(User user) {
+		usersFavorited.remove(user);
+	}
 }

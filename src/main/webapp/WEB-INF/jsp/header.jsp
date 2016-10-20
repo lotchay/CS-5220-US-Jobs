@@ -58,7 +58,7 @@
 				</ul>
 			</security:authorize>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="user/list.html">User Management</a></li>
+				<li><a href="<c:url value='/user/list.html' />" >User Management</a></li>
 			</ul>
 		</div>
 	</div>

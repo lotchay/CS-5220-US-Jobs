@@ -22,15 +22,31 @@
 			<p>${jobPosting.jobDescription }</p>
 			<security:authorize access="hasRole('SEEKER') or hasRole('ADMIN')">
 				<div class="container">
-					<form method="post"
-						action="favorite.html?jobid=${jobPosting.id}">
-						<button type="submit" id="favorite" class="btn btn-info">Favorite</button>
-					</form>
+					<c:choose>
+						<c:when test="${jobPosting.usersFavorited.contains(currentUser)}">
+							<form method="post" action="favorite.html?jobid=${jobPosting.id}">
+								<button type="submit" id="favorite" class="btn btn-info"><i class="fa fa-undo" aria-hidden="true"></i>
+								&nbsp;&nbsp;Unfavorite</button>
+							</form>
+						</c:when>
+						<c:otherwise>
+							<form method="post" action="favorite.html?jobid=${jobPosting.id}">
+								<button type="submit" id="favorite" class="btn btn-info">
+								<i class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;Favorite</button>
+							</form>
+						</c:otherwise>
+					</c:choose>
 					<br />
-					<form method="post"
-						action="apply.html?jobid=${jobPosting.id}">
-						<button type="submit" id="apply" class="btn btn-info">Apply</button>
-					</form>
+					<c:choose>
+						<c:when test="${jobPosting.usersApplied.contains(currentUser)}">
+						<button class="btn btn-info" disabled><i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Applied</button>
+						</c:when>
+						<c:otherwise>
+							<form method="post" action="apply.html?jobid=${jobPosting.id}">
+								<button type="submit" id="apply" class="btn btn-info">Apply</button>
+							</form>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</security:authorize>
 		</div>

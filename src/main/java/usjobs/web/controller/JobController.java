@@ -1,5 +1,7 @@
 package usjobs.web.controller;
 
+import java.security.Principal;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,15 @@ public class JobController {
 	private UserDao userDao;
 
 	@RequestMapping(value = "/job/view.html")
-	public String jobPosting(@RequestParam int jobid, ModelMap models) {
+	public String jobPosting(@RequestParam int jobid, ModelMap models, Principal principal) {
+		// only if there's someone logged in do we attempt to get current user.
+		// I need
+		// the user so that we don't let users favorite or apply to a job if
+		// theyve already done so.
+		if (principal != null) {
+			User currentUser = userDao.getUser(Security.getUserDetails().getUsername());
+			models.put("currentUser", currentUser);
+		}
 		JobPosting job = jobPostingDao.getJobPosting(jobid);
 		models.put("jobPosting", job);
 		return "job-posting";
@@ -45,7 +55,11 @@ public class JobController {
 	public String addFavorites(@RequestParam int jobid) {
 		JobPosting jobPosting = jobPostingDao.getJobPosting(jobid);
 		User user = userDao.getUser(Security.getUserDetails().getUsername());
-		jobPosting.addUsersFavorited(user);
+		if (jobPosting.getUsersFavorited().contains(user)) {
+			jobPosting.removeUsersFavorited(user);
+		} else {
+			jobPosting.addUsersFavorited(user);
+		}
 		jobPostingDao.jobFavoritedOrApplied(jobPosting);
 		return "redirect:view.html?jobid=" + jobid;
 	}
