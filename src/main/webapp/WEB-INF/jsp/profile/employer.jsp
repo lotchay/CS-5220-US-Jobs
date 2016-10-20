@@ -9,9 +9,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Employer Profile</title>
 
-<link href="css/vendor/bower.css" rel="stylesheet" />
-<link href="css/us-jobs.css" rel="stylesheet" />
-<link href="bower_components/font-awesome/css/font-awesome.css"
+<link href="../css/vendor/bower.css" rel="stylesheet" />
+<link href="../css/us-jobs.css" rel="stylesheet" />
+<link href="../bower_components/font-awesome/css/font-awesome.css"
 	rel="stylesheet" />
 </head>
 <body>
@@ -110,7 +110,7 @@
 				</div>
 				<div class="panel-body">
 					<form:form modelAttribute="newJob" class="form-horizontal"
-						action="addJob.html?employerId=3">
+						action="addJob.html?employerId=${user.id}" method="post">
 						<fieldset>
 							<div class="form-group">
 								<label for="title" class="col-lg-2 control-label">Title</label>
@@ -167,7 +167,7 @@
 							<th>Title</th>
 							<th></th>
 						</tr>
-						<c:forEach items="${jobPostings}" var="jobPosting">
+						<c:forEach items="${user.jobsPosted}" var="jobPosting">
 							<tr>
 								<td>${jobPosting.jobTitle }</td>
 								<td>
@@ -178,7 +178,7 @@
 									</form>
 
 									<form class="form-btn-container"
-										action="deleteJob.html?employerId=3&jobId=${jobPosting.id }"
+										action="deleteJob.html?employerId=${user.id}&jobId=${jobPosting.id }"
 										method="post">
 										<button type="submit" class="btn btn-sm btn-danger">Delete</button>
 									</form>
@@ -192,6 +192,6 @@
 	</div>
 </body>
 
-<script src="js/vendor/bower.js"></script>
-<script src="js/list-detail.js"></script>
+<script src="../js/vendor/bower.js"></script>
+<script src="../js/list-detail.js"></script>
 </html>

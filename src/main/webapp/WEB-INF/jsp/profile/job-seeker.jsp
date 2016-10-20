@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Job Seeker Profile</title>
 
-<link href="css/vendor/bower.css" rel="stylesheet" />
-<link href="css/us-jobs.css" rel="stylesheet" />
-<link href="bower_components/font-awesome/css/font-awesome.css"
+<link href="../css/vendor/bower.css" rel="stylesheet" />
+<link href="../css/us-jobs.css" rel="stylesheet" />
+<link href="../bower_components/font-awesome/css/font-awesome.css"
 	rel="stylesheet" />
 </head>
 <body>
@@ -105,18 +105,46 @@
 				<div class="panel-heading">
 					<h3 class="panel-title">Jobs Applied</h3>
 				</div>
-				<div class="panel-body">TODO</div>
+				<div class="panel-body">
+					<div class="panel-body">
+						<table class="table table-striped table-hover">
+							<tr class="info">
+								<th>Title</th>
+								<th></th>
+							</tr>
+							<c:forEach items="${user.appliedJobs}" var="appliedJob">
+								<tr>
+									<td>${appliedJob.jobTitle }</td>
+								</tr>
+							</c:forEach>
+						</table>
+					</div>
+				</div>
 			</div>
 			<div id="favJobsDetail" class="panel panel-info">
 				<div class="panel-heading">
-					<h3 class="panel-title">Favorite Jobs</h3>
+					<h3 class="panel-title">Jobs Favorited</h3>
 				</div>
-				<div class="panel-body">TODO</div>
+				<div class="panel-body">
+					<div class="panel-body">
+						<table class="table table-striped table-hover">
+							<tr class="info">
+								<th>Title</th>
+								<th></th>
+							</tr>
+							<c:forEach items="${user.favoritedJobs}" var="favoritedJob">
+								<tr>
+									<td>${favoritedJob.jobTitle }</td>
+								</tr>
+							</c:forEach>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </body>
 
-<script src="js/vendor/bower.js"></script>
-<script src="js/list-detail.js"></script>
+<script src="../js/vendor/bower.js"></script>
+<script src="../js/list-detail.js"></script>
 </html>

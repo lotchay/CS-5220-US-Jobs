@@ -1,8 +1,12 @@
 package usjobs.web.controller;
 
+import java.security.Principal;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,15 +14,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import usjobs.model.Employer;
 import usjobs.model.JobPosting;
 import usjobs.model.JobSeeker;
+import usjobs.model.User;
 import usjobs.model.dao.JobPostingDao;
 import usjobs.model.dao.UserDao;
+import usjobs.util.Security;
 
 @Controller
-@RequestMapping("/job")
 public class JobController {
 
 	private static final Logger logger = LoggerFactory.getLogger(JobController.class);
@@ -29,28 +36,40 @@ public class JobController {
 	@Autowired
 	private UserDao userDao;
 
-	@RequestMapping(value = "/view.html")
-	public String jobPosting(@RequestParam int jobid, ModelMap models) {
+	@RequestMapping(value = "/job/view.html")
+	public String jobPosting(@RequestParam int jobid, ModelMap models, Principal principal) {
+		// only if there's someone logged in do we attempt to get current user.
+		// I need
+		// the user so that we don't let users favorite or apply to a job if
+		// theyve already done so.
+		if (principal != null) {
+			User currentUser = userDao.getUser(Security.getUserDetails().getUsername());
+			models.put("currentUser", currentUser);
+		}
 		JobPosting job = jobPostingDao.getJobPosting(jobid);
 		models.put("jobPosting", job);
-		return "job-posting";
+		return "job/post";
 	}
 
-	@RequestMapping(value = "/favorite.html", method = RequestMethod.POST)
-	public String addFavorites(@RequestParam int userid, @RequestParam int jobid) {
+	@RequestMapping(value = "/job/favorite.html", method = RequestMethod.POST)
+	public String addFavorites(@RequestParam int jobid) {
 		JobPosting jobPosting = jobPostingDao.getJobPosting(jobid);
-		JobSeeker user = (JobSeeker) userDao.getUser(userid);
-		jobPosting.addUsersFavorited(user);
-		jobPostingDao.save(jobPosting);
+		User user = userDao.getUser(Security.getUserDetails().getUsername());
+		if (jobPosting.getUsersFavorited().contains(user)) {
+			jobPosting.removeUsersFavorited(user);
+		} else {
+			jobPosting.addUsersFavorited(user);
+		}
+		jobPostingDao.jobFavoritedOrApplied(jobPosting);
 		return "redirect:view.html?jobid=" + jobid;
 	}
 
-	@RequestMapping(value = "/apply.html", method = RequestMethod.POST)
-	public String addApplied(@RequestParam int userid, @RequestParam int jobid) {
+	@RequestMapping(value = "/job/apply.html", method = RequestMethod.POST)
+	public String addApplied(@RequestParam int jobid) {
 		JobPosting jobPosting = jobPostingDao.getJobPosting(jobid);
-		JobSeeker user = (JobSeeker) userDao.getUser(userid);
+		User user = userDao.getUser(Security.getUserDetails().getUsername());
 		jobPosting.addUsersApplied(user);
-		jobPostingDao.save(jobPosting);
+		jobPostingDao.jobFavoritedOrApplied(jobPosting);
 		return "redirect:view.html?jobid=" + jobid;
 	}
 }

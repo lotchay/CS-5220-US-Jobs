@@ -91,6 +91,10 @@ public class User implements Serializable {
     public boolean isEmployer() {
         return userRoles.contains( "ROLE_EMPLOYER" );
     }
+    
+    public boolean isSeeker() {
+    	return userRoles.contains("ROLE_SEEKER");
+    }
 
     public Integer getId() {
         return id;
