@@ -11,7 +11,7 @@
         Password: <form:input path="password" size='30'/> <form:errors path="password" /> <br />
         First Name: <form:input path="firstName" size='50' /> <form:errors path="firstName" /> <br />
         Last Name: <form:input path="lastName" size='50' /> <form:errors path="lastName" /> <br />
-        Email: <form:input path="email" size='60' /> <form:errors path="email" /> <br />
+        Email: <form:input path="email" size='50' /> <form:errors path="email" /> <br />
         <input type="submit" name="add" value="Add" />
     </form:form>
 </body>

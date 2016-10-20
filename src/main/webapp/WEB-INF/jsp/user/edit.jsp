@@ -8,12 +8,12 @@
 <body>
     <form:form modelAttribute="user">
         Username: ${user.username} <br />
-        Password: <form:input path="password" /> <br />
-        E-mail: <form:input path="email" /> <br />
-        Street: <form:input path="address.street" /> <br />
-        City: <form:input path="address.city" /> <br />
-        State: <form:input path="address.state" /> <br />
-        Zip Code: <form:input path="address.zip" /> <br />
+        Password: <form:input path="password" size='30' /> <br />
+        E-mail: <form:input path="email" size='50' /> <br />
+        Street: <form:input path="address.street" size='50' /> <br />
+        City: <form:input path="address.city" size='30' /> <br />
+        State: <form:input path="address.state" size='30' /> <br />
+        Zip Code: <form:input path="address.zip" size='30' /> <br />
         <input type="submit" name="save" value="Save" />
     </form:form>
 </body>
