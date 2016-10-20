@@ -51,6 +51,7 @@ public class UserController {
     @RequestMapping(value = "/user/add.html", method = RequestMethod.GET)
     public String add( ModelMap models ) {
         
+        // Create a new user
         models.put( "user", new User() );
         
         return "user/add";
@@ -62,7 +63,7 @@ public class UserController {
         
         // Validate user's input
         userValidator.validate( user, result );
-        
+              
         if ( result.hasErrors() ) {
             return "user/add";
         }
@@ -100,6 +101,37 @@ public class UserController {
         
         // Redirect to user list
         return "redirect:list.html";
+    }
+    
+    @RequestMapping(value = "/register.html", method = RequestMethod.GET)
+    public String register( ModelMap models ) {
+        
+        // Create a new user
+        models.put( "user", new User() );
+        
+        return "/register";
+    }
+    
+    @RequestMapping(value = "/register.html", method = RequestMethod.POST)
+    public String register( @ModelAttribute User user, BindingResult result, 
+        SessionStatus status ) {
+        
+        // Validate user's input
+        userValidator.validate( user, result );
+        
+        if ( result.hasErrors() ) {
+            return "register";
+        }    
+        
+        user.setEnabled( true );
+                
+        // Save the user to database
+        user = userDao.saveUser( user );
+        
+        // Remove all the session attributes when done
+        status.setComplete();
+        
+        return "redirect:index.html";
     }
     
 }
