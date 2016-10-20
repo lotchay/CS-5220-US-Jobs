@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <nav class="navbar navbar-inverse">
@@ -11,14 +10,14 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand"
-				href="${pageContext.request.contextPath}/home.html">U.S. Jobs</a>
+			<a class="navbar-brand" href="<c:url value='/home.html' />">U.S.
+				Jobs</a>
 		</div>
 
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-2">
 			<ul class="nav navbar-nav">
-				<li><a href="${pageContext.request.contextPath}/home.html">Main</a></li>
+				<li><a href="<c:url value='/home.html' />">Main</a></li>
 				<li><a href="#">Link</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-expanded="false">Dropdown
@@ -44,17 +43,18 @@
 			</form>
 			<security:authorize access="isAuthenticated()">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="user/profile.html">Welcome, <security:authentication
-								property="principal.username" /></a></li>
+					<li><a href="<c:url value='/user/profile.html' />">Welcome,
+							<security:authentication property="principal.username" />
+					</a></li>
 					<li><a href="logout">Logout</a></li>
 				</ul>
 			</security:authorize>
 			<security:authorize access="!isAuthenticated()">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="${pageContext.request.contextPath}/login.html">Login</a></li>
+					<li><a href="<c:url value='/login.html' />" >Login</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="${pageContext.request.contextPath}/register.html">Register</a></li>
+					<li><a href="<c:url value='/register.html' />">Register</a></li>
 				</ul>
 			</security:authorize>
 			<ul class="nav navbar-nav navbar-right">

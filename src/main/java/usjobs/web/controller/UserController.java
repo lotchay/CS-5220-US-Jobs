@@ -23,7 +23,7 @@ import usjobs.model.dao.JobPostingDao;
 import usjobs.model.dao.UserDao;
 
 @Controller
-@SessionAttributes({"newJob", "user", "editJob"})
+@SessionAttributes("user")
 public class UserController {
 	
 	private static final Logger logger = Logger.getLogger(UserController.class);
@@ -92,55 +92,4 @@ public class UserController {
         // Redirect to user list
         return "redirect:list.html";
     }
-    
-    /**
-     * Return the correct profile page for the user depending on if they are
-     * an employer, seeker, or admin.
-     * @return
-     */
-    @RequestMapping(value = "/user/profile.html", method = RequestMethod.GET)
-    public String getProfile(ModelMap models) {
-    	UserDetails details = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    	User user = userDao.getUser(details.getUsername());
-    	if (user.isAdmin()) {
-    		return "profile/admin";
-    	} else if (user.isEmployer()) {
-    		Employer employer = (Employer) user;
-    		employer.setJobsPosted(jobPostingDao.getJobPostings(user.getId()));
-    		models.put("user", employer);
-    		JobPosting newJob = new JobPosting();
-    		newJob.setCompany(employer);
-    		models.put("newJob", newJob);
-    		return "profile/employer";
-    	} else {
-    		return "profile/job-seeker";
-    	}
-    }
-    
-	@RequestMapping(value = "/user/addJob.html", method = RequestMethod.POST)
-	public String addJob(@RequestParam int employerId, @ModelAttribute("newJob") JobPosting newJob, SessionStatus session) {
-		jobPostingDao.save(newJob);
-		session.setComplete();
-		return "redirect:profile.html?id=" + employerId;
-	}
-
-	@RequestMapping(value = "/user/deleteJob.html", method = RequestMethod.POST)
-	public String deleteJob(@RequestParam int employerId, @RequestParam int jobId) {
-		JobPosting jobPosting = jobPostingDao.getJobPosting(jobId);
-		jobPostingDao.delete(jobPosting);
-		return "redirect:profile.html?id=" + employerId;
-	}
-
-	@RequestMapping(value = "/user/editJob.html", method = RequestMethod.GET)
-	public String editJobForm(@RequestParam int employerId, @RequestParam int jobId, ModelMap models) {
-		models.put("editJob", jobPostingDao.getJobPosting(jobId));
-		return "job-edit";
-	}
-
-	@RequestMapping(value = "/user/editJob.html", method = RequestMethod.POST)
-	public String editJobForm(@RequestParam int employerId, @ModelAttribute("editJob") JobPosting editJob, SessionStatus sessionStatus) {
-		jobPostingDao.save(editJob);
-		sessionStatus.setComplete();
-		return "redirect:profile.html?id=" + employerId;
-	}
 }
