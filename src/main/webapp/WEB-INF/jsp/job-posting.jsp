@@ -23,12 +23,12 @@
 			<security:authorize access="hasRole('SEEKER') or hasRole('ADMIN')">
 				<div class="container">
 					<form method="post"
-						action="favorite.html?userid=1&jobid=${jobPosting.id}">
+						action="favorite.html?jobid=${jobPosting.id}">
 						<button type="submit" id="favorite" class="btn btn-info">Favorite</button>
 					</form>
 					<br />
 					<form method="post"
-						action="apply.html?userid=1&jobid=${jobPosting.id}">
+						action="apply.html?jobid=${jobPosting.id}">
 						<button type="submit" id="apply" class="btn btn-info">Apply</button>
 					</form>
 				</div>

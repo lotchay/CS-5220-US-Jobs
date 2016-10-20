@@ -18,4 +18,6 @@ public interface JobPostingDao {
 	
 	JobPosting save(JobPosting jobPosting);
 	
+	JobPosting jobFavoritedOrApplied(JobPosting jobPosting);
+
 }

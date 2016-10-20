@@ -21,6 +21,7 @@ import usjobs.model.JobSeeker;
 import usjobs.model.User;
 import usjobs.model.dao.JobPostingDao;
 import usjobs.model.dao.UserDao;
+import usjobs.util.Security;
 
 @Controller
 @SessionAttributes({"newJob", "editJob"})
@@ -42,20 +43,20 @@ public class JobController {
 	}
 
 	@RequestMapping(value = "/job/favorite.html", method = RequestMethod.POST)
-	public String addFavorites(@RequestParam int userid, @RequestParam int jobid) {
+	public String addFavorites(@RequestParam int jobid) {
 		JobPosting jobPosting = jobPostingDao.getJobPosting(jobid);
-		JobSeeker user = (JobSeeker) userDao.getUser(userid);
+		User user = userDao.getUser(Security.getUserDetails().getUsername());
 		jobPosting.addUsersFavorited(user);
-		jobPostingDao.save(jobPosting);
+		jobPostingDao.jobFavoritedOrApplied(jobPosting);
 		return "redirect:view.html?jobid=" + jobid;
 	}
 
 	@RequestMapping(value = "/job/apply.html", method = RequestMethod.POST)
-	public String addApplied(@RequestParam int userid, @RequestParam int jobid) {
+	public String addApplied(@RequestParam int jobid) {
 		JobPosting jobPosting = jobPostingDao.getJobPosting(jobid);
-		JobSeeker user = (JobSeeker) userDao.getUser(userid);
+		User user = userDao.getUser(Security.getUserDetails().getUsername());
 		jobPosting.addUsersApplied(user);
-		jobPostingDao.save(jobPosting);
+		jobPostingDao.jobFavoritedOrApplied(jobPosting);
 		return "redirect:view.html?jobid=" + jobid;
 	}
     

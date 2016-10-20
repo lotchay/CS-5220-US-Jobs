@@ -21,6 +21,7 @@ import usjobs.model.JobPosting;
 import usjobs.model.User;
 import usjobs.model.dao.JobPostingDao;
 import usjobs.model.dao.UserDao;
+import usjobs.util.Security;
 
 @Controller
 @SessionAttributes("user")
@@ -100,7 +101,7 @@ public class UserController {
      */
     @RequestMapping(value = "/user/profile.html", method = RequestMethod.GET)
     public String getProfile(ModelMap models) {
-    	UserDetails details = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	UserDetails details = Security.getUserDetails();
     	User user = userDao.getUser(details.getUsername());
     	if (user.isAdmin()) {
     		return "profile/admin";
