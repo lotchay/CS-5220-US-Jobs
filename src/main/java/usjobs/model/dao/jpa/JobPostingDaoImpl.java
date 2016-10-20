@@ -54,6 +54,14 @@ public class JobPostingDaoImpl implements JobPostingDao {
 	}
 	
 	@Override
+	public List<JobPosting> searchJobSalary(String searchTerm) {
+		String query = "FROM JobPosting j WHERE UPPER(j.salary) LIKE ?1 ";
+		return em.createQuery(query, JobPosting.class)
+				.setParameter(1, "%" + searchTerm.toUpperCase() + "%")
+				.getResultList();
+	}
+	
+	@Override
 	@Transactional
 	@PreAuthorize ("hasRole('ROLE_ADMIN') or principal.username == #jobPosting.company.username")
 	public JobPosting save(JobPosting jobPosting) {
