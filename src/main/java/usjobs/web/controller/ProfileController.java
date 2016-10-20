@@ -1,5 +1,7 @@
 package usjobs.web.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -64,6 +66,10 @@ public class ProfileController {
     
 	@RequestMapping(value = "/user/addJob.html", method = RequestMethod.POST)
 	public String addJob(@RequestParam int employerId, @ModelAttribute("newJob") JobPosting newJob, SessionStatus session) {
+		Date date = new Date();
+		newJob.setDatePosted(date);
+		newJob.setEnabled(true);
+		newJob.setOpened(true);
 		jobPostingDao.save(newJob);
 		session.setComplete();
 		return "redirect:profile.html?id=" + employerId;
@@ -73,6 +79,20 @@ public class ProfileController {
 	public String deleteJob(@RequestParam int employerId, @RequestParam int jobId) {
 		JobPosting jobPosting = jobPostingDao.getJobPosting(jobId);
 		jobPostingDao.delete(jobPosting);
+		return "redirect:profile.html?id=" + employerId;
+	}
+	
+	@RequestMapping(value = "/user/toggleJob.html", method = RequestMethod.POST)
+	public String toggleJob(@RequestParam int employerId, @RequestParam int jobId) {
+		JobPosting jobPosting = jobPostingDao.getJobPosting(jobId);
+		boolean isOpened = jobPosting.isOpened();
+		if (isOpened) {
+			jobPosting.setDateClosed(new Date());
+		} else {
+			jobPosting.setDatePosted(new Date());
+		}
+		jobPosting.setOpened(!isOpened);
+		jobPostingDao.save(jobPosting);
 		return "redirect:profile.html?id=" + employerId;
 	}
 

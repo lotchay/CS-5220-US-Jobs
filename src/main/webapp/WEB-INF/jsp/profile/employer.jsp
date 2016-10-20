@@ -25,7 +25,7 @@
 						Description</a></li>
 				<li id="newJob" class="list-group-item"><a href="#">Add a
 						New Job Listing</a></li>
-				<li id="job" class="list-group-item"><a href="#">Your Job
+				<li id="job" class="list-group-item"><a href="#">Manage Job
 						Listings</a></li>
 			</ul>
 		</div>
@@ -159,7 +159,7 @@
 			</div>
 			<div id="jobDetail" class="panel panel-info">
 				<div class="panel-heading">
-					<h3 class="panel-title">Your Job Listings</h3>
+					<h3 class="panel-title">Manage Job Listings</h3>
 				</div>
 				<div class="panel-body">
 					<table class="table table-striped table-hover">
@@ -171,16 +171,36 @@
 							<tr>
 								<td>${jobPosting.jobTitle }</td>
 								<td>
-									<form class="form-btn-container" action="editJob.html" method="get">
-										<input type="hidden" name="employerId" value="3"/>
-										<input type="hidden" name="jobId" value="${jobPosting.id }" />
-										<button type="submit" class="btn btn-sm btn-success">Edit</button>
+									<form class="form-btn-container"
+										action="toggleJob.html?employerId=${user.id}&jobId=${jobPosting.id }"
+										method="post">
+										<c:choose>
+											<c:when test="${jobPosting.opened}">
+												<button type="submit" class="btn btn-sm btn-warning">
+													<i class="fa fa-level-down" aria-hidden="true"></i>&nbsp;&nbsp;Close
+												</button>
+											</c:when>
+											<c:otherwise>
+												<button type="submit" class="btn btn-sm btn-info">
+													<i class="fa fa-level-up" aria-hidden="true"></i>&nbsp;&nbsp;
+													Open
+												</button>
+											</c:otherwise>
+										</c:choose>
+									</form>
+									<form class="form-btn-container" action="editJob.html"
+										method="get">
+										<input type="hidden" name="employerId" value="3" /> <input
+											type="hidden" name="jobId" value="${jobPosting.id }" />
+										<button type="submit" class="btn btn-sm btn-success">
+											<i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Edit
+										</button>
 									</form>
 
 									<form class="form-btn-container"
 										action="deleteJob.html?employerId=${user.id}&jobId=${jobPosting.id }"
 										method="post">
-										<button type="submit" class="btn btn-sm btn-danger">Delete</button>
+										<button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-times-circle"></i>&nbsp;&nbsp;Delete</button>
 									</form>
 								</td>
 							</tr>

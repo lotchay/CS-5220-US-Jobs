@@ -42,7 +42,11 @@ public class JobPosting implements Serializable {
 	private Employer company;
 
 	private String location;
-
+	
+	private boolean opened; //employers can open or close jobs
+	
+	private boolean enabled; //admins can disable or enable jobs
+	
 	private int salary;
 
 	private String website;
@@ -197,4 +201,21 @@ public class JobPosting implements Serializable {
 	public void removeUsersFavorited(User user) {
 		usersFavorited.remove(user);
 	}
+
+	public boolean isOpened() {
+		return opened;
+	}
+
+	public void setOpened(boolean opened) {
+		this.opened = opened;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	
 }

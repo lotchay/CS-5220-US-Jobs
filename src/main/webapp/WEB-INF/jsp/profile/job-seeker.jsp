@@ -110,7 +110,6 @@
 						<table class="table table-striped table-hover">
 							<tr class="info">
 								<th>Title</th>
-								<th></th>
 							</tr>
 							<c:forEach items="${user.appliedJobs}" var="appliedJob">
 								<tr>
@@ -130,7 +129,6 @@
 						<table class="table table-striped table-hover">
 							<tr class="info">
 								<th>Title</th>
-								<th></th>
 							</tr>
 							<c:forEach items="${user.favoritedJobs}" var="favoritedJob">
 								<tr>

@@ -18,7 +18,7 @@ public class HomeController {
 	@RequestMapping( value={"/index.html", "/home.html"}, 
 			method = RequestMethod.GET)
 	public String home(ModelMap models) {
-		models.put("jobPostings", jobPostingDao.getJobPostings());
+		models.put("jobPostings", jobPostingDao.getOpenedJobPostings());
 		return "home";
 	}
 	
