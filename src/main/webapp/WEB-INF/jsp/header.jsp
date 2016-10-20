@@ -36,7 +36,11 @@
 			<form method="post" action="home.html" class="navbar-form navbar-left" role="search">
 				<div class="form-group">
 					<input id="searchKey" type="text" class="form-control" name="searchBar"
-						placeholder="Search for jobs"> 
+						placeholder="Search">
+				    <select class="form-control" id="searchType" name="searchType">
+				    	<option>Job Postings</option>
+				        <option>Salary</option>
+				    </select>
 				</div>
 				<button type="submit" class="btn btn-default" id="search-btn">
 					<i class="fa fa-search"></i>&nbsp;&nbsp;Search
