@@ -14,7 +14,7 @@
 	rel="stylesheet" />
 </head>
 <body>
-	<jsp:include page="header.jsp" />
+	<jsp:include page="../header.jsp" />
 	<div class="animated fadeIn row">
 		<div class="col col-md-4 col-md-offset-4">
 			<div class="panel panel-info">

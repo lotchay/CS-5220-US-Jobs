@@ -79,7 +79,7 @@ public class ProfileController {
 	@RequestMapping(value = "/user/editJob.html", method = RequestMethod.GET)
 	public String editJobForm(@RequestParam int employerId, @RequestParam int jobId, ModelMap models) {
 		models.put("editJob", jobPostingDao.getJobPosting(jobId));
-		return "job-edit";
+		return "job/edit";
 	}
 
 	@RequestMapping(value = "/user/editJob.html", method = RequestMethod.POST)

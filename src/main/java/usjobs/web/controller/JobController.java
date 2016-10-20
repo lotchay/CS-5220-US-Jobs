@@ -48,7 +48,7 @@ public class JobController {
 		}
 		JobPosting job = jobPostingDao.getJobPosting(jobid);
 		models.put("jobPosting", job);
-		return "job-posting";
+		return "job/post";
 	}
 
 	@RequestMapping(value = "/job/favorite.html", method = RequestMethod.POST)

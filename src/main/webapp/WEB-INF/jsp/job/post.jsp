@@ -15,7 +15,7 @@
 	rel="stylesheet" />
 </head>
 <body>
-	<jsp:include page="header.jsp" />
+	<jsp:include page="../header.jsp" />
 	<div class="row">
 		<div class="col col-md-8 col-md-offset-2">
 			<h3>${jobPosting.jobTitle }</h3>
