@@ -45,9 +45,9 @@ public class JobPostingDaoImpl implements JobPostingDao {
 	
 	@Override
 	public List<JobPosting> searchJobs(String searchTerm) {
-		String query = "FROM JobPosting j WHERE UPPER(j.job_title) LIKE ?1 "
-				+ "OR UPPER(j.salary) like ?1 "
-				+ "OR UPPER(u.location) like ?1";
+		String query = "FROM JobPosting j WHERE UPPER(j.jobTitle) LIKE ?1 ";
+				//+ "OR UPPER(j.salary) like ?1 ";
+				//+ "OR UPPER(u.location) like ?1";
 		return em.createQuery(query, JobPosting.class)
 				.setParameter(1, "%" + searchTerm.toUpperCase() + "%")
 				.getResultList();
