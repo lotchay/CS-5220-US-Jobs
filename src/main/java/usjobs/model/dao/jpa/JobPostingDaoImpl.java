@@ -55,9 +55,19 @@ public class JobPostingDaoImpl implements JobPostingDao {
 	
 	@Override
 	public List<JobPosting> searchJobSalary(String searchTerm) {
-		String query = "FROM JobPosting j WHERE UPPER(j.salary) LIKE ?1 ";
+		String digits = "\\d+";
+		if (searchTerm.contains(",") || searchTerm.contains("$")){
+			searchTerm = searchTerm.replace(",", "");
+			searchTerm = searchTerm.replace("$", "");
+		}
+		if (!searchTerm.matches(digits)){
+			return null;
+		}
+		int salary = Integer.parseInt(searchTerm);
+		int bottomRange = salary - 10000;
+		int topRange = salary + 10000;
+		String query = "FROM JobPosting j WHERE (j.salary) BETWEEN " + bottomRange + " AND " + topRange;
 		return em.createQuery(query, JobPosting.class)
-				.setParameter(1, "%" + searchTerm.toUpperCase() + "%")
 				.getResultList();
 	}
 	
