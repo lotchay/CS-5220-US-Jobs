@@ -33,7 +33,7 @@
 						<li><a href="#">One more separated link</a></li>
 					</ul></li>
 			</ul>
-			<form method="post" action="home.html" class="navbar-form navbar-left" role="search">
+			<form method="post" action="<c:url value='/home.html' />" class="navbar-form navbar-left" role="search">
 				<div class="form-group">
 					<input id="searchKey" type="text" class="form-control" name="searchBar"
 						placeholder="Search">
