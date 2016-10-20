@@ -10,6 +10,10 @@ public interface JobPostingDao {
 	
 	List<JobPosting> getJobPostings(int id);
 	
+	List<JobPosting> getOpenedJobPostings();
+	
+	List<JobPosting> getClosedJobPostings();
+	
 	JobPosting getJobPosting(int id);
 	
 	void delete(JobPosting jobPosting);
