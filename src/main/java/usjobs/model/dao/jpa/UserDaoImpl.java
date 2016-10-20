@@ -29,8 +29,11 @@ public class UserDaoImpl implements UserDao  {
 	@Override
 	@PostAuthorize ("hasRole('ROLE_ADMIN') or principal.username == returnObject.username")
 	public User getUser( String username ) {
-		
-		return entityManager.find( User.class, username );
+		String query = "from User where username= :username";
+		return entityManager
+				.createQuery(query, User.class)
+				.setParameter("username", username)
+				.getSingleResult();
 	}
 
 	@Override

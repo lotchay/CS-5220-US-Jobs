@@ -16,6 +16,10 @@ public interface JobPostingDao {
 	
 	List<JobPosting> searchJobs(String searchTerm);
 	
+	List<JobPosting> searchJobSalary(String searchTerm);
+	
 	JobPosting save(JobPosting jobPosting);
 	
+	JobPosting jobFavoritedOrApplied(JobPosting jobPosting);
+
 }

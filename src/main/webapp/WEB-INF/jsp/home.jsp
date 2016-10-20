@@ -31,28 +31,37 @@
 			</p>
 		</div>
 	</div>
+	
+	<c:choose>
 
-	<div class="row">
-		<div class="col col-md-8 col-md-offset-2">
-			<h1 class="text-primary">Trending Jobs</h1>
-			<hr />
-			<div class="list-group">
-				<c:forEach items="${jobPostings}" var="jobPosting">
-					<a href="job/view.html?jobid=${jobPosting.id}"
-						class="list-group-item">
-						<h4 class="list-group-item-heading">${jobPosting.jobTitle}</h4>
-						<h6>${jobPosting.company.employerName}</h6>
-						<div class="job-listing-preview">
-							<p class="list-group-item-text">${jobPosting.jobDescription }</p>
-						</div>
-					</a>
-				</c:forEach>
+		<c:when test="${searchBar != null }">
+			<jsp:include page="search.jsp"/>
+		</c:when>
+		
+		<c:otherwise>
+			<div class="row">
+				<div class="col col-md-8 col-md-offset-2">
+					<h1 class="text-primary">Trending Jobs</h1>
+					<hr />
+					<div class="list-group">
+						<c:forEach items="${jobPostings}" var="jobPosting">
+							<a href="job/view.html?jobid=${jobPosting.id}"
+								class="list-group-item">
+								<h4 class="list-group-item-heading">${jobPosting.jobTitle}</h4>
+								<h6>${jobPosting.company.employerName}</h6>
+								<div class="job-listing-preview">
+									<p class="list-group-item-text">${jobPosting.jobDescription }</p>
+								</div>
+							</a>
+						</c:forEach>
+					</div>
+					<div class="btn-container row col col-md-2 col-md-offset-5">
+						<button class="btn btn-singleton btn-info">Show More</button>
+					</div>
+				</div>
 			</div>
-			<div class="btn-container row col col-md-2 col-md-offset-5">
-				<button class="btn btn-singleton btn-info">Show More</button>
-			</div>
-		</div>
-	</div>
+		</c:otherwise>
+	</c:choose>
 </body>
 
 <script src="js/vendor/bower.js"></script>

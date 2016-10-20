@@ -3,6 +3,8 @@ package usjobs.model.dao.jpa;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import usjobs.model.JobPosting;
@@ -36,23 +38,50 @@ public class JobPostingDaoImpl implements JobPostingDao {
 	
 	@Override
 	@Transactional
+	@PreAuthorize ("hasRole('ROLE_ADMIN') or principal.username == #jobPosting.company.username")
 	public void delete(JobPosting jobPosting) {
 		em.remove(jobPosting);
 	}
 	
 	@Override
 	public List<JobPosting> searchJobs(String searchTerm) {
-		String query = "FROM JobPosting j WHERE UPPER(j.job_title) LIKE ?1 "
-				+ "OR UPPER(j.salary) like ?1 "
-				+ "OR UPPER(u.location) like ?1";
+		String query = "FROM JobPosting j WHERE UPPER(j.jobTitle) LIKE ?1 ";
+				//+ "OR UPPER(j.salary) like ?1 ";
+				//+ "OR UPPER(u.location) like ?1";
 		return em.createQuery(query, JobPosting.class)
 				.setParameter(1, "%" + searchTerm.toUpperCase() + "%")
 				.getResultList();
 	}
 	
 	@Override
+	public List<JobPosting> searchJobSalary(String searchTerm) {
+		String digits = "\\d+";
+		if (searchTerm.contains(",") || searchTerm.contains("$")){
+			searchTerm = searchTerm.replace(",", "");
+			searchTerm = searchTerm.replace("$", "");
+		}
+		if (!searchTerm.matches(digits)){
+			return null;
+		}
+		int salary = Integer.parseInt(searchTerm);
+		int bottomRange = salary - 10000;
+		int topRange = salary + 10000;
+		String query = "FROM JobPosting j WHERE (j.salary) BETWEEN " + bottomRange + " AND " + topRange;
+		return em.createQuery(query, JobPosting.class)
+				.getResultList();
+	}
+	
+	@Override
 	@Transactional
+	@PreAuthorize ("hasRole('ROLE_ADMIN') or principal.username == #jobPosting.company.username")
 	public JobPosting save(JobPosting jobPosting) {
+		return em.merge(jobPosting);
+	}
+	
+	@Override
+	@Transactional
+	@PreAuthorize ("hasRole('ROLE_ADMIN') or hasRole('ROLE_SEEKER')")
+	public JobPosting jobFavoritedOrApplied(JobPosting jobPosting) {
 		return em.merge(jobPosting);
 	}
 }

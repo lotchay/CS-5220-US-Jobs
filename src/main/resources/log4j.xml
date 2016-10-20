@@ -11,6 +11,8 @@
     <root>
         <level value="error" />
         <appender-ref ref="stdout" />
+         <level value="info" />
+        <appender-ref ref="stdout" />
     </root>
 
 </log4j:configuration>
