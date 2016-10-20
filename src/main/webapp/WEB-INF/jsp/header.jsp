@@ -33,13 +33,18 @@
 						<li><a href="#">One more separated link</a></li>
 					</ul></li>
 			</ul>
-			<form class="navbar-form navbar-left" role="search">
+			<form method="post" action="home.html" class="navbar-form navbar-left" role="search">
 				<div class="form-group">
-					<input id="searchKey" type="text" class="form-control"
-						placeholder="Search for jobs"> <input id="searchLoc"
-						type="text" class="form-control" placeholder="Enter location">
+					<input id="searchKey" type="text" class="form-control" name="searchBar"
+						placeholder="Search">
+				    <select class="form-control" id="searchType" name="searchType">
+				    	<option>Job Postings</option>
+				        <option>Salary</option>
+				    </select>
 				</div>
-				<button type="submit" class="btn btn-default">Search</button>
+				<button type="submit" class="btn btn-default" id="search-btn">
+					<i class="fa fa-search"></i>&nbsp;&nbsp;Search
+				</button>
 			</form>
 			<security:authorize access="isAuthenticated()">
 				<ul class="nav navbar-nav navbar-right">

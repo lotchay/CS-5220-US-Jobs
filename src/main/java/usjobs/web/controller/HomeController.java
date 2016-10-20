@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import usjobs.model.dao.JobPostingDao;
 
@@ -13,10 +15,24 @@ public class HomeController {
 	@Autowired
 	private JobPostingDao jobPostingDao;
 	
-	@RequestMapping( value={"/index.html", "/home.html"} )
+	@RequestMapping( value={"/index.html", "/home.html"}, 
+			method = RequestMethod.GET)
 	public String home(ModelMap models) {
 		models.put("jobPostings", jobPostingDao.getJobPostings());
 		return "home";
+	}
+	
+	@RequestMapping( value={"/index.html", "/home.html"}, 
+			method = RequestMethod.POST )
+	public String home(@RequestParam String searchBar, @RequestParam String searchType,
+			ModelMap models) {
+		if(searchType.equals("Job Postings")){
+			models.put("searchResultJob", jobPostingDao.searchJobs(searchBar));
+		} else if (searchType.equals("Salary")){
+			models.put("searchResultJob", jobPostingDao.searchJobSalary(searchBar));
+		}
+		models.put("searchBar", searchBar);
+		return home(models);
 	}
 	
 	@RequestMapping(value="/login.html")

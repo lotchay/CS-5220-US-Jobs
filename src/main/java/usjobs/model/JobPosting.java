@@ -43,7 +43,7 @@ public class JobPosting implements Serializable {
 
 	private String location;
 
-	private String salary;
+	private int salary;
 
 	private String website;
 
@@ -130,11 +130,11 @@ public class JobPosting implements Serializable {
 		this.location = location;
 	}
 
-	public String getSalary() {
+	public int getSalary() {
 		return salary;
 	}
 
-	public void setSalary(String salary) {
+	public void setSalary(int salary) {
 		this.salary = salary;
 	}
 
