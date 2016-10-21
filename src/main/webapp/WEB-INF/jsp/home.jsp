@@ -34,7 +34,7 @@
 	
 	<c:choose>
 
-		<c:when test="${searchBar != null }">
+		<c:when test="${not empty searchBar }">
 			<jsp:include page="search.jsp"/>
 		</c:when>
 		

@@ -36,6 +36,8 @@ public class HomeController {
 			models.put("searchResultJob", jobPostingDao.searchJobSalary(searchBar, searchLoc));
 		} else if (searchType.equals("User")){
 			models.put("searchResultUser", userDao.searchUsers(searchBar, searchLoc));
+		} else if (searchType.equals("Email")){
+			models.put("searchResultEmail", userDao.searchEmail(searchBar, searchLoc));
 		}
 		models.put("searchBar", searchBar);
 		return home(models);
