@@ -53,6 +53,11 @@
 								<i class="fa fa-usd" aria-hidden="true"></i>User
 							</option>
                 		</security:authorize>
+                		<security:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_EMPLOYER')">
+                			<option>
+								<i class="fa fa-usd" aria-hidden="true"></i>Email
+							</option>
+                		</security:authorize>
 					</select>
 				</div>
 				<button type="submit" class="btn btn-default" id="search-btn">
