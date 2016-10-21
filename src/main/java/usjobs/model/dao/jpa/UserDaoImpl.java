@@ -81,13 +81,13 @@ public class UserDaoImpl implements UserDao  {
 	}
 	
 	@Override
-	public User searchEmail(String searchTerm, String searchLoc){
-		String query = "From User u WHERE UPPER(u.email) LIKE ?1 "
+	public List<User> searchSeekers(String searchTerm, String searchLoc){
+		String query = "From User u WHERE UPPER(u.currentJobTitle) LIKE ?1 OR u.experience LIKE ?1 "
 				+ "AND (UPPER(u.address.state) like ?2 OR UPPER(u.address.city) like ?2 OR u.address.zip like ?2)";
 		return entityManager.createQuery(query, User.class)
-				.setParameter(1, searchTerm.toUpperCase())
+				.setParameter(1, "%" + searchTerm.toUpperCase() + "%")
 				.setParameter(2, "%" + searchLoc.toUpperCase() + "%")
-				.getSingleResult();
+				.getResultList();
 	}
 
 	@Override

@@ -16,7 +16,7 @@ public interface UserDao {
 	
 	List<User> searchUsers(String searchTerm, String searchLoc);
 	
-	User searchEmail(String searchTerm, String searchLoc);
+	List<User> searchSeekers(String searchTerm, String searchLoc);
 	
 	User saveUser( User user );
 	
