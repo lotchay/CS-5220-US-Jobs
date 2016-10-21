@@ -39,7 +39,7 @@
 					<input id="searchKey" type="text" class="form-control"
 						name="searchBar" placeholder="Search"> 
 					<input id="searchLoc" type="text" class="form-control" name="searchLoc"
-						placeholder="Location (optional)">	
+						placeholder="Location (Optional)">
 					<select class="form-control" id="searchType" name="searchType">
 						<option>
 							<i class="fa fa-hand-spock-o" aria-hidden="true"></i>Job Postings
@@ -54,7 +54,7 @@
                 		</security:authorize>
                 		<security:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_EMPLOYER')">
                 			<option>
-								<i class="fa fa-usd" aria-hidden="true"></i>Email
+								<i class="fa fa-usd" aria-hidden="true"></i>Job Seeker
 							</option>
                 		</security:authorize>
 					</select>
