@@ -38,7 +38,7 @@
 		<div class="col-md-6 col-md-offset-2">
 			<div class="panel panel-success">
 				<div class="panel-heading">
-					<h3 class="panel-title">Job Description</h3>
+					<h3 class="panel-title"><i class="fa fa-industry" aria-hidden="true"></i>&nbsp;&nbsp;Job Description</h3>
 				</div>
 				<div class="panel-body">
 					<p>${jobPosting.jobDescription }</p>
@@ -82,7 +82,7 @@
 		<div class="col-md-2">
 			<div class="panel panel-info">
 				<div class="panel-heading">
-					<h3 class="panel-title">Job Summary</h3>
+					<h3 class="panel-title"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;Job Summary</h3>
 				</div>
 				<div class="panel-body">
 					<h4>

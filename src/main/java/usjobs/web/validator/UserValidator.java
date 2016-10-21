@@ -34,6 +34,11 @@ public class UserValidator implements Validator {
             errors.rejectValue( "password", "error.field.empty" );
         }
         
+
+        if ( !StringUtils.hasText( user.getPassword2() ) ) {
+            errors.rejectValue( "password", "error.field.empty" );
+        }
+        
         if ( !StringUtils.hasText( user.getFirstName() ) ) {
             errors.rejectValue( "firstName", "error.field.empty" );
         }
@@ -43,12 +48,12 @@ public class UserValidator implements Validator {
         }
         
         if ( !StringUtils.hasText( user.getEmail() ) ) {
-            errors.rejectValue( "password2", "error.field.empty" );
+            errors.rejectValue( "email", "error.field.empty" );
         }
         
         if ( ( user.getPassword() != null ) && 
             !( user.getPassword().equals(user.getPassword2() ) ) ) {
-            errors.rejectValue( "email", "error.field.empty" );
+            errors.rejectValue( "password2", "error.password.doesnotmatch" );
         }
         
         String username = user.getUsername();
