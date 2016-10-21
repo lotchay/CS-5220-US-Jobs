@@ -38,13 +38,21 @@
 				class="navbar-form navbar-left" role="search">
 				<div class="form-group">
 					<input id="searchKey" type="text" class="form-control"
-						name="searchBar" placeholder="Search"> <select
-						class="form-control" id="searchType" name="searchType">
-						<option><i class="fa fa-hand-spock-o" aria-hidden="true"></i>&nbsp;&nbsp;Job
-							Postings
+						name="searchBar" placeholder="Search"> 
+					<input id="searchLoc" type="text" class="form-control" name="searchLoc"
+						placeholder="Location">	
+					<select class="form-control" id="searchType" name="searchType">
+						<option>
+							<i class="fa fa-hand-spock-o" aria-hidden="true"></i>Job Postings
 						</option>
-						<option><i class="fa fa-usd" aria-hidden="true"></i>&nbsp;&nbsp;Salary
+						<option>
+							<i class="fa fa-usd" aria-hidden="true"></i>Salary
 						</option>
+						<security:authorize access="hasRole('ROLE_ADMIN')">
+                			<option>
+								<i class="fa fa-usd" aria-hidden="true"></i>User
+							</option>
+                		</security:authorize>
 					</select>
 				</div>
 				<button type="submit" class="btn btn-default" id="search-btn">
