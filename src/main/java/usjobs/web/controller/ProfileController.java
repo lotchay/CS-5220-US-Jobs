@@ -38,7 +38,7 @@ public class ProfileController {
     @RequestMapping(value = "/user/profile.html", method = RequestMethod.GET)
     public String getProfile(ModelMap models) {
     	UserDetails details = Security.getUserDetails();
-    	User user = userDao.getUser(details.getUsername());
+    	User user = userDao.getProfileUser(details.getUsername());
     	
     	if (user.isAdmin()) {
     		return "profile/admin";
