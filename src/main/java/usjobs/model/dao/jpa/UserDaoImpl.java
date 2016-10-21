@@ -29,8 +29,10 @@ public class UserDaoImpl implements UserDao  {
 
 	@Override
 	public User getUser( String username ) {
-		String query = "from User where username= :username";
+		
+	    String query = "from User where username= :username";
 		User user;
+		
 		try {
 			user = entityManager
 					.createQuery(query, User.class)
@@ -39,14 +41,17 @@ public class UserDaoImpl implements UserDao  {
 		} catch(NoResultException e) {
 			user = null; //did't find a user.
 		}
+		
 		return user;
 	}
 	
 	@Override
 	@PostAuthorize ("hasRole('ROLE_ADMIN') or principal.username == returnObject.username")
 	public User getProfileUser( String username ) {
-		String query = "from User where username= :username";
+		
+	    String query = "from User where username= :username";
 		User user;
+		
 		try {
 			user = entityManager
 					.createQuery(query, User.class)
@@ -55,6 +60,7 @@ public class UserDaoImpl implements UserDao  {
 		} catch(NoResultException e) {
 			user = null; //did't find a user.
 		}
+		
 		return user;
 	}
 
@@ -79,4 +85,5 @@ public class UserDaoImpl implements UserDao  {
 		
 		return entityManager.merge( user );
 	}
+	
 }

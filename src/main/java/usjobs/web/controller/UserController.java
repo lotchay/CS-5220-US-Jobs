@@ -22,114 +22,119 @@ import usjobs.model.dao.UserDao;
 @SessionAttributes("user")
 public class UserController {
 
-	@Autowired
-	private UserDao userDao;
+    @Autowired
+    private UserDao userDao;
 
-	@Autowired
-	private UserValidator userValidator;
+    @Autowired
+    private UserValidator userValidator;
 
-	@RequestMapping("/user/list.html")
-	public String list(ModelMap models) {
+    @RequestMapping("/user/list.html")
+    public String list( ModelMap models ) {
 
-		// Get all users from database and pass them to JSP
-		List<User> users = userDao.getUsers();
+        // Get all users from database and pass them to JSP
+        List<User> users = userDao.getUsers();
 
-		models.put("users", users);
+        models.put( "users", users );
 
-		return "user/list";
-	}
+        return "user/list";
+    }
 
-	@RequestMapping("/user/view/{id}.html")
-	public String view(@PathVariable Integer id, ModelMap models) {
+    @RequestMapping("/user/view/{id}.html")
+    public String view( @PathVariable Integer id, ModelMap models ) {
 
-		// Get user from database and pass it to JSP
-		models.put("user", userDao.getUser(id));
-		return "user/view";
-	}
+        // Get user from database and pass it to JSP
+        models.put( "user", userDao.getUser( id ) );
 
-	// Using Model Attribute to bind fields
-	@RequestMapping(value = "/user/add.html", method = RequestMethod.GET)
-	public String add(ModelMap models) {
+        return "user/view";
+    }
 
-		// Create a new user
-		models.put("user", new User());
+    // Using Model Attribute to bind fields
+    @RequestMapping(value = "/user/add.html", method = RequestMethod.GET)
+    public String add( ModelMap models ) {
 
-		return "user/add";
-	}
+        // Create a new user
+        models.put( "user", new User() );
 
-	@RequestMapping(value = "/user/add.html", method = RequestMethod.POST)
-	public String add(@ModelAttribute User user, BindingResult result, SessionStatus status) {
+        return "user/add";
+    }
 
-		// Validate user's input
-		userValidator.validate(user, result);
+    @RequestMapping(value = "/user/add.html", method = RequestMethod.POST)
+    public String add( @ModelAttribute User user, BindingResult result,
+        SessionStatus status ) {
 
-		if (result.hasErrors()) {
-			return "user/add";
-		}
+        // Validate user's input
+        userValidator.validate( user, result );
 
-		// Allow admin user to add other admin users
-		user.getUserRoles().add("ROLE_ADMIN");
-		user.setEnabled(true);
+        if ( result.hasErrors() ) { 
+        
+            return "user/add"; 
+        }
 
-		// Save the user to database
-		user = userDao.saveUser(user);
+        // Allow admin user to add other admin users
+        user.getUserRoles().add( "ROLE_ADMIN" );
+        user.setEnabled( true );
 
-		// Remove all the session attributes when done
-		status.setComplete();
+        // Save the user to database
+        user = userDao.saveUser( user );
 
-		// Redirect to user list
-		return "redirect:list.html";
-	}
+        // Remove all the session attributes when done
+        status.setComplete();
 
-	@RequestMapping(value = "/user/edit.html", method = RequestMethod.GET)
-	public String edit(@RequestParam Integer id, ModelMap models) {
+        // Redirect to user list
+        return "redirect:list.html";
+    }
 
-		models.put("user", userDao.getUser(id));
+    @RequestMapping(value = "/user/edit.html", method = RequestMethod.GET)
+    public String edit( @RequestParam Integer id, ModelMap models ) {
 
-		return "user/edit";
-	}
+        models.put( "user", userDao.getUser( id ) );
 
-	@RequestMapping(value = "/user/edit.html", method = RequestMethod.POST)
-	public String edit(@ModelAttribute User user, SessionStatus status) {
+        return "user/edit";
+    }
 
-		// Save the user to database
-		user = userDao.saveUser(user);
+    @RequestMapping(value = "/user/edit.html", method = RequestMethod.POST)
+    public String edit( @ModelAttribute User user, SessionStatus status ) {
 
-		// Remove all the session attributes when done
-		status.setComplete();
+        // Save the user to database
+        user = userDao.saveUser( user );
 
-		// Redirect to user list
-		return "redirect:list.html";
-	}
+        // Remove all the session attributes when done
+        status.setComplete();
 
-	@RequestMapping(value = "/register.html", method = RequestMethod.GET)
-	public String register(ModelMap models) {
+        // Redirect to user list
+        return "redirect:list.html";
+    }
 
-		// Create a new user
-		models.put("user", new User());
+    @RequestMapping(value = "/register.html", method = RequestMethod.GET)
+    public String register( ModelMap models ) {
 
-		return "/register";
-	}
+        // Create a new user
+        models.put( "user", new User() );
 
-	@RequestMapping(value = "/register.html", method = RequestMethod.POST)
-	public String register(@ModelAttribute("user") User user, BindingResult result, SessionStatus status) {
+        return "/register";
+    }
 
-		// Validate user's input
-		userValidator.validate(user, result);
+    @RequestMapping(value = "/register.html", method = RequestMethod.POST)
+    public String register( @ModelAttribute("user") User user,
+        BindingResult result, SessionStatus status ) {
 
-		if (result.hasErrors()) {
-			return "register";
-		}
+        // Validate user's input
+        userValidator.validate( user, result );
 
-		user.setEnabled(true);
+        if ( result.hasErrors() ) { 
+            
+            return "register";         
+        }
 
-		// Save the user to database
-		user = userDao.saveUser(user);
+        user.setEnabled( true );
 
-		// Remove all the session attributes when done
-		status.setComplete();
+        // Save the user to database
+        user = userDao.saveUser( user );
 
-		return "redirect:index.html";
-	}
+        // Remove all the session attributes when done
+        status.setComplete();
+
+        return "redirect:index.html";
+    }
 
 }
