@@ -2,9 +2,12 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Display One User</title>
+<title>US Jobs - View User</title>
 </head>
 <body>
+    <h2><a href="../../index.html">US Jobs</a></h2>
+    <h2>View Your Profile</h2>
+
     <table border="8" cellspacing="8" cellpadding="8" bgcolor="#99ccff" width="80%" height="100px">
         <tr>
             <th>ID</th>

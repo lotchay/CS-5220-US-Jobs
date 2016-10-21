@@ -23,6 +23,18 @@ public class JobPostingDaoImpl implements JobPostingDao {
 	}
 	
 	@Override
+	public List<JobPosting> getOpenedJobPostings() {
+		String query = "From JobPosting where opened = true";
+		return em.createQuery(query, JobPosting.class).getResultList();
+	}
+	
+	@Override
+	public List<JobPosting> getClosedJobPostings() {
+		String query = "From JobPosting where opened = false";
+		return em.createQuery(query, JobPosting.class).getResultList();
+	}
+	
+	@Override
 	public List<JobPosting> getJobPostings(int id) {
 		String query = "FROM JobPosting WHERE employer_id = :id";
 		return em.createQuery(query, JobPosting.class)
@@ -44,17 +56,17 @@ public class JobPostingDaoImpl implements JobPostingDao {
 	}
 	
 	@Override
-	public List<JobPosting> searchJobs(String searchTerm) {
-		String query = "FROM JobPosting j WHERE UPPER(j.jobTitle) LIKE ?1 ";
-				//+ "OR UPPER(j.salary) like ?1 ";
-				//+ "OR UPPER(u.location) like ?1";
+	public List<JobPosting> searchJobs(String searchTerm, String searchLoc) {
+		String query = "FROM JobPosting j WHERE j.opened = true AND UPPER(j.jobTitle) LIKE ?1 "
+				+ "AND UPPER(j.location) like ?2";
 		return em.createQuery(query, JobPosting.class)
 				.setParameter(1, "%" + searchTerm.toUpperCase() + "%")
+				.setParameter(2, "%" + searchLoc.toUpperCase() + "%")
 				.getResultList();
 	}
 	
 	@Override
-	public List<JobPosting> searchJobSalary(String searchTerm) {
+	public List<JobPosting> searchJobSalary(String searchTerm, String searchLoc) {
 		String digits = "\\d+";
 		if (searchTerm.contains(",") || searchTerm.contains("$")){
 			searchTerm = searchTerm.replace(",", "");
@@ -66,8 +78,10 @@ public class JobPostingDaoImpl implements JobPostingDao {
 		int salary = Integer.parseInt(searchTerm);
 		int bottomRange = salary - 10000;
 		int topRange = salary + 10000;
-		String query = "FROM JobPosting j WHERE (j.salary) BETWEEN " + bottomRange + " AND " + topRange;
+		String query = "FROM JobPosting j WHERE j.opened = true AND (j.salary) BETWEEN " + bottomRange + " AND " + topRange
+				+ "AND UPPER(j.location) like ?2";
 		return em.createQuery(query, JobPosting.class)
+				.setParameter(2, "%" + searchLoc.toUpperCase() + "%")
 				.getResultList();
 	}
 	

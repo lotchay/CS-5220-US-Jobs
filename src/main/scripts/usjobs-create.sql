@@ -45,6 +45,8 @@ create sequence hibernate_sequence minvalue 80;
         job_id int4 not null,
         date_closed timestamp,
         date_posted timestamp,
+        enabled boolean default true,
+        opened boolean default true,
         job_description text,
         job_title varchar(255),
         location varchar(255),
@@ -239,12 +241,12 @@ create sequence hibernate_sequence minvalue 80;
     	(4, 'ROLE_EMPLOYER'),
     	(5, 'ROLE_ADMIN');
 
-    insert into job_postings (job_id, date_closed, date_posted, job_description, job_title, location, contact_email, contact_first_name, contact_title, contact_last_name, contact_phone, salary, website, employer_id)
-	  values (1, null, null, 'We are looking for a full-stack engineer with solid front end experience. You must be passionate about APIs and services, and competent in the data that support them. You will be developing, supporting and enhancing Web and internal applications.',
+    insert into job_postings (enabled, opened, job_id, date_closed, date_posted, job_description, job_title, location, contact_email, contact_first_name, contact_title, contact_last_name, contact_phone, salary, website, employer_id)
+	  values (true, true, 1, null, null, 'We are looking for a full-stack engineer with solid front end experience. You must be passionate about APIs and services, and competent in the data that support them. You will be developing, supporting and enhancing Web and internal applications.',
             'Software Engineer', 'Dallas, TX', 'joe@nasa.hr.gov', 'joe', 'software engineer', 'smith', '999-955-5555', 200000, 'www.nasa.gov', 4);
 
-    insert into job_postings (job_id, date_closed, date_posted, job_description, job_title, location, contact_email, contact_first_name, contact_title, contact_last_name, contact_phone, salary, website, employer_id)
-	  values (2, null, null, 'Qualifications:
+    insert into job_postings (enabled, opened, job_id, date_closed, date_posted, job_description, job_title, location, contact_email, contact_first_name, contact_title, contact_last_name, contact_phone, salary, website, employer_id)
+	  values (true, true, 2, null, null, 'Qualifications:
             SolidWorks (SCWP preferred)
             BSME preferred or CSWP with strong skills
             3-5 years Machine Design
@@ -259,8 +261,8 @@ create sequence hibernate_sequence minvalue 80;
             'Mechanical Engineer', 'Los Angeles, CA', 'joe@nasa.hr.gov', 'joe', 'Engineering Boss', 'smith', '999-955-5555', 120000, 'www.nasa.gov', 4);
 
 
-    insert into job_postings (job_id, date_closed, date_posted, job_description, job_title, location, contact_email, contact_first_name, contact_title, contact_last_name, contact_phone, salary, website, employer_id)
-	  values (3, null, null, 'Analytical Linguists work across Google to drive improvements in quality, classification,
+    insert into job_postings (enabled, opened, job_id, date_closed, date_posted, job_description, job_title, location, contact_email, contact_first_name, contact_title, contact_last_name, contact_phone, salary, website, employer_id)
+	  values (true, false, 3, null, null, 'Analytical Linguists work across Google to drive improvements in quality, classification,
             information structure, and natural language understanding and generation. As an Analytical Linguist you
             will work both on complex projects spanning multiple products, groups, and disciplines, and on tightly
             focused efforts to produce specific product components or answer specific research questions. Analytical
@@ -286,8 +288,8 @@ create sequence hibernate_sequence minvalue 80;
             Google what it is today, and are constantly innovating to deliver the most effective advertising and commerce opportunities of tomorrow.',
             'Linguist, Text Classification', 'Los Angeles, TX', 'kelly@google.com', 'Kelly', 'HR', 'Smith', '999-955-5555', 88888, 'www.google.com', 3);
 
-    insert into job_postings (job_id, date_closed, date_posted, job_description, job_title, location, contact_email, contact_first_name, contact_title, contact_last_name, contact_phone, salary, website, employer_id)
-	  values (4, null, null, 'YouTube''s Technology Solutions Organization is a global organization dedicated to developing and managing the company''s
+    insert into job_postings (enabled, opened, job_id, date_closed, date_posted, job_description, job_title, location, contact_email, contact_first_name, contact_title, contact_last_name, contact_phone, salary, website, employer_id)
+	  values (true, true, 4, null, null, 'YouTube''s Technology Solutions Organization is a global organization dedicated to developing and managing the company''s
             largest and most strategic partnerships. We work closely with the YouTube product, engineering, and content teams to address
             our partners'' most pressing and complex technology challenges. You''ll lead deployments, optimize implementations, and handle
             integrations to build strong, successful, long-term partnerships.

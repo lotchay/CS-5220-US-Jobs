@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,44 +17,98 @@
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
-	<div class="row">
-		<div class="col col-md-8 col-md-offset-2">
-			<h3>${jobPosting.jobTitle }</h3>
-			<p>${jobPosting.jobDescription }</p>
-			<security:authorize access="hasRole('SEEKER') or hasRole('ADMIN')">
-				<div class="container">
-					<c:choose>
-						<c:when test="${jobPosting.usersFavorited.contains(currentUser)}">
-							<form method="post" action="favorite.html?jobid=${jobPosting.id}">
-								<button type="submit" id="favorite" class="btn btn-info"><i class="fa fa-undo" aria-hidden="true"></i>
-								&nbsp;&nbsp;Unfavorite</button>
-							</form>
+	<div class="col-md-8 col-md-offset-2 page-header">
+		<div class="row">
+			<h1>${jobPosting.jobTitle }</h1>
+			<h4 class="pull-left">${jobPosting.company.employerName}-${jobPosting.location }</h4>
+			<h4 class="pull-right">
+				Dated posted:
+				<c:choose>
+					<c:when test="${jobPosting.datePosted == null}">
+						Not available
 						</c:when>
-						<c:otherwise>
-							<form method="post" action="favorite.html?jobid=${jobPosting.id}">
-								<button type="submit" id="favorite" class="btn btn-info">
-								<i class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;Favorite</button>
-							</form>
-						</c:otherwise>
-					</c:choose>
-					<br />
-					<c:choose>
-						<c:when test="${jobPosting.usersApplied.contains(currentUser)}">
-						<button class="btn btn-info" disabled><i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Applied</button>
-						</c:when>
-						<c:otherwise>
-							<form method="post" action="apply.html?jobid=${jobPosting.id}">
-								<button type="submit" id="apply" class="btn btn-info">Apply</button>
-							</form>
-						</c:otherwise>
-					</c:choose>
-				</div>
-			</security:authorize>
+					<c:otherwise>
+						<fmt:formatDate type="date" value="${jobPosting.datePosted}" />
+					</c:otherwise>
+				</c:choose>
+			</h4>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col col-md-8 col-md-offset-2">
-			<p class="text-success" id="status-msg"></p>
+		<div class="col-md-6 col-md-offset-2">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<h3 class="panel-title"><i class="fa fa-industry" aria-hidden="true"></i>&nbsp;&nbsp;Job Description</h3>
+				</div>
+				<div class="panel-body">
+					<p>${jobPosting.jobDescription }</p>
+					<security:authorize access="hasRole('SEEKER') or hasRole('ADMIN')">
+						<c:choose>
+							<c:when test="${jobPosting.usersApplied.contains(currentUser)}">
+								<button class="btn btn-info" disabled>
+									<i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Applied
+								</button>
+							</c:when>
+							<c:otherwise>
+								<form class="form-btn-container" method="post"
+									action="apply.html?jobid=${jobPosting.id}">
+									<button type="submit" id="apply" class="btn btn-info">Apply</button>
+								</form>
+							</c:otherwise>
+						</c:choose>
+						<c:choose>
+							<c:when test="${jobPosting.usersFavorited.contains(currentUser)}">
+								<form class="form-btn-container" method="post"
+									action="favorite.html?jobid=${jobPosting.id}">
+									<button type="submit" id="favorite" class="btn btn-warning">
+										<i class="fa fa-undo" aria-hidden="true"></i>
+										&nbsp;&nbsp;Unfavorite
+									</button>
+								</form>
+							</c:when>
+							<c:otherwise>
+								<form class="form-btn-container" method="post"
+									action="favorite.html?jobid=${jobPosting.id}">
+									<button type="submit" id="favorite" class="btn btn-warning">
+										<i class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;Favorite
+									</button>
+								</form>
+							</c:otherwise>
+						</c:choose>
+					</security:authorize>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;Job Summary</h3>
+				</div>
+				<div class="panel-body">
+					<h4>
+						<strong>Company</strong>
+					</h4>
+					<p>${jobPosting.company.employerName }</p>
+					<h4>
+						<strong>Job Title</strong>
+					</h4>
+					<p>${jobPosting.jobTitle }</p>
+					<h4>
+						<strong>Location</strong>
+					</h4>
+					<p>${jobPosting.location }</p>
+					<h4>
+						<strong>Salary</strong>
+					</h4>
+					<p>${jobPosting.salary }</p>
+					<h4>
+						<strong>Website</strong>
+					</h4>
+					<p>
+						<a target="_blank" href="http://${jobPosting.website }">${jobPosting.website }</a>
+					</p>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

@@ -34,14 +34,14 @@
 	
 	<c:choose>
 
-		<c:when test="${searchBar != null }">
+		<c:when test="${not empty searchBar }">
 			<jsp:include page="search.jsp"/>
 		</c:when>
 		
 		<c:otherwise>
 			<div class="row">
 				<div class="col col-md-8 col-md-offset-2">
-					<h1 class="text-primary">Trending Jobs</h1>
+					<h1 class="text-warning">Trending Jobs</h1>
 					<hr />
 					<div class="list-group">
 						<c:forEach items="${jobPostings}" var="jobPosting">
@@ -55,7 +55,7 @@
 							</a>
 						</c:forEach>
 					</div>
-					<div class="btn-container row col col-md-2 col-md-offset-5">
+					<div class="btn-container row pull-left">
 						<button class="btn btn-singleton btn-info">Show More</button>
 					</div>
 				</div>

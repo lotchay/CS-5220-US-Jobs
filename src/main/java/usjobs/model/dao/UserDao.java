@@ -10,8 +10,16 @@ public interface UserDao {
 	
 	User getUser( String username );
 	
+	User getProfileUser( String username);
+	
 	List<User> getUsers();
 	
+	List<User> searchUsers(String searchTerm, String searchLoc);
+	
+	User searchEmail(String searchTerm, String searchLoc);
+	
 	User saveUser( User user );
+	
+	User saveProfileUser( User user );
 	
 }
