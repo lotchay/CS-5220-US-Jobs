@@ -50,9 +50,10 @@
 								</button>
 							</c:when>
 							<c:otherwise>
-								<form class="form-btn-container" method="post"
-									action="apply.html?jobid=${jobPosting.id}">
-									<button type="submit" id="apply" class="btn btn-info">Apply</button>
+								<form class="form-btn-container" action="apply.html" method="get">
+									<input type="hidden" name="jobId" value="${jobPosting.id }" />
+									<input type="hidden" name="seekerId" value="${currentUser.id }"/>
+									<button type="submit" id="apply" class="btn btn-info" >Apply</button>
 								</form>
 							</c:otherwise>
 						</c:choose>
