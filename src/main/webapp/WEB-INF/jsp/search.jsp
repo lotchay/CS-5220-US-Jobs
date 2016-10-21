@@ -5,13 +5,13 @@
 
 <div class="row">
 	<div class="col col-md-8 col-md-offset-2">
-		<h1 class="text-primary">Job Results</h1>
-		<hr />
 		<c:choose>
 		<c:when test="${empty searchResultJob && empty searchResultUser}">
-			<h2 class="text-warning">No results found.</h2>
+			<h1 class="text-warning">No results found.</h1>
 		</c:when>
 		<c:when test="${not empty searchResultUser }">
+			<h1 class="text-primary">User Results</h1>
+			<hr />
 			<div class="list-group">
 				<c:forEach items="${searchResultUser}" var="user">
 					<a href="user/edit.html?id=${user.id}"
@@ -22,6 +22,8 @@
 			</div>
 		</c:when>
 		<c:otherwise>
+			<h1 class="text-primary">Job Results</h1>
+			<hr />
 			<div class="list-group">
 				<c:forEach items="${searchResultJob}" var="jobPosting">
 					<a href="job/view.html?jobid=${jobPosting.id}"
