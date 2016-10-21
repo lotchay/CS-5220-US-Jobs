@@ -38,7 +38,7 @@
 								<label for="username" class="col-lg-2 control-label">Username</label>
 								<div class="col-lg-10">
 									<input type="text" class="form-control" id="username"
-										value="Username goes here" disabled>
+										value="${user.username}" disabled>
 								</div>
 							</div>
 							<div class="form-group">
@@ -110,10 +110,16 @@
 						<table class="table table-striped table-hover">
 							<tr class="info">
 								<th>Title</th>
+								<th>Salary</th>
+								<th>Location</th>
+								<th>Link</th>
 							</tr>
 							<c:forEach items="${user.appliedJobs}" var="appliedJob">
 								<tr>
-									<td>${appliedJob.jobTitle }</td>
+									<td>${appliedJob.jobTitle}</td>									
+									<td>${appliedJob.salary}</td>
+									<td>${appliedJob.location}</td>
+									<td>${appliedJob.website}</td>
 								</tr>
 							</c:forEach>
 						</table>
@@ -129,10 +135,16 @@
 						<table class="table table-striped table-hover">
 							<tr class="info">
 								<th>Title</th>
+								<th>Salary</th>
+								<th>Location</th>
+								<th>Link</th>
 							</tr>
 							<c:forEach items="${user.favoritedJobs}" var="favoritedJob">
 								<tr>
 									<td>${favoritedJob.jobTitle }</td>
+									<td>${favoritedJob.salary}</td>
+									<td>${favoritedJob.location}</td>
+									<td>${favoritedJob.website}</td>
 								</tr>
 							</c:forEach>
 						</table>
