@@ -47,6 +47,13 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<label for="coverLetter" class="col-lg-2 control-label">Cover Letter</label>
+								<div class="col-lg-10">
+									<form:textarea class="form-control" path=""
+										rows="5" id="coverLetter" placeholder="Write your cover letter here."/>
+								</div>
+							</div>
+							<div class="form-group">
 								<div class="col-lg-10 col-lg-offset-2">
 									
 									<button type="submit" id="apply" class="btn btn-info">Apply</button>
