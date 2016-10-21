@@ -40,7 +40,7 @@
 					<input id="searchKey" type="text" class="form-control"
 						name="searchBar" placeholder="Search"> 
 					<input id="searchLoc" type="text" class="form-control" name="searchLoc"
-						placeholder="Location">	
+						placeholder="Location (Optional)">	
 					<select class="form-control" id="searchType" name="searchType">
 						<option>
 							<i class="fa fa-hand-spock-o" aria-hidden="true"></i>Job Postings
