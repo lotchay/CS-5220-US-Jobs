@@ -30,6 +30,7 @@
 					<h6>Email: ${seeker.email }</h6>
 					<h6>Title: ${seeker.currentJobTitle}</h6>
 					<h6>Experience: ${seeker.experience }</h6>
+					<h6>${seeker.address.city } , ${seeker.address.state }</h6>
 					<hr/>
 				</c:forEach>
 			</div>
