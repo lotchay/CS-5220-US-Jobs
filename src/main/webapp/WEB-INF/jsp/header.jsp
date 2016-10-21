@@ -37,6 +37,8 @@
 				<div class="form-group">
 					<input id="searchKey" type="text" class="form-control" name="searchBar"
 						placeholder="Search">
+					<input id="searchLoc" type="text" class="form-control" name="searchLoc"
+						placeholder="Location">
 				    <select class="form-control" id="searchType" name="searchType">
 				    	<option>Job Postings</option>
 				        <option>Salary</option>

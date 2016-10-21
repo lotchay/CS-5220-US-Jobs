@@ -262,7 +262,7 @@ create sequence hibernate_sequence minvalue 80;
 
 
     insert into job_postings (enabled, opened, job_id, date_closed, date_posted, job_description, job_title, location, contact_email, contact_first_name, contact_title, contact_last_name, contact_phone, salary, website, employer_id)
-	  values (true, true, 3, null, null, 'Analytical Linguists work across Google to drive improvements in quality, classification,
+	  values (true, false, 3, null, null, 'Analytical Linguists work across Google to drive improvements in quality, classification,
             information structure, and natural language understanding and generation. As an Analytical Linguist you
             will work both on complex projects spanning multiple products, groups, and disciplines, and on tightly
             focused efforts to produce specific product components or answer specific research questions. Analytical

@@ -24,12 +24,12 @@ public class HomeController {
 	
 	@RequestMapping( value={"/index.html", "/home.html"}, 
 			method = RequestMethod.POST )
-	public String home(@RequestParam String searchBar, @RequestParam String searchType,
-			ModelMap models) {
+	public String home(@RequestParam String searchBar, @RequestParam String searchLoc, 
+			@RequestParam String searchType, ModelMap models) {
 		if(searchType.equals("Job Postings")){
-			models.put("searchResultJob", jobPostingDao.searchJobs(searchBar));
+			models.put("searchResultJob", jobPostingDao.searchJobs(searchBar, searchLoc));
 		} else if (searchType.equals("Salary")){
-			models.put("searchResultJob", jobPostingDao.searchJobSalary(searchBar));
+			models.put("searchResultJob", jobPostingDao.searchJobSalary(searchBar, searchLoc));
 		}
 		models.put("searchBar", searchBar);
 		return home(models);
