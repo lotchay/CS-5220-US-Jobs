@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -40,7 +39,7 @@
 					<input id="searchKey" type="text" class="form-control"
 						name="searchBar" placeholder="Search"> 
 					<input id="searchLoc" type="text" class="form-control" name="searchLoc"
-						placeholder="Location">	
+						placeholder="Location (optional)">	
 					<select class="form-control" id="searchType" name="searchType">
 						<option>
 							<i class="fa fa-hand-spock-o" aria-hidden="true"></i>Job Postings
@@ -64,7 +63,7 @@
 					<i class="fa fa-search"></i>&nbsp;&nbsp;Search
 				</button>
 			</form>
-			<security:authorize access="isAuthenticated()">
+			<security:authorize access="hasAnyRole('ROLE_SEEKER', 'ROLE_EMPLOYER')">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="<c:url value='/user/profile.html' />"><i
 							class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;Welcome, <security:authentication
@@ -83,11 +82,18 @@
 							class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;&nbsp;Register</a></li>
 				</ul>
 			</security:authorize>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="<c:url value='/user/list.html' />"><i
-						class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;User
-						Management</a></li>
-			</ul>
+			<security:authorize access="hasAnyRole('ROLE_ADMIN')">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="<c:url value='/user/list.html' />"><i
+							class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;User
+							Management</a></li>
+					<li><a href="<c:url value='/job/list.html' />"><i
+							class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;Job Posting
+							Management</a></li>
+					<li><a href="<c:url value='/logout' />"><i
+							class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;Logout</a></li>
+				</ul>
+			</security:authorize>
 		</div>
 	</div>
 </nav>

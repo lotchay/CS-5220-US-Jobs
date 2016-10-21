@@ -104,6 +104,40 @@ public class UserController {
         // Redirect to user list
         return "redirect:list.html";
     }
+    
+    @RequestMapping(value = "/user/disable.html", method = RequestMethod.GET)
+    public String disable(@RequestParam Integer id, ModelMap models) {
+    	
+    	// Disable the user
+    	userDao.getUser(id).setEnabled(false);
+    	
+    	// Save the user to database
+        userDao.saveUser(userDao.getUser(id));
+
+        // Get all users from database and pass them to JSP
+        List<User> users = userDao.getUsers();
+
+        models.put( "users", users );
+
+        return "user/list";
+    }
+    
+    @RequestMapping(value = "/user/enable.html", method = RequestMethod.GET)
+    public String enable(@RequestParam Integer id, ModelMap models) {
+    	
+    	// Disable the user
+    	userDao.getUser(id).setEnabled(true);
+    	
+    	// Save the user to database
+        userDao.saveUser(userDao.getUser(id));
+
+        // Get all users from database and pass them to JSP
+        List<User> users = userDao.getUsers();
+
+        models.put( "users", users );
+
+        return "user/list";
+    }
 
     @RequestMapping(value = "/register.html", method = RequestMethod.GET)
     public String register( ModelMap models ) {
