@@ -1,6 +1,7 @@
 package usjobs.web.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,8 +36,62 @@ public class JobController {
 
 	@Autowired
 	private UserDao userDao;
+	
+	@RequestMapping("/job/list.html")
+    public String list( ModelMap models ) {
 
-	@RequestMapping(value = "/job/view.html")
+        // Get all users from database and pass them to JSP
+        List<JobPosting> jobPostings = jobPostingDao.getJobPostings();
+
+        models.put( "jobPostings", jobPostings );
+
+        return "job/list";
+    }
+	
+	@RequestMapping("/job/view/{id}.html")
+    public String view( @PathVariable Integer id, ModelMap models ) {
+
+        // Get user from database and pass it to JSP
+        models.put( "jobPosting", jobPostingDao.getJobPosting( id ) );
+
+        return "job/view";
+    }
+	
+	@RequestMapping(value = "/job/disable.html", method = RequestMethod.GET)
+    public String disable(@RequestParam Integer id, ModelMap models) {
+    	
+    	// Disable the user
+    	jobPostingDao.getJobPosting(id).setEnabled(false);
+    	
+    	// Save the user to database
+    	jobPostingDao.save(jobPostingDao.getJobPosting(id));
+
+        // Get all users from database and pass them to JSP
+        List<JobPosting> jobPostings = jobPostingDao.getJobPostings();
+
+        models.put( "jobPostings", jobPostings );
+
+        return "job/list";
+    }
+    
+	@RequestMapping(value = "/job/enable.html", method = RequestMethod.GET)
+    public String enable(@RequestParam Integer id, ModelMap models) {
+    	
+    	// Disable the user
+    	jobPostingDao.getJobPosting(id).setEnabled(true);
+    	
+    	// Save the user to database
+    	jobPostingDao.save(jobPostingDao.getJobPosting(id));
+
+        // Get all users from database and pass them to JSP
+        List<JobPosting> jobPostings = jobPostingDao.getJobPostings();
+
+        models.put( "jobPostings", jobPostings );
+
+        return "job/list";
+    }
+
+	@RequestMapping(value = "/job/post.html")
 	public String jobPosting(@RequestParam int jobid, ModelMap models, Principal principal) {
 		// only if there's someone logged in do we attempt to get current user.
 		// I need
