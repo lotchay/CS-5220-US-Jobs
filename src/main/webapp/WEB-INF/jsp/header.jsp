@@ -55,7 +55,7 @@
                 		</security:authorize>
                 		<security:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_EMPLOYER')">
                 			<option>
-								<i class="fa fa-usd" aria-hidden="true"></i>Email
+								<i class="fa fa-usd" aria-hidden="true"></i>Job Seeker
 							</option>
                 		</security:authorize>
 					</select>
