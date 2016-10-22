@@ -25,6 +25,12 @@
 		        <tr><td>City: </td><td><form:input path="address.city" size='30' /></td></tr>
 		        <tr><td>State: </td><td><form:input path="address.state" size='30' /></td></tr>
 		        <tr><td>Zip Code: </td><td><form:input path="address.zip" size='30' /></td></tr>
+		        <tr><td>Select Role: </td><td>
+		        	<form:radiobutton path="userRoles" value="ROLE_SEEKER" /> 
+		        	<form:errors class="text-danger" path="userRoles" />Job Seeker
+			        <form:radiobutton path="userRoles" value="ROLE_EMPLOYER" />
+			        <form:errors class="text-danger" path="userRoles" />Employer
+				</td></tr>
 		    </table>    
 		    <input type="submit" name="save" value="Save" />
 		    </form:form>

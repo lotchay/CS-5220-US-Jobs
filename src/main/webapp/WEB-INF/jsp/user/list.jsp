@@ -21,7 +21,8 @@
 		            <th>Username</th>
 		            <th>First Name</th>
 		            <th>Last Name</th>
-		            <th>Email</th>           
+		            <th>Email</th>
+		            <th>User Roles</th>
 		            <th>Operations</th>
 		        </tr>
 		        <c:forEach items="${users}" var="user">
@@ -31,6 +32,7 @@
 		            <td>${user.firstName}</td>
 		            <td>${user.lastName}</td>
 		            <td>${user.email}</td>
+		            <td>${user.userRoles}</td>
 		            <td>
 		                <security:authorize access="hasRole('ROLE_ADMIN')">
 		                <a href="view/${user.id}.html">View</a> &nbsp; | &nbsp;&nbsp;

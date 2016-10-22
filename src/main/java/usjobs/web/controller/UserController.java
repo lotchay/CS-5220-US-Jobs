@@ -1,6 +1,8 @@
 package usjobs.web.controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -95,6 +97,22 @@ public class UserController {
     @RequestMapping(value = "/user/edit.html", method = RequestMethod.POST)
     public String edit( @ModelAttribute User user, SessionStatus status ) {
 
+    	// Save the user's role to database
+    	/*switch(roleType){
+    		case "SEEKER":
+    			user.getUserRoles().clear();
+    			user = userDao.saveUser(user);
+    			user.getUserRoles().add( "ROLE_SEEKER" );
+    			break;
+    		case "EMPLOYER":
+    			user.getUserRoles().clear();
+    			user = userDao.saveUser(user);
+    			user.getUserRoles().add( "ROLE_EMPLOYER" );
+    			break;
+    		default:
+    			break;
+    	}*/
+    	
         // Save the user to database
         user = userDao.saveUser( user );
 
