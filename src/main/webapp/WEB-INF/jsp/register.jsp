@@ -81,13 +81,13 @@
 									<div class="radio">
 										<label> <form:radiobutton path="userRoles"
 												value="ROLE_SEEKER" /> <form:errors class="text-danger"
-												path="userRoles" />Employer
+												path="userRoles" />Job Seeker
 										</label>
 									</div>
 									<div class="radio">
 										<label> <form:radiobutton path="userRoles"
 												value="ROLE_EMPLOYER" /> <form:errors class="text-danger"
-												path="userRoles" />Job Seeker
+												path="userRoles" />Employer
 										</label>
 									</div>
 								</div>

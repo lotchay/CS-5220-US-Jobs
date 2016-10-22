@@ -1,10 +1,7 @@
 package usjobs.web.controller;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,149 +22,157 @@ import usjobs.model.dao.UserDao;
 @SessionAttributes("user")
 public class UserController {
 
-	private Logger logger = Logger.getLogger(UserController.class);
-	@Autowired
-	private UserDao userDao;
+//    private Logger logger = Logger.getLogger( UserController.class );
 
-	@Autowired
-	private UserValidator userValidator;
+    @Autowired
+    private UserDao userDao;
 
-	@RequestMapping("/user/list.html")
-	public String list(ModelMap models) {
+    @Autowired
+    private UserValidator userValidator;
 
-		// Get all users from database and pass them to JSP
-		List<User> users = userDao.getUsers();
+    @RequestMapping("/user/list.html")
+    public String list( ModelMap models ) {
 
-		models.put("users", users);
+        // Get all users from database and pass them to JSP
+        List<User> users = userDao.getUsers();
 
-		return "user/list";
-	}
+        models.put( "users", users );
 
-	@RequestMapping("/user/view/{id}.html")
-	public String view(@PathVariable Integer id, ModelMap models) {
+        return "user/list";
+    }
 
-		// Get user from database and pass it to JSP
-		models.put("user", userDao.getUser(id));
+    @RequestMapping("/user/view/{id}.html")
+    public String view( @PathVariable Integer id, ModelMap models ) {
 
-		return "user/view";
-	}
+        // Get user from database and pass it to JSP
+        models.put( "user", userDao.getUser( id ) );
 
-	// Using Model Attribute to bind fields
-	@RequestMapping(value = "/user/add.html", method = RequestMethod.GET)
-	public String add(ModelMap models) {
+        return "user/view";
+    }
 
-		// Create a new user
-		models.put("user", new User());
+    // Using Model Attribute to bind fields
+    @RequestMapping(value = "/user/add.html", method = RequestMethod.GET)
+    public String add( ModelMap models ) {
 
-		return "user/add";
-	}
+        // Create a new user
+        models.put( "user", new User() );
 
-	@RequestMapping(value = "/user/add.html", method = RequestMethod.POST)
-	public String add(@ModelAttribute User user, BindingResult result, SessionStatus status) {
+        return "user/add";
+    }
 
-		// Validate user's input
-		userValidator.validate(user, result);
+    @RequestMapping(value = "/user/add.html", method = RequestMethod.POST)
+    public String add( @ModelAttribute User user, BindingResult result,
+        SessionStatus status ) {
 
-		if (result.hasErrors()) {
+        // Validate user's input
+        userValidator.validate( user, result );
 
-			return "user/add";
-		}
+        if( result.hasErrors() ) {
 
-		// Allow admin user to add other admin users
-		user.getUserRoles().add("ROLE_ADMIN");
+            return "user/add"; 
+        }
 
-		// Save the user to database
-		user = userDao.saveUser(user);
+        // Allow admin user to add other admin users
+        user.getUserRoles().add( "ROLE_ADMIN" );
 
-		// Remove all the session attributes when done
-		status.setComplete();
+        // Save the user to database
+        user = userDao.saveUser( user );
 
-		// Redirect to user list
-		return "redirect:list.html";
-	}
+        // Remove all the session attributes when done
+        status.setComplete();
 
-	@RequestMapping(value = "/user/edit.html", method = RequestMethod.GET)
-	public String edit(@RequestParam Integer id, ModelMap models) {
+        // Redirect to user list
+        return "redirect:list.html";
+    }
 
-		models.put("user", userDao.getUser(id));
+    @RequestMapping(value = "/user/edit.html", method = RequestMethod.GET)
+    public String edit( @RequestParam Integer id, ModelMap models ) {
 
-		return "user/edit";
-	}
+        models.put( "user", userDao.getUser( id ) );
 
-	@RequestMapping(value = "/user/edit.html", method = RequestMethod.POST)
-	public String edit(@ModelAttribute User user, SessionStatus status) {
+        return "user/edit";
+    }
 
-		// Save the user to database
-		user = userDao.saveUser(user);
-		userDao.updateUserType(user); //update user type since postgres default it to ADMIN even if seeker or employer.
-		// Remove all the session attributes when done
-		status.setComplete();
+    @RequestMapping(value = "/user/edit.html", method = RequestMethod.POST)
+    public String edit( @ModelAttribute User user, SessionStatus status ) {
 
-		// Redirect to user list
-		return "redirect:list.html";
-	}
+        // Save the user to database
+        user = userDao.saveUser( user );
+        userDao.updateUserType( user ); // update user type since postgres
+                                        // default it to ADMIN even if seeker or
+                                        // employer.
+        // Remove all the session attributes when done
+        status.setComplete();
 
-	@RequestMapping(value = "/user/disable.html", method = RequestMethod.GET)
-	public String disable(@RequestParam Integer id, ModelMap models) {
+        // Redirect to user list
+        return "redirect:list.html";
+    }
 
-		// Disable the user
-		userDao.getUser(id).setEnabled(false);
+    @RequestMapping(value = "/user/disable.html", method = RequestMethod.GET)
+    public String disable( @RequestParam Integer id, ModelMap models ) {
 
-		// Save the user to database
-		userDao.saveUser(userDao.getUser(id));
+        // Disable the user
+        userDao.getUser( id ).setEnabled( false );
 
-		// Get all users from database and pass them to JSP
-		List<User> users = userDao.getUsers();
+        // Save the user to database
+        userDao.saveUser( userDao.getUser( id ) );
 
-		models.put("users", users);
+        // Get all users from database and pass them to JSP
+        List<User> users = userDao.getUsers();
 
-		return "user/list";
-	}
+        models.put( "users", users );
 
-	@RequestMapping(value = "/user/enable.html", method = RequestMethod.GET)
-	public String enable(@RequestParam Integer id, ModelMap models) {
+        return "user/list";
+    }
 
-		// Disable the user
-		userDao.getUser(id).setEnabled(true);
+    @RequestMapping(value = "/user/enable.html", method = RequestMethod.GET)
+    public String enable( @RequestParam Integer id, ModelMap models ) {
 
-		// Save the user to database
-		userDao.saveUser(userDao.getUser(id));
+        // Disable the user
+        userDao.getUser( id ).setEnabled( true );
 
-		// Get all users from database and pass them to JSP
-		List<User> users = userDao.getUsers();
+        // Save the user to database
+        userDao.saveUser( userDao.getUser( id ) );
 
-		models.put("users", users);
+        // Get all users from database and pass them to JSP
+        List<User> users = userDao.getUsers();
 
-		return "user/list";
-	}
+        models.put( "users", users );
 
-	@RequestMapping(value = "/register.html", method = RequestMethod.GET)
-	public String register(ModelMap models) {
+        return "user/list";
+    }
 
-		// Create a new user
-		models.put("user", new User());
+    @RequestMapping(value = "/register.html", method = RequestMethod.GET)
+    public String register( ModelMap models ) {
 
-		return "/register";
-	}
+        // Create a new user
+        models.put( "user", new User() );
 
-	@RequestMapping(value = "/register.html", method = RequestMethod.POST)
-	public String register(@ModelAttribute("user") User user, BindingResult result, SessionStatus status) {
+        return "/register";
+    }
 
-		// Validate user's input
-		userValidator.validate(user, result);
+    @RequestMapping(value = "/register.html", method = RequestMethod.POST)
+    public String register( @ModelAttribute("user") User user,
+        BindingResult result, SessionStatus status ) {
 
-		if (result.hasErrors()) {
+        // Validate user's input
+        userValidator.validate( user, result );
 
-			return "register";
-		}
-		
-		// Save the user to database
-		user = userDao.saveUser(user);
-		
-		userDao.updateUserType(user); //update user type since postgres default it to ADMIN even if seeker or employer.
-		// Remove all the session attributes when done
-		status.setComplete();
+        if( result.hasErrors() ) {
 
-		return "redirect:login.html";
-	}
+            return "register"; 
+        }
+
+        // Save the user to database
+        user = userDao.saveUser( user );
+
+        userDao.updateUserType( user ); // update user type since postgres
+                                        // default it to ADMIN even if seeker or
+                                        // employer.
+        // Remove all the session attributes when done
+        status.setComplete();
+
+        return "redirect:login.html";
+    }
+    
 }
