@@ -17,6 +17,9 @@ import org.hibernate.annotations.Type;
 public class JobSeeker extends User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	@OneToMany(mappedBy = "seeker", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private List<Application> applications;
 
 	//jobs applied to
 	@ManyToMany(mappedBy = "usersApplied", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -106,5 +109,12 @@ public class JobSeeker extends User implements Serializable {
 	public void setEmployersReviewed(List<EmployerReview> employersReviewed) {
 		this.employersReviewed = employersReviewed;
 	}
-	
+
+	public List<Application> getApplications() {
+		return applications;
+	}
+
+	public void setApplications(List<Application> applications) {
+		this.applications = applications;
+	}
 }

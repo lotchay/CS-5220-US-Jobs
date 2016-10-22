@@ -9,6 +9,7 @@ create sequence hibernate_sequence minvalue 80;
         phone_number varchar(255),
         job_id int4,
         resume_id int4,
+        seeker_id int4,
         primary key (app_id)
     );
 
@@ -123,6 +124,11 @@ create sequence hibernate_sequence minvalue 80;
         add constraint FKbhnfs5wwy14wdm2f1wam8qkhf
         foreign key (resume_id)
         references resumes;
+    
+    alter table applications 
+        add constraint FKbipd4utha945ggyvtsyair097 
+        foreign key (seeker_id) 
+        references users;
 
     alter table authorities
         add constraint FKk91upmbueyim93v469wj7b2qh
