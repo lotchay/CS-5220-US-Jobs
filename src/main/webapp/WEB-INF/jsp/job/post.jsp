@@ -129,7 +129,7 @@
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>
-						<security:authorize access="hasRole('SEEKER') or hasRole('ADMIN')">
+						<security:authorize access="hasRole('SEEKER')">
 						<c:choose>
 							<c:when test="${currentUser.jobsReviewed.contains(jobPosting)}">
 								<button class="btn btn-danger" disabled>
