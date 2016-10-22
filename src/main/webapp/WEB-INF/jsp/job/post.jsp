@@ -101,7 +101,7 @@
 					<h4>
 						<strong>Salary</strong>
 					</h4>
-					<p>${jobPosting.salary }</p>
+						<p>$${jobPosting.salary }</p>
 					<h4>
 						<strong>Website</strong>
 					</h4>
