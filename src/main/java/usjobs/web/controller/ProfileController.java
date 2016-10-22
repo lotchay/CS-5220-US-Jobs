@@ -75,14 +75,14 @@ public class ProfileController {
 		return "redirect:profile.html?id=" + employerId;
 	}
 
-	@RequestMapping(value = "/user/deleteJob.html", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/deleteJob.html", method = RequestMethod.GET)
 	public String deleteJob(@RequestParam int employerId, @RequestParam int jobId) {
 		JobPosting jobPosting = jobPostingDao.getJobPosting(jobId);
 		jobPostingDao.delete(jobPosting);
 		return "redirect:profile.html?id=" + employerId;
 	}
 	
-	@RequestMapping(value = "/user/toggleJob.html", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/toggleJob.html", method = RequestMethod.GET)
 	public String toggleJob(@RequestParam int employerId, @RequestParam int jobId) {
 		JobPosting jobPosting = jobPostingDao.getJobPosting(jobId);
 		boolean isOpened = jobPosting.isOpened();

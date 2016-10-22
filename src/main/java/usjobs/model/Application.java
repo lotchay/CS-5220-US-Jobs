@@ -26,7 +26,11 @@ public class Application implements Serializable {
 
 	@Column(name = "first_name")
 	private String firstName;
-
+	
+	@ManyToOne
+	@JoinColumn(name = "seeker_id")
+	private JobSeeker seeker;
+	
 	@Column(name = "last_name")
 	private String lastName;
 
@@ -111,4 +115,11 @@ public class Application implements Serializable {
 		this.resume = resume;
 	}
 
+	public JobSeeker getSeeker() {
+		return seeker;
+	}
+
+	public void setSeeker(JobSeeker seeker) {
+		this.seeker = seeker;
+	}
 }

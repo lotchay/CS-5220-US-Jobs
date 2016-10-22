@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -33,27 +34,28 @@
 		<div id="detail" class="col col-md-6">
 			<div id="viewProfileDetail" class="panel panel-info">
 				<div class="panel-heading">
-					<h3 class="panel-title">View ${user.firstName} ${user.lastName }'s Profile</h3>
+					<h3 class="panel-title">View ${user.firstName} ${user.lastName }'s
+						Profile</h3>
 				</div>
 				<div class="panel-body">
 					<table class="table table-striped table-hover">
-				        <tr>
-				            <th>ID</th>
-				            <th>Username</th>
-				            <th>First Name</th>
-				            <th>Last Name</th>
-				            <th>Email</th>
-				            <th>Password</th>
-				        </tr>
-				        <tr>
-				            <td>${user.id}</td>
-				            <td>${user.username}</td>
-				            <td>${user.firstName}</td>
-				            <td>${user.lastName}</td>
-				            <td>${user.email}</td>
-				            <td>${user.password}</td>            
-				        </tr>
-				    </table>
+						<tr>
+							<th>ID</th>
+							<th>Username</th>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Email</th>
+							<th>Password</th>
+						</tr>
+						<tr>
+							<td>${user.id}</td>
+							<td>${user.username}</td>
+							<td>${user.firstName}</td>
+							<td>${user.lastName}</td>
+							<td>${user.email}</td>
+							<td>${user.password}</td>
+						</tr>
+					</table>
 				</div>
 			</div>
 			<div id="profileDetail" class="panel panel-info">
@@ -175,7 +177,8 @@
 							</div>
 							<div class="form-group">
 								<div class="col-lg-10 col-lg-offset-2">
-									<a href="<c:url value='/user/profile.html' />" class="btn btn-default">Cancel</a>
+									<a href="<c:url value='/user/profile.html' />"
+										class="btn btn-default">Cancel</a>
 									<button type="submit" class="btn btn-primary">Submit</button>
 								</div>
 							</div>
@@ -196,39 +199,30 @@
 						<c:forEach items="${user.jobsPosted}" var="jobPosting">
 							<tr>
 								<td>${jobPosting.jobTitle }</td>
-								<td>
-									<form class="form-btn-container"
-										action="toggleJob.html?employerId=${user.id}&jobId=${jobPosting.id }"
-										method="post">
-										<c:choose>
-											<c:when test="${jobPosting.opened}">
-												<button type="submit" class="btn btn-sm btn-warning">
-													<i class="fa fa-level-down" aria-hidden="true"></i>&nbsp;&nbsp;Close
-												</button>
-											</c:when>
-											<c:otherwise>
-												<button type="submit" class="btn btn-sm btn-info">
-													<i class="fa fa-level-up" aria-hidden="true"></i>&nbsp;&nbsp;
-													Open
-												</button>
-											</c:otherwise>
-										</c:choose>
-									</form>
-									<form class="form-btn-container" action="editJob.html"
-										method="get">
-										<input type="hidden" name="employerId" value="3" /> <input
-											type="hidden" name="jobId" value="${jobPosting.id }" />
-										<button type="submit" class="btn btn-sm btn-success">
-											<i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Edit
-										</button>
-									</form>
-
-									<form class="form-btn-container"
-										action="deleteJob.html?employerId=${user.id}&jobId=${jobPosting.id }"
-										method="post">
-										<button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-times-circle"></i>&nbsp;&nbsp;Delete</button>
-									</form>
-								</td>
+								<td><c:choose>
+										<c:when test="${jobPosting.opened}">
+											<a
+												href="toggleJob.html?employerId=${user.id}&jobId=${jobPosting.id }"
+												role="button" class="btn btn-sm btn-warning"> <i
+												class="fa fa-level-down" aria-hidden="true"></i>&nbsp;&nbsp;Close
+											</a>
+										</c:when>
+										<c:otherwise>
+											<a
+												href="toggleJob.html?employerId=${user.id}&jobId=${jobPosting.id }"
+												role="button" class="btn btn-sm btn-info"> <i
+												class="fa fa-level-up" aria-hidden="true"></i>&nbsp;&nbsp;
+												Open
+											</a>
+										</c:otherwise>
+									</c:choose> <a href="editJob.html?employerId=${user.id}&jobId=${jobPosting.id}" role="button"
+									class="btn btn-sm btn-success"> <i
+										class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Edit
+								</a> <a
+									href="deleteJob.html?employerId=${user.id}&jobId=${jobPosting.id }"
+									role="button" class="btn btn-sm btn-danger"> <i
+										class="fa fa-times-circle"></i>&nbsp;&nbsp;Delete
+								</a></td>
 							</tr>
 						</c:forEach>
 					</table>
