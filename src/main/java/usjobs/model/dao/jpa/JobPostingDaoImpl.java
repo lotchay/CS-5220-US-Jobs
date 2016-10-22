@@ -23,8 +23,8 @@ public class JobPostingDaoImpl implements JobPostingDao {
 	}
 	
 	@Override
-	public List<JobPosting> getOpenedJobPostings() {
-		String query = "From JobPosting where opened = true";
+	public List<JobPosting> getPublicJobPostings() {
+		String query = "From JobPosting where enabled = true AND opened = true";
 		return em.createQuery(query, JobPosting.class).getResultList();
 	}
 	
@@ -35,7 +35,7 @@ public class JobPostingDaoImpl implements JobPostingDao {
 	}
 	
 	@Override
-	public List<JobPosting> getJobPostings(int id) {
+	public List<JobPosting> getEmployerJobPostings(int id) {
 		String query = "FROM JobPosting WHERE employer_id = :id";
 		return em.createQuery(query, JobPosting.class)
 				.setParameter("id", id)
@@ -57,7 +57,7 @@ public class JobPostingDaoImpl implements JobPostingDao {
 	
 	@Override
 	public List<JobPosting> searchJobs(String searchTerm, String searchLoc) {
-		String query = "FROM JobPosting j WHERE j.opened = true AND UPPER(j.jobTitle) LIKE ?1 "
+		String query = "FROM JobPosting j WHERE j.enabled = true and j.opened = true AND UPPER(j.jobTitle) LIKE ?1 "
 				+ "AND UPPER(j.location) like ?2";
 		return em.createQuery(query, JobPosting.class)
 				.setParameter(1, "%" + searchTerm.toUpperCase() + "%")
@@ -78,7 +78,7 @@ public class JobPostingDaoImpl implements JobPostingDao {
 		int salary = Integer.parseInt(searchTerm);
 		int bottomRange = salary - 10000;
 		int topRange = salary + 10000;
-		String query = "FROM JobPosting j WHERE j.opened = true AND (j.salary) BETWEEN " + bottomRange + " AND " + topRange
+		String query = "FROM JobPosting j WHERE j.enabled = true and j.opened = true AND (j.salary) BETWEEN " + bottomRange + " AND " + topRange
 				+ "AND UPPER(j.location) like ?2";
 		return em.createQuery(query, JobPosting.class)
 				.setParameter(2, "%" + searchLoc.toUpperCase() + "%")

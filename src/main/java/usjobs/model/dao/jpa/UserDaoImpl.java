@@ -76,7 +76,7 @@ public class UserDaoImpl implements UserDao  {
 	@Override
 	public List<User> searchUsers( String searchTerm, String searchLoc ) {
 	    
-		String query = "FROM User u WHERE UPPER(u.username) LIKE ?1 "
+		String query = "FROM User u WHERE UPPER(u.username) LIKE ?1 AND u.enabled=true "
 				+ "AND (UPPER(u.address.state) like ?2 OR UPPER(u.address.city) like ?2 OR u.address.zip like ?2)";
 		
 		return entityManager.createQuery(query, User.class)
@@ -88,7 +88,7 @@ public class UserDaoImpl implements UserDao  {
 	@Override
 	public List<User> searchSeekers( String searchTerm, String searchLoc ) {
 	    
-		String query = "From User u WHERE UPPER(u.currentJobTitle) LIKE ?1 OR u.experience LIKE ?1 "
+		String query = "From User u WHERE UPPER(u.currentJobTitle) LIKE ?1 OR u.experience LIKE ?1 AND u.enabled = true"
 				+ "AND (UPPER(u.address.state) like ?2 OR UPPER(u.address.city) like ?2 OR u.address.zip like ?2)";
 		
 		return entityManager.createQuery(query, User.class)
