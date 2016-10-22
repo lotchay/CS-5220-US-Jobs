@@ -48,7 +48,7 @@ public class User implements Serializable {
     private String password2;
 
     @Column(nullable = false)
-    private boolean enabled = true;
+    private boolean enabled;
 
     private boolean reported;
 
@@ -81,6 +81,8 @@ public class User implements Serializable {
     private List<String> phones;
 
     public User() {
+        
+        enabled = true;
         userRoles = new HashSet<String>();
     }
     

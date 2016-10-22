@@ -38,6 +38,7 @@ public class UserDaoImpl implements UserDao  {
 					.createQuery(query, User.class)
 					.setParameter("username", username)
 					.getSingleResult();
+			
 		} catch(NoResultException e) {
 			user = null; //did't find a user.
 		}
@@ -57,6 +58,7 @@ public class UserDaoImpl implements UserDao  {
 					.createQuery(query, User.class)
 					.setParameter("username", username)
 					.getSingleResult();
+			
 		} catch(NoResultException e) {
 			user = null; //did't find a user.
 		}
@@ -67,13 +69,16 @@ public class UserDaoImpl implements UserDao  {
 	@Override
 	public List<User> getUsers() {
 		
-		return entityManager.createQuery( "from User order by id", User.class ).getResultList();
+		return entityManager.createQuery( "from User order by id", User.class )
+		    .getResultList();
 	}
 	
 	@Override
-	public List<User> searchUsers(String searchTerm, String searchLoc){
+	public List<User> searchUsers( String searchTerm, String searchLoc ) {
+	    
 		String query = "FROM User u WHERE UPPER(u.username) LIKE ?1 "
 				+ "AND (UPPER(u.address.state) like ?2 OR UPPER(u.address.city) like ?2 OR u.address.zip like ?2)";
+		
 		return entityManager.createQuery(query, User.class)
 				.setParameter(1, "%" + searchTerm.toUpperCase() + "%")
 				.setParameter(2, "%" + searchLoc.toUpperCase() + "%")
@@ -81,9 +86,11 @@ public class UserDaoImpl implements UserDao  {
 	}
 	
 	@Override
-	public List<User> searchSeekers(String searchTerm, String searchLoc){
+	public List<User> searchSeekers( String searchTerm, String searchLoc ) {
+	    
 		String query = "From User u WHERE UPPER(u.currentJobTitle) LIKE ?1 OR u.experience LIKE ?1 "
 				+ "AND (UPPER(u.address.state) like ?2 OR UPPER(u.address.city) like ?2 OR u.address.zip like ?2)";
+		
 		return entityManager.createQuery(query, User.class)
 				.setParameter(1, "%" + searchTerm.toUpperCase() + "%")
 				.setParameter(2, "%" + searchLoc.toUpperCase() + "%")
@@ -95,8 +102,7 @@ public class UserDaoImpl implements UserDao  {
 	public User saveUser( User user ) {
 		
 		return entityManager.merge( user );
-	}	
-	
+	}		
 
 	@Override
 	@Transactional
