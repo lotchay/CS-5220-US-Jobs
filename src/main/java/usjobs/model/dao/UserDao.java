@@ -22,4 +22,5 @@ public interface UserDao {
 	
 	User saveProfileUser( User user );
 	
+	int updateUserType(User user);
 }

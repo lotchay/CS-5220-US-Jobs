@@ -41,7 +41,7 @@ public class User implements Serializable {
 
     @Column(nullable = false)
     private String password;
-
+    
     // This field is used to validate password during registration.
     // It is not stored in the database
     @Transient
