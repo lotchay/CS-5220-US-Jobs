@@ -101,7 +101,8 @@
 					<h4>
 						<strong>Salary</strong>
 					</h4>
-					<p>${jobPosting.salary }</p>
+						<p><fmt:setLocale value="en_US"/>
+						<fmt:formatNumber value="${jobPosting.salary }" type="currency"/></p>
 					<h4>
 						<strong>Website</strong>
 					</h4>
@@ -117,7 +118,6 @@
 					<h3 class="panel-title"><i class="fa fa-industry" aria-hidden="true"></i>&nbsp;&nbsp;Job Reviews</h3>
 				</div>
 				<div class="panel-body">
-					<security:authorize access="hasRole('SEEKER') or hasRole('ADMIN')">
 						<c:choose>
 							<c:when test="${empty jobPosting.jobReviews}">
 								<h4>There are no reviews for this job.</h4>
@@ -129,6 +129,7 @@
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>
+						<security:authorize access="hasRole('SEEKER') or hasRole('ADMIN')">
 						<c:choose>
 							<c:when test="${currentUser.jobsReviewed.contains(jobPosting)}">
 								<button class="btn btn-danger" disabled>

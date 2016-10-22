@@ -18,6 +18,8 @@
 	<div class="row animated fadeIn">
 		<div class="col col-md-2 col-md-offset-2">
 			<ul id="options-list" class="list-group">
+				<li id="viewProfile" class="list-group-item"><a href="#">View
+						Profile</a></li>
 				<li id="profile" class="list-group-item"><a href="#">Update
 						Profile</a></li>
 				<li id="company" class="list-group-item"><a href="#">Company
@@ -29,6 +31,31 @@
 			</ul>
 		</div>
 		<div id="detail" class="col col-md-6">
+			<div id="viewProfileDetail" class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">View ${user.firstName} ${user.lastName }'s Profile</h3>
+				</div>
+				<div class="panel-body">
+					<table class="table table-striped table-hover">
+				        <tr>
+				            <th>ID</th>
+				            <th>Username</th>
+				            <th>First Name</th>
+				            <th>Last Name</th>
+				            <th>Email</th>
+				            <th>Password</th>
+				        </tr>
+				        <tr>
+				            <td>${user.id}</td>
+				            <td>${user.username}</td>
+				            <td>${user.firstName}</td>
+				            <td>${user.lastName}</td>
+				            <td>${user.email}</td>
+				            <td>${user.password}</td>            
+				        </tr>
+				    </table>
+				</div>
+			</div>
 			<div id="profileDetail" class="panel panel-info">
 				<div class="panel-heading">
 					<h3 class="panel-title">Update Profile</h3>
