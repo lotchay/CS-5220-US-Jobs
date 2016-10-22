@@ -50,9 +50,10 @@
 								</button>
 							</c:when>
 							<c:otherwise>
-								<form class="form-btn-container" method="post"
-									action="apply.html?jobid=${jobPosting.id}">
-									<button type="submit" id="apply" class="btn btn-info">Apply</button>
+								<form class="form-btn-container" action="apply.html" method="get">
+									<input type="hidden" name="jobId" value="${jobPosting.id }" />
+									<input type="hidden" name="seekerId" value="${currentUser.id }"/>
+									<button type="submit" id="apply" class="btn btn-info" >Apply</button>
 								</form>
 							</c:otherwise>
 						</c:choose>
@@ -100,13 +101,53 @@
 					<h4>
 						<strong>Salary</strong>
 					</h4>
-					<p>${jobPosting.salary }</p>
+						<p><fmt:setLocale value="en_US"/>
+						<fmt:formatNumber value="${jobPosting.salary }" type="currency"/></p>
 					<h4>
 						<strong>Website</strong>
 					</h4>
 					<p>
 						<a target="_blank" href="http://${jobPosting.website }">${jobPosting.website }</a>
 					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-8 col-md-offset-2">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title"><i class="fa fa-industry" aria-hidden="true"></i>&nbsp;&nbsp;Job Reviews</h3>
+				</div>
+				<div class="panel-body">
+						<c:choose>
+							<c:when test="${empty jobPosting.jobReviews}">
+								<h4>There are no reviews for this job.</h4>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${jobPosting.jobReviews }" var="review">
+									<h3>${review.userPosted.username}</h3>
+									<h4>${review.jobReview }</h4>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+						<security:authorize access="hasRole('SEEKER') or hasRole('ADMIN')">
+						<c:choose>
+							<c:when test="${currentUser.jobsReviewed.contains(jobPosting)}">
+								<button class="btn btn-danger" disabled>
+									<i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Reviewed
+								</button>
+							</c:when>
+							<c:otherwise>
+								<div class="col-lg-10">
+									<textarea class="form-control"
+										rows="4" id="reviewText" placeholder="Write your review here."></textarea>
+								</div>
+								<form class="form-btn-container" method="post"
+									action="review.html?jobid=${jobPosting.id}">
+									<button type="reset" id="review" class="btn btn-warning">Review</button>
+								</form>
+							</c:otherwise>
+						</c:choose>
+					</security:authorize>
 				</div>
 			</div>
 		</div>

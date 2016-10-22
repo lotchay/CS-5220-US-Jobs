@@ -19,7 +19,7 @@
 			<p>We all go to college in the hopes of landing good and
 				high-paying jobs. Unfortunately, there are too many job websites out
 				there such as Monster and CareerBuilder that mostly contain
-				employment agencies’ listings designed to pool for candidates
+				employment agencies listings designed to pool for candidates
 				instead of bonafide employers listing real job openings. There are
 				just too many unemployed recent college grads. Therefore, we want to
 				create a website where recent college grads and college students can

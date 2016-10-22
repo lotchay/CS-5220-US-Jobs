@@ -120,11 +120,19 @@ public class JobController {
 	}
 
 	@RequestMapping(value = "/job/apply.html", method = RequestMethod.POST)
-	public String addApplied(@RequestParam int jobid) {
-		JobPosting jobPosting = jobPostingDao.getJobPosting(jobid);
+	public String addApplied(@RequestParam int jobId) {
+		JobPosting jobPosting = jobPostingDao.getJobPosting(jobId);
 		User user = userDao.getProfileUser(Security.getUserDetails().getUsername());
 		jobPosting.addUsersApplied(user);
 		jobPostingDao.jobFavoritedOrApplied(jobPosting);
-		return "redirect:view.html?jobid=" + jobid;
+		return "redirect:view.html?jobid=" + jobId;
+	}
+	
+	@RequestMapping(value="/job/apply.html", method = RequestMethod.GET)
+	public String apply(@RequestParam int jobId, @RequestParam int seekerId, ModelMap models){
+		JobPosting jobPosting = jobPostingDao.getJobPosting(jobId);
+		User user = userDao.getProfileUser(Security.getUserDetails().getUsername());
+		models.put("applyJob", user);
+		return "job/apply";
 	}
 }

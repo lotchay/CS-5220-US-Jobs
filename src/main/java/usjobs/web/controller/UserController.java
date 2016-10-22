@@ -1,8 +1,6 @@
 package usjobs.web.controller;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -74,7 +72,6 @@ public class UserController {
 
         // Allow admin user to add other admin users
         user.getUserRoles().add( "ROLE_ADMIN" );
-        user.setEnabled( true );
 
         // Save the user to database
         user = userDao.saveUser( user );
@@ -96,23 +93,7 @@ public class UserController {
 
     @RequestMapping(value = "/user/edit.html", method = RequestMethod.POST)
     public String edit( @ModelAttribute User user, SessionStatus status ) {
-
-    	// Save the user's role to database
-    	/*switch(roleType){
-    		case "SEEKER":
-    			user.getUserRoles().clear();
-    			user = userDao.saveUser(user);
-    			user.getUserRoles().add( "ROLE_SEEKER" );
-    			break;
-    		case "EMPLOYER":
-    			user.getUserRoles().clear();
-    			user = userDao.saveUser(user);
-    			user.getUserRoles().add( "ROLE_EMPLOYER" );
-    			break;
-    		default:
-    			break;
-    	}*/
-    	
+   	
         // Save the user to database
         user = userDao.saveUser( user );
 
@@ -124,13 +105,13 @@ public class UserController {
     }
     
     @RequestMapping(value = "/user/disable.html", method = RequestMethod.GET)
-    public String disable(@RequestParam Integer id, ModelMap models) {
+    public String disable( @RequestParam Integer id, ModelMap models ) {
     	
     	// Disable the user
-    	userDao.getUser(id).setEnabled(false);
+    	userDao.getUser( id ).setEnabled( false );
     	
     	// Save the user to database
-        userDao.saveUser(userDao.getUser(id));
+        userDao.saveUser( userDao.getUser( id ) );
 
         // Get all users from database and pass them to JSP
         List<User> users = userDao.getUsers();
@@ -141,13 +122,13 @@ public class UserController {
     }
     
     @RequestMapping(value = "/user/enable.html", method = RequestMethod.GET)
-    public String enable(@RequestParam Integer id, ModelMap models) {
+    public String enable( @RequestParam Integer id, ModelMap models ) {
     	
     	// Disable the user
-    	userDao.getUser(id).setEnabled(true);
+    	userDao.getUser( id ).setEnabled( true );
     	
     	// Save the user to database
-        userDao.saveUser(userDao.getUser(id));
+        userDao.saveUser( userDao.getUser( id ) );
 
         // Get all users from database and pass them to JSP
         List<User> users = userDao.getUsers();
@@ -177,8 +158,6 @@ public class UserController {
             
             return "register";         
         }
-
-        user.setEnabled( true );
 
         // Save the user to database
         user = userDao.saveUser( user );
