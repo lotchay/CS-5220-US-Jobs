@@ -303,3 +303,11 @@ create sequence hibernate_sequence minvalue 80;
             The YouTube team helps budding creators build careers, creates products like YouTube Kids, YouTube Music, and YouTube Gaming, and engages
             communities around shared passions and global conversations. Together, we empower the world to create, broadcast, and share.',
             'Head of Content Operations, YouTube', 'Los Angeles, TX', 'kelly@google.com', 'Kelly', 'HR', 'Smith', '999-955-5555', 88888, 'www.google.com', 3);
+	
+	insert into job_postings (enabled, opened, job_id, date_closed, date_posted, job_description, job_title, location, contact_email, contact_first_name, contact_title, contact_last_name, contact_phone, salary, website, employer_id)
+	  values (true, true, 5, null, null, 'Office administrator is responsible for many operations of the company. The individual must be able to diversity his or herself among many different tasks for the company. 
+			This position entails working in our accounting software doing basic accounting tasks such as accounts payable, invoicing, entering bills, some accounts receivable, collecting credit card payments from 
+			customers, collection calls, processing orders for sales, data entry, filing, answering phones, gathering data for projects and ensuring all information is complete before passing on to the design team, 
+			restocking files, some office manager duties, and other various clerical tasks. This position includes being the gatekeeper for other departments and shielding unnecessary phone calls for the different 
+			personnel. This position must be proficient in organizational skills, communication, and possess excellent customer services skills.',
+            'Receptionist', 'New York, NY', 'hiring@truss.com', 'John', 'Recruiter', 'Smith', '555-555-5555', 25000, 'www.indeed.com', 3);
