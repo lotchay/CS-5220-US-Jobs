@@ -101,7 +101,8 @@
 					<h4>
 						<strong>Salary</strong>
 					</h4>
-						<p>$${jobPosting.salary }</p>
+						<p><fmt:setLocale value="en_US"/>
+						<fmt:formatNumber value="${jobPosting.salary }" type="currency"/></p>
 					<h4>
 						<strong>Website</strong>
 					</h4>
