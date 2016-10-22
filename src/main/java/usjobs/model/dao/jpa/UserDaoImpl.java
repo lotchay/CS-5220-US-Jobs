@@ -1,6 +1,7 @@
 package usjobs.model.dao.jpa;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -112,4 +113,30 @@ public class UserDaoImpl implements UserDao  {
 		return entityManager.merge( user );
 	}
 	
+	@Override
+	@Transactional
+	public int updateUserType(User user) {
+		/* Helper method to ensure no problems with user_type and inheritance*/
+		Set<String> userRoles = user.getUserRoles();		
+		String type = null;
+		int status = -1; //status = -1 means that no user role was selected, and so
+		// a user will be "ADMIN" by default per the behavior of postgres.
+		
+		if (userRoles.contains("ROLE_SEEKER")) {
+			type = "SEEKER";
+		} else if (userRoles.contains(("ROLE_EMPLOYER"))) {
+			type = "EMPLOYER";
+		}
+		
+		if (type != null) {
+			String query = "UPDATE User SET user_type = :type where id = :id";
+			return entityManager
+					.createQuery(query)
+					.setParameter("type", type)
+					.setParameter("id", user.getId())
+					.executeUpdate();
+		} else {
+			return status;
+		}
+	}
 }
