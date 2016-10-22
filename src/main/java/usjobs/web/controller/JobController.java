@@ -113,7 +113,7 @@ public class JobController {
 		return "job/post";
 	}
 
-	@RequestMapping(value = "/job/favorite.html", method = RequestMethod.POST)
+	@RequestMapping(value = "/job/favorite.html", method = RequestMethod.GET)
 	public String addFavorites(@RequestParam int jobid) {
 		JobPosting jobPosting = jobPostingDao.getJobPosting(jobid);
 		User user = userDao.getProfileUser(Security.getUserDetails().getUsername());
