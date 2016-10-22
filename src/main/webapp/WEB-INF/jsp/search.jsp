@@ -40,7 +40,7 @@
 			<hr />
 			<div class="list-group">
 				<c:forEach items="${searchResultJob}" var="jobPosting">
-					<a href="job/view.html?jobid=${jobPosting.id}"
+					<a href="job/post.html?jobid=${jobPosting.id}"
 						class="list-group-item">
 						<h4 class="list-group-item-heading">${jobPosting.jobTitle}</h4>
 						<h6>${jobPosting.company.employerName}</h6>
