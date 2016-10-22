@@ -114,7 +114,7 @@ public class JobController {
 	}
 
 	@RequestMapping(value = "/job/favorite.html", method = RequestMethod.POST)
-	public String addFavorites(@RequestParam int jobid, @ModelAttribute Application application) {
+	public String addFavorites(@RequestParam int jobid) {
 		JobPosting jobPosting = jobPostingDao.getJobPosting(jobid);
 		User user = userDao.getProfileUser(Security.getUserDetails().getUsername());
 		if (jobPosting.getUsersFavorited().contains(user)) {
@@ -123,7 +123,7 @@ public class JobController {
 			jobPosting.addUsersFavorited(user);
 		}
 		jobPostingDao.jobFavoritedOrApplied(jobPosting);
-		return "redirect:view.html?jobid=" + jobid;
+		return "redirect:post.html?jobid=" + jobid;
 	}
 
 	@RequestMapping(value = "/job/apply.html", method = RequestMethod.GET)
@@ -144,6 +144,7 @@ public class JobController {
 		JobPosting jobPosting = app.getJobApplied();
 		jobPosting.addUsersApplied(userDao.getProfileUser(Security.getUserDetails().getUsername()));
 		jobPostingDao.jobFavoritedOrApplied(jobPosting);
+		session.setComplete();
 		return "redirect:post.html?jobid=" + application.getJobApplied().getId();
 	}
 }
