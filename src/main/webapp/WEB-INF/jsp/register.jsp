@@ -18,7 +18,8 @@
 		<div class="col col-md-6 col-md-offset-3">
 			<div class="panel panel-info">
 				<div class="panel-heading">
-					<h3 class="panel-title">Register</h3>
+					<h3 class="panel-title"><i
+							class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;&nbsp;Register</h3>
 				</div>
 				<div class="panel-body">
 					<form:form class="form-horizontal" modelAttribute="user">

@@ -15,51 +15,65 @@
 <body>
 	<jsp:include page="../header.jsp" />
 	<div class="row animated fadeIn">
-		<div class="col col-md-2 col-md-offset-2">
-			<ul id="options-list" class="list-group">
-				<li id="viewProfile" class="list-group-item"><a href="#">View
-						Profile</a></li>
-				<li id="profile" class="list-group-item"><a href="#">Update
-						Profile</a></li>
-				<li id="resume" class="list-group-item"><a href="#">Resumes</a></li>
-				<li id="appJobs" class="list-group-item"><a href="#">Applied
-						Jobs</a></li>
-				<li id="favJobs" class="list-group-item"><a href="#">Favorited
-						Jobs</a></li>
-			</ul>
+		<div id="options-list" class="list-group col col-md-2 col-md-offset-2">
+
+			<a id="viewProfile" class="list-group-item" href="#"><i
+				class="fa fa-address-card" aria-hidden="true"></i>&nbsp;&nbsp;View
+				Profile</a><a id="profile" class="list-group-item" href="#"><i
+				class="fa fa-adjust" aria-hidden="true"></i>&nbsp;&nbsp;Update
+				Profile</a> <a id="resume" class="list-group-item" href="#"><i
+				class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;&nbsp;Resumes</a>
+			<a id="appJobs" class="list-group-item" href="#"> <i
+				class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Applied
+				Jobs
+			</a> <a id="favJobs" class="list-group-item" href="#"><i
+				class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;Favorited Jobs</a>
 		</div>
 		<div id="detail" class="col col-md-6">
 			<div id="viewProfileDetail" class="panel panel-info">
 				<div class="panel-heading">
-					<h3 class="panel-title">View ${user.firstName} ${user.lastName }'s Profile</h3>
+					<h3 class="panel-title">
+						<i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;View
+						${user.firstName }'s profile
+					</h3>
 				</div>
 				<div class="panel-body">
-					<table class="table table-striped table-hover">
-				        <tr>
-				            <th>ID</th>
-				            <th>Username</th>
-				            <th>First Name</th>
-				            <th>Last Name</th>
-				            <th>Email</th>
-				            <th>Password</th>
-				        </tr>
-				        <tr>
-				            <td>${user.id}</td>
-				            <td>${user.username}</td>
-				            <td>${user.firstName}</td>
-				            <td>${user.lastName}</td>
-				            <td>${user.email}</td>
-				            <td>${user.password}</td>            
-				        </tr>
-				    </table>
+					<h4>
+						<strong>Id</strong>
+					</h4>
+					<p>${user.id }</p>
+					<h4>
+						<strong>Username</strong>
+					</h4>
+					<p>${user.username }</p>
+					<h4>
+						<strong>First Name</strong>
+					</h4>
+					<p>${user.firstName }</p>
+					<h4>
+						<strong>Last Name</strong>
+					</h4>
+					<p>${user.lastName}</p>
+					<h4>
+						<strong>Email</strong>
+					</h4>
+					<p>${user.email }</p>
+					<h4>
+						<strong>Password</strong>
+					</h4>
+					<p>${user.password }</p>
 				</div>
 			</div>
 			<div id="profileDetail" class="panel panel-info">
 				<div class="panel-heading">
-					<h3 class="panel-title">Update Profile</h3>
+					<h3 class="panel-title">
+						<i class="fa fa-adjust" aria-hidden="true"></i>&nbsp;&nbsp;Update
+						Profile
+					</h3>
 				</div>
 				<div class="panel-body">
-					<form class="form-horizontal">
+					<form action="editProfile.html" method="post"
+						class="form-horizontal">
 						<fieldset>
 							<div class="form-group">
 								<label for="username" class="col-lg-2 control-label">Username</label>
@@ -71,43 +85,74 @@
 							<div class="form-group">
 								<label for="inputPassword" class="col-lg-2 control-label">Password</label>
 								<div class="col-lg-10">
-									<input type="password" class="form-control" id="inputPassword"
+									<input type="password" name="password" class="form-control"
+										id="inputPassword" value="${user.password }"
 										placeholder="Password">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="email" class="col-lg-2 control-label">Email</label>
 								<div class="col-lg-10">
-									<input type="email" class="form-control" id="email"
-										placeholder="email">
+									<input type="email" name="email" class="form-control"
+										id="email" placeholder="email" value="${user.email }">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="address" class="col-lg-2 control-label">Address</label>
+								<label for="street" class="col-lg-2 control-label">Street</label>
 								<div class="col-lg-10">
-									<input type="text" class="form-control" id="address"
-										placeholder="address">
+									<input type="text" name="street" class="form-control"
+										id="street" placeholder="Street"
+										value="${user.address.street}">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="phone" class="col-lg-2 control-label">Phone</label>
+								<label for="city" class="col-lg-2 control-label">City</label>
 								<div class="col-lg-10">
-									<input type="number" class="form-control" id="phone"
-										placeholder="Phone #">
+									<input type="text" name="city" class="form-control" id="city"
+										placeholder="City" value="${user.address.city }">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="state" class="col-lg-2 control-label">State</label>
+								<div class="col-lg-10">
+									<input type="text" name="state" class="form-control" id="state"
+										placeholder="State" value="${user.address.state }">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="zip" class="col-lg-2 control-label">Zip</label>
+								<div class="col-lg-10">
+									<input type="text" name="zip" class="form-control" id="zip"
+										placeholder="Zip code" value="${user.address.zip }">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-lg-2 control-label">Contact Sharing</label>
 								<div class="col-lg-10">
 									<div class="radio">
-										<label> <input type="radio" name="contact-sharing"
-											id="enableSharing" value="option1" checked="">
-											Enabled
+										<label> <c:choose>
+												<c:when test="${!user.supressContact }">
+													<input type="radio" checked name="supress"
+														id="enableSharing" value="false">
+												</c:when>
+												<c:otherwise>
+													<input type="radio" name="supress" id="enableSharing"
+														value="false">
+												</c:otherwise>
+											</c:choose> Enabled
 										</label>
 									</div>
 									<div class="radio">
-										<label> <input type="radio" name="contact-sharing"
-											id="disableSharing" value="option2"> Disabled
+										<label> <c:choose>
+												<c:when test="${user.supressContact }">
+													<input type="radio" checked name="supress"
+														id="disableSharing" value="true">
+												</c:when>
+												<c:otherwise>
+													<input type="radio" name="supress" id="disableSharing"
+														value="true">
+												</c:otherwise>
+											</c:choose> Disabled
 										</label>
 									</div>
 								</div>
@@ -124,13 +169,19 @@
 			</div>
 			<div id="resumeDetail" class="panel panel-info">
 				<div class="panel-heading">
-					<h3 class="panel-title">Resume (s)</h3>
+					<h3 class="panel-title">
+						<i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;&nbsp;Resume
+						(s)
+					</h3>
 				</div>
 				<div class="panel-body">TODO</div>
 			</div>
 			<div id="appJobsDetail" class="panel panel-info">
 				<div class="panel-heading">
-					<h3 class="panel-title">Jobs Applied</h3>
+					<h3 class="panel-title">
+						<i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Jobs
+						Applied
+					</h3>
 				</div>
 				<div class="panel-body">
 					<div class="panel-body">
@@ -143,7 +194,7 @@
 							</tr>
 							<c:forEach items="${user.appliedJobs}" var="appliedJob">
 								<tr>
-									<td>${appliedJob.jobTitle}</td>									
+									<td>${appliedJob.jobTitle}</td>
 									<td>${appliedJob.salary}</td>
 									<td>${appliedJob.location}</td>
 									<td>${appliedJob.website}</td>
@@ -155,7 +206,10 @@
 			</div>
 			<div id="favJobsDetail" class="panel panel-info">
 				<div class="panel-heading">
-					<h3 class="panel-title">Jobs Favorited</h3>
+					<h3 class="panel-title">
+						<i class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;Jobs
+						Favorited
+					</h3>
 				</div>
 				<div class="panel-body">
 					<div class="panel-body">

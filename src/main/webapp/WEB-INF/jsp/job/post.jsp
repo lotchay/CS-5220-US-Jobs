@@ -69,9 +69,9 @@
 								</a>
 							</c:when>
 							<c:otherwise>
-								<a href="favorite.html?jobid=${jobPosting.id}"
-									role="button" id="favorite" class="btn btn-warning">
-									<i class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;Favorite
+								<a href="favorite.html?jobid=${jobPosting.id}" role="button"
+									id="favorite" class="btn btn-warning"> <i
+									class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;Favorite
 								</a>
 							</c:otherwise>
 						</c:choose>
@@ -150,7 +150,9 @@
 								</div>
 								<form class="form-btn-container" method="post"
 									action="review.html?jobid=${jobPosting.id}">
-									<button type="reset" id="review" class="btn btn-warning">Review</button>
+									<button type="reset" id="review" class="btn btn-warning">
+										<i class="fa fa-paper-plane-o" aria-hidden="true"></i>&nbsp;&nbsp;Review
+									</button>
 								</form>
 							</c:otherwise>
 						</c:choose>

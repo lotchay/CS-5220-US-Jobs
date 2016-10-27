@@ -16,10 +16,13 @@
 <body>
 	<jsp:include page="../header.jsp" />
 	<div class="animated fadeIn row">
-		<div class="col col-md-4 col-md-offset-4">
-			<div class="panel panel-info">
+		<div class="col col-md-6 col-md-offset-3">
+			<div class="panel panel-success">
 				<div class="panel-heading">
-					<h3 class="panel-title">Edit Job</h3>
+					<h3 class="panel-title">
+						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Edit
+						Job
+					</h3>
 				</div>
 				<div class="panel-body">
 					<form:form modelAttribute="editJob" class="form-horizontal">

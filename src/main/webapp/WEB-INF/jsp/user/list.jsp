@@ -17,7 +17,7 @@
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
-	<div class="col-md-8 col-md-offset-2">
+	<div class="animated fadeIn col-md-8 col-md-offset-2">
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h3 class="panel-title">
