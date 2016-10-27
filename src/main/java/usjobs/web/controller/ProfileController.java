@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+
+import usjobs.model.Address;
 import usjobs.model.Employer;
 import usjobs.model.JobPosting;
 import usjobs.model.JobSeeker;
@@ -21,7 +23,7 @@ import usjobs.model.dao.UserDao;
 import usjobs.util.Security;
 
 @Controller
-@SessionAttributes({"newJob", "editJob"})
+@SessionAttributes({"newJob", "editJob", "user"})
 public class ProfileController {
 	
 	@Autowired
@@ -39,29 +41,48 @@ public class ProfileController {
     public String getProfile(ModelMap models) {
     	UserDetails details = Security.getUserDetails();
     	User user = userDao.getProfileUser(details.getUsername());
+    	models.put("user", user);
     	
     	if (user.isAdmin()) {
     		return "profile/admin";
     	}
     	
     	if (user.isEmployer()) {
-    		Employer employer = (Employer) user;
-    		models.put("user", employer);
     		JobPosting newJob = new JobPosting();
-    		newJob.setCompany(employer);
+    		newJob.setCompany((Employer) user);
     		models.put("newJob", newJob);
     		return "profile/employer";
     	}
     	
     	if (user.isSeeker()){
-    		JobSeeker seeker = (JobSeeker) user;
-    		models.put("user", seeker);
     		return "profile/job-seeker";
     	}
     	
     	//This would protect against some db insertion? mistake that caused this authenticated user to have no role at all.
     	//then just redirect them to home page.
     	return "home.html";
+    }
+    
+    @RequestMapping(value = "/user/editProfile.html", method = RequestMethod.POST)
+    public String editProfile(@RequestParam String password, @RequestParam String email, 
+    		@RequestParam String street, @RequestParam String city, @RequestParam String state,
+    		@RequestParam String zip, @RequestParam String supress
+    		) {
+    	
+    	Address address = new Address(street, city, state, zip);
+    	UserDetails details = Security.getUserDetails();
+    	User user = userDao.getProfileUser(details.getUsername());
+    	
+    	user.setPassword(password);
+    	user.setEmail(email);
+    	user.setAddress(address);
+    	user.setSupressContact(Boolean.parseBoolean(supress));
+    	
+    	userDao.saveProfileUser(user);
+    
+    	//This would protect against some db insertion? mistake that caused this authenticated user to have no role at all.
+    	//then just redirect them to home page.
+    	return "redirect:profile.html";
     }
     
 	@RequestMapping(value = "/user/addJob.html", method = RequestMethod.POST)

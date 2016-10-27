@@ -18,7 +18,8 @@
 		<div class="col col-md-4 col-md-offset-4">
 			<div class="panel panel-info">
 				<div class="panel-heading">
-					<h3 class="panel-title">Login</h3>
+					<h3 class="panel-title"><i
+							class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;&nbsp;Login</h3>
 			
 				</div>
 				<div class="panel-body">
