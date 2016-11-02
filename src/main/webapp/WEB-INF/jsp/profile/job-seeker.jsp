@@ -233,6 +233,10 @@
 				</div>
 			</div>
 		</div>
+		<p>
+            <a class="btn btn-primary" role="button" href="<c:url value='/application/upload.html' />"><i
+               class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;&nbsp; Upload Resume</a>
+         </p>
 	</div>
 </body>
 
