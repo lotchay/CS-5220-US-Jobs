@@ -57,7 +57,7 @@ public class ApplicationController {
         resume.transferTo( new File( getFileDirectory( userId ), 
             resume.getOriginalFilename() ) );
         
-        return "redirect:profile/job-seeker.html";
+        return "redirect:/";
     }
     
     @RequestMapping("/application/download.html")
