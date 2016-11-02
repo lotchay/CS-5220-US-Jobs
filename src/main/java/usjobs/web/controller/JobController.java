@@ -3,12 +3,9 @@ package usjobs.web.controller;
 import java.security.Principal;
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,7 +17,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import usjobs.model.Application;
-import usjobs.model.Employer;
 import usjobs.model.JobPosting;
 import usjobs.model.JobSeeker;
 import usjobs.model.User;
@@ -147,4 +143,5 @@ public class JobController {
 		session.setComplete();
 		return "redirect:post.html?jobid=" + application.getJobApplied().getId();
 	}
+	
 }
