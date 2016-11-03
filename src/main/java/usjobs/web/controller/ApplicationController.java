@@ -65,6 +65,8 @@ public class ApplicationController {
         @RequestParam Integer userId, @RequestParam String filename ) 
             throws IOException {
         
+        response.setHeader( "Content-Disposition", "attachment; filename=" + filename );
+        
         FileInputStream in = new FileInputStream( new File( getFileDirectory( userId ), filename ) );
         
         OutputStream out = response.getOutputStream();
