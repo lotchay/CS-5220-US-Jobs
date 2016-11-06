@@ -198,7 +198,7 @@
 								<th>Upload Date</th>
 								<th></th>
 							</tr>
-							<c:forEach items="${resumes}" var="resume">
+							<c:forEach items="${user.resumes}" var="resume">
 								<tr>
 									<td><a
 										href="<c:url value='/resume/download.html?resumeId=${resume.id }' />"
@@ -228,12 +228,12 @@
 								<th>Date Applied</th>
 								<th></th>
 							</tr>
-							<c:forEach items="${applications}" var="application">
+							<c:forEach items="${user.applications}" var="application">
 								<tr>
 									<td>${application.jobApplied.jobTitle}</td>
 									<td>${application.jobApplied.location }</td>
 									<td><fmt:formatDate type="date" value="${application.dateApplied}" /></td>
-									<td><a href="#" role="button" class="btn btn-success">View Application</a></td>
+									<td><a href="<c:url value='/application/view.html?id=${application.id }' />" role="button" class="btn btn-success">View Application</a></td>
 								</tr>
 							</c:forEach>
 						</table>

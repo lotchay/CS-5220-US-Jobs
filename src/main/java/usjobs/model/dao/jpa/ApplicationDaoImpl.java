@@ -36,6 +36,11 @@ public class ApplicationDaoImpl implements ApplicationDao {
 	}
 	
 	@Override
+	public Application getApplication(int id) {
+		return em.find(Application.class, id);
+	}
+	
+	@Override
 	@Transactional
 	public Application saveApplication(Application application) {
 		return em.merge(application);

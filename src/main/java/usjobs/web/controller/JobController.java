@@ -36,7 +36,7 @@ public class JobController {
 
 	@Autowired
 	private JobPostingDao jobPostingDao;
-	
+
 	@Autowired
 	private ResumeDao resumeDao;
 
@@ -153,5 +153,5 @@ public class JobController {
 		session.setComplete();
 		return "redirect:post.html?jobid=" + application.getJobApplied().getId();
 	}
-	
+
 }

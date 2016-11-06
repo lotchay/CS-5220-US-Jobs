@@ -13,4 +13,6 @@ public interface ApplicationDao {
 	List<Application> getUserApplications(int userId);
 	
 	Application saveApplication(Application application);
+	
+	Application getApplication(int id);
 }

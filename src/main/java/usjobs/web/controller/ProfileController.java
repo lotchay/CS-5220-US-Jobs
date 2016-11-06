@@ -39,12 +39,6 @@ public class ProfileController {
 	UserDao userDao;
 	
 	@Autowired
-	ResumeDao resumeDao;
-	
-	@Autowired
-	ApplicationDao applicationDao;
-	
-	@Autowired
 	JobPostingDao jobPostingDao;
 	
     /**
@@ -70,11 +64,6 @@ public class ProfileController {
     	}
     	
     	if (user.isSeeker()){
-    		int id = user.getId();
-    		List<Resume> resumes = resumeDao.getResumes(id);
-    		List<Application> applications = applicationDao.getUserApplications(id);
-    		models.put("resumes", resumes);
-    		models.put("applications", applications);
     		return "profile/job-seeker";
     	}
     	
