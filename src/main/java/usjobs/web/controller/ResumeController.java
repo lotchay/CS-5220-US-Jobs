@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Date;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import usjobs.model.Resume;
 import usjobs.model.User;
+import usjobs.model.dao.ResumeDao;
 import usjobs.model.dao.UserDao;
 import usjobs.util.Security;
 
@@ -30,6 +33,9 @@ public class ResumeController {
 	
     @Autowired 
     ServletContext context;
+    
+    @Autowired
+    ResumeDao resumeDao;
     
     @Autowired
     UserDao userDao;
@@ -58,9 +64,22 @@ public class ResumeController {
         User user = userDao.getProfileUser( details.getUsername() );
         
         Integer userId = user.getId();
-       
-        resume.transferTo( new File( getFileDirectory( userId ), 
-            resume.getOriginalFilename() ) );
+        
+        File file = new File( getFileDirectory( userId ), 
+                resume.getOriginalFilename() );
+        
+        resume.transferTo( file );
+        
+        if (file.exists()) {
+        	logger.info("file successfully uploaded to path: " + file.getPath());
+        	Resume newResume = new Resume();
+        	newResume.setFileName(file.getPath());
+        	newResume.setUser(user);
+        	newResume.setUploadDate(new Date());
+        	resumeDao.saveResume(newResume);
+        } else {
+        	logger.error("failed to upload file: " + file.getPath());
+        }
         
         return "redirect:/user/profile.html";
     }
