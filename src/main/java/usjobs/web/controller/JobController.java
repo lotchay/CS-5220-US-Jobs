@@ -19,9 +19,11 @@ import org.springframework.web.bind.support.SessionStatus;
 import usjobs.model.Application;
 import usjobs.model.JobPosting;
 import usjobs.model.JobSeeker;
+import usjobs.model.Resume;
 import usjobs.model.User;
 import usjobs.model.dao.ApplicationDao;
 import usjobs.model.dao.JobPostingDao;
+import usjobs.model.dao.ResumeDao;
 import usjobs.model.dao.UserDao;
 import usjobs.util.Security;
 
@@ -33,6 +35,9 @@ public class JobController {
 
 	@Autowired
 	private JobPostingDao jobPostingDao;
+	
+	@Autowired
+	private ResumeDao resumeDao;
 
 	@Autowired
 	private UserDao userDao;
@@ -127,9 +132,11 @@ public class JobController {
 		Application application = new Application();
 		application.setJobApplied(jobPostingDao.getJobPosting(jobId));
 		User user = userDao.getProfileUser(Security.getUserDetails().getUsername());
+		List<Resume> resumes = resumeDao.getResumes(user.getId());
 		if (user.isSeeker()) {
 			application.setSeeker((JobSeeker) user);
 		}
+		models.put("resumes", resumes);
 		models.put("application", application);
 		return "job/apply";
 	}
