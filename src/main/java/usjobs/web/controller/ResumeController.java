@@ -43,16 +43,19 @@ public class ResumeController {
     private File getFileDirectory( Integer userId ) {
 
         String userPath = fileDir.getPath() + userId;
-        logger.info("Path: " + userPath);
+        String fullPath = context.getRealPath(userPath);
         
-        boolean pathCreated = new File( userPath ).mkdirs();
+        logger.info("User Path: " + userPath);
+        logger.info("Full path: " + fullPath);
+        
+        boolean pathCreated = new File( fullPath ).mkdirs();
         
         if (pathCreated) {
         	logger.info("path created");
         } else {
         	logger.info("path not created");
         }
-        return new File( userPath );
+        return new File( fullPath );
     }
     
     @RequestMapping(value = "/resume/upload.html", method = RequestMethod.POST)
