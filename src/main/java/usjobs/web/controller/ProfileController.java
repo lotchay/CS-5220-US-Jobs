@@ -1,7 +1,9 @@
 package usjobs.web.controller;
 
+import java.io.File;
 import java.util.Date;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,8 @@ import usjobs.util.Security;
 @Controller
 @SessionAttributes({"newJob", "editJob", "user"})
 public class ProfileController {
+	
+	Logger logger = Logger.getLogger(ProfileController.class);
 	
 	@Autowired
 	UserDao userDao;
@@ -55,6 +59,9 @@ public class ProfileController {
     	}
     	
     	if (user.isSeeker()){
+    		File resumeDir = new File (ResumeController.fileDir.getPath() + user.getId());
+    		logger.info("Searching for resumes in path: " + resumeDir.getPath());
+    		models.put("names", resumeDir.list());
     		return "profile/job-seeker";
     	}
     	

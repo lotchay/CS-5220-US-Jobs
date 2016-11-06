@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -21,8 +22,12 @@ import usjobs.model.dao.UserDao;
 import usjobs.util.Security;
 
 @Controller
-public class ApplicationController {
-
+public class ResumeController {
+	
+	Logger logger = Logger.getLogger(this.getClass());
+	
+	public static final File fileDir = new File("/WEB-INF/files/user_");
+	
     @Autowired 
     ServletContext context;
     
@@ -30,21 +35,21 @@ public class ApplicationController {
     UserDao userDao;
     
     private File getFileDirectory( Integer userId ) {
+
+        String userPath = fileDir.getPath() + userId;
+        logger.info("Path: " + userPath);
         
-        String path = context.getRealPath( "/WEB-INF/files/user_" + userId );
+        boolean pathCreated = new File( userPath ).mkdirs();
         
-        new File( path ).mkdirs();
-        
-        return new File( path );
+        if (pathCreated) {
+        	logger.info("path created");
+        } else {
+        	logger.info("path not created");
+        }
+        return new File( userPath );
     }
     
-    @RequestMapping(value = "/application/upload.html", method = RequestMethod.GET)
-    public String upload() {
-        
-        return "application/upload";
-    }
-    
-    @RequestMapping(value = "/application/upload.html", method = RequestMethod.POST)
+    @RequestMapping(value = "/resume/upload.html", method = RequestMethod.POST)
     public String upload( @RequestParam MultipartFile resume ) 
         throws IllegalStateException, IOException {
         
@@ -57,10 +62,10 @@ public class ApplicationController {
         resume.transferTo( new File( getFileDirectory( userId ), 
             resume.getOriginalFilename() ) );
         
-        return "redirect:/";
+        return "redirect:/user/profile.html";
     }
     
-    @RequestMapping("/application/download.html")
+    @RequestMapping("/resume/download.html")
     public String download( HttpServletResponse response, 
         @RequestParam Integer userId, @RequestParam String filename ) 
             throws IOException {
