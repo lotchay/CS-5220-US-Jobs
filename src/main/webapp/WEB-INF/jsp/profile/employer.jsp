@@ -250,9 +250,9 @@
 								<td>${jobPosting.jobTitle }</td>
 								<td><a
 									href="<c:url value='/application/jobApplications.html?jobId=${jobPosting.id }' />"
-									role="button" class="btn btn-sm btn-primary">Applications
-								</a>
-								<c:choose>
+									role="button" class="btn btn-sm btn-primary"><i
+										class="fa fa-shopping-basket" aria-hidden="true"></i>&nbsp;&nbsp;Applications
+								</a> <c:choose>
 										<c:when test="${jobPosting.opened}">
 											<a
 												href="toggleJob.html?employerId=${user.id}&jobId=${jobPosting.id }"

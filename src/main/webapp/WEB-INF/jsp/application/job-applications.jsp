@@ -47,7 +47,9 @@
 							<td>${application.phoneNumber}</td>
 							<td><p style="display: none;">${application.coverLetter }</p>
 								<button onclick='initModal(this)' class="btn btn-info"
-									data-toggle="modal" data-target="#coverLetter">View</button></td>
+									data-toggle="modal" data-target="#coverLetter">
+									<i class="fa fa-share-square-o" aria-hidden="true"></i>&nbsp;&nbsp;View
+								</button></td>
 							<td><a
 								href="<c:url value='/resume/download.html?resumeId=${application.resume.id}' />"
 								role="button" class="btn btn-primary"><i

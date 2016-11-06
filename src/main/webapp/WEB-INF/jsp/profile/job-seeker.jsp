@@ -180,12 +180,14 @@
 						enctype="multipart/form-data">
 						<fieldset>
 							<div class="form-group">
-								<label class="control-label text-primary">Upload</label>
+								<label class="control-label text-primary">Upload a Resume</label>
 								<div class="input-group">
 									<span class="input-group-addon">PDF, DOC, DOCX Format</span> <input
 										type="file" name="resume" class="form-control"> <span
 										class="input-group-btn">
-										<button type="submit" class="btn btn-default" type="button">Upload</button>
+										<button type="submit" class="btn btn-primary" type="button">
+											<i class="fa fa-upload" aria-hidden="true"></i>&nbsp;&nbsp;Upload
+										</button>
 									</span>
 								</div>
 							</div>
@@ -240,7 +242,9 @@
 													value="${application.dateApplied}" /></td>
 											<td><a
 												href="<c:url value='/application/view.html?id=${application.id }' />"
-												role="button" class="btn btn-success">View Application</a></td>
+												role="button" class="btn btn-success"><i
+													class="fa fa-share-square-o" aria-hidden="true"></i>&nbsp;&nbsp;View
+													Application</a></td>
 										</tr>
 									</c:when>
 									<c:otherwise>
@@ -251,7 +255,9 @@
 													value="${application.dateApplied}" /></td>
 											<td><a
 												href="<c:url value='/application/view.html?id=${application.id }' />"
-												role="button" class="btn btn-success">View Application</a></td>
+												role="button" class="btn btn-success"><i
+													class="fa fa-share-square-o" aria-hidden="true"></i>&nbsp;&nbsp;View
+													Application</a></td>
 										</tr>
 									</c:otherwise>
 								</c:choose>
