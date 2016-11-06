@@ -18,17 +18,40 @@ public class ApplicationDaoImpl implements ApplicationDao {
 	private EntityManager em;
 	
 	@Override
-	public List<Application> getApplications(int jobid) {
-		String query = "FROM Applications where jobid = :jobid";
+	public List<Application> getJobApplications(int jobId) {
+		String query = "FROM Application where job_id = :jobId";
 		return em
 		.createQuery(query, Application.class)
-		.setParameter("jobid", jobid)
+		.setParameter("jobId", jobId)
 		.getResultList();
+	}
+	
+	@Override
+	public List<Application> getUserApplications(int userId) {
+		String query = "FROM Application where seeker_id = :seekerId";
+		return em
+				.createQuery(query, Application.class)
+				.setParameter("seekerId", userId)
+				.getResultList();
+	}
+	
+	@Override
+	public Application getApplication(int id) {
+		return em.find(Application.class, id);
 	}
 	
 	@Override
 	@Transactional
 	public Application saveApplication(Application application) {
 		return em.merge(application);
+	}
+	
+	@Override
+	public List<Application> getApplicationByResume(int resumeId) {
+		String query = "FROM Application where resume_id = :resumeId";
+		return em
+				.createQuery(query, Application.class)
+				.setParameter("resumeId", resumeId)
+				.getResultList();
 	}
 }

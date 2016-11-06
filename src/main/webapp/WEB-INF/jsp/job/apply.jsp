@@ -64,13 +64,7 @@
 								<label for="select" class="col-lg-2 control-label">Select
 									a Resume</label>
 								<div class="col-lg-10">
-									<select class="form-control" id="select">
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-									</select>
+									 <form:select path="resume" class="form-controller" items="${resumes}" itemLabel="fileName" />
 								</div>
 							</div>
 							<div class="form-group">

@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import usjobs.model.Address;
+import usjobs.model.Application;
 import usjobs.model.Employer;
 import usjobs.model.JobPosting;
 import usjobs.model.JobSeeker;
 import usjobs.model.Resume;
 import usjobs.model.User;
+import usjobs.model.dao.ApplicationDao;
 import usjobs.model.dao.JobPostingDao;
 import usjobs.model.dao.ResumeDao;
 import usjobs.model.dao.UserDao;
@@ -37,10 +39,10 @@ public class ProfileController {
 	UserDao userDao;
 	
 	@Autowired
-	ResumeDao resumeDao;
+	JobPostingDao jobPostingDao;
 	
 	@Autowired
-	JobPostingDao jobPostingDao;
+	ApplicationDao applicationDao;
 	
     /**
      * Return the correct profile page for the user depending on if they are
@@ -65,9 +67,6 @@ public class ProfileController {
     	}
     	
     	if (user.isSeeker()){
-    		List<Resume> resumes = resumeDao.getResumes(user.getId());
-    		models.put("resumes", resumes);
-    		logger.info("resumes length: " + resumes.size());
     		return "profile/job-seeker";
     	}
     	
@@ -112,6 +111,11 @@ public class ProfileController {
 	@RequestMapping(value = "/user/deleteJob.html", method = RequestMethod.GET)
 	public String deleteJob(@RequestParam int employerId, @RequestParam int jobId) {
 		JobPosting jobPosting = jobPostingDao.getJobPosting(jobId);
+		List<Application> applications = applicationDao.getJobApplications(jobId);
+		for (Application app : applications) {
+			app.setJobApplied(null); //since job is being deleted, app should no longer reference that job
+			applicationDao.saveApplication(app);
+		}
 		jobPostingDao.delete(jobPosting);
 		return "redirect:profile.html?id=" + employerId;
 	}

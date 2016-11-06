@@ -23,8 +23,8 @@
 				Profile</a><a id="profile" class="list-group-item" href="#"><i
 				class="fa fa-adjust" aria-hidden="true"></i>&nbsp;&nbsp;Update
 				Profile</a> <a id="resume" class="list-group-item" href="#"><i
-				class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;&nbsp;Manage Resumes</a>
-			<a id="appJobs" class="list-group-item" href="#"> <i
+				class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;&nbsp;Manage
+				Resumes</a> <a id="appJobs" class="list-group-item" href="#"> <i
 				class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Applied
 				Jobs
 			</a> <a id="favJobs" class="list-group-item" href="#"><i
@@ -176,40 +176,44 @@
 					</h3>
 				</div>
 				<div class="panel-body">
-					<form action="<c:url value='/resume/upload.html' />"
-						method="post" enctype="multipart/form-data">
+					<form action="<c:url value='/resume/upload.html' />" method="post"
+						enctype="multipart/form-data">
 						<fieldset>
 							<div class="form-group">
-								<label class="control-label text-primary">Upload</label>
+								<label class="control-label text-primary">Upload a Resume</label>
 								<div class="input-group">
 									<span class="input-group-addon">PDF, DOC, DOCX Format</span> <input
 										type="file" name="resume" class="form-control"> <span
 										class="input-group-btn">
-										<button type="submit" class="btn btn-default" type="button">Upload</button>
+										<button type="submit" class="btn btn-primary" type="button">
+											<i class="fa fa-upload" aria-hidden="true"></i>&nbsp;&nbsp;Upload
+										</button>
 									</span>
 								</div>
 							</div>
 						</fieldset>
 					</form>
 
-						<table class="table table-striped table-hover">
-							<tr class="info">
-								<th>Resume</th>
-								<th>Upload Date</th>
-								<th></th>
+					<table class="table table-striped table-hover">
+						<tr class="info">
+							<th>Resume</th>
+							<th>Upload Date</th>
+							<th></th>
+						</tr>
+						<c:forEach items="${user.resumes}" var="resume">
+							<tr>
+								<td><a
+									href="<c:url value='/resume/download.html?resumeId=${resume.id }' />">
+										${resume.fileName } </a></td>
+								<td><fmt:formatDate type="date"
+										value="${resume.uploadDate}" /></td>
+								<td><a
+									href="<c:url value='/resume/delete.html?userId=${user.id }&resumeId=${resume.id }' />"
+									role="button" class="btn btn-danger"><i
+										class="fa fa-times-circle"></i>&nbsp;&nbsp;Delete</a></td>
 							</tr>
-							<c:forEach items="${resumes}" var="resume">
-								<tr>
-									<td><a
-										href="<c:url value='/resume/download.html?resumeId=${resume.id }' />"
-										> ${resume.fileName } </a></td>
-										<td><fmt:formatDate type="date" value="${resume.uploadDate}" /></td>
-										<td><a href="<c:url value='/resume/delete.html?userId=${user.id }&resumeId=${resume.id }' />" 
-										role="button" class="btn btn-danger"><i
-										class="fa fa-times-circle"></i>&nbsp;&nbsp;Delete</a></td>								
-								</tr>
-							</c:forEach>
-						</table>
+						</c:forEach>
+					</table>
 				</div>
 			</div>
 			<div id="appJobsDetail" class="panel panel-info">
@@ -224,17 +228,39 @@
 						<table class="table table-striped table-hover">
 							<tr class="info">
 								<th>Title</th>
-								<th>Salary</th>
 								<th>Location</th>
-								<th>Link</th>
+								<th>Date Applied</th>
+								<th></th>
 							</tr>
-							<c:forEach items="${user.appliedJobs}" var="appliedJob">
-								<tr>
-									<td>${appliedJob.jobTitle}</td>
-									<td>${appliedJob.salary}</td>
-									<td>${appliedJob.location}</td>
-									<td>${appliedJob.website}</td>
-								</tr>
+							<c:forEach items="${user.applications}" var="application">
+								<c:choose>
+									<c:when test="${not empty application.jobApplied }">
+										<tr>
+											<td>${application.jobApplied.jobTitle}</td>
+											<td>${application.jobApplied.location }</td>
+											<td><fmt:formatDate type="date"
+													value="${application.dateApplied}" /></td>
+											<td><a
+												href="<c:url value='/application/view.html?id=${application.id }' />"
+												role="button" class="btn btn-success"><i
+													class="fa fa-share-square-o" aria-hidden="true"></i>&nbsp;&nbsp;View
+													Application</a></td>
+										</tr>
+									</c:when>
+									<c:otherwise>
+										<tr>
+											<td class="text-danger">N/A (Job no longer exists)</td>
+											<td>N/A</td>
+											<td><fmt:formatDate type="date"
+													value="${application.dateApplied}" /></td>
+											<td><a
+												href="<c:url value='/application/view.html?id=${application.id }' />"
+												role="button" class="btn btn-success"><i
+													class="fa fa-share-square-o" aria-hidden="true"></i>&nbsp;&nbsp;View
+													Application</a></td>
+										</tr>
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>
 						</table>
 					</div>
