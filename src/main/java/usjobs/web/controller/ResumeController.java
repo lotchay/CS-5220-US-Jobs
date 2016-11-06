@@ -105,6 +105,7 @@ public class ResumeController {
             out.write( buffer, 0, bytesRead );
         }
         
+        out.close();
         in.close();
         
         return null;
@@ -117,13 +118,17 @@ public class ResumeController {
         logger.info("resume id: " + resumeId);
     	Resume resume = resumeDao.getResume(resumeId);
         File fileToDelete = new File(resume.getFilePath());
-        boolean deleted = fileToDelete.delete();
         
-        if (deleted) {
-            logger.info("File: " + fileToDelete.getPath() + " successfully deleted");
-            resumeDao.deleteResume(resume);
+        if (fileToDelete.exists()) {
+            boolean deleted = fileToDelete.delete();
+            if (deleted) {
+                logger.info("File: " + fileToDelete.getPath() + " successfully deleted");
+                resumeDao.deleteResume(resume);
+            } else {
+            	logger.error("file not deleted successfully");
+            }
         } else {
-        	logger.error("file not deleted successfully");
+        	logger.info("file to delete doesn't exist.");
         }
         
         return "redirect:/user/profile.html";
