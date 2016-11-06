@@ -2,6 +2,7 @@ package usjobs.web.controller;
 
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,10 @@ import usjobs.model.Address;
 import usjobs.model.Employer;
 import usjobs.model.JobPosting;
 import usjobs.model.JobSeeker;
+import usjobs.model.Resume;
 import usjobs.model.User;
 import usjobs.model.dao.JobPostingDao;
+import usjobs.model.dao.ResumeDao;
 import usjobs.model.dao.UserDao;
 import usjobs.util.Security;
 
@@ -32,6 +35,9 @@ public class ProfileController {
 	
 	@Autowired
 	UserDao userDao;
+	
+	@Autowired
+	ResumeDao resumeDao;
 	
 	@Autowired
 	JobPostingDao jobPostingDao;
@@ -59,9 +65,9 @@ public class ProfileController {
     	}
     	
     	if (user.isSeeker()){
-    		File resumeDir = new File (ResumeController.fileDir.getPath() + user.getId());
-    		logger.info("Searching for resumes in path: " + resumeDir.getPath());
-    		models.put("names", resumeDir.list());
+    		List<Resume> resumes = resumeDao.getResumes(user.getId());
+    		models.put("resumes", resumes);
+    		logger.info("resumes length: " + resumes.size());
     		return "profile/job-seeker";
     	}
     	

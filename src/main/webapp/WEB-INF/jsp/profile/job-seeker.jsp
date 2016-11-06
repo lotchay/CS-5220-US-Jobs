@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -194,16 +195,18 @@
 						<table class="table table-striped table-hover">
 							<tr class="info">
 								<th>Resume</th>
+								<th>Upload Date</th>
 								<th></th>
 							</tr>
-							<c:forEach items="${names}" var="name">
+							<c:forEach items="${resumes}" var="resume">
 								<tr>
 									<td><a
-										href="<c:url value='/resume/download.html?userId=${user.id }&filename=${name }' />"
-										> ${name } </a></td>
-										<td><a href="<c:url value='/resume/delete.html?userId=${user.id }&filename=${name }' />" 
+										href="<c:url value='/resume/download.html?resumeId=${resume.id }' />"
+										> ${resume.fileName } </a></td>
+										<td><fmt:formatDate type="date" value="${resume.uploadDate}" /></td>
+										<td><a href="<c:url value='/resume/delete.html?userId=${user.id }&resumeId=${resume.id }' />" 
 										role="button" class="btn btn-danger"><i
-										class="fa fa-times-circle"></i>&nbsp;&nbsp;Delete</a></td>
+										class="fa fa-times-circle"></i>&nbsp;&nbsp;Delete</a></td>								
 								</tr>
 							</c:forEach>
 						</table>

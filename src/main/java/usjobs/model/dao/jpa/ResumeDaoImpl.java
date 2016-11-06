@@ -6,6 +6,8 @@ import javax.persistence.PersistenceContext;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import usjobs.model.JobPosting;
 import usjobs.model.Resume;
 import usjobs.model.User;
 import usjobs.model.dao.ResumeDao;
@@ -17,11 +19,16 @@ public class ResumeDaoImpl implements ResumeDao {
 	private EntityManager em;
 	
 	@Override
-	public List<Resume> getResumes(User user) {
-		String query = "FROM Resumes where user = :user";
+	public Resume getResume(int resumeId) {
+		return em.find(Resume.class, resumeId);
+	}
+	
+	@Override
+	public List<Resume> getResumes(int userId) {
+		String query = "FROM Resume where user_id = :userId";
 		return em
 		.createQuery(query, Resume.class)
-		.setParameter("user", user)
+		.setParameter("userId", userId)
 		.getResultList();
 	}
 	

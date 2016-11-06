@@ -73,7 +73,8 @@ public class ResumeController {
         if (file.exists()) {
         	logger.info("file successfully uploaded to path: " + file.getPath());
         	Resume newResume = new Resume();
-        	newResume.setFileName(file.getPath());
+        	newResume.setFilePath(file.getPath());
+        	newResume.setFileName(resume.getOriginalFilename());
         	newResume.setUser(user);
         	newResume.setUploadDate(new Date());
         	resumeDao.saveResume(newResume);
@@ -85,13 +86,13 @@ public class ResumeController {
     }
     
     @RequestMapping("/resume/download.html")
-    public String download( HttpServletResponse response, 
-        @RequestParam Integer userId, @RequestParam String filename ) 
+    public String download( HttpServletResponse response, @RequestParam int resumeId ) 
             throws IOException {
         
-        response.setHeader( "Content-Disposition", "attachment; filename=" + filename );
+    	Resume resume = resumeDao.getResume(resumeId);
+        response.setHeader( "Content-Disposition", "attachment; filename=" + resume.getFileName() );
         
-        FileInputStream in = new FileInputStream( new File( getFileDirectory( userId ), filename ) );
+        FileInputStream in = new FileInputStream( new File( resume.getFilePath() ));
         
         OutputStream out = response.getOutputStream();
         
@@ -111,13 +112,19 @@ public class ResumeController {
     
     @RequestMapping("/resume/delete.html")
     public String delete( HttpServletResponse response, 
-        @RequestParam Integer userId, @RequestParam String filename ) 
+        @RequestParam Integer userId, @RequestParam int resumeId ) 
             throws IOException {
-        
-        File fileToDelete = new File(getFileDirectory(userId), filename);
+        logger.info("resume id: " + resumeId);
+    	Resume resume = resumeDao.getResume(resumeId);
+        File fileToDelete = new File(resume.getFilePath());
         boolean deleted = fileToDelete.delete();
         
-        logger.info("File: " + filename + " successfully deleted: " + deleted);
+        if (deleted) {
+            logger.info("File: " + fileToDelete.getPath() + " successfully deleted");
+            resumeDao.deleteResume(resume);
+        } else {
+        	logger.error("file not deleted successfully");
+        }
         
         return "redirect:/user/profile.html";
     }  
