@@ -1,6 +1,7 @@
 package usjobs.web.controller;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -143,6 +144,8 @@ public class JobController {
 
 	@RequestMapping(value = "/job/apply.html", method = RequestMethod.POST)
 	public String addApplied(@ModelAttribute("application") Application application, SessionStatus session) {
+		Date date = new Date();
+		application.setDateApplied(date);
 		Application app = applicationDao.saveApplication(application);
 		JobPosting jobPosting = app.getJobApplied();
 		jobPosting.addUsersApplied(userDao.getProfileUser(Security.getUserDetails().getUsername()));

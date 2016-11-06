@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import usjobs.model.Address;
+import usjobs.model.Application;
 import usjobs.model.Employer;
 import usjobs.model.JobPosting;
 import usjobs.model.JobSeeker;
 import usjobs.model.Resume;
 import usjobs.model.User;
+import usjobs.model.dao.ApplicationDao;
 import usjobs.model.dao.JobPostingDao;
 import usjobs.model.dao.ResumeDao;
 import usjobs.model.dao.UserDao;
@@ -38,6 +40,9 @@ public class ProfileController {
 	
 	@Autowired
 	ResumeDao resumeDao;
+	
+	@Autowired
+	ApplicationDao applicationDao;
 	
 	@Autowired
 	JobPostingDao jobPostingDao;
@@ -65,9 +70,11 @@ public class ProfileController {
     	}
     	
     	if (user.isSeeker()){
-    		List<Resume> resumes = resumeDao.getResumes(user.getId());
+    		int id = user.getId();
+    		List<Resume> resumes = resumeDao.getResumes(id);
+    		List<Application> applications = applicationDao.getUserApplications(id);
     		models.put("resumes", resumes);
-    		logger.info("resumes length: " + resumes.size());
+    		models.put("applications", applications);
     		return "profile/job-seeker";
     	}
     	

@@ -224,16 +224,16 @@
 						<table class="table table-striped table-hover">
 							<tr class="info">
 								<th>Title</th>
-								<th>Salary</th>
 								<th>Location</th>
-								<th>Link</th>
+								<th>Date Applied</th>
+								<th></th>
 							</tr>
-							<c:forEach items="${user.appliedJobs}" var="appliedJob">
+							<c:forEach items="${applications}" var="application">
 								<tr>
-									<td>${appliedJob.jobTitle}</td>
-									<td>${appliedJob.salary}</td>
-									<td>${appliedJob.location}</td>
-									<td>${appliedJob.website}</td>
+									<td>${application.jobApplied.jobTitle}</td>
+									<td>${application.jobApplied.location }</td>
+									<td><fmt:formatDate type="date" value="${application.dateApplied}" /></td>
+									<td><a href="#" role="button" class="btn btn-success">View Application</a></td>
 								</tr>
 							</c:forEach>
 						</table>

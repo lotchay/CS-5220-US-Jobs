@@ -7,6 +7,7 @@ create sequence hibernate_sequence minvalue 80;
         first_name varchar(255),
         last_name varchar(255),
         phone_number varchar(255),
+        date_applied timestamp,
         job_id int4,
         resume_id int4,
         seeker_id int4,
