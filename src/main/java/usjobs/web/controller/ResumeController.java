@@ -88,6 +88,19 @@ public class ResumeController {
         in.close();
         
         return null;
+    }
+    
+    @RequestMapping("/resume/delete.html")
+    public String delete( HttpServletResponse response, 
+        @RequestParam Integer userId, @RequestParam String filename ) 
+            throws IOException {
+        
+        File fileToDelete = new File(getFileDirectory(userId), filename);
+        boolean deleted = fileToDelete.delete();
+        
+        logger.info("File: " + filename + " successfully deleted: " + deleted);
+        
+        return "redirect:/user/profile.html";
     }  
     
 }
