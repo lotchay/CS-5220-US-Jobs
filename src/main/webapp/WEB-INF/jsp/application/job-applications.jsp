@@ -3,11 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>US Jobs - View User</title>
+<title>US Jobs - Applications</title>
 <link href="<c:url value='/css/vendor/bower.css' />" rel="stylesheet" />
 <link href="<c:url value='/css/us-jobs.css' />" rel="stylesheet" />
 <link
@@ -17,41 +18,68 @@
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
-	<div class="animated fadeIn col-md-8 col-md-offset-2">
+	<div class="animated fadeIn col col-md-8 col-md-offset-2">
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h3 class="panel-title">
-					<i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;View
-					${user.firstName }'s profile
+					<i class="fa fa-tasks" aria-hidden="true"></i>&nbsp;&nbsp;Applications
+					for ${applications[0].jobApplied.jobTitle }
 				</h3>
 			</div>
 			<div class="panel-body">
-				<h4>
-					<strong>Id</strong>
-				</h4>
-				<p>${user.id }</p>
-				<h4>
-					<strong>Username</strong>
-				</h4>
-				<p>${user.username }</p>
-				<h4>
-					<strong>First Name</strong>
-				</h4>
-				<p>${user.firstName }</p>
-				<h4>
-					<strong>Last Name</strong>
-				</h4>
-				<p>${user.lastName}</p>
-				<h4>
-					<strong>Email</strong>
-				</h4>
-				<p>${user.email }</p>
-				<h4>
-					<strong>Password</strong>
-				</h4>
-				<p>${user.password }</p>
+				<table class="table table-striped table-hover">
+					<tr class="info">
+						<th>Date Applied</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Email</th>
+						<th>Phone Number</th>
+						<th>Cover Letter</th>
+						<th>Resume</th>
+					</tr>
+					<c:forEach items="${applications}" var="application">
+						<tr>
+							<td><fmt:formatDate type="date"
+									value="${application.dateApplied}" /></td>
+							<td>${application.firstName}</td>
+							<td>${application.lastName}</td>
+							<td>${application.email}</td>
+							<td>${application.phoneNumber}</td>
+							<td><p style="display: none;">${application.coverLetter }</p>
+								<button onclick='initModal(this)' class="btn btn-info"
+									data-toggle="modal" data-target="#coverLetter">View</button></td>
+							<td><a
+								href="<c:url value='/resume/download.html?resumeId=${application.resume.id}' />"
+								role="button" class="btn btn-primary"><i
+									class="fa fa-download" aria-hidden="true"></i>&nbsp;&nbsp;Download</a></td>
+						</tr>
+					</c:forEach>
+				</table>
 			</div>
 		</div>
 	</div>
+	<div id="coverLetter" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title url">Cover Letter</h4>
+				</div>
+				<div class="modal-body">
+					<p id="coverLetterText"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		function initModal(object) {
+			var coverLetter = $(object).prev().html(); //hacky solution.
+			$("#coverLetterText").html(coverLetter);
+		}
+	</script>
 </body>
 </html>
