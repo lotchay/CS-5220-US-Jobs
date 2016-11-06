@@ -1,7 +1,10 @@
 package usjobs.web.controller;
 
+import java.io.File;
 import java.util.Date;
+import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -17,8 +20,10 @@ import usjobs.model.Address;
 import usjobs.model.Employer;
 import usjobs.model.JobPosting;
 import usjobs.model.JobSeeker;
+import usjobs.model.Resume;
 import usjobs.model.User;
 import usjobs.model.dao.JobPostingDao;
+import usjobs.model.dao.ResumeDao;
 import usjobs.model.dao.UserDao;
 import usjobs.util.Security;
 
@@ -26,8 +31,13 @@ import usjobs.util.Security;
 @SessionAttributes({"newJob", "editJob", "user"})
 public class ProfileController {
 	
+	Logger logger = Logger.getLogger(ProfileController.class);
+	
 	@Autowired
 	UserDao userDao;
+	
+	@Autowired
+	ResumeDao resumeDao;
 	
 	@Autowired
 	JobPostingDao jobPostingDao;
@@ -55,6 +65,9 @@ public class ProfileController {
     	}
     	
     	if (user.isSeeker()){
+    		List<Resume> resumes = resumeDao.getResumes(user.getId());
+    		models.put("resumes", resumes);
+    		logger.info("resumes length: " + resumes.size());
     		return "profile/job-seeker";
     	}
     	

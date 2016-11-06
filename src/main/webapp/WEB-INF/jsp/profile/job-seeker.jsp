@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,7 +23,7 @@
 				Profile</a><a id="profile" class="list-group-item" href="#"><i
 				class="fa fa-adjust" aria-hidden="true"></i>&nbsp;&nbsp;Update
 				Profile</a> <a id="resume" class="list-group-item" href="#"><i
-				class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;&nbsp;Resumes</a>
+				class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;&nbsp;Manage Resumes</a>
 			<a id="appJobs" class="list-group-item" href="#"> <i
 				class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Applied
 				Jobs
@@ -170,11 +171,46 @@
 			<div id="resumeDetail" class="panel panel-info">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;&nbsp;Resume
-						(s)
+						<i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;&nbsp;
+						Manage Resume (s)
 					</h3>
 				</div>
-				<div class="panel-body">TODO</div>
+				<div class="panel-body">
+					<form action="<c:url value='/resume/upload.html' />"
+						method="post" enctype="multipart/form-data">
+						<fieldset>
+							<div class="form-group">
+								<label class="control-label text-primary">Upload</label>
+								<div class="input-group">
+									<span class="input-group-addon">PDF, DOC, DOCX Format</span> <input
+										type="file" name="resume" class="form-control"> <span
+										class="input-group-btn">
+										<button type="submit" class="btn btn-default" type="button">Upload</button>
+									</span>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+
+						<table class="table table-striped table-hover">
+							<tr class="info">
+								<th>Resume</th>
+								<th>Upload Date</th>
+								<th></th>
+							</tr>
+							<c:forEach items="${resumes}" var="resume">
+								<tr>
+									<td><a
+										href="<c:url value='/resume/download.html?resumeId=${resume.id }' />"
+										> ${resume.fileName } </a></td>
+										<td><fmt:formatDate type="date" value="${resume.uploadDate}" /></td>
+										<td><a href="<c:url value='/resume/delete.html?userId=${user.id }&resumeId=${resume.id }' />" 
+										role="button" class="btn btn-danger"><i
+										class="fa fa-times-circle"></i>&nbsp;&nbsp;Delete</a></td>								
+								</tr>
+							</c:forEach>
+						</table>
+				</div>
 			</div>
 			<div id="appJobsDetail" class="panel panel-info">
 				<div class="panel-heading">
@@ -233,10 +269,6 @@
 				</div>
 			</div>
 		</div>
-		<p>
-            <a class="btn btn-primary" role="button" href="<c:url value='/application/upload.html' />"><i
-               class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;&nbsp; Upload Resume</a>
-         </p>
 	</div>
 </body>
 

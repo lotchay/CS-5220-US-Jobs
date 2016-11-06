@@ -26,6 +26,9 @@ public class Resume implements Serializable {
 
 	@Column(name = "upload_date")
 	private Date uploadDate;
+	
+	@Column(name = "file_path")
+	private String filePath;
 
 	@Column(name = "file_name")
 	private String fileName;
@@ -84,5 +87,15 @@ public class Resume implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+	
+	
 	
 }

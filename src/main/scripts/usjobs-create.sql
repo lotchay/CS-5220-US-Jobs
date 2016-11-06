@@ -78,8 +78,9 @@ create sequence hibernate_sequence minvalue 80;
     create table resumes (
         resume_id int4 not null,
         file_data bytea,
-        file_name varchar(255),
         name varchar(255),
+        file_name varchar(255),
+        file_path varchar(255),
         upload_date timestamp,
         user_id int4,
         primary key (resume_id)
