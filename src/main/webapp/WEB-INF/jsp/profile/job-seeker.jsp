@@ -202,7 +202,8 @@
 										href="<c:url value='/resume/download.html?userId=${user.id }&filename=${name }' />"
 										> ${name } </a></td>
 										<td><a href="<c:url value='/resume/delete.html?userId=${user.id }&filename=${name }' />" 
-										role="button" class="btn btn-danger">Delete</a></td>
+										role="button" class="btn btn-danger"><i
+										class="fa fa-times-circle"></i>&nbsp;&nbsp;Delete</a></td>
 								</tr>
 							</c:forEach>
 						</table>
