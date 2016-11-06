@@ -66,7 +66,6 @@ public class JobPostingDaoImpl implements JobPostingDao {
 	}
 	
 	// TODO need fulltext search to look for job postings with user specified k eywords
-	@Override
 //	public List<JobPosting> searchJobsByKeyword(String keywords) {
 //		String query = "FROM JobPosting j WHERE j.enabled = true and j.opened = true AND UPPER(j.jobTitle) LIKE ?1 "
 //				+ "AND UPPER(j.location) like ?2";
