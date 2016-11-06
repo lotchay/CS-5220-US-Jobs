@@ -41,6 +41,9 @@ public class ProfileController {
 	@Autowired
 	JobPostingDao jobPostingDao;
 	
+	@Autowired
+	ApplicationDao applicationDao;
+	
     /**
      * Return the correct profile page for the user depending on if they are
      * an employer, seeker, or admin.
@@ -108,6 +111,11 @@ public class ProfileController {
 	@RequestMapping(value = "/user/deleteJob.html", method = RequestMethod.GET)
 	public String deleteJob(@RequestParam int employerId, @RequestParam int jobId) {
 		JobPosting jobPosting = jobPostingDao.getJobPosting(jobId);
+		List<Application> applications = applicationDao.getJobApplications(jobId);
+		for (Application app : applications) {
+			app.setJobApplied(null); //since job is being deleted, app should no longer reference that job
+			applicationDao.saveApplication(app);
+		}
 		jobPostingDao.delete(jobPosting);
 		return "redirect:profile.html?id=" + employerId;
 	}

@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import usjobs.model.Application;
 import usjobs.model.Resume;
 import usjobs.model.User;
+import usjobs.model.dao.ApplicationDao;
 import usjobs.model.dao.ResumeDao;
 import usjobs.model.dao.UserDao;
 import usjobs.util.Security;
@@ -36,6 +39,9 @@ public class ResumeController {
     
     @Autowired
     ResumeDao resumeDao;
+    
+    @Autowired
+    ApplicationDao applicationDao;
     
     @Autowired
     UserDao userDao;
@@ -126,7 +132,12 @@ public class ResumeController {
             boolean deleted = fileToDelete.delete();
             if (deleted) {
                 logger.info("File: " + fileToDelete.getPath() + " successfully deleted");
-                resumeDao.deleteResume(resume);
+                List<Application> applications = applicationDao.getApplicationByResume(resume.getId());
+                for (Application application : applications) {
+                	application.setResume(null); //this application should no longer reference the resume being deleted
+                	applicationDao.saveApplication(application);
+                }
+                resumeDao.deleteResume(resume); //then you can safely delete the resume.
             } else {
             	logger.error("file not deleted successfully");
             }

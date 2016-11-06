@@ -50,9 +50,17 @@
 					<strong>Resume</strong>
 				</h4>
 				<p>
-					<a href="<c:url value='/resume/download.html?resumeId=${application.resume.id}' />" role="button"
-						class="btn btn-primary"><i class="fa fa-download"
-						aria-hidden="true"></i>&nbsp;&nbsp;Download</a>
+					<c:choose>
+						<c:when test="${not empty application.resume.id }">
+							<a
+								href="<c:url value='/resume/download.html?resumeId=${application.resume.id}' />"
+								role="button" class="btn btn-primary"><i
+								class="fa fa-download" aria-hidden="true"></i>&nbsp;&nbsp;Download</a>
+						</c:when>
+						<c:otherwise>
+							<p class="text-danger">Resume submitted for this application doesn't exist.</p>
+						</c:otherwise>
+					</c:choose>
 				</p>
 			</div>
 		</div>

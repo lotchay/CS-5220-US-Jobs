@@ -43,6 +43,7 @@ public class ResumeDaoImpl implements ResumeDao {
 	@Transactional
 	@PreAuthorize ("hasRole('ROLE_ADMIN') or principal.username == #resume.user.username")
 	public void deleteResume(Resume resume) {
+
 		em.remove(resume);
 	}
 }

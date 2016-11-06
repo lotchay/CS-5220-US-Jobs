@@ -14,5 +14,6 @@ public interface ApplicationDao {
 	
 	Application saveApplication(Application application);
 	
+	List<Application> getApplicationByResume(int resumeId);
 	Application getApplication(int id);
 }

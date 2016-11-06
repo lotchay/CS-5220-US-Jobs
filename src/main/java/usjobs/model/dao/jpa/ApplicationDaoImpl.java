@@ -45,4 +45,13 @@ public class ApplicationDaoImpl implements ApplicationDao {
 	public Application saveApplication(Application application) {
 		return em.merge(application);
 	}
+	
+	@Override
+	public List<Application> getApplicationByResume(int resumeId) {
+		String query = "FROM Application where resume_id = :resumeId";
+		return em
+				.createQuery(query, Application.class)
+				.setParameter("resumeId", resumeId)
+				.getResultList();
+	}
 }
