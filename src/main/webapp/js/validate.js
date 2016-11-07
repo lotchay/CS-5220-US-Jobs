@@ -133,5 +133,55 @@ $(document).ready(function() {
 		}
 	});
 	
+	/* Valid add job form */
+	$("#addJobForm").validate({
+		rules: {
+			jobTitle: {
+				required: true,
+				minlength: 1
+			},
+			website: {
+				required: true,
+				url: true				
+			},
+			location: {
+				required: true,
+				minlength: 1
+			},
+			jobDescription: {
+				required: true,
+				minlength: 5
+			},
+			salary: {
+				required: true,
+				digits: true
+			}
+		}
+	});
 	
+	/* Validate edit job form */
+	$("#editJobForm").validate({
+		rules: {
+			jobTitle: {
+				required: true,
+				minlength: 1
+			},
+			website: {
+				required: true,
+				url: true				
+			},
+			location: {
+				required: true,
+				minlength: 1
+			},
+			jobDescription: {
+				required: true,
+				minlength: 5
+			},
+			salary: {
+				required: true,
+				digits: true
+			}
+		}
+	});
 })
