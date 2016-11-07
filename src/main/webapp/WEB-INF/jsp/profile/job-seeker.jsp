@@ -195,9 +195,9 @@
 									<span class="input-group-addon">PDF, DOC, DOCX Format</span> <input
 										type="file" name="resume" class="form-control" id="resume"> <span
 										class="input-group-btn">
-										<input type="submit" class="btn btn-primary" type="button">
+										<button type="submit" class="btn btn-primary" type="button">
 											<i class="fa fa-upload" aria-hidden="true"></i>&nbsp;&nbsp;Upload
-										</input>
+										</button>
 									</span>
 								</div>
 							</div>

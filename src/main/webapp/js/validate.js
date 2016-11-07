@@ -154,6 +154,9 @@ $(document).ready(function() {
 			resume: {
 				required: true
 			}
+		},
+		messages: {
+			resume: "  You need to select a resume. Add a resume if you haven't already."
 		}
 	});
 	

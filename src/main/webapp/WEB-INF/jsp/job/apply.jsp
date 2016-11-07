@@ -10,7 +10,7 @@
 	rel="stylesheet" />
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Application for ${jobPosting.jobTitle }</title>
+<title>Application for ${application.jobApplied.jobTitle }  </title>
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
@@ -19,10 +19,11 @@
 			<div class="panel panel-info">
 				<div class="panel-heading">
 					<h3 class="panel-title">Application for
-						${application.jobApplied.jobTitle }</h3>
+						${application.jobApplied.jobTitle } </h3>
 				</div>
 				<div class="panel-body">
-					<form:form id="applicationForm" modelAttribute="application" class="form-horizontal">
+					<form:form id="applicationForm" modelAttribute="application"
+						class="form-horizontal">
 						<fieldset>
 							<div class="form-group">
 								<label for="name" class="col-lg-2 control-label">First
@@ -68,11 +69,22 @@
 								</div>
 							</div>
 							<div class="form-group">
+
+								<div class="col-lg-10 col-lg-offset-2">
+									<button class="btn btn-primary" data-toggle="modal"
+										data-target="#upload">
+										<i class="fa fa-plus-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Add
+										a New Resume
+									</button>
+								</div>
+							</div>
+							<div class="form-group">
 								<label for="select" class="col-lg-2 control-label">Select
 									a Resume</label>
 								<div class="col-lg-10">
-									<form:select id="resume" name="resume" path="resume" class="form-controller"
-										items="${resumes}" itemLabel="fileName" />
+									<form:select id="resume" name="resume" path="resume"
+										class="form-controller" items="${resumes}"
+										itemLabel="fileName" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -83,6 +95,43 @@
 							</div>
 						</fieldset>
 					</form:form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="upload" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title url">Upload a New Resume </h4>
+				</div>
+				<div class="modal-body">
+					<form id="uploadForm"
+						action="uploadResume.html" method="post"
+						enctype="multipart/form-data">
+						<input type="hidden" name="jobId" value=${application.jobApplied.id } /> 
+						<fieldset>
+							<div class="form-group">
+								<label class="control-label text-primary">Upload a
+									Resume</label>
+								<div class="input-group">
+									<span class="input-group-addon">PDF, DOC, DOCX Format</span> <input
+										type="file" name="resume" class="form-control" id="resume">
+									<span class="input-group-btn">
+										<button type="submit" class="btn btn-primary" type="button">
+											<i class="fa fa-upload" aria-hidden="true"></i>&nbsp;&nbsp;Upload
+										</button>
+									</span>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						Close</button>
 				</div>
 			</div>
 		</div>
