@@ -4,7 +4,7 @@
 $(document).ready(function() {
 	
 	// JOB SEEKER PROFILE VALIDATION
-	/* Validate the upload. Make sure it's pdf, doc, or docx*/
+	/* Validate the upload. Make sure it's pdf, doc, or docx */
 	$("#uploadForm").validate({
 		rules: {
 			resume: {
@@ -38,7 +38,6 @@ $(document).ready(function() {
 			},
 			city: {
 				required: true,
-				lettersonly: true,
 				minlength: 1,
 			},
 			state: {
@@ -55,7 +54,7 @@ $(document).ready(function() {
 	// END JOB SEEKER VALIDATION
 	
 	
-	//EMPLOYER VALIDATION
+	// EMPLOYER VALIDATION
 	$("#editProfileEmployer").validate({
 		rules: {
 			password: {
@@ -79,7 +78,6 @@ $(document).ready(function() {
 			},
 			city: {
 				required: true,
-				lettersonly: true,
 				minlength: 1,
 			},
 			state: {
@@ -94,7 +92,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	//ADMIN VALIDATION
+	// ADMIN VALIDATION
 	$("#editProfileAdmin").validate({
 		rules: {
 			password: {
@@ -118,7 +116,6 @@ $(document).ready(function() {
 			},
 			city: {
 				required: true,
-				lettersonly: true,
 				minlength: 1,
 			},
 			state: {
@@ -208,6 +205,37 @@ $(document).ready(function() {
 			salary: {
 				required: true,
 				digits: true
+			}
+		}
+	});
+	
+	/* Admin's view in editing a user from user management */
+	$("#adminEditUserForm").validate({
+		rules: {
+			password : {
+				required: true,
+				minlength: 5
+			},
+			email: {
+				required: true,
+				email: true
+			},
+			'address.street': {
+				required: true,
+				minlength: 1
+			},
+			'address.city': {
+				required: true,
+				minlength: 1
+			},
+			'address.state': {
+				required: true,
+				stateUS: true
+			}, 
+			'address.zip': {
+				required: true,
+				minlength: 5,
+				zipcodeUS: true
 			}
 		}
 	});
