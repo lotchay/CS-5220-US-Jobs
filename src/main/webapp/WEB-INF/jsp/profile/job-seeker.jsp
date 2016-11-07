@@ -178,7 +178,7 @@
 					</h3>
 				</div>
 				<div class="panel-body">
-					<form action="<c:url value='/resume/upload.html' />" method="post"
+					<form id="uploadForm" action="<c:url value='/resume/upload.html' />" method="post"
 						enctype="multipart/form-data">
 						<fieldset>
 							<div class="form-group">
@@ -186,11 +186,11 @@
 									Resume</label>
 								<div class="input-group">
 									<span class="input-group-addon">PDF, DOC, DOCX Format</span> <input
-										type="file" name="resume" class="form-control"> <span
+										type="file" name="resume" class="form-control" id="resume"> <span
 										class="input-group-btn">
-										<button type="submit" class="btn btn-primary" type="button">
+										<input type="submit" class="btn btn-primary" type="button">
 											<i class="fa fa-upload" aria-hidden="true"></i>&nbsp;&nbsp;Upload
-										</button>
+										</input>
 									</span>
 								</div>
 							</div>
@@ -306,7 +306,8 @@
 				</div>
 				<div class="panel-body">
 					<div class="panel-body">
-						<form action="editNotifications.html" method="post" class="form-horizontal">
+						<form action="editNotifications.html" method="post"
+							class="form-horizontal">
 							<fieldset>
 								<div class="form-group">
 									<label class="col-lg-2 control-label">Contact Sharing</label>
@@ -360,5 +361,7 @@
 </body>
 
 <script src="../js/vendor/bower.js"></script>
+<script src="../bower_components/jquery-validation/dist/additional-methods.js"></script>
 <script src="../js/list-detail.js"></script>
+<script src="../js/seeker-profile-validate.js"></script>
 </html>
