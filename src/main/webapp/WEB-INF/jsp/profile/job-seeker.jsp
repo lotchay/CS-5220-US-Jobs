@@ -29,8 +29,7 @@
 				Jobs
 			</a> <a id="favJobs" class="list-group-item" href="#"><i
 				class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;Favorited Jobs</a>
-			<a id="notifications" class="list-group-item" href="#"><i
-				class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;Notifications</a>
+			<a id="notifications" class="list-group-item" href="#"><i class="fa fa-bullhorn" aria-hidden="true"></i>&nbsp;&nbsp;Notifications</a>
 		</div>
 		<div id="detail" class="col col-md-6">
 			<div id="viewProfileDetail" class="panel panel-info">
@@ -308,7 +307,7 @@
 			<div id="notificationsDetail" class="panel panel-info">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;Manage
+						<i class="fa fa-bullhorn" aria-hidden="true"></i>&nbsp;&nbsp;Manage
 						your Job Posting Notifications
 					</h3>
 				</div>

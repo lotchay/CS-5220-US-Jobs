@@ -133,6 +133,33 @@ $(document).ready(function() {
 		}
 	});
 	
+	/* Validate application form */
+	$("#applicationForm").validate({
+		rules: {
+			firstName: {
+				required: true,
+				minlength: 1,
+				lettersonly: true
+			},
+			lastName: {
+				required: true,
+				minlength: 1,
+				lettersonly: true
+			},
+			email: {
+				required: true,
+				email: true,
+			},
+			phoneNumber: {
+				required: true,
+				phoneUS: true
+			},
+			resume: {
+				required: true
+			}
+		}
+	});
+	
 	/* Valid add job form */
 	$("#addJobForm").validate({
 		rules: {
