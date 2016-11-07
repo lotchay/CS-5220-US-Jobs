@@ -239,4 +239,38 @@ $(document).ready(function() {
 			}
 		}
 	});
+	
+	/* Admin's add user management validate*/
+	$("#addUserForm").validate({
+		rules: {
+			username: {
+				required: true,
+				minlength: 1
+			},
+			password : {
+				required: true,
+				minlength: 5
+			},
+			password2: {
+				required: true,
+				minlength: 5,
+				equalTo: "#password",
+				nowhitespace: true
+			},
+			email: {
+				required: true,
+				email: true
+			},
+			firstName: {
+				required: true,
+				minlength: 1,
+				lettersonly: true
+			},
+			lastName: {
+				required: true,
+				minlength: 1,
+				lettersonly: true
+			}
+		}
+	});
 })
