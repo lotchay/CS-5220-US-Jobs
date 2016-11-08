@@ -49,4 +49,9 @@ public class HomeController {
 	public String login() {
 		return "login";
 	}
+	
+	@RequestMapping(value="/loginError.html")
+	public String loginError() {
+		return "login-error";
+	}
 }
