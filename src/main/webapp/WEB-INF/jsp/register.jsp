@@ -11,7 +11,7 @@
 				</h3>
 			</div>
 			<div class="panel-body">
-				<form:form class="form-horizontal" modelAttribute="user">
+				<form:form id="registerForm" class="form-horizontal" modelAttribute="user">
 					<fieldset>
 						<div class="form-group">
 							<label for="username" class="col-lg-2 control-label">Username</label>
@@ -22,19 +22,19 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="inputPassword" class="col-lg-2 control-label">Password</label>
+							<label for="password" class="col-lg-2 control-label">Password</label>
 							<div class="col-lg-10">
 								<form:input type="password" path="password" class="form-control"
-									id="inputPassword" placeholder="Password" />
+									id="password" placeholder="Password" />
 								<form:errors class="text-danger" path="password" />
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="inputPassword2" class="col-lg-2 control-label">Confirm
+							<label for="password2" class="col-lg-2 control-label">Confirm
 								Password</label>
 							<div class="col-lg-10">
 								<form:input type="password" path="password2"
-									class="form-control" id="inputPassword2" placeholder="Password" />
+									class="form-control" id="password2" placeholder="Password" />
 								<form:errors class="text-danger" path="password2" />
 							</div>
 						</div>
@@ -69,7 +69,7 @@
 							<div class="col-lg-10">
 								<div class="radio">
 									<label> <form:radiobutton path="userRoles"
-											value="ROLE_SEEKER" /> <form:errors class="text-danger"
+											value="ROLE_SEEKER" checked="true" /> <form:errors class="text-danger"
 											path="userRoles" />Job Seeker
 									</label>
 								</div>
