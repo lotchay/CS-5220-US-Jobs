@@ -108,6 +108,15 @@
 	<div class="container-fluid">
 		<tiles:insertAttribute name="content" />
 	</div>
+
+	<footer class="footer">
+	<div class="container">
+		<span class="text-default"> Copyright &copy; 2016, <a
+			href="https://github.com/Jordanton/CS-5220-US-Jobs" target="_blank">CS-5220-US-Jobs</a>.
+			All rights reserved.
+		</span>
+	</div>
+	</footer>
 </body>
 
 <script src="<c:url value='/js/vendor/bower.js' />"></script>
