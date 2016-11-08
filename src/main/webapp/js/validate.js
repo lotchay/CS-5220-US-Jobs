@@ -19,12 +19,10 @@ $(document).ready(function() {
 		rules: {
 			password: {
 				required: true,
-				minlength: 5,
 				nowhitespace: true
 			},
 			confirm_password: {
 				required: true,
-				minlength: 5,
 				equalTo: "#password",
 				nowhitespace: true
 			},
@@ -59,12 +57,10 @@ $(document).ready(function() {
 		rules: {
 			password: {
 				required: true,
-				minlength: 5,
 				nowhitespace: true
 			},
 			confirm_password: {
 				required: true,
-				minlength: 5,
 				equalTo: "#password",
 				nowhitespace: true
 			},
@@ -99,8 +95,7 @@ $(document).ready(function() {
 				minlength: 1
 			},
 			password : {
-				required: true,
-				minlength: 5
+				required: true
 			}
 		}
 	});
@@ -143,12 +138,10 @@ $(document).ready(function() {
 		rules: {
 			password: {
 				required: true,
-				minlength: 5,
 				nowhitespace: true
 			},
 			confirm_password: {
 				required: true,
-				minlength: 5,
 				equalTo: "#password",
 				nowhitespace: true
 			},
