@@ -24,7 +24,7 @@
 		<div id="viewProfileDetail" class="panel panel-info">
 			<div class="panel-heading">
 				<h3 class="panel-title">
-					<i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;View
+					<i class="fa fa-address-card" aria-hidden="true"></i>&nbsp;&nbsp;View
 					${user.firstName }'s profile
 				</h3>
 			</div>

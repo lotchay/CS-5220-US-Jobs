@@ -9,12 +9,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title><tiles:insertAttribute name="title"
 		defaultValue="US Jobs" defaultValueType="string" /></title>
 
 <link href="<c:url value='/css/vendor/bower.css' />" rel="stylesheet" />
 <link href="<c:url value='/css/us-jobs.css' />" rel="stylesheet" />
-<link href="<c:url value='/bower_components/font-awesome/css/font-awesome.css' />" rel="stylesheet" />
+<link
+	href="<c:url value='/bower_components/font-awesome/css/font-awesome.css' />"
+	rel="stylesheet" />
 </head>
 <body>
 	<nav class="navbar navbar-inverse">
@@ -102,7 +105,9 @@
 		</div>
 	</div>
 	</nav>
-	<tiles:insertAttribute name="content" />
+	<div class="container-fluid">
+		<tiles:insertAttribute name="content" />
+	</div>
 </body>
 
 <script src="<c:url value='/js/vendor/bower.js' />"></script>
