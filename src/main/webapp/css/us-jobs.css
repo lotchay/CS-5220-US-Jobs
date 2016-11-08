@@ -18,3 +18,7 @@ div.job-listing-preview {
 form.form-btn-container {
 	display:inline;
 }
+
+.top-button {
+	margin-bottom:10px;
+}

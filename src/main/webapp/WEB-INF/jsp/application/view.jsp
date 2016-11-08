@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>US Jobs - View Job Posting</title>
+<title>US Jobs - View Application</title>
 <link href="<c:url value='/css/vendor/bower.css' />" rel="stylesheet" />
 <link href="<c:url value='/css/us-jobs.css' />" rel="stylesheet" />
 <link
@@ -22,36 +22,46 @@
 			<div class="panel-heading">
 				<h3 class="panel-title">
 					<i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;View
-					Job Posting
+					Application
 				</h3>
 			</div>
 			<div class="panel-body">
 				<h4>
-					<strong>Id</strong>
+					<strong>Name</strong>
 				</h4>
-				<p>${jobPosting.id }</p>
+				<p>${application.firstName } ${application.lastName }</p>
 				<h4>
-					<strong>Title</strong>
+					<strong>Email</strong>
 				</h4>
-				<p>${jobPosting.jobTitle }</p>
+				<p>${application.email }</p>
 				<h4>
-					<strong>Description</strong>
+					<strong>Phone Number</strong>
 				</h4>
-				<p>${jobPosting.jobDescription }</p>
+				<p>${application.phoneNumber }</p>
 				<h4>
-					<strong>Employer</strong>
+					<strong>Cover Letter</strong>
 				</h4>
-				<p>${jobPosting.company.employerName}</p>
-				<h4><strong>Location</strong></h4>
-				<p>${jobPosting.location }</p>
+				<p>${application.coverLetter}</p>
 				<h4>
-					<strong>Salary</strong>
+					<strong>Email</strong>
 				</h4>
-				<p>${jobPosting.salary }</p>
+				<p>${application.email }</p>
 				<h4>
-					<strong>Website</strong>
+					<strong>Resume</strong>
 				</h4>
-				<p>${jobPosting.website }</p>
+				<p>
+					<c:choose>
+						<c:when test="${not empty application.resume.id }">
+							<a
+								href="<c:url value='/resume/download.html?resumeId=${application.resume.id}' />"
+								role="button" class="btn btn-primary"><i
+								class="fa fa-download" aria-hidden="true"></i>&nbsp;&nbsp;Download</a>
+						</c:when>
+						<c:otherwise>
+							<p class="text-danger">Resume submitted for this application doesn't exist.</p>
+						</c:otherwise>
+					</c:choose>
+				</p>
 			</div>
 		</div>
 	</div>

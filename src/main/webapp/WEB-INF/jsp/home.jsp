@@ -38,7 +38,7 @@
 		</c:when>
 		
 		<c:otherwise>
-			<div class="row">
+			<div class="animated fadeIn row">
 				<div class="col col-md-8 col-md-offset-2">
 					<h1 class="text-warning">Trending Jobs</h1>
 					<hr />

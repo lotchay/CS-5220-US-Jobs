@@ -8,9 +8,9 @@ public interface JobPostingDao {
 	
 	List<JobPosting> getJobPostings();
 	
-	List<JobPosting> getJobPostings(int id);
+	List<JobPosting> getEmployerJobPostings(int id);
 	
-	List<JobPosting> getOpenedJobPostings();
+	List<JobPosting> getPublicJobPostings();
 	
 	List<JobPosting> getClosedJobPostings();
 	

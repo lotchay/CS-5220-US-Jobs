@@ -38,7 +38,10 @@
 		<div class="col-md-6 col-md-offset-2">
 			<div class="panel panel-success">
 				<div class="panel-heading">
-					<h3 class="panel-title"><i class="fa fa-industry" aria-hidden="true"></i>&nbsp;&nbsp;Job Description</h3>
+					<h3 class="panel-title">
+						<i class="fa fa-industry" aria-hidden="true"></i>&nbsp;&nbsp;Job
+						Description
+					</h3>
 				</div>
 				<div class="panel-body">
 					<p>${jobPosting.jobDescription }</p>
@@ -50,30 +53,26 @@
 								</button>
 							</c:when>
 							<c:otherwise>
-								<form class="form-btn-container" action="apply.html" method="get">
-									<input type="hidden" name="jobId" value="${jobPosting.id }" />
-									<input type="hidden" name="seekerId" value="${currentUser.id }"/>
-									<button type="submit" id="apply" class="btn btn-info" >Apply</button>
-								</form>
+								<a
+									href="apply.html?jobId=${jobPosting.id }"
+									role="button" id="apply" class="btn btn-info"> <i
+									class="fa fa-arrow-circle-right" aria-hidden="true"></i>&nbsp;&nbsp;Apply
+								</a>
 							</c:otherwise>
 						</c:choose>
 						<c:choose>
 							<c:when test="${jobPosting.usersFavorited.contains(currentUser)}">
-								<form class="form-btn-container" method="post"
-									action="favorite.html?jobid=${jobPosting.id}">
-									<button type="submit" id="favorite" class="btn btn-warning">
-										<i class="fa fa-undo" aria-hidden="true"></i>
-										&nbsp;&nbsp;Unfavorite
-									</button>
-								</form>
+								<a href="favorite.html?jobid=${jobPosting.id}" role="button"
+									id="favorite" class="btn btn-warning"> <i
+									class="fa fa-undo" aria-hidden="true"></i>
+									&nbsp;&nbsp;Unfavorite
+								</a>
 							</c:when>
 							<c:otherwise>
-								<form class="form-btn-container" method="post"
-									action="favorite.html?jobid=${jobPosting.id}">
-									<button type="submit" id="favorite" class="btn btn-warning">
-										<i class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;Favorite
-									</button>
-								</form>
+								<a href="favorite.html?jobid=${jobPosting.id}" role="button"
+									id="favorite" class="btn btn-warning"> <i
+									class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;Favorite
+								</a>
 							</c:otherwise>
 						</c:choose>
 					</security:authorize>
@@ -83,7 +82,10 @@
 		<div class="col-md-2">
 			<div class="panel panel-info">
 				<div class="panel-heading">
-					<h3 class="panel-title"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;Job Summary</h3>
+					<h3 class="panel-title">
+						<i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;Job
+						Summary
+					</h3>
 				</div>
 				<div class="panel-body">
 					<h4>
@@ -101,8 +103,10 @@
 					<h4>
 						<strong>Salary</strong>
 					</h4>
-						<p><fmt:setLocale value="en_US"/>
-						<fmt:formatNumber value="${jobPosting.salary }" type="currency"/></p>
+					<p>
+						<fmt:setLocale value="en_US" />
+						<fmt:formatNumber value="${jobPosting.salary }" type="currency" />
+					</p>
 					<h4>
 						<strong>Website</strong>
 					</h4>
@@ -115,21 +119,24 @@
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h3 class="panel-title"><i class="fa fa-industry" aria-hidden="true"></i>&nbsp;&nbsp;Job Reviews</h3>
+					<h3 class="panel-title">
+						<i class="fa fa-commenting" aria-hidden="true"></i>&nbsp;&nbsp;Job
+						Reviews
+					</h3>
 				</div>
 				<div class="panel-body">
-						<c:choose>
-							<c:when test="${empty jobPosting.jobReviews}">
-								<h4>There are no reviews for this job.</h4>
-							</c:when>
-							<c:otherwise>
-								<c:forEach items="${jobPosting.jobReviews }" var="review">
-									<h3>${review.userPosted.username}</h3>
-									<h4>${review.jobReview }</h4>
-								</c:forEach>
-							</c:otherwise>
-						</c:choose>
-						<security:authorize access="hasRole('SEEKER') or hasRole('ADMIN')">
+					<c:choose>
+						<c:when test="${empty jobPosting.jobReviews}">
+							<h4>There are no reviews for this job.</h4>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${jobPosting.jobReviews }" var="review">
+								<h3>${review.userPosted.username}</h3>
+								<h4>${review.jobReview }</h4>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+					<security:authorize access="hasRole('SEEKER')">
 						<c:choose>
 							<c:when test="${currentUser.jobsReviewed.contains(jobPosting)}">
 								<button class="btn btn-danger" disabled>
@@ -138,12 +145,14 @@
 							</c:when>
 							<c:otherwise>
 								<div class="col-lg-10">
-									<textarea class="form-control"
-										rows="4" id="reviewText" placeholder="Write your review here."></textarea>
+									<textarea class="form-control" rows="4" id="reviewText"
+										placeholder="Write your review here."></textarea>
 								</div>
 								<form class="form-btn-container" method="post"
 									action="review.html?jobid=${jobPosting.id}">
-									<button type="reset" id="review" class="btn btn-warning">Review</button>
+									<button type="reset" id="review" class="btn btn-warning">
+										<i class="fa fa-paper-plane-o" aria-hidden="true"></i>&nbsp;&nbsp;Review
+									</button>
 								</form>
 							</c:otherwise>
 						</c:choose>

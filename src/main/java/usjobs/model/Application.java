@@ -1,7 +1,9 @@
 package usjobs.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +28,11 @@ public class Application implements Serializable {
 
 	@Column(name = "first_name")
 	private String firstName;
-
+	
+	@ManyToOne
+	@JoinColumn(name = "seeker_id")
+	private JobSeeker seeker;
+	
 	@Column(name = "last_name")
 	private String lastName;
 
@@ -46,6 +52,9 @@ public class Application implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "resume_id")
 	private Resume resume;
+	
+	@Column(name = "date_applied")
+	private Date dateApplied;
 
 	public Integer getId() {
 		return id;
@@ -111,4 +120,21 @@ public class Application implements Serializable {
 		this.resume = resume;
 	}
 
+	public JobSeeker getSeeker() {
+		return seeker;
+	}
+
+	public void setSeeker(JobSeeker seeker) {
+		this.seeker = seeker;
+	}
+
+	public Date getDateApplied() {
+		return dateApplied;
+	}
+
+	public void setDateApplied(Date dateApplied) {
+		this.dateApplied = dateApplied;
+	}
+	
+	
 }

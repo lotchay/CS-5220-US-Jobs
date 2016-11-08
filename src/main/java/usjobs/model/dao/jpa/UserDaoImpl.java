@@ -1,6 +1,7 @@
 package usjobs.model.dao.jpa;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -76,7 +77,7 @@ public class UserDaoImpl implements UserDao  {
 	@Override
 	public List<User> searchUsers( String searchTerm, String searchLoc ) {
 	    
-		String query = "FROM User u WHERE UPPER(u.username) LIKE ?1 "
+		String query = "FROM User u WHERE UPPER(u.username) LIKE ?1 AND u.enabled=true "
 				+ "AND (UPPER(u.address.state) like ?2 OR UPPER(u.address.city) like ?2 OR u.address.zip like ?2)";
 		
 		return entityManager.createQuery(query, User.class)
@@ -88,12 +89,21 @@ public class UserDaoImpl implements UserDao  {
 	@Override
 	public List<User> searchSeekers( String searchTerm, String searchLoc ) {
 	    
-		String query = "From User u WHERE UPPER(u.currentJobTitle) LIKE ?1 OR u.experience LIKE ?1 "
+		String query = "From User u WHERE UPPER(u.currentJobTitle) LIKE ?1 OR u.experience LIKE ?1 AND u.enabled = true "
 				+ "AND (UPPER(u.address.state) like ?2 OR UPPER(u.address.city) like ?2 OR u.address.zip like ?2)";
 		
 		return entityManager.createQuery(query, User.class)
 				.setParameter(1, "%" + searchTerm.toUpperCase() + "%")
 				.setParameter(2, "%" + searchLoc.toUpperCase() + "%")
+				.getResultList();
+	}
+	
+	@Override
+	public List<User> getJobSeekers() {
+		String query = "From User WHERE user_type = :type";
+		return entityManager
+				.createQuery(query, User.class)
+				.setParameter("type", "SEEKER")
 				.getResultList();
 	}
 
@@ -112,4 +122,30 @@ public class UserDaoImpl implements UserDao  {
 		return entityManager.merge( user );
 	}
 	
+	@Override
+	@Transactional
+	public int updateUserType(User user) {
+		/* Helper method to ensure no problems with user_type and inheritance*/
+		Set<String> userRoles = user.getUserRoles();		
+		String type = null;
+		int status = -1; //status = -1 means that no user role was selected, and so
+		// a user will be "ADMIN" by default per the behavior of postgres.
+		
+		if (userRoles.contains("ROLE_SEEKER")) {
+			type = "SEEKER";
+		} else if (userRoles.contains(("ROLE_EMPLOYER"))) {
+			type = "EMPLOYER";
+		}
+		
+		if (type != null) {
+			String query = "UPDATE User SET user_type = :type where id = :id";
+			return entityManager
+					.createQuery(query)
+					.setParameter("type", type)
+					.setParameter("id", user.getId())
+					.executeUpdate();
+		} else {
+			return status;
+		}
+	}
 }

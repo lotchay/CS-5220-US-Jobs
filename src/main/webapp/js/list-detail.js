@@ -6,10 +6,15 @@ $(document).ready(function() {
 
 	var optionsChildren = $("#options-list").children();
 	var detailChildren = $("#detail").children();
-
+	
+	var activeTab = 0; //first tab is active by default.
+	
 	// hide all detail views but the first option's.
 	optionsChildren.each(function(index) {
 		$(this).click(function() {
+			$(optionsChildren[activeTab]).removeClass("active");
+			activeTab = index;
+			$(this).addClass("active");
 			filterHides($(this));
 		});
 		if (index !== 0) {

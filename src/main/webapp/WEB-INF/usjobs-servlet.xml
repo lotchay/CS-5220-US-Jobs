@@ -23,4 +23,23 @@
         <property name="basename" value="messages" />
     </bean>
 
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
+    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="defaultErrorView" value="error" />
+    </bean>
+    
+    
+    <mvc:annotation-driven conversion-service="conversionService" />
+
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="usjobs.web.converter.ResumeToText" />
+                <bean class="usjobs.web.converter.TextToResume" />
+            </set>
+        </property>
+    </bean>
+    
+        
 </beans>

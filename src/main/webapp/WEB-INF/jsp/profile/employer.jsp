@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -16,100 +17,152 @@
 <body>
 	<jsp:include page="../header.jsp" />
 	<div class="row animated fadeIn">
-		<div class="col col-md-2 col-md-offset-2">
-			<ul id="options-list" class="list-group">
-				<li id="viewProfile" class="list-group-item"><a href="#">View
-						Profile</a></li>
-				<li id="profile" class="list-group-item"><a href="#">Update
-						Profile</a></li>
-				<li id="company" class="list-group-item"><a href="#">Company
-						Description</a></li>
-				<li id="newJob" class="list-group-item"><a href="#">Add a
-						New Job Listing</a></li>
-				<li id="job" class="list-group-item"><a href="#">Manage Job
-						Listings</a></li>
-			</ul>
+		<div id="options-list" class="col col-md-2 col-md-offset-2 list-group">
+
+			<a id="viewProfile" class="list-group-item" href="#"><i
+				class="fa fa-address-card" aria-hidden="true"></i>&nbsp;&nbsp;View
+				Profile</a> <a id="profile" class="list-group-item" href="#"><i
+				class="fa fa-adjust" aria-hidden="true"></i>&nbsp;&nbsp;Update
+				Profile</a> <a id="company" class="list-group-item" href="#">Company
+				Description</a> <a id="newJob" class="list-group-item" href="#"><i
+				class="fa fa-plus-square" aria-hidden="true"></i>&nbsp;&nbsp;Add a
+				New Job Listing</a> <a id="job" class="list-group-item" href="#"> <i
+				class="fa fa-tasks" aria-hidden="true"></i>&nbsp;&nbsp;Manage Job
+				Listings
+			</a>
 		</div>
 		<div id="detail" class="col col-md-6">
 			<div id="viewProfileDetail" class="panel panel-info">
 				<div class="panel-heading">
-					<h3 class="panel-title">View ${user.firstName} ${user.lastName }'s Profile</h3>
+					<h3 class="panel-title">
+						<i class="fa fa-address-card" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;View
+						${user.firstName }'s profile
+					</h3>
 				</div>
 				<div class="panel-body">
-					<table class="table table-striped table-hover">
-				        <tr>
-				            <th>ID</th>
-				            <th>Username</th>
-				            <th>First Name</th>
-				            <th>Last Name</th>
-				            <th>Email</th>
-				            <th>Password</th>
-				        </tr>
-				        <tr>
-				            <td>${user.id}</td>
-				            <td>${user.username}</td>
-				            <td>${user.firstName}</td>
-				            <td>${user.lastName}</td>
-				            <td>${user.email}</td>
-				            <td>${user.password}</td>            
-				        </tr>
-				    </table>
+					<h4>
+						<strong>Id</strong>
+					</h4>
+					<p>${user.id }</p>
+					<h4>
+						<strong>Username</strong>
+					</h4>
+					<p>${user.username }</p>
+					<h4>
+						<strong>First Name</strong>
+					</h4>
+					<p>${user.firstName }</p>
+					<h4>
+						<strong>Last Name</strong>
+					</h4>
+					<p>${user.lastName}</p>
+					<h4>
+						<strong>Email</strong>
+					</h4>
+					<p>${user.email }</p>
+					<h4>
+						<strong>Password</strong>
+					</h4>
+					<p>${user.password }</p>
 				</div>
 			</div>
 			<div id="profileDetail" class="panel panel-info">
 				<div class="panel-heading">
-					<h3 class="panel-title">Update Profile</h3>
+					<h3 class="panel-title">
+						<i class="fa fa-adjust" aria-hidden="true"></i>&nbsp;&nbsp;Update
+						Profile
+					</h3>
 				</div>
 				<div class="panel-body">
-					<form class="form-horizontal">
+					<form id="editProfileEmployer" action="editProfile.html" method="post"
+						class="form-horizontal">
 						<fieldset>
 							<div class="form-group">
 								<label for="username" class="col-lg-2 control-label">Username</label>
 								<div class="col-lg-10">
-									<input type="text" class="form-control" id="username"
+									<input type="text" class="form-control" id="username" name="username"
 										value="${user.username}" disabled>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputPassword" class="col-lg-2 control-label">Password</label>
 								<div class="col-lg-10">
-									<input type="password" class="form-control" id="inputPassword"
+									<input type="password" name="password" class="form-control"
+										id="password" value="${user.password }"
 										placeholder="Password">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputPassword" class="col-lg-2 control-label">Confirm Password</label>
+								<div class="col-lg-10">
+									<input type="password" name="confirm_password" class="form-control"
+										id="confirm_password" value=""
+										placeholder="Confirm password">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="email" class="col-lg-2 control-label">Email</label>
 								<div class="col-lg-10">
-									<input type="email" class="form-control" id="email"
-										placeholder="email">
+									<input type="email" name="email" class="form-control"
+										id="email" placeholder="email" value="${user.email }">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="address" class="col-lg-2 control-label">Address</label>
+								<label for="street" class="col-lg-2 control-label">Street</label>
 								<div class="col-lg-10">
-									<input type="text" class="form-control" id="address"
-										placeholder="address">
+									<input type="text" name="street" class="form-control"
+										id="street" placeholder="Street"
+										value="${user.address.street}">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="phone" class="col-lg-2 control-label">Phone</label>
+								<label for="city" class="col-lg-2 control-label">City</label>
 								<div class="col-lg-10">
-									<input type="number" class="form-control" id="phone"
-										placeholder="Phone #">
+									<input type="text" name="city" class="form-control" id="city"
+										placeholder="City" value="${user.address.city }">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="state" class="col-lg-2 control-label">State</label>
+								<div class="col-lg-10">
+									<input type="text" name="state" class="form-control" id="state"
+										placeholder="State" value="${user.address.state }">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="zip" class="col-lg-2 control-label">Zip</label>
+								<div class="col-lg-10">
+									<input type="text" name="zip" class="form-control" id="zip"
+										placeholder="Zip code" value="${user.address.zip }">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-lg-2 control-label">Contact Sharing</label>
 								<div class="col-lg-10">
 									<div class="radio">
-										<label> <input type="radio" name="contact-sharing"
-											id="enableSharing" value="option1" checked="">
-											Enabled
+										<label> <c:choose>
+												<c:when test="${!user.supressContact }">
+													<input type="radio" checked name="supress"
+														id="enableSharing" value="false">
+												</c:when>
+												<c:otherwise>
+													<input type="radio" name="supress" id="enableSharing"
+														value="false">
+												</c:otherwise>
+											</c:choose> Enabled
 										</label>
 									</div>
 									<div class="radio">
-										<label> <input type="radio" name="contact-sharing"
-											id="disableSharing" value="option2"> Disabled
+										<label> <c:choose>
+												<c:when test="${user.supressContact }">
+													<input type="radio" checked name="supress"
+														id="disableSharing" value="true">
+												</c:when>
+												<c:otherwise>
+													<input type="radio" name="supress" id="disableSharing"
+														value="true">
+												</c:otherwise>
+											</c:choose> Disabled
 										</label>
 									</div>
 								</div>
@@ -132,50 +185,54 @@
 			</div>
 			<div id="newJobDetail" class="panel panel-info">
 				<div class="panel-heading">
-					<h3 class="panel-title">Post a New Job</h3>
+					<h3 class="panel-title">
+						<i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp;&nbspPost
+						a New Job
+					</h3>
 				</div>
 				<div class="panel-body">
-					<form:form modelAttribute="newJob" class="form-horizontal"
+					<form:form id="addJobForm" modelAttribute="newJob" class="form-horizontal"
 						action="addJob.html?employerId=${user.id}" method="post">
 						<fieldset>
 							<div class="form-group">
-								<label for="title" class="col-lg-2 control-label">Title</label>
+								<label for="jobTitle" class="col-lg-2 control-label">Title</label>
 								<div class="col-lg-10">
 									<form:input type="text" class="form-control" path="jobTitle"
-										id="title" placeholder="Job Title" />
+										id="jobTitle" name="jobTitle" placeholder="Job Title" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="website" class="col-lg-2 control-label">Website</label>
 								<div class="col-lg-10">
 									<form:input type="text" class="form-control" path="website"
-										id="website" placeholder="Job posting website" />
+										id="website" name="website" placeholder="Job posting website" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="location" class="col-lg-2 control-label">Location</label>
 								<div class="col-lg-10">
 									<form:input type="text" class="form-control" path="location"
-										id="location" placeholder="Job Location" />
+										id="location" name="location" placeholder="Job Location" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="description" class="col-lg-2 control-label">Description</label>
 								<div class="col-lg-10">
 									<form:textarea class="form-control" path="jobDescription"
-										rows="3" id="description" />
+										rows="3" id="jobDescription" name="jobDescription" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="salary" class="col-lg-2 control-label">Salary</label>
 								<div class="col-lg-10">
 									<form:input type="text" class="form-control" path="salary"
-										id="salary" placeholder="Job Salary" />
+										id="salary" name="salary" placeholder="Job Salary" />
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-lg-10 col-lg-offset-2">
-									<a href="<c:url value='/user/profile.html' />" class="btn btn-default">Cancel</a>
+									<a href="<c:url value='/user/profile.html' />"
+										class="btn btn-default">Cancel</a>
 									<button type="submit" class="btn btn-primary">Submit</button>
 								</div>
 							</div>
@@ -185,7 +242,10 @@
 			</div>
 			<div id="jobDetail" class="panel panel-info">
 				<div class="panel-heading">
-					<h3 class="panel-title">Manage Job Listings</h3>
+					<h3 class="panel-title">
+						<i class="fa fa-tasks" aria-hidden="true"></i>&nbsp;&nbsp;Manage
+						Job Listings
+					</h3>
 				</div>
 				<div class="panel-body">
 					<table class="table table-striped table-hover">
@@ -196,39 +256,35 @@
 						<c:forEach items="${user.jobsPosted}" var="jobPosting">
 							<tr>
 								<td>${jobPosting.jobTitle }</td>
-								<td>
-									<form class="form-btn-container"
-										action="toggleJob.html?employerId=${user.id}&jobId=${jobPosting.id }"
-										method="post">
-										<c:choose>
-											<c:when test="${jobPosting.opened}">
-												<button type="submit" class="btn btn-sm btn-warning">
-													<i class="fa fa-level-down" aria-hidden="true"></i>&nbsp;&nbsp;Close
-												</button>
-											</c:when>
-											<c:otherwise>
-												<button type="submit" class="btn btn-sm btn-info">
-													<i class="fa fa-level-up" aria-hidden="true"></i>&nbsp;&nbsp;
-													Open
-												</button>
-											</c:otherwise>
-										</c:choose>
-									</form>
-									<form class="form-btn-container" action="editJob.html"
-										method="get">
-										<input type="hidden" name="employerId" value="3" /> <input
-											type="hidden" name="jobId" value="${jobPosting.id }" />
-										<button type="submit" class="btn btn-sm btn-success">
-											<i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Edit
-										</button>
-									</form>
-
-									<form class="form-btn-container"
-										action="deleteJob.html?employerId=${user.id}&jobId=${jobPosting.id }"
-										method="post">
-										<button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-times-circle"></i>&nbsp;&nbsp;Delete</button>
-									</form>
-								</td>
+								<td><a
+									href="<c:url value='/application/jobApplications.html?jobId=${jobPosting.id }' />"
+									role="button" class="btn btn-sm btn-primary"><i
+										class="fa fa-shopping-basket" aria-hidden="true"></i>&nbsp;&nbsp;Applications
+								</a> <c:choose>
+										<c:when test="${jobPosting.opened}">
+											<a
+												href="toggleJob.html?employerId=${user.id}&jobId=${jobPosting.id }"
+												role="button" class="btn btn-sm btn-warning"> <i
+												class="fa fa-level-down" aria-hidden="true"></i>&nbsp;&nbsp;Close
+											</a>
+										</c:when>
+										<c:otherwise>
+											<a
+												href="toggleJob.html?employerId=${user.id}&jobId=${jobPosting.id }"
+												role="button" class="btn btn-sm btn-info"> <i
+												class="fa fa-level-up" aria-hidden="true"></i>&nbsp;&nbsp;
+												Open
+											</a>
+										</c:otherwise>
+									</c:choose> <a
+									href="editJob.html?employerId=${user.id}&jobId=${jobPosting.id}"
+									role="button" class="btn btn-sm btn-success"> <i
+										class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Edit
+								</a> <a
+									href="deleteJob.html?employerId=${user.id}&jobId=${jobPosting.id }"
+									role="button" class="btn btn-sm btn-danger"> <i
+										class="fa fa-times-circle"></i>&nbsp;&nbsp;Delete
+								</a></td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -239,5 +295,7 @@
 </body>
 
 <script src="../js/vendor/bower.js"></script>
+<script src="../bower_components/jquery-validation/dist/additional-methods.js"></script>
 <script src="../js/list-detail.js"></script>
+<script src="../js/validate.js"></script>
 </html>

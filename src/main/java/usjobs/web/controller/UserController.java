@@ -22,6 +22,8 @@ import usjobs.model.dao.UserDao;
 @SessionAttributes("user")
 public class UserController {
 
+//    private Logger logger = Logger.getLogger( UserController.class );
+
     @Autowired
     private UserDao userDao;
 
@@ -65,8 +67,8 @@ public class UserController {
         // Validate user's input
         userValidator.validate( user, result );
 
-        if ( result.hasErrors() ) { 
-        
+        if( result.hasErrors() ) {
+
             return "user/add"; 
         }
 
@@ -93,24 +95,26 @@ public class UserController {
 
     @RequestMapping(value = "/user/edit.html", method = RequestMethod.POST)
     public String edit( @ModelAttribute User user, SessionStatus status ) {
-   	
+
         // Save the user to database
         user = userDao.saveUser( user );
-
+        userDao.updateUserType( user ); // update user type since postgres
+                                        // default it to ADMIN even if seeker or
+                                        // employer.
         // Remove all the session attributes when done
         status.setComplete();
 
         // Redirect to user list
         return "redirect:list.html";
     }
-    
+
     @RequestMapping(value = "/user/disable.html", method = RequestMethod.GET)
     public String disable( @RequestParam Integer id, ModelMap models ) {
-    	
-    	// Disable the user
-    	userDao.getUser( id ).setEnabled( false );
-    	
-    	// Save the user to database
+
+        // Disable the user
+        userDao.getUser( id ).setEnabled( false );
+
+        // Save the user to database
         userDao.saveUser( userDao.getUser( id ) );
 
         // Get all users from database and pass them to JSP
@@ -120,14 +124,14 @@ public class UserController {
 
         return "user/list";
     }
-    
+
     @RequestMapping(value = "/user/enable.html", method = RequestMethod.GET)
     public String enable( @RequestParam Integer id, ModelMap models ) {
-    	
-    	// Disable the user
-    	userDao.getUser( id ).setEnabled( true );
-    	
-    	// Save the user to database
+
+        // Disable the user
+        userDao.getUser( id ).setEnabled( true );
+
+        // Save the user to database
         userDao.saveUser( userDao.getUser( id ) );
 
         // Get all users from database and pass them to JSP
@@ -154,18 +158,21 @@ public class UserController {
         // Validate user's input
         userValidator.validate( user, result );
 
-        if ( result.hasErrors() ) { 
-            
-            return "register";         
+        if( result.hasErrors() ) {
+
+            return "register"; 
         }
 
         // Save the user to database
         user = userDao.saveUser( user );
 
+        userDao.updateUserType( user ); // update user type since postgres
+                                        // default it to ADMIN even if seeker or
+                                        // employer.
         // Remove all the session attributes when done
         status.setComplete();
 
-        return "redirect:index.html";
+        return "redirect:login.html";
     }
-
+    
 }
