@@ -19,12 +19,10 @@ $(document).ready(function() {
 		rules: {
 			password: {
 				required: true,
-				minlength: 5,
 				nowhitespace: true
 			},
 			confirm_password: {
 				required: true,
-				minlength: 5,
 				equalTo: "#password",
 				nowhitespace: true
 			},
@@ -59,12 +57,10 @@ $(document).ready(function() {
 		rules: {
 			password: {
 				required: true,
-				minlength: 5,
 				nowhitespace: true
 			},
 			confirm_password: {
 				required: true,
-				minlength: 5,
 				equalTo: "#password",
 				nowhitespace: true
 			},
@@ -92,17 +88,60 @@ $(document).ready(function() {
 		}
 	});
 	
+	$("#loginForm").validate({
+		rules: {
+			username: {
+				required: true,
+				minlength: 1
+			},
+			password : {
+				required: true
+			}
+		}
+	});
+	
+	$("#registerForm").validate({
+		rules: {
+			username: {
+				required: true,
+				minlength: 1
+			},
+			password : {
+				required: true,
+				minlength: 5
+			},
+			password2: {
+				required: true,
+				minlength: 5,
+				equalTo: "#password",
+				nowhitespace: true
+			},
+			email: {
+				required: true,
+				email: true
+			},
+			firstName: {
+				required: true,
+				minlength: 1,
+				lettersonly: true
+			},
+			lastName: {
+				required: true,
+				minlength: 1,
+				lettersonly: true
+			}
+		}
+	});
+	
 	// ADMIN VALIDATION
 	$("#editProfileAdmin").validate({
 		rules: {
 			password: {
 				required: true,
-				minlength: 5,
 				nowhitespace: true
 			},
 			confirm_password: {
 				required: true,
-				minlength: 5,
 				equalTo: "#password",
 				nowhitespace: true
 			},
