@@ -14,54 +14,62 @@ import javax.persistence.Table;
 @Table(name = "job_reviews")
 public class JobReview implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "job_review_id")
-	@GeneratedValue
-	private Integer id;
+    @Id
+    @Column(name = "job_review_id")
+    @GeneratedValue
+    private Integer id;
 
-	@Column(name = "job_review")
-	private String jobReview;
+    @Column(name = "job_review")
+    private String jobReview;
 
-	@ManyToOne
-	@JoinColumn(name = "job_id")
-	private JobPosting jobReviewed;
+    @ManyToOne
+    @JoinColumn(name = "job_id")
+    private JobPosting jobReviewed;
 
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User userPosted;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User userPosted;
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getId() {
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+        return id;
+    }
 
-	public String getJobReview() {
-		return jobReview;
-	}
+    public void setId( Integer id ) {
 
-	public void setJobReview(String jobReview) {
-		this.jobReview = jobReview;
-	}
+        this.id = id;
+    }
 
-	public JobPosting getJobReviewed() {
-		return jobReviewed;
-	}
+    public String getJobReview() {
 
-	public void setJobReviewed(JobPosting jobReviewed) {
-		this.jobReviewed = jobReviewed;
-	}
+        return jobReview;
+    }
 
-	public User getUserPosted() {
-		return userPosted;
-	}
+    public void setJobReview( String jobReview ) {
 
-	public void setUserPosted(User userPosted) {
-		this.userPosted = userPosted;
-	}
+        this.jobReview = jobReview;
+    }
+
+    public JobPosting getJobReviewed() {
+
+        return jobReviewed;
+    }
+
+    public void setJobReviewed( JobPosting jobReviewed ) {
+
+        this.jobReviewed = jobReviewed;
+    }
+
+    public User getUserPosted() {
+
+        return userPosted;
+    }
+
+    public void setUserPosted( User userPosted ) {
+
+        this.userPosted = userPosted;
+    }
 
 }

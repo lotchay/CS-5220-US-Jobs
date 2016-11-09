@@ -3,7 +3,6 @@ package usjobs.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,122 +18,141 @@ import org.hibernate.annotations.Type;
 @Table(name = "applications")
 public class Application implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue
-	@Column(name = "app_id")
-	private Integer id;
+    @Id
+    @GeneratedValue
+    @Column(name = "app_id")
+    private Integer id;
 
-	@Column(name = "first_name")
-	private String firstName;
-	
-	@ManyToOne
-	@JoinColumn(name = "seeker_id")
-	private JobSeeker seeker;
-	
-	@Column(name = "last_name")
-	private String lastName;
+    @Column(name = "first_name")
+    private String firstName;
 
-	private String email;
+    @ManyToOne
+    @JoinColumn(name = "seeker_id")
+    private JobSeeker seeker;
 
-	@Column(name = "phone_number")
-	private String phoneNumber;
+    @Column(name = "last_name")
+    private String lastName;
 
-	@Column(name = "cover_letter")
-	@Type(type = "text")
-	private String coverLetter;
+    private String email;
 
-	@ManyToOne
-	@JoinColumn(name = "job_id")
-	private JobPosting jobApplied;
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
-	@OneToOne
-	@JoinColumn(name = "resume_id")
-	private Resume resume;
-	
-	@Column(name = "date_applied")
-	private Date dateApplied;
+    @Column(name = "cover_letter")
+    @Type(type = "text")
+    private String coverLetter;
 
-	public Integer getId() {
-		return id;
-	}
+    @ManyToOne
+    @JoinColumn(name = "job_id")
+    private JobPosting jobApplied;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @OneToOne
+    @JoinColumn(name = "resume_id")
+    private Resume resume;
 
-	public String getFirstName() {
-		return firstName;
-	}
+    @Column(name = "date_applied")
+    private Date dateApplied;
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public Integer getId() {
 
-	public String getLastName() {
-		return lastName;
-	}
+        return id;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public void setId( Integer id ) {
 
-	public String getEmail() {
-		return email;
-	}
+        this.id = id;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getFirstName() {
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
+        return firstName;
+    }
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+    public void setFirstName( String firstName ) {
 
-	public String getCoverLetter() {
-		return coverLetter;
-	}
+        this.firstName = firstName;
+    }
 
-	public void setCoverLetter(String coverLetter) {
-		this.coverLetter = coverLetter;
-	}
+    public String getLastName() {
 
-	public JobPosting getJobApplied() {
-		return jobApplied;
-	}
+        return lastName;
+    }
 
-	public void setJobApplied(JobPosting jobApplied) {
-		this.jobApplied = jobApplied;
-	}
+    public void setLastName( String lastName ) {
 
-	public Resume getResume() {
-		return resume;
-	}
+        this.lastName = lastName;
+    }
 
-	public void setResume(Resume resume) {
-		this.resume = resume;
-	}
+    public String getEmail() {
 
-	public JobSeeker getSeeker() {
-		return seeker;
-	}
+        return email;
+    }
 
-	public void setSeeker(JobSeeker seeker) {
-		this.seeker = seeker;
-	}
+    public void setEmail( String email ) {
 
-	public Date getDateApplied() {
-		return dateApplied;
-	}
+        this.email = email;
+    }
 
-	public void setDateApplied(Date dateApplied) {
-		this.dateApplied = dateApplied;
-	}
-	
-	
+    public String getPhoneNumber() {
+
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber( String phoneNumber ) {
+
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getCoverLetter() {
+
+        return coverLetter;
+    }
+
+    public void setCoverLetter( String coverLetter ) {
+
+        this.coverLetter = coverLetter;
+    }
+
+    public JobPosting getJobApplied() {
+
+        return jobApplied;
+    }
+
+    public void setJobApplied( JobPosting jobApplied ) {
+
+        this.jobApplied = jobApplied;
+    }
+
+    public Resume getResume() {
+
+        return resume;
+    }
+
+    public void setResume( Resume resume ) {
+
+        this.resume = resume;
+    }
+
+    public JobSeeker getSeeker() {
+
+        return seeker;
+    }
+
+    public void setSeeker( JobSeeker seeker ) {
+
+        this.seeker = seeker;
+    }
+
+    public Date getDateApplied() {
+
+        return dateApplied;
+    }
+
+    public void setDateApplied( Date dateApplied ) {
+
+        this.dateApplied = dateApplied;
+    }
+
 }
