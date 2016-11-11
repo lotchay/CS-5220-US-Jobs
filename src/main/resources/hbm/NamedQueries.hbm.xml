@@ -12,7 +12,8 @@ select r.* from resumes r
 	where
 	(plainto_tsquery(:text) @@ tsv) and
 	(upper(u.city) like upper(:location) || '%' 
-	or upper(u.state) like upper(:location) || '%')	
+	or upper(u.state) like upper(:location) || '%'
+	or u.zip = :location)	
     order by ts_rank(tsv, plainto_tsquery(:text), 16|32) desc
 ]]>
     </sql-query>
