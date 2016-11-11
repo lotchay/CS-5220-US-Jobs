@@ -6,7 +6,7 @@
 <div class="animated fadeIn row">
 	<div class="col-md-8 col-md-offset-2">
 		<c:choose>
-		<c:when test="${empty searchResultJob && empty searchResultUser && empty searchResultSeeker}">
+		<c:when test="${empty searchResultJob && empty searchResultUser && empty searchResultResumes}">
 			<h1 class="text-warning">No results found.</h1>
 		</c:when>
 		<c:when test="${not empty searchResultUser }">

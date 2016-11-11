@@ -34,9 +34,9 @@ public class ResumeDaoImpl implements ResumeDao {
     }
     
     @Override
-    public List<Resume> searchResumes(String text){
+    public List<Resume> searchResumes(String searchTerm, String searchLoc){
     	TypedQuery<Resume> query = em.createNamedQuery("resume.search", Resume.class)
-    			.setParameter("text", text);
+    			.setParameter("text", searchTerm);
     	return query.getResultList();
     }
 

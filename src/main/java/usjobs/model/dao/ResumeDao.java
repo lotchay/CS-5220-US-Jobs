@@ -10,7 +10,7 @@ public interface ResumeDao {
 
     Resume saveResume( Resume resume );
     
-    List<Resume> searchResumes(String text);
+    List<Resume> searchResumes(String searchTerm, String searchLoc);
 
     void deleteResume( Resume resume );
 

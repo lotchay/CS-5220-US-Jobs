@@ -48,7 +48,7 @@ public class HomeController {
                 userDao.searchUsers( searchBar, searchLoc ) );
         } else if ( searchType.equals( "Job Seeker" ) ) {
             models.put( "searchResultResumes",
-                resumeDao.searchResumes( searchBar ) );
+                resumeDao.searchResumes( searchBar, searchLoc ) );
         }
         models.put( "searchBar", searchBar );
         return home( models );
