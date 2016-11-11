@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+          "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<sql-query name="resume.search">
+        <return class="usjobs.model.Resume" />
+<![CDATA[
+select * from resumes where plainto_tsquery(:text) @@ tsv
+    order by ts_rank(tsv, plainto_tsquery(:text), 16|32) desc
+]]>
+    </sql-query>
+    
+    	<sql-query name="job.search">
+        <return class="usjobs.model.JobPosting" />
+<![CDATA[
+select * from job_postings where (opened = 't') and 
+	(upper(job_title) like upper(:text) || '%' or plainto_tsquery(:text) @@ tsv) and
+	(upper(location) like upper(:location) || '%')
+    order by ts_rank(tsv, plainto_tsquery(:text), 16|32) desc
+]]>
+    </sql-query>
+</hibernate-mapping>
