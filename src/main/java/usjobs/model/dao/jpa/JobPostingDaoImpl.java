@@ -62,13 +62,11 @@ public class JobPostingDaoImpl implements JobPostingDao {
 
     @Override
     public List<JobPosting> searchJobs( String searchTerm, String searchLoc ) {
-
-        String query = "FROM JobPosting j WHERE j.enabled = true and j.opened = true AND UPPER(j.jobTitle) LIKE ?1 "
-            + "AND UPPER(j.location) like ?2";
-        return em.createQuery( query, JobPosting.class )
-            .setParameter( 1, "%" + searchTerm.toUpperCase() + "%" )
-            .setParameter( 2, "%" + searchLoc.toUpperCase() + "%" )
-            .getResultList();
+    	
+    	return em.createNamedQuery("job.search", JobPosting.class).
+    			setParameter("text", searchTerm).
+    			setParameter("location", searchLoc).getResultList();
+        
     }
 
     // TODO need fulltext search to look for job postings with user specified k

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.StringWriter;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.util.PDFTextStripper;
+import org.apache.poi.POITextExtractor;
+import org.apache.poi.extractor.ExtractorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -73,9 +78,10 @@ public class ResumeController {
         User user = userDao.getProfileUser( details.getUsername() );
 
         Integer userId = user.getId();
+        
+        String filename = resume.getOriginalFilename();
 
-        File file = new File( getFileDirectory( userId ),
-            resume.getOriginalFilename() );
+        File file = new File( getFileDirectory( userId ), filename );
 
         resume.transferTo( file );
 
@@ -84,9 +90,26 @@ public class ResumeController {
                 "file successfully uploaded to path: " + file.getPath() );
             Resume newResume = new Resume();
             newResume.setFilePath( file.getPath() );
-            newResume.setFileName( resume.getOriginalFilename() );
+            newResume.setFileName( filename );
             newResume.setUser( user );
             newResume.setUploadDate( new Date() );
+            //Full text search
+            String content = "";
+            try{
+            	if (filename.endsWith(".pdf")){
+            		PDDocument document = PDDocument.load(file);
+            		PDFTextStripper stripper = new PDFTextStripper();
+            		StringWriter sw = new StringWriter();
+            		stripper.writeText(document, sw);
+            		content = sw.toString();
+            	} else if (filename.endsWith(".doc") || filename.endsWith(".docx")){
+            		POITextExtractor extractor = ExtractorFactory.createExtractor(file);
+            		content = extractor.getText();
+            	}
+            } catch (Exception e){
+            	e.printStackTrace();
+            }
+            newResume.setContent(content);
             resumeDao.saveResume( newResume );
         } else {
             logger.error( "failed to upload file: " + file.getPath() );

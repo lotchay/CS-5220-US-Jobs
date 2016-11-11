@@ -9,6 +9,8 @@ public interface ResumeDao {
     List<Resume> getResumes( int userId );
 
     Resume saveResume( Resume resume );
+    
+    List<Resume> searchResumes(String searchTerm, String searchLoc);
 
     void deleteResume( Resume resume );
 

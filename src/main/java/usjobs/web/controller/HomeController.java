@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import usjobs.model.dao.JobPostingDao;
+import usjobs.model.dao.ResumeDao;
 import usjobs.model.dao.UserDao;
 
 @Controller
@@ -18,6 +19,9 @@ public class HomeController {
 
     @Autowired
     private UserDao userDao;
+    
+    @Autowired
+    private ResumeDao resumeDao;
 
     @RequestMapping(value = { "/index.html", "/home.html" },
         method = RequestMethod.GET)
@@ -43,8 +47,8 @@ public class HomeController {
             models.put( "searchResultUser",
                 userDao.searchUsers( searchBar, searchLoc ) );
         } else if ( searchType.equals( "Job Seeker" ) ) {
-            models.put( "searchResultSeeker",
-                userDao.searchSeekers( searchBar, searchLoc ) );
+            models.put( "searchResultResumes",
+                resumeDao.searchResumes( searchBar, searchLoc ) );
         }
         models.put( "searchBar", searchBar );
         return home( models );
