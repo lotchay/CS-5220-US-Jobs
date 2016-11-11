@@ -7,7 +7,12 @@
 	<sql-query name="resume.search">
         <return class="usjobs.model.Resume" />
 <![CDATA[
-select * from resumes where plainto_tsquery(:text) @@ tsv
+select r.* from resumes r 
+	inner join users u on r.user_id = u.user_id 
+	where
+	(plainto_tsquery(:text) @@ tsv) and
+	(upper(u.city) like upper(:location) || '%' 
+	or upper(u.state) like upper(:location) || '%')	
     order by ts_rank(tsv, plainto_tsquery(:text), 16|32) desc
 ]]>
     </sql-query>
