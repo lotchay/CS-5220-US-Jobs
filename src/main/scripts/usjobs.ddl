@@ -3,12 +3,14 @@ create sequence hibernate_sequence start 1 increment 1
     create table applications (
         app_id int4 not null,
         cover_letter text,
+        date_applied timestamp,
         email varchar(255),
         first_name varchar(255),
         last_name varchar(255),
         phone_number varchar(255),
         job_id int4,
         resume_id int4,
+        seeker_id int4,
         primary key (app_id)
     )
 
@@ -76,8 +78,10 @@ create sequence hibernate_sequence start 1 increment 1
 
     create table resumes (
         resume_id int4 not null,
+        content text,
         file_data bytea,
         file_name varchar(255),
+        file_path varchar(255),
         name varchar(255),
         upload_date timestamp,
         user_id int4,
@@ -108,6 +112,8 @@ create sequence hibernate_sequence start 1 increment 1
         employer_website varchar(255),
         current_job_title varchar(255),
         experience text,
+        keywords varchar(255),
+        is_notified boolean,
         primary key (user_id)
     )
 
@@ -123,6 +129,11 @@ create sequence hibernate_sequence start 1 increment 1
         add constraint FKbhnfs5wwy14wdm2f1wam8qkhf 
         foreign key (resume_id) 
         references resumes
+
+    alter table applications 
+        add constraint FKbipd4utha945ggyvtsyair097 
+        foreign key (seeker_id) 
+        references users
 
     alter table authorities 
         add constraint FKk91upmbueyim93v469wj7b2qh 

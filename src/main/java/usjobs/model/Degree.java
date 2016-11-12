@@ -13,88 +13,102 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="degrees")
+@Table(name = "degrees")
 public class Degree implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "degree_id")
-	@GeneratedValue
-	private Integer id;
+    @Id
+    @Column(name = "degree_id")
+    @GeneratedValue
+    private Integer id;
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "education_level")
-	private EducationLevel educationLevel;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "education_level")
+    private EducationLevel educationLevel;
 
-	private String school;
+    private String school;
 
-	private String major;
+    private String major;
 
-	@Column(name = "date_start")
-	private Date startDate;
+    @Column(name = "date_start")
+    private Date startDate;
 
-	@Column(name = "date_end")
-	private Date endDate;
+    @Column(name = "date_end")
+    private Date endDate;
 
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getId() {
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+        return id;
+    }
 
-	public EducationLevel getEducationLevel() {
-		return educationLevel;
-	}
+    public void setId( Integer id ) {
 
-	public void setEducationLevel(EducationLevel educationLevel) {
-		this.educationLevel = educationLevel;
-	}
+        this.id = id;
+    }
 
-	public String getSchool() {
-		return school;
-	}
+    public EducationLevel getEducationLevel() {
 
-	public void setSchool(String school) {
-		this.school = school;
-	}
+        return educationLevel;
+    }
 
-	public Date getStartDate() {
-		return startDate;
-	}
+    public void setEducationLevel( EducationLevel educationLevel ) {
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
+        this.educationLevel = educationLevel;
+    }
 
-	public Date getEndDate() {
-		return endDate;
-	}
+    public String getSchool() {
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
+        return school;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public void setSchool( String school ) {
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+        this.school = school;
+    }
 
-	public String getMajor() {
-		return major;
-	}
+    public Date getStartDate() {
 
-	public void setMajor(String major) {
-		this.major = major;
-	}
+        return startDate;
+    }
+
+    public void setStartDate( Date startDate ) {
+
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+
+        return endDate;
+    }
+
+    public void setEndDate( Date endDate ) {
+
+        this.endDate = endDate;
+    }
+
+    public User getUser() {
+
+        return user;
+    }
+
+    public void setUser( User user ) {
+
+        this.user = user;
+    }
+
+    public String getMajor() {
+
+        return major;
+    }
+
+    public void setMajor( String major ) {
+
+        this.major = major;
+    }
 
 }

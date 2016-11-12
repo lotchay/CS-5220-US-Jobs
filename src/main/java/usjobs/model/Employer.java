@@ -13,51 +13,61 @@ import javax.persistence.OneToMany;
 @DiscriminatorValue("EMPLOYER")
 public class Employer extends User implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	@Column(name = "employer_name")
-	private String employerName;
-	
-	@Column(name = "employer_website")
-	private String employerWebsite;
+    private static final long serialVersionUID = 1L;
 
-	//list of jobs by employer
-	@OneToMany(mappedBy = "company", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	private List<JobPosting> jobsPosted;
+    @Column(name = "employer_name")
+    private String employerName;
 
-	@OneToMany(mappedBy = "employerReviewed", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	private List<EmployerReview> employerReviews;
-	
-	public String getEmployerName() {
-		return employerName;
-	}
+    @Column(name = "employer_website")
+    private String employerWebsite;
 
-	public void setEmployerName(String employerName) {
-		this.employerName = employerName;
-	}
+    // list of jobs by employer
+    @OneToMany(mappedBy = "company",
+        cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private List<JobPosting> jobsPosted;
 
-	public String getEmployerWebsite() {
-		return employerWebsite;
-	}
+    @OneToMany(mappedBy = "employerReviewed",
+        cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private List<EmployerReview> employerReviews;
 
-	public void setEmployerWebsite(String employerWebsite) {
-		this.employerWebsite = employerWebsite;
-	}
+    public String getEmployerName() {
 
-	public List<JobPosting> getJobsPosted() {
-		return jobsPosted;
-	}
+        return employerName;
+    }
 
-	public void setJobsPosted(List<JobPosting> jobsPosted) {
-		this.jobsPosted = jobsPosted;
-	}
+    public void setEmployerName( String employerName ) {
 
-	public List<EmployerReview> getEmployerReviews() {
-		return employerReviews;
-	}
+        this.employerName = employerName;
+    }
 
-	public void setEmployerReviews(List<EmployerReview> employerReviews) {
-		this.employerReviews = employerReviews;
-	}
-	
+    public String getEmployerWebsite() {
+
+        return employerWebsite;
+    }
+
+    public void setEmployerWebsite( String employerWebsite ) {
+
+        this.employerWebsite = employerWebsite;
+    }
+
+    public List<JobPosting> getJobsPosted() {
+
+        return jobsPosted;
+    }
+
+    public void setJobsPosted( List<JobPosting> jobsPosted ) {
+
+        this.jobsPosted = jobsPosted;
+    }
+
+    public List<EmployerReview> getEmployerReviews() {
+
+        return employerReviews;
+    }
+
+    public void setEmployerReviews( List<EmployerReview> employerReviews ) {
+
+        this.employerReviews = employerReviews;
+    }
+
 }

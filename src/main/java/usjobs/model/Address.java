@@ -5,56 +5,64 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Address {
 
-	// Street has both the street number and street name
-	private String street;
+    // Street has both the street number and street name
+    private String street;
 
-	private String city;
+    private String city;
 
-	private String state;
+    private String state;
 
-	private String zip;
-	
-	public Address() {
-		
-	}
-	
-	public Address (String street, String city, String state, String zip) {
-		this.street = street;
-		this.city = city;
-		this.state = state;
-		this.zip = zip;
-	}
+    private String zip;
 
-	public String getStreet() {
-		return street;
-	}
+    public Address() {
 
-	public void setStreet(String street) {
-		this.street = street;
-	}
+    }
 
-	public String getCity() {
-		return city;
-	}
+    public Address( String street, String city, String state, String zip ) {
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+    }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    public String getStreet() {
 
-	public String getState() {
-		return state;
-	}
+        return street;
+    }
 
-	public void setState(String state) {
-		this.state = state;
-	}
+    public void setStreet( String street ) {
 
-	public String getZip() {
-		return zip;
-	}
-	
-	public void setZip(String zip) {
-		this.zip = zip;
-	}
+        this.street = street;
+    }
+
+    public String getCity() {
+
+        return city;
+    }
+
+    public void setCity( String city ) {
+
+        this.city = city;
+    }
+
+    public String getState() {
+
+        return state;
+    }
+
+    public void setState( String state ) {
+
+        this.state = state;
+    }
+
+    public String getZip() {
+
+        return zip;
+    }
+
+    public void setZip( String zip ) {
+
+        this.zip = zip;
+    }
 
 }

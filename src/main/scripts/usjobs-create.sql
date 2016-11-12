@@ -78,10 +78,11 @@ create sequence hibernate_sequence minvalue 80;
 
     create table resumes (
         resume_id int4 not null,
+        content text,
         file_data bytea,
-        name varchar(255),
         file_name varchar(255),
         file_path varchar(255),
+        name varchar(255),
         upload_date timestamp,
         user_id int4,
         primary key (resume_id)
@@ -198,7 +199,7 @@ create sequence hibernate_sequence minvalue 80;
         add constraint FKnup2o0u3x7dudj4ky81oiio13
         foreign key (user_id)
         references users;
-
+        
     insert into users (user_type, user_id, city, state, street,
                        zip, email, enabled, first_name,
                        last_name, password, reported, username,
@@ -321,3 +322,51 @@ create sequence hibernate_sequence minvalue 80;
 			restocking files, some office manager duties, and other various clerical tasks. This position includes being the gatekeeper for other departments and shielding unnecessary phone calls for the different 
 			personnel. This position must be proficient in organizational skills, communication, and possess excellent customer services skills.',
             'Receptionist', 'New York, NY', 'hiring@truss.com', 'John', 'Recruiter', 'Smith', '555-555-5555', 25000, 'www.indeed.com', 3);
+
+    set default_text_search_config=english;
+    
+    -- Add a tsvector column
+    alter table job_postings add column tsv tsvector;
+    
+    alter table resumes add column tsv tsvector;
+    
+    -- Populate the tsvector column
+    update job_postings set tsv = to_tsvector(job_description);
+    
+    update resumes set tsv = to_tsvector(content);
+    
+    -- A trigger can be used to automatically populate the tsvector column.
+    create or replace function job_postings_ts_trigger_function() returns trigger as $$
+    begin
+	    new.tsv := to_tsvector(new.job_description);
+	    return new;
+    end
+    $$ language plpgsql;
+    
+    create trigger job_postings_ts_trigger
+        before insert or update
+        on job_postings
+        for each row
+        execute procedure job_postings_ts_trigger_function();
+    
+    create or replace function resumes_ts_trigger_function() returns trigger as $$
+    begin
+        new.tsv := to_tsvector(new.content);
+        return new;
+    end
+    $$ language plpgsql;
+    
+    create trigger resumes_ts_trigger
+        before insert or update
+        on resumes
+        for each row
+        execute procedure resumes_ts_trigger_function();    
+        
+    -- Create an index on the tsvector column.
+    create index job_postings_tsv_index
+        on job_postings
+        using gin(tsv);
+        
+    create index resumes_tsv_index
+        on resumes
+        using gin(tsv);

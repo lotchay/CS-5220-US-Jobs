@@ -14,54 +14,62 @@ import javax.persistence.Table;
 @Table(name = "employer_reviews")
 public class EmployerReview implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "employer_review_id")
-	@GeneratedValue
-	private Integer id;
+    @Id
+    @Column(name = "employer_review_id")
+    @GeneratedValue
+    private Integer id;
 
-	@Column(name = "employer_review")
-	private String employerReview;
+    @Column(name = "employer_review")
+    private String employerReview;
 
-	@ManyToOne
-	@JoinColumn(name = "employer_id")
-	private Employer employerReviewed;
+    @ManyToOne
+    @JoinColumn(name = "employer_id")
+    private Employer employerReviewed;
 
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User userPosted;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User userPosted;
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getId() {
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+        return id;
+    }
 
-	public String getEmployerReview() {
-		return employerReview;
-	}
+    public void setId( Integer id ) {
 
-	public void setEmployerReview(String employerReview) {
-		this.employerReview = employerReview;
-	}
+        this.id = id;
+    }
 
-	public Employer getEmployerReviewed() {
-		return employerReviewed;
-	}
+    public String getEmployerReview() {
 
-	public void setEmployerReviewed(Employer employerReviewed) {
-		this.employerReviewed = employerReviewed;
-	}
+        return employerReview;
+    }
 
-	public User getUserPosted() {
-		return userPosted;
-	}
+    public void setEmployerReview( String employerReview ) {
 
-	public void setUserPosted(User userPosted) {
-		this.userPosted = userPosted;
-	}
+        this.employerReview = employerReview;
+    }
+
+    public Employer getEmployerReviewed() {
+
+        return employerReviewed;
+    }
+
+    public void setEmployerReviewed( Employer employerReviewed ) {
+
+        this.employerReviewed = employerReviewed;
+    }
+
+    public User getUserPosted() {
+
+        return userPosted;
+    }
+
+    public void setUserPosted( User userPosted ) {
+
+        this.userPosted = userPosted;
+    }
 
 }

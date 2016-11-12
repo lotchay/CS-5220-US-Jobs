@@ -2,6 +2,7 @@ package usjobs.web.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,7 +23,7 @@ import usjobs.model.dao.UserDao;
 @SessionAttributes("user")
 public class UserController {
 
-//    private Logger logger = Logger.getLogger( UserController.class );
+    private Logger logger = Logger.getLogger( UserController.class );
 
     @Autowired
     private UserDao userDao;
@@ -67,10 +68,9 @@ public class UserController {
         // Validate user's input
         userValidator.validate( user, result );
 
-        if( result.hasErrors() ) {
+        if ( result.hasErrors() ) {
 
-            return "user/add"; 
-        }
+        return "user/add"; }
 
         // Allow admin user to add other admin users
         user.getUserRoles().add( "ROLE_ADMIN" );
@@ -148,7 +148,7 @@ public class UserController {
         // Create a new user
         models.put( "user", new User() );
 
-        return "/register";
+        return "register";
     }
 
     @RequestMapping(value = "/register.html", method = RequestMethod.POST)
@@ -158,10 +158,9 @@ public class UserController {
         // Validate user's input
         userValidator.validate( user, result );
 
-        if( result.hasErrors() ) {
+        if ( result.hasErrors() ) {
 
-            return "register"; 
-        }
+        return "register"; }
 
         // Save the user to database
         user = userDao.saveUser( user );
@@ -174,5 +173,5 @@ public class UserController {
 
         return "redirect:login.html";
     }
-    
+
 }

@@ -3,10 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<div class="row">
-	<div class="col col-md-8 col-md-offset-2">
+<div class="animated fadeIn row">
+	<div class="col-md-8 col-md-offset-2">
 		<c:choose>
-		<c:when test="${empty searchResultJob && empty searchResultUser && empty searchResultSeeker}">
+		<c:when test="${empty searchResultJob && empty searchResultUser && empty searchResultResumes}">
 			<h1 class="text-warning">No results found.</h1>
 		</c:when>
 		<c:when test="${not empty searchResultUser }">
@@ -21,16 +21,18 @@
 				</c:forEach>
 			</div>
 		</c:when>
-		<c:when test="${not empty searchResultSeeker }">
+		<c:when test="${not empty searchResultResumes }">
 			<h1 class="text-primary">Job Seeker Results</h1>
 			<hr />
 			<div class="list-group">
-				<c:forEach items="${searchResultSeeker}" var="seeker">
-					<h4 class="list-group-item-heading">${seeker.firstName} ${seeker.lastName }</h4>
-					<h6>Email: ${seeker.email }</h6>
-					<h6>Title: ${seeker.currentJobTitle}</h6>
-					<h6>Experience: ${seeker.experience }</h6>
-					<h6>${seeker.address.city }, ${seeker.address.state }</h6>
+				<c:forEach items="${searchResultResumes}" var="resume">
+					<h4 class="list-group-item-heading">${resume.user.firstName} ${resume.user.lastName }</h4>
+					<h6>Email: ${resume.user.email }</h6>
+					<h6>Title: ${resume.user.currentJobTitle}</h6>
+					<h6>Experience: ${resume.user.experience }</h6>
+					<h6>${resume.user.address.city }, ${resume.user.address.state }</h6>
+					<h6><a href="<c:url value='/resume/download.html?resumeId=${resume.id }' />">
+									${resume.fileName } </a></h6>
 					<hr/>
 				</c:forEach>
 			</div>
