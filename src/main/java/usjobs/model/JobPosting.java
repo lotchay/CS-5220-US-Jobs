@@ -47,6 +47,9 @@ public class JobPosting implements Serializable {
 	
 	private boolean enabled; //admins can disable or enable jobs
 	
+	@Column(name = "new", nullable = true)
+    private boolean isNew;
+	
 	private int salary;
 
 	private String website;
@@ -216,6 +219,14 @@ public class JobPosting implements Serializable {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+	
+	public boolean isNew() {
+		return isNew;
+	}
+
+	public void setNew(boolean isNew) {
+		this.isNew = isNew;
 	}
 	
 }

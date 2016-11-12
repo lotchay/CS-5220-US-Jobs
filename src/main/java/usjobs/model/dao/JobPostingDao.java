@@ -14,6 +14,8 @@ public interface JobPostingDao {
 	
 	List<JobPosting> getClosedJobPostings();
 	
+	List<JobPosting> getNewJobPostings();
+	
 	JobPosting getJobPosting(int id);
 	
 	void delete(JobPosting jobPosting);
