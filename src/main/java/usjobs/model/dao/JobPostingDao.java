@@ -21,6 +21,8 @@ public interface JobPostingDao {
     void delete( JobPosting jobPosting );
 
     List<JobPosting> searchJobs( String searchTerm, String searchLocation );
+    
+    List<JobPosting> searchJobsByKeyword( String keyword, int maxResults );
 
     List<JobPosting> searchJobSalary( String searchTerm,
         String searchLocation );
