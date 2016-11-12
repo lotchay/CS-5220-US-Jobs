@@ -7,8 +7,10 @@ create sequence hibernate_sequence minvalue 80;
         first_name varchar(255),
         last_name varchar(255),
         phone_number varchar(255),
+        date_applied timestamp,
         job_id int4,
         resume_id int4,
+        seeker_id int4,
         primary key (app_id)
     );
 
@@ -77,8 +79,10 @@ create sequence hibernate_sequence minvalue 80;
 
     create table resumes (
         resume_id int4 not null,
+        content text,
         file_data bytea,
         file_name varchar(255),
+        file_path varchar(255),
         name varchar(255),
         upload_date timestamp,
         user_id int4,
@@ -109,6 +113,8 @@ create sequence hibernate_sequence minvalue 80;
         employer_website varchar(255),
         current_job_title varchar(255),
         experience text,
+        is_notified boolean,
+        keywords varchar(255),
         primary key (user_id)
     );
 
@@ -124,6 +130,11 @@ create sequence hibernate_sequence minvalue 80;
         add constraint FKbhnfs5wwy14wdm2f1wam8qkhf
         foreign key (resume_id)
         references resumes;
+    
+    alter table applications 
+        add constraint FKbipd4utha945ggyvtsyair097 
+        foreign key (seeker_id) 
+        references users;
 
     alter table authorities
         add constraint FKk91upmbueyim93v469wj7b2qh
@@ -189,24 +200,24 @@ create sequence hibernate_sequence minvalue 80;
         add constraint FKnup2o0u3x7dudj4ky81oiio13
         foreign key (user_id)
         references users;
-
+        
     insert into users (user_type, user_id, city, state, street,
                        zip, email, enabled, first_name,
                        last_name, password, reported, username,
-                       current_job_title, experience, supress_contact) values
+                       current_job_title, experience, supress_contact, is_notified, keywords) values
                       ('SEEKER', 1, 'New Brunswick', 'NJ', '467 Durham Court',
                        '08901', 'loc.truong@testemail.com', true, 'Loc',
                        'Truong', 'password@1', false, 'loc',
-                       'Software Engineering', '4 years', false);
+                       'Software Engineering', '4 years', false, true, 'engineer, assistant, accountant');
 
     insert into users (user_type, user_id, city, state, street,
                        zip, email, enabled, first_name,
                        last_name, password, reported, username,
-                       current_job_title, experience, supress_contact) values
+                       current_job_title, experience, supress_contact, is_notified, keywords) values
                       ('SEEKER', 2, 'Henderson', 'KY', '398 Augusta Drive',
                        '42420', 'steve.shim@testemail.com', true, 'Steve',
                        'Shim', 'password@1', false, 'steve',
-                       'Software Engineering', '5 years', false);
+                       'Software Engineering', '5 years', false, true, 'receptionist, taxi, driver');
 
     insert into users (user_type, user_id, city, state, street,
                        zip, email, enabled, first_name,
@@ -312,3 +323,51 @@ create sequence hibernate_sequence minvalue 80;
 			restocking files, some office manager duties, and other various clerical tasks. This position includes being the gatekeeper for other departments and shielding unnecessary phone calls for the different 
 			personnel. This position must be proficient in organizational skills, communication, and possess excellent customer services skills.',
             'Receptionist', 'New York, NY', 'hiring@truss.com', 'John', 'Recruiter', 'Smith', '555-555-5555', 25000, 'www.indeed.com', 3);
+
+    set default_text_search_config=english;
+    
+    -- Add a tsvector column
+    alter table job_postings add column tsv tsvector;
+    
+    alter table resumes add column tsv tsvector;
+    
+    -- Populate the tsvector column
+    update job_postings set tsv = to_tsvector(job_description);
+    
+    update resumes set tsv = to_tsvector(content);
+    
+    -- A trigger can be used to automatically populate the tsvector column.
+    create or replace function job_postings_ts_trigger_function() returns trigger as $$
+    begin
+	    new.tsv := to_tsvector(new.job_description);
+	    return new;
+    end
+    $$ language plpgsql;
+    
+    create trigger job_postings_ts_trigger
+        before insert or update
+        on job_postings
+        for each row
+        execute procedure job_postings_ts_trigger_function();
+    
+    create or replace function resumes_ts_trigger_function() returns trigger as $$
+    begin
+        new.tsv := to_tsvector(new.content);
+        return new;
+    end
+    $$ language plpgsql;
+    
+    create trigger resumes_ts_trigger
+        before insert or update
+        on resumes
+        for each row
+        execute procedure resumes_ts_trigger_function();    
+        
+    -- Create an index on the tsvector column.
+    create index job_postings_tsv_index
+        on job_postings
+        using gin(tsv);
+        
+    create index resumes_tsv_index
+        on resumes
+        using gin(tsv);

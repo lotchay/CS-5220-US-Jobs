@@ -23,75 +23,80 @@ import org.hibernate.annotations.Type;
 @Table(name = "job_postings")
 public class JobPosting implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "job_id")
-	@GeneratedValue
-	private Integer id;
+    @Id
+    @Column(name = "job_id")
+    @GeneratedValue
+    private Integer id;
 
-	@Column(name = "job_title")
-	private String jobTitle;
+    @Column(name = "job_title")
+    private String jobTitle;
 
-	@Column(name = "job_description")
-	@Type(type = "text")
-	private String jobDescription;
+    @Column(name = "job_description")
+    @Type(type = "text")
+    private String jobDescription;
 
-	@ManyToOne
-	@JoinColumn(name = "employer_id")
-	private Employer company;
+    @ManyToOne
+    @JoinColumn(name = "employer_id")
+    private Employer company;
 
-	private String location;
-	
-	private boolean opened; //employers can open or close jobs
-	
-	private boolean enabled; //admins can disable or enable jobs
-	
-	@Column(name = "new", nullable = true)
+    private String location;
+
+    private boolean opened; // employers can open or close jobs
+
+    private boolean enabled; // admins can disable or enable jobs
+    
+    @Column(name = "new", nullable = true)
     private boolean isNew;
-	
-	private int salary;
 
-	private String website;
+    private int salary;
 
-	@Column(name = "date_posted")
-	private Date datePosted;
+    private String website;
 
-	@Column(name = "date_closed")
-	private Date dateClosed;
+    @Column(name = "date_posted")
+    private Date datePosted;
 
-	@ManyToMany
-	@JoinTable(name = "jobs_applied",
-			joinColumns = @JoinColumn(name = "job_id"),
-			inverseJoinColumns = @JoinColumn(name = "user_id"))
-	private List<User> usersApplied;
+    @Column(name = "date_closed")
+    private Date dateClosed;
 
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name = "favorites",
-			joinColumns = @JoinColumn(name = "job_id"),
-			inverseJoinColumns = @JoinColumn(name = "user_id"))
-	private List<User> usersFavorited;
+    @ManyToMany
+    @JoinTable(name = "jobs_applied",
+        joinColumns = @JoinColumn(name = "job_id"),
+        inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<User> usersApplied;
 
-	@OneToMany(mappedBy = "jobApplied", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	private List<Application> applications;
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(name = "favorites",
+        joinColumns = @JoinColumn(name = "job_id"),
+        inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<User> usersFavorited;
 
-	@OneToMany(mappedBy = "jobReviewed", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	private List<JobReview> jobReviews;
+    @OneToMany(mappedBy = "jobApplied",
+        cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private List<Application> applications;
 
-	@Embedded
-	private Contact pointOfContact;
+    @OneToMany(mappedBy = "jobReviewed",
+        cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private List<JobReview> jobReviews;
 
-	public List<JobReview> getJobReviews() {
-		return jobReviews;
-	}
+    @Embedded
+    private Contact pointOfContact;
 
-	public void setJobReviews(List<JobReview> jobReviews) {
-		this.jobReviews = jobReviews;
-	}
+    public List<JobReview> getJobReviews() {
 
-	public Integer getId() {
-		return id;
-	}
+        return jobReviews;
+    }
+
+    public void setJobReviews( List<JobReview> jobReviews ) {
+
+        this.jobReviews = jobReviews;
+    }
+
+    public Integer getId() {
+
+        return id;
+    }
 
 	public void setId(Integer id) {
 		this.id = id;

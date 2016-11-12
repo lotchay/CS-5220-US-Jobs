@@ -1,187 +1,353 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Job Seeker Profile</title>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<link href="../css/vendor/bower.css" rel="stylesheet" />
-<link href="../css/us-jobs.css" rel="stylesheet" />
-<link href="../bower_components/font-awesome/css/font-awesome.css"
-	rel="stylesheet" />
-</head>
-<body>
-	<jsp:include page="../header.jsp" />
-	<div class="row animated fadeIn">
-		<div class="col col-md-2 col-md-offset-2">
-			<ul id="options-list" class="list-group">
-				<li id="viewProfile" class="list-group-item"><a href="#">View
-						Profile</a></li>
-				<li id="profile" class="list-group-item"><a href="#">Update
-						Profile</a></li>
-				<li id="resume" class="list-group-item"><a href="#">Resumes</a></li>
-				<li id="appJobs" class="list-group-item"><a href="#">Applied
-						Jobs</a></li>
-				<li id="favJobs" class="list-group-item"><a href="#">Favorited
-						Jobs</a></li>
-			</ul>
+<div class="row animated fadeIn">
+	<div id="options-list" class="list-group col-md-2 col-md-offset-2">
+
+		<a id="viewProfile" class="list-group-item" href="#"><i
+			class="fa fa-address-card" aria-hidden="true"></i>&nbsp;&nbsp;View
+			Profile</a><a id="profile" class="list-group-item" href="#"><i
+			class="fa fa-adjust" aria-hidden="true"></i>&nbsp;&nbsp;Update
+			Profile</a> <a id="resume" class="list-group-item" href="#"><i
+			class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;&nbsp;Manage
+			Resumes</a> <a id="appJobs" class="list-group-item" href="#"> <i
+			class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Applied
+			Jobs
+		</a> <a id="favJobs" class="list-group-item" href="#"><i
+			class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;Favorited Jobs</a>
+		<a id="notifications" class="list-group-item" href="#"><i
+			class="fa fa-bullhorn" aria-hidden="true"></i>&nbsp;&nbsp;Notifications</a>
+	</div>
+	<div id="detail" class="col-md-6">
+		<div id="viewProfileDetail" class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<i class="fa fa-address-card" aria-hidden="true"></i>&nbsp;&nbsp;View
+					${user.firstName }'s profile
+				</h3>
+			</div>
+			<div class="panel-body">
+				<h4>
+					<strong>Id</strong>
+				</h4>
+				<p>${user.id }</p>
+				<h4>
+					<strong>Username</strong>
+				</h4>
+				<p>${user.username }</p>
+				<h4>
+					<strong>First Name</strong>
+				</h4>
+				<p>${user.firstName }</p>
+				<h4>
+					<strong>Last Name</strong>
+				</h4>
+				<p>${user.lastName}</p>
+				<h4>
+					<strong>Email</strong>
+				</h4>
+				<p>${user.email }</p>
+				<h4>
+					<strong>Password</strong>
+				</h4>
+				<p>${user.password }</p>
+			</div>
 		</div>
-		<div id="detail" class="col col-md-6">
-			<div id="viewProfileDetail" class="panel panel-info">
-				<div class="panel-heading">
-					<h3 class="panel-title">View ${user.firstName} ${user.lastName }'s Profile</h3>
-				</div>
+		<div id="profileDetail" class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<i class="fa fa-adjust" aria-hidden="true"></i>&nbsp;&nbsp;Update
+					Profile
+				</h3>
+			</div>
+			<div class="panel-body">
+				<form id="editProfileSeeker" action="editProfile.html" method="post"
+					class="form-horizontal">
+					<fieldset>
+						<div class="form-group">
+							<label for="username" class="col-lg-2 control-label">Username</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" id="username"
+									name="username" value="${user.username}" disabled>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputPassword" class="col-lg-2 control-label">Password</label>
+							<div class="col-lg-10">
+								<input type="password" name="password" class="form-control"
+									id="password" value="${user.password }" placeholder="Password">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputPassword" class="col-lg-2 control-label">Confirm
+								Password</label>
+							<div class="col-lg-10">
+								<input type="password" name="confirm_password"
+									class="form-control" id="confirm_password" value=""
+									placeholder="Confirm password">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="email" class="col-lg-2 control-label">Email</label>
+							<div class="col-lg-10">
+								<input type="email" name="email" class="form-control" id="email"
+									placeholder="email" value="${user.email }">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="street" class="col-lg-2 control-label">Street</label>
+							<div class="col-lg-10">
+								<input type="text" name="street" class="form-control"
+									id="street" placeholder="Street" value="${user.address.street}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="city" class="col-lg-2 control-label">City</label>
+							<div class="col-lg-10">
+								<input type="text" name="city" class="form-control" id="city"
+									placeholder="City" value="${user.address.city }">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="state" class="col-lg-2 control-label">State</label>
+							<div class="col-lg-10">
+								<input type="text" name="state" class="form-control" id="state"
+									placeholder="State" value="${user.address.state }">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="zip" class="col-lg-2 control-label">Zip</label>
+							<div class="col-lg-10">
+								<input type="text" name="zip" class="form-control" id="zip"
+									placeholder="Zip code" value="${user.address.zip }">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">Contact Sharing</label>
+							<div class="col-lg-10">
+								<div class="radio">
+									<label> <c:choose>
+											<c:when test="${!user.supressContact }">
+												<input type="radio" checked name="supress"
+													id="enableSharing" value="false">
+											</c:when>
+											<c:otherwise>
+												<input type="radio" name="supress" id="enableSharing"
+													value="false">
+											</c:otherwise>
+										</c:choose> Enabled
+									</label>
+								</div>
+								<div class="radio">
+									<label> <c:choose>
+											<c:when test="${user.supressContact }">
+												<input type="radio" checked name="supress"
+													id="disableSharing" value="true">
+											</c:when>
+											<c:otherwise>
+												<input type="radio" name="supress" id="disableSharing"
+													value="true">
+											</c:otherwise>
+										</c:choose> Disabled
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-10 col-lg-offset-2">
+								<button type="submit" class="btn btn-primary btn-block">Save</button>
+								<button type="reset" class="btn btn-default btn-block">Reset</button>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		<div id="resumeDetail" class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;&nbsp;
+					Manage Resume (s)
+				</h3>
+			</div>
+			<div class="panel-body">
+				<form id="uploadForm" action="<c:url value='/resume/upload.html' />"
+					method="post" enctype="multipart/form-data">
+					<fieldset>
+						<div class="form-group">
+							<label class="control-label text-primary">Upload a Resume</label>
+							<div class="input-group">
+								<span class="input-group-addon">PDF, DOC, DOCX Format</span> <input
+									type="file" name="resume" class="form-control" id="resume">
+								<span class="input-group-btn">
+									<button type="submit" class="btn btn-primary" type="button">
+										<i class="fa fa-upload" aria-hidden="true"></i>&nbsp;&nbsp;Upload
+									</button>
+								</span>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+
+				<table class="table table-striped table-hover">
+					<tr class="info">
+						<th>Resume</th>
+						<th>Upload Date</th>
+						<th></th>
+					</tr>
+					<c:forEach items="${user.resumes}" var="resume">
+						<tr>
+							<td><a
+								href="<c:url value='/resume/download.html?resumeId=${resume.id }' />">
+									${resume.fileName } </a></td>
+							<td><fmt:formatDate type="date" value="${resume.uploadDate}" /></td>
+							<td><a
+								href="<c:url value='/resume/delete.html?userId=${user.id }&resumeId=${resume.id }' />"
+								role="button" class="btn btn-danger"><i
+									class="fa fa-times-circle"></i>&nbsp;&nbsp;Delete</a></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+		</div>
+		<div id="appJobsDetail" class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Jobs
+					Applied
+				</h3>
+			</div>
+			<div class="panel-body">
 				<div class="panel-body">
 					<table class="table table-striped table-hover">
-				        <tr>
-				            <th>ID</th>
-				            <th>Username</th>
-				            <th>First Name</th>
-				            <th>Last Name</th>
-				            <th>Email</th>
-				            <th>Password</th>
-				        </tr>
-				        <tr>
-				            <td>${user.id}</td>
-				            <td>${user.username}</td>
-				            <td>${user.firstName}</td>
-				            <td>${user.lastName}</td>
-				            <td>${user.email}</td>
-				            <td>${user.password}</td>            
-				        </tr>
-				    </table>
+						<tr class="info">
+							<th>Title</th>
+							<th>Location</th>
+							<th>Date Applied</th>
+							<th></th>
+						</tr>
+						<c:forEach items="${user.applications}" var="application">
+							<c:choose>
+								<c:when test="${not empty application.jobApplied }">
+									<tr>
+										<td>${application.jobApplied.jobTitle}</td>
+										<td>${application.jobApplied.location }</td>
+										<td><fmt:formatDate type="date"
+												value="${application.dateApplied}" /></td>
+										<td><a
+											href="<c:url value='/application/view.html?id=${application.id }' />"
+											role="button" class="btn btn-success"><i
+												class="fa fa-share-square-o" aria-hidden="true"></i>&nbsp;&nbsp;View
+												Application</a></td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<tr>
+										<td class="text-danger">N/A (Job no longer exists)</td>
+										<td>N/A</td>
+										<td><fmt:formatDate type="date"
+												value="${application.dateApplied}" /></td>
+										<td><a
+											href="<c:url value='/application/view.html?id=${application.id }' />"
+											role="button" class="btn btn-success"><i
+												class="fa fa-share-square-o" aria-hidden="true"></i>&nbsp;&nbsp;View
+												Application</a></td>
+									</tr>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</table>
 				</div>
 			</div>
-			<div id="profileDetail" class="panel panel-info">
-				<div class="panel-heading">
-					<h3 class="panel-title">Update Profile</h3>
-				</div>
+		</div>
+		<div id="favJobsDetail" class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<i class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;Jobs
+					Favorited
+				</h3>
+			</div>
+			<div class="panel-body">
 				<div class="panel-body">
-					<form class="form-horizontal">
+					<table class="table table-striped table-hover">
+						<tr class="info">
+							<th>Title</th>
+							<th>Salary</th>
+							<th>Location</th>
+							<th>Link</th>
+						</tr>
+						<c:forEach items="${user.favoritedJobs}" var="favoritedJob">
+							<tr>
+								<td>${favoritedJob.jobTitle }</td>
+								<td>${favoritedJob.salary}</td>
+								<td>${favoritedJob.location}</td>
+								<td>${favoritedJob.website}</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div id="notificationsDetail" class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<i class="fa fa-bullhorn" aria-hidden="true"></i>&nbsp;&nbsp;Manage
+					your Job Posting Notifications
+				</h3>
+			</div>
+			<div class="panel-body">
+				<div class="panel-body">
+					<form action="editNotifications.html" method="post"
+						class="form-horizontal">
 						<fieldset>
-							<div class="form-group">
-								<label for="username" class="col-lg-2 control-label">Username</label>
-								<div class="col-lg-10">
-									<input type="text" class="form-control" id="username"
-										value="${user.username}" disabled>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="inputPassword" class="col-lg-2 control-label">Password</label>
-								<div class="col-lg-10">
-									<input type="password" class="form-control" id="inputPassword"
-										placeholder="Password">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="email" class="col-lg-2 control-label">Email</label>
-								<div class="col-lg-10">
-									<input type="email" class="form-control" id="email"
-										placeholder="email">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="address" class="col-lg-2 control-label">Address</label>
-								<div class="col-lg-10">
-									<input type="text" class="form-control" id="address"
-										placeholder="address">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="phone" class="col-lg-2 control-label">Phone</label>
-								<div class="col-lg-10">
-									<input type="number" class="form-control" id="phone"
-										placeholder="Phone #">
-								</div>
-							</div>
 							<div class="form-group">
 								<label class="col-lg-2 control-label">Contact Sharing</label>
 								<div class="col-lg-10">
 									<div class="radio">
-										<label> <input type="radio" name="contact-sharing"
-											id="enableSharing" value="option1" checked="">
-											Enabled
+										<label> <c:choose>
+												<c:when test="${user.notified }">
+													<input type="radio" checked name="notify" value="true">
+												</c:when>
+												<c:otherwise>
+													<input type="radio" name="notify" value="true">
+												</c:otherwise>
+											</c:choose> Enable
 										</label>
 									</div>
 									<div class="radio">
-										<label> <input type="radio" name="contact-sharing"
-											id="disableSharing" value="option2"> Disabled
+										<label> <c:choose>
+												<c:when test="${!user.notified }">
+													<input type="radio" checked name="notify" value="false">
+												</c:when>
+												<c:otherwise>
+													<input type="radio" name="notify" value="false">
+												</c:otherwise>
+											</c:choose> Disable
 										</label>
 									</div>
 								</div>
 							</div>
 							<div class="form-group">
+								<label for="keywords" class="col-lg-2 control-label">Job
+									Keywords</label>
+								<div class="col-lg-10">
+									<input type="text" name="keywords" class="form-control"
+										id="keywords" placeholder="comma separated keywords"
+										value="${user.keywords }">
+								</div>
+							</div>
+							<div class="form-group">
 								<div class="col-lg-10 col-lg-offset-2">
-									<button type="submit" class="btn btn-primary btn-block">Save</button>
-									<button type="reset" class="btn btn-default btn-block">Reset</button>
+									<button type="submit" class="btn btn-primary">Save</button>
+									<button type="reset" class="btn btn-default">Reset</button>
 								</div>
 							</div>
 						</fieldset>
 					</form>
 				</div>
 			</div>
-			<div id="resumeDetail" class="panel panel-info">
-				<div class="panel-heading">
-					<h3 class="panel-title">Resume (s)</h3>
-				</div>
-				<div class="panel-body">TODO</div>
-			</div>
-			<div id="appJobsDetail" class="panel panel-info">
-				<div class="panel-heading">
-					<h3 class="panel-title">Jobs Applied</h3>
-				</div>
-				<div class="panel-body">
-					<div class="panel-body">
-						<table class="table table-striped table-hover">
-							<tr class="info">
-								<th>Title</th>
-								<th>Salary</th>
-								<th>Location</th>
-								<th>Link</th>
-							</tr>
-							<c:forEach items="${user.appliedJobs}" var="appliedJob">
-								<tr>
-									<td>${appliedJob.jobTitle}</td>									
-									<td>${appliedJob.salary}</td>
-									<td>${appliedJob.location}</td>
-									<td>${appliedJob.website}</td>
-								</tr>
-							</c:forEach>
-						</table>
-					</div>
-				</div>
-			</div>
-			<div id="favJobsDetail" class="panel panel-info">
-				<div class="panel-heading">
-					<h3 class="panel-title">Jobs Favorited</h3>
-				</div>
-				<div class="panel-body">
-					<div class="panel-body">
-						<table class="table table-striped table-hover">
-							<tr class="info">
-								<th>Title</th>
-								<th>Salary</th>
-								<th>Location</th>
-								<th>Link</th>
-							</tr>
-							<c:forEach items="${user.favoritedJobs}" var="favoritedJob">
-								<tr>
-									<td>${favoritedJob.jobTitle }</td>
-									<td>${favoritedJob.salary}</td>
-									<td>${favoritedJob.location}</td>
-									<td>${favoritedJob.website}</td>
-								</tr>
-							</c:forEach>
-						</table>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
-</body>
-
-<script src="../js/vendor/bower.js"></script>
-<script src="../js/list-detail.js"></script>
-</html>
+</div>
