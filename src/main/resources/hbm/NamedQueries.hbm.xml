@@ -5,7 +5,7 @@
 
 <hibernate-mapping>
 	<sql-query name="resume.search">
-        <return class="usjobs.model.Resume" />
+    <return class="usjobs.model.Resume" />
 <![CDATA[
 select r.* from resumes r 
 	inner join users u on r.user_id = u.user_id 
@@ -18,15 +18,26 @@ select r.* from resumes r
 ]]>
     </sql-query>
     
-    	<sql-query name="job.search">
-        <return class="usjobs.model.JobPosting" />
+    <sql-query name="job.search">
+    <return class="usjobs.model.JobPosting" />
 <![CDATA[
 select * from job_postings where 
-	(opened = 't') and 
-	(new = 't') and
-	(upper(job_title) like upper(:text) || '%' or plainto_tsquery(:text) @@ tsv) and
+	(opened = 't') and
+	(upper(job_title) like '%' || upper(:text) || '%' or plainto_tsquery(:text) @@ tsv) and
 	(upper(location) like upper(:location) || '%')
     order by ts_rank(tsv, plainto_tsquery(:text), 16|32) desc
 ]]>
     </sql-query>
+    
+    <sql-query name="emailjob.search">
+    <return class="usjobs.model.JobPosting" />
+<![CDATA[
+select * from job_postings where 
+	(opened = 't') and 
+	(new = 't') and
+	(upper(job_title) like '%' || upper(:text) || '%' or plainto_tsquery(:text) @@ tsv) 
+    order by ts_rank(tsv, plainto_tsquery(:text), 16|32) desc
+]]>
+    </sql-query>
+    
 </hibernate-mapping>
