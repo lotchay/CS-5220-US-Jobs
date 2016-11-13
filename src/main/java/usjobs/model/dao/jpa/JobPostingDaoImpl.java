@@ -77,11 +77,11 @@ public class JobPostingDaoImpl implements JobPostingDao {
 
     @Override
     public List<JobPosting> searchJobsByKeyword(String keyword, int maxResults) {
-    	TypedQuery<JobPosting> query = em.createNamedQuery("job.search", JobPosting.class);
+    	TypedQuery<JobPosting> query = em.createNamedQuery("emailjob.search", JobPosting.class);
     	if(maxResults > 0){
     		query.setMaxResults(maxResults);
     	}
-        return query.setParameter("text", keyword).setParameter("location", "").getResultList();
+        return query.setParameter("text", keyword).getResultList();
     }
 
     @Override
