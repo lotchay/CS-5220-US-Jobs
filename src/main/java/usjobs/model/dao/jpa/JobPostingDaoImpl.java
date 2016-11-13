@@ -112,6 +112,12 @@ public class JobPostingDaoImpl implements JobPostingDao {
 
         return em.merge( jobPosting );
     }
+    
+    @Override
+    @Transactional
+    public JobPosting saveEmail( JobPosting jobPosting){
+    	return em.merge( jobPosting);
+    }
 
     @Override
     @Transactional
