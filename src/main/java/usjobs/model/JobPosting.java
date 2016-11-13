@@ -47,8 +47,8 @@ public class JobPosting implements Serializable {
 
     private boolean enabled; // admins can disable or enable jobs
     
-    @Column(name = "new", nullable = true)
-    private boolean isNew;
+    @Column(name = "new", nullable = false)
+    private boolean isNew = true;
 
     private int salary;
 

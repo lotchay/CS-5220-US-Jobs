@@ -60,6 +60,7 @@ public class EmailTask {
 							jobPostingsToBeSent.add(jobPosting);
 							if(!jobPostingsSent.contains(jobPosting)){
 								jobPostingsSent.add(jobPosting);
+								logger.info("Adding " + jobPosting.getJobTitle() + " to be set to old.");
 							}
 						}
 					}
@@ -72,7 +73,8 @@ public class EmailTask {
 		// Set new to false for jobs that have been processed.
 		for(JobPosting jobPosting : jobPostingsSent){
 			jobPosting.setNew(false);
-			jobPostingDao.save(jobPosting);
+			logger.info(jobPosting.getJobTitle() + " is new? " + jobPosting.isNew());
+			jobPostingDao.saveEmail(jobPosting);
 		}
     }
 
