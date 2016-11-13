@@ -13,12 +13,16 @@ public interface JobPostingDao {
     List<JobPosting> getPublicJobPostings();
 
     List<JobPosting> getClosedJobPostings();
+    
+    List<JobPosting> getNewJobPostings();
 
     JobPosting getJobPosting( int id );
 
     void delete( JobPosting jobPosting );
 
     List<JobPosting> searchJobs( String searchTerm, String searchLocation );
+    
+    List<JobPosting> searchJobsByKeyword( String keyword, int maxResults );
 
     List<JobPosting> searchJobSalary( String searchTerm,
         String searchLocation );

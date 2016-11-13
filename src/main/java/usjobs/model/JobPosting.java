@@ -46,6 +46,9 @@ public class JobPosting implements Serializable {
     private boolean opened; // employers can open or close jobs
 
     private boolean enabled; // admins can disable or enable jobs
+    
+    @Column(name = "new", nullable = true)
+    private boolean isNew;
 
     private int salary;
 
@@ -95,164 +98,140 @@ public class JobPosting implements Serializable {
         return id;
     }
 
-    public void setId( Integer id ) {
-
-        this.id = id;
-    }
-
-    public String getJobTitle() {
-
-        return jobTitle;
-    }
-
-    public void setJobTitle( String jobTitle ) {
-
-        this.jobTitle = jobTitle;
-    }
-
-    public List<User> getUsersApplied() {
-
-        return usersApplied;
-    }
-
-    public void setUsersApplied( List<User> usersApplied ) {
-
-        this.usersApplied = usersApplied;
-    }
-
-    public String getJobDescription() {
-
-        return jobDescription;
-    }
-
-    public void setJobDescription( String jobDescription ) {
-
-        this.jobDescription = jobDescription;
-    }
-
-    public Employer getCompany() {
-
-        return company;
-    }
-
-    public void setCompany( Employer company ) {
-
-        this.company = company;
-    }
-
-    public String getLocation() {
-
-        return location;
-    }
-
-    public void setLocation( String location ) {
-
-        this.location = location;
-    }
-
-    public int getSalary() {
-
-        return salary;
-    }
-
-    public void setSalary( int salary ) {
-
-        this.salary = salary;
-    }
-
-    public Date getDatePosted() {
-
-        return datePosted;
-    }
-
-    public void setDatePosted( Date datePosted ) {
-
-        this.datePosted = datePosted;
-    }
-
-    public Date getDateClosed() {
-
-        return dateClosed;
-    }
-
-    public void setDateClosed( Date dateClosed ) {
-
-        this.dateClosed = dateClosed;
-    }
-
-    public List<User> getUsersFavorited() {
-
-        return usersFavorited;
-    }
-
-    public void setUsersFavorited( List<User> usersFavorited ) {
-
-        this.usersFavorited = usersFavorited;
-    }
-
-    public String getWebsite() {
-
-        return website;
-    }
-
-    public void setWebsite( String website ) {
-
-        this.website = website;
-    }
-
-    public List<Application> getApplications() {
-
-        return applications;
-    }
-
-    public void setApplications( List<Application> applications ) {
-
-        this.applications = applications;
-    }
-
-    public Contact getPointOfContact() {
-
-        return pointOfContact;
-    }
-
-    public void setPointOfContact( Contact pointOfContact ) {
-
-        this.pointOfContact = pointOfContact;
-    }
-
-    public void addUsersFavorited( User user ) {
-
-        usersFavorited.add( user );
-    }
-
-    public void addUsersApplied( User user ) {
-
-        usersApplied.add( user );
-    }
-
-    public void removeUsersFavorited( User user ) {
-
-        usersFavorited.remove( user );
-    }
-
-    public boolean isOpened() {
-
-        return opened;
-    }
-
-    public void setOpened( boolean opened ) {
-
-        this.opened = opened;
-    }
-
-    public boolean isEnabled() {
-
-        return enabled;
-    }
-
-    public void setEnabled( boolean enabled ) {
-
-        this.enabled = enabled;
-    }
-
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getJobTitle() {
+		return jobTitle;
+	}
+
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
+	}
+
+	public List<User> getUsersApplied() {
+		return usersApplied;
+	}
+
+	public void setUsersApplied(List<User> usersApplied) {
+		this.usersApplied = usersApplied;
+	}
+
+	public String getJobDescription() {
+		return jobDescription;
+	}
+
+	public void setJobDescription(String jobDescription) {
+		this.jobDescription = jobDescription;
+	}
+
+	public Employer getCompany() {
+		return company;
+	}
+
+	public void setCompany(Employer company) {
+		this.company = company;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public int getSalary() {
+		return salary;
+	}
+
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+
+	public Date getDatePosted() {
+		return datePosted;
+	}
+
+	public void setDatePosted(Date datePosted) {
+		this.datePosted = datePosted;
+	}
+
+	public Date getDateClosed() {
+		return dateClosed;
+	}
+
+	public void setDateClosed(Date dateClosed) {
+		this.dateClosed = dateClosed;
+	}
+
+	public List<User> getUsersFavorited() {
+		return usersFavorited;
+	}
+
+	public void setUsersFavorited(List<User> usersFavorited) {
+		this.usersFavorited = usersFavorited;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
+	public List<Application> getApplications() {
+		return applications;
+	}
+
+	public void setApplications(List<Application> applications) {
+		this.applications = applications;
+	}
+
+	public Contact getPointOfContact() {
+		return pointOfContact;
+	}
+
+	public void setPointOfContact(Contact pointOfContact) {
+		this.pointOfContact = pointOfContact;
+	}
+	
+	public void addUsersFavorited(User user) {
+		usersFavorited.add(user);
+	}
+	
+	public void addUsersApplied(User user) {
+		usersApplied.add(user);
+	}
+	
+	public void removeUsersFavorited(User user) {
+		usersFavorited.remove(user);
+	}
+
+	public boolean isOpened() {
+		return opened;
+	}
+
+	public void setOpened(boolean opened) {
+		this.opened = opened;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	
+	public boolean isNew() {
+		return isNew;
+	}
+
+	public void setNew(boolean isNew) {
+		this.isNew = isNew;
+	}
+	
 }

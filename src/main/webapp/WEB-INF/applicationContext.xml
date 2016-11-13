@@ -63,13 +63,10 @@
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="localhost" />
     </bean>
-    
-    <task:scheduler id="scheduler" />
-    
-    <task:executor id="executor" pool-size="5" />
-    
-    <task:annotation-driven scheduler="scheduler" executor="executor" />     
-    
+        <task:scheduler id="scheduler" />
+
+    <task:executor id="executor" pool-size="5"/>
+    <task:annotation-driven scheduler="scheduler" executor="executor" />    
     <context:component-scan base-package="usjobs.task" />
     
 </beans>
