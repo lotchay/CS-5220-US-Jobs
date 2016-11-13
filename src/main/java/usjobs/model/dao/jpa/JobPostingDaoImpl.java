@@ -81,7 +81,7 @@ public class JobPostingDaoImpl implements JobPostingDao {
     	if(maxResults > 0){
     		query.setMaxResults(maxResults);
     	}
-        return query.setParameter("text", keyword).getResultList();
+        return query.setParameter("text", keyword).setParameter("location", "").getResultList();
     }
 
     @Override

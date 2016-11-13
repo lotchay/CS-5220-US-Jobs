@@ -38,7 +38,7 @@ public class EmailTask {
      * there's a match, send an email to that user with a list of all the job
      * postings that match their query.
      */
-    @Scheduled(initialDelay = 1000, fixedDelay = 86400000)
+    @Scheduled(cron = "10 * * * * *")
     public void notifyNewPostings(){
     	List<JobPosting> jobPostingsSent = new ArrayList<JobPosting>();
     	List<JobPosting> jobPostingsToBeSent = new ArrayList<JobPosting>();
@@ -77,7 +77,6 @@ public class EmailTask {
     }
 
     // Sending an email every minute
-    // @Scheduled(cron = "0 * * * * *")
     public void sendMail(List<JobPosting> jobPostings, String email){
 
         SimpleMailMessage msg = new SimpleMailMessage();
@@ -91,9 +90,7 @@ public class EmailTask {
         	content += "Job Title: " + job.getJobTitle() + " @" + job.getLocation() + "\n";
         	content += "Job Details: " + job.getJobDescription() + "\n";
         }
-        // emails are fake...
-        // to test this switch to jobseeker@localhost.localdomain;
-        // String to = "jobseeker@localhost.localdomain";
+        
         String to = email;
 
         msg.setFrom( from );
