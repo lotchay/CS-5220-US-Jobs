@@ -19,7 +19,7 @@ public class HomeController {
 
     @Autowired
     private UserDao userDao;
-    
+
     @Autowired
     private ResumeDao resumeDao;
 
@@ -65,5 +65,5 @@ public class HomeController {
 
         return "login-error";
     }
-    
+
 }

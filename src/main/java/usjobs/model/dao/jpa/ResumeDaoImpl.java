@@ -32,13 +32,15 @@ public class ResumeDaoImpl implements ResumeDao {
             .setParameter( "userId", userId )
             .getResultList();
     }
-    
+
     @Override
-    public List<Resume> searchResumes(String searchTerm, String searchLoc){
-    	TypedQuery<Resume> query = em.createNamedQuery("resume.search", Resume.class)
-    			.setParameter("text", searchTerm)
-    			.setParameter("location", searchLoc);
-    	return query.getResultList();
+    public List<Resume> searchResumes( String searchTerm, String searchLoc ) {
+
+        TypedQuery<Resume> query = em
+            .createNamedQuery( "resume.search", Resume.class )
+            .setParameter( "text", searchTerm )
+            .setParameter( "location", searchLoc );
+        return query.getResultList();
     }
 
     @Override
@@ -56,5 +58,5 @@ public class ResumeDaoImpl implements ResumeDao {
 
         em.remove( resume );
     }
-    
+
 }
