@@ -1,4 +1,5 @@
 package usjobs.model.dao.jpa;
+
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import usjobs.model.JobPosting;
 import usjobs.model.dao.JobPostingDao;
+
 @Repository
 public class JobPostingDaoImpl implements JobPostingDao {
 
@@ -35,7 +37,7 @@ public class JobPostingDaoImpl implements JobPostingDao {
         String query = "From JobPosting where opened = false";
         return em.createQuery( query, JobPosting.class ).getResultList();
     }
-    
+
     @Override
     public List<JobPosting> getNewJobPostings() {
 
@@ -68,20 +70,24 @@ public class JobPostingDaoImpl implements JobPostingDao {
 
     @Override
     public List<JobPosting> searchJobs( String searchTerm, String searchLoc ) {
-    	
-    	return em.createNamedQuery("job.search", JobPosting.class).
-    			setParameter("text", searchTerm).
-    			setParameter("location", searchLoc).getResultList();
-        
+
+        return em.createNamedQuery( "job.search", JobPosting.class )
+            .setParameter( "text", searchTerm )
+            .setParameter( "location", searchLoc )
+            .getResultList();
+
     }
 
     @Override
-    public List<JobPosting> searchJobsByKeyword(String keyword, int maxResults) {
-    	TypedQuery<JobPosting> query = em.createNamedQuery("emailjob.search", JobPosting.class);
-    	if(maxResults > 0){
-    		query.setMaxResults(maxResults);
-    	}
-        return query.setParameter("text", keyword).getResultList();
+    public List<JobPosting> searchJobsByKeyword( String keyword,
+        int maxResults ) {
+
+        TypedQuery<JobPosting> query = em.createNamedQuery( "emailjob.search",
+            JobPosting.class );
+        if ( maxResults > 0 ) {
+            query.setMaxResults( maxResults );
+        }
+        return query.setParameter( "text", keyword ).getResultList();
     }
 
     @Override
@@ -112,11 +118,12 @@ public class JobPostingDaoImpl implements JobPostingDao {
 
         return em.merge( jobPosting );
     }
-    
+
     @Override
     @Transactional
-    public JobPosting saveEmail( JobPosting jobPosting){
-    	return em.merge( jobPosting);
+    public JobPosting saveEmail( JobPosting jobPosting ) {
+
+        return em.merge( jobPosting );
     }
 
     @Override
@@ -126,5 +133,5 @@ public class JobPostingDaoImpl implements JobPostingDao {
 
         return em.merge( jobPosting );
     }
-    
+
 }
