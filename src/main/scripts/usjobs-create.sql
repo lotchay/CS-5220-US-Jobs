@@ -113,7 +113,7 @@ create sequence hibernate_sequence minvalue 80;
         employer_website varchar(255),
         current_job_title varchar(255),
         experience text,
-        is_notified boolean,
+        is_notified boolean not null default false,
         keywords varchar(255),
         primary key (user_id)
     );
