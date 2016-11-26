@@ -101,7 +101,7 @@ create sequence hibernate_sequence minvalue 80;
         state varchar(255),
         street varchar(255),
         zip varchar(255),
-        email varchar(255),
+        email varchar(255) not null,
         enabled boolean not null,
         employer_name varchar(255),
         first_name varchar(255),
