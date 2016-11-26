@@ -38,7 +38,7 @@ public class EmailTask {
      * there's a match, send an email to that user with a list of all the job
      * postings that match their query.
      */
-    @Scheduled(cron = "*/10 * * * * *")
+    @Scheduled(cron = "0 0 * * * *")
     public void notifyNewPostings() {
 
         List<JobPosting> jobPostingsSent = new ArrayList<JobPosting>();
