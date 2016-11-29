@@ -40,7 +40,7 @@ public class UserDaoImpl implements UserDao {
                 .getSingleResult();
 
         } catch ( NoResultException e ) {
-            user = null; // did't find a user.
+            user = null; // didn't find a user.
         }
 
         return user;
@@ -59,7 +59,7 @@ public class UserDaoImpl implements UserDao {
                 .getSingleResult();
 
         } catch ( NoResultException e ) {
-            user = null; // did't find a user.
+            user = null; // didn't find a user.
         }
 
         return user;
@@ -146,6 +146,25 @@ public class UserDaoImpl implements UserDao {
         } else {
             return status;
         }
+    }
+
+    @Override
+    public User getUserByEmail( String email ) {
+
+        String query = "from User where email= :email";
+        User user;
+        
+        try {
+            
+            user = entityManager.createQuery( query, User.class )
+                .setParameter( "email", email )
+                .getSingleResult();
+            
+        } catch ( NoResultException e ) {
+            user = null; //Didn't find a user
+        }
+        
+        return user;
     }
 
 }

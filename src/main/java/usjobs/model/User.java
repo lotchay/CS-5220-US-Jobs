@@ -55,6 +55,7 @@ public class User implements Serializable {
     @Column(name = "supress_contact")
     private boolean supressContact;
 
+    @Column(unique = true, nullable = false)
     private String email;
 
     // Anyone who is not ROLE_ADMIN or ROLE_EMPLOYER has ROLE_SEEKER
