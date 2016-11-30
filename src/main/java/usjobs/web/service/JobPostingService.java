@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import usjobs.model.Application;
 import usjobs.model.JobPosting;
+import usjobs.model.dao.ApplicationDao;
 import usjobs.model.dao.JobPostingDao;
 
 @RestController
@@ -21,10 +23,5 @@ public class JobPostingService {
 	@RequestMapping(value="/service/job/{id}", method=RequestMethod.GET)
 	public JobPosting getJobPosting(@PathVariable int id) {
 		return jobPostingDao.getJobPosting(id);
-	}
-	
-	@RequestMapping(value="/service/jobs", method=RequestMethod.GET)
-	public List<JobPosting> getJobPostings() {
-		return jobPostingDao.getJobPostings();
 	}
 }

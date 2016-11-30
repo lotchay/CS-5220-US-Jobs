@@ -124,4 +124,5 @@
 	src="<c:url value='/bower_components/jquery-validation/dist/additional-methods.js' />"></script>
 <script src="<c:url value='/js/list-detail.js' />"></script>
 <script src="<c:url value='/js/validate.js' />"></script>
+<script src="<c:url value='/js/job-posting.js' />"></script>
 </html>
