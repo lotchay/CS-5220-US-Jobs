@@ -56,7 +56,7 @@ public class JobController {
     @Autowired
     private ApplicationDao applicationDao;
 
-    @RequestMapping("/job/list.html")
+    @RequestMapping("/job/list")
     public String list( ModelMap models ) {
 
         // Get all users from database and pass them to JSP
@@ -67,7 +67,7 @@ public class JobController {
         return "job/list";
     }
 
-    @RequestMapping("/job/view/{id}.html")
+    @RequestMapping("/job/view/{id}")
     public String view( @PathVariable Integer id, ModelMap models ) {
 
         // Get user from database and pass it to JSP
@@ -76,7 +76,7 @@ public class JobController {
         return "job/view";
     }
 
-    @RequestMapping(value = "/job/disable.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/job/disable", method = RequestMethod.GET)
     public String disable( @RequestParam Integer id, ModelMap models ) {
 
         // Disable the user
@@ -93,7 +93,7 @@ public class JobController {
         return "job/list";
     }
 
-    @RequestMapping(value = "/job/enable.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/job/enable", method = RequestMethod.GET)
     public String enable( @RequestParam Integer id, ModelMap models ) {
 
         // Disable the user
@@ -110,7 +110,7 @@ public class JobController {
         return "job/list";
     }
 
-    @RequestMapping(value = "/job/post.html")
+    @RequestMapping(value = "/job/post")
     public String jobPosting( @RequestParam int jobid, ModelMap models,
         Principal principal ) {
 
@@ -128,7 +128,7 @@ public class JobController {
         return "job/post";
     }
 
-    @RequestMapping(value = "/job/favorite.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/job/favorite", method = RequestMethod.GET)
     public String addFavorites( @RequestParam int jobid ) {
 
         JobPosting jobPosting = jobPostingDao.getJobPosting( jobid );
@@ -140,10 +140,10 @@ public class JobController {
             jobPosting.addUsersFavorited( user );
         }
         jobPostingDao.jobFavoritedOrApplied( jobPosting );
-        return "redirect:post.html?jobid=" + jobid;
+        return "redirect:post?jobid=" + jobid;
     }
 
-    @RequestMapping(value = "/job/apply.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/job/apply", method = RequestMethod.GET)
     public String apply( @RequestParam int jobId, ModelMap models ) {
 
         Application application = new Application();
@@ -159,7 +159,7 @@ public class JobController {
         return "job/apply";
     }
 
-    @RequestMapping(value = "/job/apply.html", method = RequestMethod.POST)
+    @RequestMapping(value = "/job/apply", method = RequestMethod.POST)
     public String addApplied(
         @ModelAttribute("application") Application application,
         SessionStatus session ) {
@@ -172,11 +172,11 @@ public class JobController {
             userDao.getProfileUser( Security.getUserDetails().getUsername() ) );
         jobPostingDao.jobFavoritedOrApplied( jobPosting );
         session.setComplete();
-        return "redirect:post.html?jobid="
+        return "redirect:post?jobid="
             + application.getJobApplied().getId();
     }
 
-    @RequestMapping(value = "/job/uploadResume.html",
+    @RequestMapping(value = "/job/uploadResume",
         method = RequestMethod.POST)
     public String upload( @RequestParam MultipartFile resume,
         @RequestParam int jobId ) throws IllegalStateException, IOException {
@@ -205,7 +205,7 @@ public class JobController {
             logger.error( "failed to upload file: " + file.getPath() );
         }
 
-        return "redirect:apply.html?jobId=" + jobId;
+        return "redirect:apply?jobId=" + jobId;
     }
 
     // duplicate code that's found in resumecontroller as well. refactor later.

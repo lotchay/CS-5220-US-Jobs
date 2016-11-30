@@ -14,13 +14,13 @@ public class EmailController {
     @Autowired
     private MailSender mailSender;
 
-    @RequestMapping(value = "email.html", method = RequestMethod.GET)
+    @RequestMapping(value = "email", method = RequestMethod.GET)
     public String email() {
 
         return "email";
     }
 
-    @RequestMapping(value = "email.html", method = RequestMethod.POST)
+    @RequestMapping(value = "email", method = RequestMethod.POST)
     public String email( @RequestParam String from, @RequestParam String to,
         @RequestParam String subject, @RequestParam String content ) {
 
