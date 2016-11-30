@@ -29,14 +29,14 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="<c:url value='/home.html' />"><i
+			<a class="navbar-brand" href="<c:url value='/home' />"><i
 				class="fa fa-wpforms" aria-hidden="true"></i>&nbsp;&nbsp;U.S. Jobs</a>
 		</div>
 
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-2">
 			<ul class="nav navbar-nav">
-				<li><a href="<c:url value='/home.html' />"><i
+				<li><a href="<c:url value='/home' />"><i
 						class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;Home</a></li>
 				<security:authorize access="hasAnyRole('ROLE_ADMIN')">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -44,16 +44,16 @@
 							class="fa fa-cog" aria-hidden="true"></i> &nbsp;&nbsp;Admin
 							Control Panel <span class="caret"></span> </a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="<c:url value='/user/list.html' />"><i
+							<li><a href="<c:url value='/user/list' />"><i
 									class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;User
 									Management</a></li>
-							<li><a href="<c:url value='/job/list.html' />"><i
+							<li><a href="<c:url value='/job/list' />"><i
 									class="fa fa-tasks" aria-hidden="true"></i>&nbsp;&nbsp;Job
 									Posting Management</a></li>
 						</ul></li>
 				</security:authorize>
 			</ul>
-			<form method="post" action="<c:url value='/home.html' />"
+			<form method="post" action="<c:url value='/home' />"
 				class="navbar-form navbar-left" role="search">
 				<div class="form-group">
 					<input id="searchKey" type="text" class="form-control"
@@ -85,7 +85,7 @@
 			<security:authorize
 				access="hasAnyRole('ROLE_ADMIN', 'ROLE_SEEKER', 'ROLE_EMPLOYER')">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="<c:url value='/user/profile.html' />"><i
+					<li><a href="<c:url value='/user/profile' />"><i
 							class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;Welcome, <security:authentication
 								property="principal.username" /> </a></li>
 					<li><a href="<c:url value='/logout' />"><i
@@ -94,11 +94,11 @@
 			</security:authorize>
 			<security:authorize access="!isAuthenticated()">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="<c:url value='/login.html' />"><i
+					<li><a href="<c:url value='/login' />"><i
 							class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;&nbsp;Login</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="<c:url value='/register.html' />"><i
+					<li><a href="<c:url value='/register' />"><i
 							class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;&nbsp;Register</a></li>
 				</ul>
 			</security:authorize>

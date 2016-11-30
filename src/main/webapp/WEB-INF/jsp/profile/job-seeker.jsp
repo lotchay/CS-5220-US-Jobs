@@ -200,11 +200,11 @@
 					<c:forEach items="${user.resumes}" var="resume">
 						<tr>
 							<td><a
-								href="<c:url value='/resume/download.html?resumeId=${resume.id }' />">
+								href="<c:url value='/resume/download?resumeId=${resume.id}' />">
 									${resume.fileName } </a></td>
 							<td><fmt:formatDate type="date" value="${resume.uploadDate}" /></td>
 							<td><a
-								href="<c:url value='/resume/delete.html?userId=${user.id }&resumeId=${resume.id }' />"
+								href="<c:url value='/resume/delete?userId=${user.id}&resumeId=${resume.id}' />"
 								role="button" class="btn btn-danger"><i
 									class="fa fa-times-circle"></i>&nbsp;&nbsp;Delete</a></td>
 						</tr>
@@ -237,7 +237,7 @@
 										<td><fmt:formatDate type="date"
 												value="${application.dateApplied}" /></td>
 										<td><a
-											href="<c:url value='/application/view.html?id=${application.id }' />"
+											href="<c:url value='/application/view?id=${application.id }' />"
 											role="button" class="btn btn-success"><i
 												class="fa fa-share-square-o" aria-hidden="true"></i>&nbsp;&nbsp;View
 												Application</a></td>
@@ -250,7 +250,7 @@
 										<td><fmt:formatDate type="date"
 												value="${application.dateApplied}" /></td>
 										<td><a
-											href="<c:url value='/application/view.html?id=${application.id }' />"
+											href="<c:url value='/application/view?id=${application.id}' />"
 											role="button" class="btn btn-success"><i
 												class="fa fa-share-square-o" aria-hidden="true"></i>&nbsp;&nbsp;View
 												Application</a></td>

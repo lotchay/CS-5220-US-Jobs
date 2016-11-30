@@ -78,7 +78,7 @@
 							<label class="col-lg-2 control-label">Role</label>
 							<div class="col-lg-10">
 								<c:choose>
-									<c:when test="${isAdmin }">
+									<c:when test="${isAdmin}">
 										<form:radiobutton id="role" name="role" path="userRoles"
 											value="ROLE_ADMIN" disabled="true" />
 									Admin

@@ -9,12 +9,12 @@
 		<c:when test="${empty searchResultJob && empty searchResultUser && empty searchResultResumes}">
 			<h1 class="text-warning">No results found.</h1>
 		</c:when>
-		<c:when test="${not empty searchResultUser }">
+		<c:when test="${not empty searchResultUser}">
 			<h1 class="text-primary">User Results</h1>
 			<hr />
 			<div class="list-group">
 				<c:forEach items="${searchResultUser}" var="user">
-					<a href="user/edit.html?id=${user.id}"
+					<a href="user/edit?id=${user.id}"
 						class="list-group-item">
 						<h4 class="list-group-item-heading">${user.email}</h4>
 					</a>
@@ -26,13 +26,13 @@
 			<hr />
 			<div class="list-group">
 				<c:forEach items="${searchResultResumes}" var="resume">
-					<h4 class="list-group-item-heading">${resume.user.firstName} ${resume.user.lastName }</h4>
-					<h6>Email: ${resume.user.email }</h6>
+					<h4 class="list-group-item-heading">${resume.user.firstName} ${resume.user.lastName}</h4>
+					<h6>Email: ${resume.user.email}</h6>
 					<h6>Title: ${resume.user.currentJobTitle}</h6>
 					<h6>Experience: ${resume.user.experience }</h6>
-					<h6>${resume.user.address.city }, ${resume.user.address.state }</h6>
-					<h6><a href="<c:url value='/resume/download.html?resumeId=${resume.id }' />">
-									${resume.fileName } </a></h6>
+					<h6>${resume.user.address.city}, ${resume.user.address.state}</h6>
+					<h6><a href="<c:url value='/resume/download?resumeId=${resume.id}' />">
+									${resume.fileName} </a></h6>
 					<hr/>
 				</c:forEach>
 			</div>
@@ -42,12 +42,12 @@
 			<hr />
 			<div class="list-group">
 				<c:forEach items="${searchResultJob}" var="jobPosting">
-					<a href="job/post.html?jobid=${jobPosting.id}"
+					<a href="job/post?jobid=${jobPosting.id}"
 						class="list-group-item">
 						<h4 class="list-group-item-heading">${jobPosting.jobTitle}</h4>
 						<h6>${jobPosting.company.employerName}</h6>
 						<div class="job-listing-preview">
-							<p class="list-group-item-text">${jobPosting.jobDescription }</p>
+							<p class="list-group-item-text">${jobPosting.jobDescription}</p>
 						</div>
 					</a>
 				</c:forEach>

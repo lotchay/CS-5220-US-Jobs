@@ -6,7 +6,7 @@
 </head>
 <body>
 
-    <form action="email.html" method="post">
+    <form action="email" method="post">
     <table>
         <tr>
             <td>From:</td><td><input type="text" name="from" style="width: 100%;" /></td> 

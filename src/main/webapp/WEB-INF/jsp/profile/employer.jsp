@@ -218,7 +218,7 @@
 						</div>
 						<div class="form-group">
 							<div class="col-lg-10 col-lg-offset-2">
-								<a href="<c:url value='/user/profile.html' />"
+								<a href="<c:url value='/user/profile' />"
 									class="btn btn-default">Cancel</a>
 								<button type="submit" class="btn btn-primary">Submit</button>
 							</div>
@@ -242,33 +242,33 @@
 					</tr>
 					<c:forEach items="${user.jobsPosted}" var="jobPosting">
 						<tr>
-							<td>${jobPosting.jobTitle }</td>
+							<td>${jobPosting.jobTitle}</td>
 							<td><a
-								href="<c:url value='/application/jobApplications.html?jobId=${jobPosting.id }' />"
+								href="<c:url value='/application/jobApplications?jobId=${jobPosting.id}' />"
 								role="button" class="btn btn-sm btn-primary"><i
 									class="fa fa-shopping-basket" aria-hidden="true"></i>&nbsp;&nbsp;Applications
 							</a> <c:choose>
 									<c:when test="${jobPosting.opened}">
 										<a
-											href="toggleJob.html?employerId=${user.id}&jobId=${jobPosting.id }"
+											href="toggleJob?employerId=${user.id}&jobId=${jobPosting.id}"
 											role="button" class="btn btn-sm btn-warning"> <i
 											class="fa fa-level-down" aria-hidden="true"></i>&nbsp;&nbsp;Close
 										</a>
 									</c:when>
 									<c:otherwise>
 										<a
-											href="toggleJob.html?employerId=${user.id}&jobId=${jobPosting.id }"
+											href="toggleJob?employerId=${user.id}&jobId=${jobPosting.id}"
 											role="button" class="btn btn-sm btn-info"> <i
 											class="fa fa-level-up" aria-hidden="true"></i>&nbsp;&nbsp;
 											Open
 										</a>
 									</c:otherwise>
 								</c:choose> <a
-								href="editJob.html?employerId=${user.id}&jobId=${jobPosting.id}"
+								href="editJob?employerId=${user.id}&jobId=${jobPosting.id}"
 								role="button" class="btn btn-sm btn-success"> <i
 									class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Edit
 							</a> <a
-								href="deleteJob.html?employerId=${user.id}&jobId=${jobPosting.id }"
+								href="deleteJob?employerId=${user.id}&jobId=${jobPosting.id }"
 								role="button" class="btn btn-sm btn-danger"> <i
 									class="fa fa-times-circle"></i>&nbsp;&nbsp;Delete
 							</a></td>
