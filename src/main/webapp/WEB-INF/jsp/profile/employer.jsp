@@ -250,15 +250,13 @@
 							</a> <c:choose>
 									<c:when test="${jobPosting.opened}">
 										<a
-											href="toggleJob?employerId=${user.id}&jobId=${jobPosting.id}"
-											role="button" class="btn btn-sm btn-warning"> <i
+											role="button" class="btn btn-sm btn-warning closeJob"> <i
 											class="fa fa-level-down" aria-hidden="true"></i>&nbsp;&nbsp;Close
 										</a>
 									</c:when>
 									<c:otherwise>
 										<a
-											href="toggleJob?employerId=${user.id}&jobId=${jobPosting.id}"
-											role="button" class="btn btn-sm btn-info"> <i
+											role="button" class="btn btn-sm btn-info openJob"> <i
 											class="fa fa-level-up" aria-hidden="true"></i>&nbsp;&nbsp;
 											Open
 										</a>

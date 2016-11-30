@@ -1,5 +1,6 @@
 package usjobs.web.service;
 
+import java.util.Date;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import usjobs.model.dao.JobPostingDao;
 @RestController
 public class JobPostingService {
 	private static final Logger logger = Logger.getLogger(JobPostingService.class);
-	
+
 	@Autowired
 	JobPostingDao jobPostingDao;
 
@@ -37,5 +38,18 @@ public class JobPostingService {
 			applicationDao.saveApplication(app);
 		}
 		jobPostingDao.delete(jobPosting);
+	}
+
+	@RequestMapping(value = "/service/job/toggle/{id}", method = RequestMethod.PUT)
+	public void toggleJob(@PathVariable int id) {
+		JobPosting jobPosting = jobPostingDao.getJobPosting(id);
+		boolean isOpened = jobPosting.isOpened();
+		if (isOpened) {
+			jobPosting.setDateClosed(new Date());
+		} else {
+			jobPosting.setDatePosted(new Date());
+		}
+		jobPosting.setOpened(!isOpened);
+		jobPostingDao.save(jobPosting);
 	}
 }
