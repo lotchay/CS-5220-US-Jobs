@@ -7,6 +7,7 @@ import javax.persistence.TypedQuery;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
 import usjobs.model.JobPosting;
 import usjobs.model.dao.JobPostingDao;
 @Repository
@@ -63,6 +64,14 @@ public class JobPostingDaoImpl implements JobPostingDao {
     @PreAuthorize("hasRole('ROLE_ADMIN') or principal.username == #jobPosting.company.username")
     public void delete( JobPosting jobPosting ) {
 
+        em.remove( jobPosting );
+    }
+    
+    @Override
+    @Transactional
+    @PreAuthorize("hasRole('ROLE_ADMIN') or principal.username == #jobPosting.company.username")
+    public void delete(int id){
+    	JobPosting jobPosting = em.find( JobPosting.class, id );
         em.remove( jobPosting );
     }
 

@@ -227,4 +227,10 @@ public class JobController {
         return new File( fullPath );
     }
     
+    @RequestMapping("postings")
+    public String jobPostings(ModelMap models){
+        models.put( "jobPostings", jobPostingDao.getJobPostings() );
+        return "postings";
+    }
+    
 }
