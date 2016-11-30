@@ -47,7 +47,7 @@ public class ProfileController {
      * 
      * @return
      */
-    @RequestMapping(value = "/user/profile.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/profile", method = RequestMethod.GET)
     public String getProfile( ModelMap models ) {
 
         UserDetails details = Security.getUserDetails();
@@ -71,10 +71,10 @@ public class ProfileController {
         // This would protect against some db insertion? mistake that caused
         // this authenticated user to have no role at all.
         // then just redirect them to home page.
-        return "home.html";
+        return "home";
     }
 
-    @RequestMapping(value = "/user/editProfile.html",
+    @RequestMapping(value = "/user/editProfile",
         method = RequestMethod.POST)
     public String editProfile( @RequestParam String password,
         @RequestParam String email, @RequestParam String street,
@@ -95,10 +95,10 @@ public class ProfileController {
         // This would protect against some db insertion? mistake that caused
         // this authenticated user to have no role at all.
         // then just redirect them to home page.
-        return "redirect:profile.html";
+        return "redirect:profile";
     }
 
-    @RequestMapping(value = "/user/addJob.html", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/addJob", method = RequestMethod.POST)
     public String addJob( @RequestParam int employerId,
         @ModelAttribute("newJob") JobPosting newJob, SessionStatus session ) {
 
@@ -108,10 +108,10 @@ public class ProfileController {
         newJob.setOpened( true );
         jobPostingDao.save( newJob );
         session.setComplete();
-        return "redirect:profile.html?id=" + employerId;
+        return "redirect:profile?id=" + employerId;
     }
 
-    @RequestMapping(value = "/user/deleteJob.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/deleteJob", method = RequestMethod.GET)
     public String deleteJob( @RequestParam int employerId,
         @RequestParam int jobId ) {
 
@@ -124,10 +124,10 @@ public class ProfileController {
             applicationDao.saveApplication( app );
         }
         jobPostingDao.delete( jobPosting );
-        return "redirect:profile.html?id=" + employerId;
+        return "redirect:profile?id=" + employerId;
     }
 
-    @RequestMapping(value = "/user/toggleJob.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/toggleJob", method = RequestMethod.GET)
     public String toggleJob( @RequestParam int employerId,
         @RequestParam int jobId ) {
 
@@ -140,10 +140,10 @@ public class ProfileController {
         }
         jobPosting.setOpened( !isOpened );
         jobPostingDao.save( jobPosting );
-        return "redirect:profile.html?id=" + employerId;
+        return "redirect:profile?id=" + employerId;
     }
 
-    @RequestMapping(value = "/user/editJob.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/editJob", method = RequestMethod.GET)
     public String editJobForm( @RequestParam int employerId,
         @RequestParam int jobId, ModelMap models ) {
 
@@ -151,17 +151,17 @@ public class ProfileController {
         return "job/edit";
     }
 
-    @RequestMapping(value = "/user/editJob.html", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/editJob", method = RequestMethod.POST)
     public String editJobForm( @RequestParam int employerId,
         @ModelAttribute("editJob") JobPosting editJob,
         SessionStatus sessionStatus ) {
 
         jobPostingDao.save( editJob );
         sessionStatus.setComplete();
-        return "redirect:profile.html?id=" + employerId;
+        return "redirect:profile?id=" + employerId;
     }
 
-    @RequestMapping(value = "/user/editNotifications.html",
+    @RequestMapping(value = "/user/editNotifications",
         method = RequestMethod.POST)
     public String editJobForm( @RequestParam String notify,
         @RequestParam String keywords ) {
@@ -172,7 +172,7 @@ public class ProfileController {
         seeker.setNotified( Boolean.parseBoolean( notify ) );
         seeker.setKeywords( keywords );
         userDao.saveProfileUser( seeker );
-        return "redirect:profile.html?id=" + seeker.getId();
+        return "redirect:profile?id=" + seeker.getId();
     }
 
 }

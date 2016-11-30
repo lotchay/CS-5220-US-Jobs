@@ -35,19 +35,19 @@
 							<td><security:authorize access="hasRole('ROLE_ADMIN')">
 
 									<a class="btn btn-info" role="button"
-										href="view/${user.id}.html"><i class="fa fa-street-view"
+										href="view/${user.id}"><i class="fa fa-street-view"
 										aria-hidden="true"></i>&nbsp;&nbsp; View</a>
 									<a class="btn btn-success" role="button"
-										href="edit.html?id=${user.id}"><i
+										href="edit?id=${user.id}"><i
 										class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Edit</a>
 									<c:if test="${user.enabled}">
 										<a class="btn btn-danger" role="button"
-											href="disable.html?id=${user.id}"><i
+											href="disable?id=${user.id}"><i
 											class="fa fa-level-down" aria-hidden="true"></i>&nbsp;&nbsp;Disable</a>
 									</c:if>
 									<c:if test="${not user.enabled}">
 										<a class="btn btn-warning" role="button"
-											href="enable.html?id=${user.id}"><i
+											href="enable?id=${user.id}"><i
 											class="fa fa-level-up" aria-hidden="true"></i>&nbsp;&nbsp;Enable</a>
 									</c:if>
 
@@ -59,7 +59,7 @@
 		</div>
 		<security:authorize access="hasRole('ROLE_ADMIN')">
 			<p>
-				<a class="btn btn-primary" role="button" href="add.html"><i
+				<a class="btn btn-primary" role="button" href="add"><i
 					class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;&nbsp; Add New
 					User</a>
 			</p>

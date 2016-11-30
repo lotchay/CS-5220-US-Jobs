@@ -27,7 +27,7 @@ public class PostingService{
         return jobPostingDao.getJobPostings();
     }
     
-    @RequestMapping(value = "/service/posting/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/service/posting/{id}", produces="application/json", method = RequestMethod.GET)
     @ResponseBody
     public JobPosting getJobPosting(@PathVariable Integer id, ModelMap models){
     	// Get job posting based on id and pass it back as a json object

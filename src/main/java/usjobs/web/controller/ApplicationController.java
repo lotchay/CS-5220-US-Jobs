@@ -18,7 +18,7 @@ public class ApplicationController {
     @Autowired
     ApplicationDao applicationDao;
 
-    @RequestMapping(value = "/application/view.html",
+    @RequestMapping(value = "/application/view",
         method = RequestMethod.GET)
     public String view( @RequestParam int id, ModelMap models ) {
 
@@ -28,7 +28,7 @@ public class ApplicationController {
         return "application/view";
     }
 
-    @RequestMapping(value = "/application/jobApplications.html",
+    @RequestMapping(value = "/application/jobApplications",
         method = RequestMethod.GET)
     public String getJobApplications( @RequestParam int jobId,
         ModelMap models ) {

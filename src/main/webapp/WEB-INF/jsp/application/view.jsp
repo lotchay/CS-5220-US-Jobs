@@ -41,7 +41,7 @@
 					<c:choose>
 						<c:when test="${not empty application.resume.id }">
 							<a
-								href="<c:url value='/resume/download.html?resumeId=${application.resume.id}' />"
+								href="<c:url value='/resume/download?resumeId=${application.resume.id}' />"
 								role="button" class="btn btn-primary"><i
 								class="fa fa-download" aria-hidden="true"></i>&nbsp;&nbsp;Download</a>
 						</c:when>
