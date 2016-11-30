@@ -31,7 +31,7 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
 
-    @RequestMapping("/user/list.html")
+    @RequestMapping("/user/list")
     public String list( ModelMap models ) {
 
         // Get all users from database and pass them to JSP
@@ -42,7 +42,7 @@ public class UserController {
         return "user/list";
     }
 
-    @RequestMapping("/user/view/{id}.html")
+    @RequestMapping("/user/view/{id}")
     public String view( @PathVariable Integer id, ModelMap models ) {
 
         // Get user from database and pass it to JSP
@@ -52,7 +52,7 @@ public class UserController {
     }
 
     // Using Model Attribute to bind fields
-    @RequestMapping(value = "/user/add.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/add", method = RequestMethod.GET)
     public String add( ModelMap models ) {
 
         // Create a new user
@@ -61,7 +61,7 @@ public class UserController {
         return "user/add";
     }
 
-    @RequestMapping(value = "/user/add.html", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/add", method = RequestMethod.POST)
     public String add( @ModelAttribute User user, BindingResult result,
         SessionStatus status ) {
 
@@ -82,10 +82,10 @@ public class UserController {
         status.setComplete();
 
         // Redirect to user list
-        return "redirect:list.html";
+        return "redirect:list";
     }
 
-    @RequestMapping(value = "/user/edit.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/edit", method = RequestMethod.GET)
     public String edit( @RequestParam Integer id, ModelMap models ) {
 
         models.put( "user", userDao.getUser( id ) );
@@ -93,7 +93,7 @@ public class UserController {
         return "user/edit";
     }
 
-    @RequestMapping(value = "/user/edit.html", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/edit", method = RequestMethod.POST)
     public String edit( @ModelAttribute User user, SessionStatus status ) {
 
         // Save the user to database
@@ -105,10 +105,10 @@ public class UserController {
         status.setComplete();
 
         // Redirect to user list
-        return "redirect:list.html";
+        return "redirect:list";
     }
 
-    @RequestMapping(value = "/user/disable.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/disable", method = RequestMethod.GET)
     public String disable( @RequestParam Integer id, ModelMap models ) {
 
         // Disable the user
@@ -125,7 +125,7 @@ public class UserController {
         return "user/list";
     }
 
-    @RequestMapping(value = "/user/enable.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/enable", method = RequestMethod.GET)
     public String enable( @RequestParam Integer id, ModelMap models ) {
 
         // Disable the user
@@ -142,7 +142,7 @@ public class UserController {
         return "user/list";
     }
 
-    @RequestMapping(value = "/register.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register( ModelMap models ) {
 
         // Create a new user
@@ -151,7 +151,7 @@ public class UserController {
         return "register";
     }
 
-    @RequestMapping(value = "/register.html", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register( @ModelAttribute("user") User user,
         BindingResult result, SessionStatus status ) {
 
@@ -171,7 +171,7 @@ public class UserController {
         // Remove all the session attributes when done
         status.setComplete();
 
-        return "redirect:login.html";
+        return "redirect:login";
     }
 
 }

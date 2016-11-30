@@ -35,7 +35,7 @@ import usjobs.util.Security;
 @Controller
 public class ResumeController {
 
-    Logger logger = Logger.getLogger( this.getClass() );
+    Logger logger = Logger.getLogger( ResumeController.class );
 
     public static final File fileDir = new File( "/WEB-INF/files/user_" );
 
@@ -69,7 +69,7 @@ public class ResumeController {
         return new File( fullPath );
     }
 
-    @RequestMapping(value = "/resume/upload.html", method = RequestMethod.POST)
+    @RequestMapping(value = "/resume/upload", method = RequestMethod.POST)
     public String upload( @RequestParam MultipartFile resume )
         throws IllegalStateException, IOException {
 
@@ -117,10 +117,10 @@ public class ResumeController {
             logger.error( "failed to upload file: " + file.getPath() );
         }
 
-        return "redirect:/user/profile.html";
+        return "redirect:/user/profile";
     }
 
-    @RequestMapping("/resume/download.html")
+    @RequestMapping("/resume/download")
     public String download( HttpServletResponse response,
         @RequestParam int resumeId ) throws IOException {
 
@@ -148,7 +148,7 @@ public class ResumeController {
         return null;
     }
 
-    @RequestMapping("/resume/delete.html")
+    @RequestMapping("/resume/delete")
     public String delete( HttpServletResponse response,
         @RequestParam Integer userId, @RequestParam int resumeId )
         throws IOException {
@@ -179,7 +179,7 @@ public class ResumeController {
             logger.info( "file to delete doesn't exist." );
         }
 
-        return "redirect:/user/profile.html";
+        return "redirect:/user/profile";
     }
 
 }

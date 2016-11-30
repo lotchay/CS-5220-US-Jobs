@@ -23,7 +23,7 @@ public class HomeController {
     @Autowired
     private ResumeDao resumeDao;
 
-    @RequestMapping(value = { "/index.html", "/home.html" },
+    @RequestMapping(value = { "/index", "/home" },
         method = RequestMethod.GET)
     public String home( ModelMap models ) {
 
@@ -31,7 +31,7 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping(value = { "/index.html", "/home.html" },
+    @RequestMapping(value = { "/index", "/home" },
         method = RequestMethod.POST)
     public String home( @RequestParam String searchBar,
         @RequestParam String searchLoc, @RequestParam String searchType,
@@ -54,13 +54,13 @@ public class HomeController {
         return home( models );
     }
 
-    @RequestMapping(value = "/login.html")
+    @RequestMapping(value = "/login")
     public String login() {
 
         return "login";
     }
 
-    @RequestMapping(value = "/loginError.html")
+    @RequestMapping(value = "/loginError")
     public String loginError() {
 
         return "login-error";

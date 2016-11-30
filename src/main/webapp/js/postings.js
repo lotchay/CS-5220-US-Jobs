@@ -1,7 +1,8 @@
 function viewJobPosting(){
     var jobPostingId = $(this).closest("tr").attr("data-job-posting-id");
     $.ajax({
-        url: "service/posting/" + jobPostingId,
+        url: "service/posting/" + jobPostingId + ".html",
+        contentType : "application/json",
         dataType: "json",
         success: function(data) {
             $("#job-posting-display td[data-field='id']").html(data.id);

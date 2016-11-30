@@ -34,16 +34,16 @@
 							<td>${jobPosting.website}</td>
 							<td><security:authorize access="hasRole('ROLE_ADMIN')">
 									<a class="btn btn-info" role="button"
-										href="view/${jobPosting.id}.html"><i
+										href="view/${jobPosting.id}"><i
 										class="fa fa-opencart" aria-hidden="true"></i>&nbsp;&nbsp;View</a>
 									<c:if test="${jobPosting.enabled}">
 										<a class="btn btn-danger" role="button"
-											href="disable.html?id=${jobPosting.id}"><i
+											href="disable?id=${jobPosting.id}"><i
 											class="fa fa-level-down" aria-hidden="true"></i>&nbsp;&nbsp;Disable</a>
 									</c:if>
 									<c:if test="${not jobPosting.enabled}">
 										<a class="btn btn-success" role="button"
-											href="enable.html?id=${jobPosting.id}"><i
+											href="enable?id=${jobPosting.id}"><i
 											class="fa fa-level-up" aria-hidden="true"></i>&nbsp;&nbsp;Enable</a>
 									</c:if>
 								</security:authorize></td>

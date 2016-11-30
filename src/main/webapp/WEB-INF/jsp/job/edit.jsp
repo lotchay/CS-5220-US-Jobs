@@ -53,7 +53,7 @@
 						</div>
 						<div class="form-group">
 							<div class="col-lg-10 col-lg-offset-2">
-								<a href="<c:url value='/user/profile.html' />"
+								<a href="<c:url value='/user/profile' />"
 									class="btn btn-default">Cancel</a>
 								<button type="submit" class="btn btn-primary">Submit</button>
 							</div>

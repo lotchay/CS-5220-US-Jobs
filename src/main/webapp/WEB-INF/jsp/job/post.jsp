@@ -8,7 +8,7 @@
 <div class="row">
 	<div class="col-md-8 col-md-offset-2 page-header">
 		<h1>${jobPosting.jobTitle }</h1>
-		<h4 class="pull-left">${jobPosting.company.employerName}-${jobPosting.location }</h4>
+		<h4 class="pull-left">${jobPosting.company.employerName}-${jobPosting.location}</h4>
 		<h4 class="pull-right">
 			Dated posted:
 			<c:choose>
@@ -41,7 +41,7 @@
 							</button>
 						</c:when>
 						<c:otherwise>
-							<a href="apply.html?jobId=${jobPosting.id }" role="button"
+							<a href="apply?jobId=${jobPosting.id}" role="button"
 								id="apply" class="btn btn-info"> <i
 								class="fa fa-arrow-circle-right" aria-hidden="true"></i>&nbsp;&nbsp;Apply
 							</a>
@@ -49,13 +49,13 @@
 					</c:choose>
 					<c:choose>
 						<c:when test="${jobPosting.usersFavorited.contains(currentUser)}">
-							<a href="favorite.html?jobid=${jobPosting.id}" role="button"
+							<a href="favorite?jobid=${jobPosting.id}" role="button"
 								id="favorite" class="btn btn-warning"> <i class="fa fa-undo"
 								aria-hidden="true"></i> &nbsp;&nbsp;Unfavorite
 							</a>
 						</c:when>
 						<c:otherwise>
-							<a href="favorite.html?jobid=${jobPosting.id}" role="button"
+							<a href="favorite?jobid=${jobPosting.id}" role="button"
 								id="favorite" class="btn btn-warning"> <i class="fa fa-star"
 								aria-hidden="true"></i>&nbsp;&nbsp;Favorite
 							</a>
@@ -77,27 +77,27 @@
 				<h4>
 					<strong>Company</strong>
 				</h4>
-				<p>${jobPosting.company.employerName }</p>
+				<p>${jobPosting.company.employerName}</p>
 				<h4>
 					<strong>Job Title</strong>
 				</h4>
-				<p>${jobPosting.jobTitle }</p>
+				<p>${jobPosting.jobTitle}</p>
 				<h4>
 					<strong>Location</strong>
 				</h4>
-				<p>${jobPosting.location }</p>
+				<p>${jobPosting.location}</p>
 				<h4>
 					<strong>Salary</strong>
 				</h4>
 				<p>
 					<fmt:setLocale value="en_US" />
-					<fmt:formatNumber value="${jobPosting.salary }" type="currency" />
+					<fmt:formatNumber value="${jobPosting.salary}" type="currency" />
 				</p>
 				<h4>
 					<strong>Website</strong>
 				</h4>
 				<p>
-					<a target="_blank" href="http://${jobPosting.website }">${jobPosting.website }</a>
+					<a target="_blank" href="http://${jobPosting.website}">${jobPosting.website}</a>
 				</p>
 			</div>
 		</div>
@@ -119,9 +119,9 @@
 						<h4>There are no reviews for this job.</h4>
 					</c:when>
 					<c:otherwise>
-						<c:forEach items="${jobPosting.jobReviews }" var="review">
+						<c:forEach items="${jobPosting.jobReviews}" var="review">
 							<h3>${review.userPosted.username}</h3>
-							<h4>${review.jobReview }</h4>
+							<h4>${review.jobReview}</h4>
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>

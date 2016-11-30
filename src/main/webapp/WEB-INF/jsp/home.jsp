@@ -32,12 +32,12 @@
 				<hr />
 				<div class="list-group">
 					<c:forEach items="${jobPostings}" var="jobPosting">
-						<a href="job/post.html?jobid=${jobPosting.id}"
+						<a href="job/post?jobid=${jobPosting.id}"
 							class="list-group-item">
 							<h4 class="list-group-item-heading">${jobPosting.jobTitle}</h4>
 							<h6>${jobPosting.company.employerName}</h6>
 							<div class="job-listing-preview">
-								<p class="list-group-item-text">${jobPosting.jobDescription }</p>
+								<p class="list-group-item-text">${jobPosting.jobDescription}</p>
 							</div>
 						</a>
 					</c:forEach>
