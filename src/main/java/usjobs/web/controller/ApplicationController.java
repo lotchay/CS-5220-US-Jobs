@@ -38,5 +38,5 @@ public class ApplicationController {
         models.put( "applications", applications );
         return "application/job-applications";
     }
-    
+
 }

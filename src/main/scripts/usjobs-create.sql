@@ -101,7 +101,7 @@ create sequence hibernate_sequence minvalue 80;
         state varchar(255),
         street varchar(255),
         zip varchar(255),
-        email varchar(255),
+        email varchar(255) not null,
         enabled boolean not null,
         employer_name varchar(255),
         first_name varchar(255),
@@ -113,7 +113,7 @@ create sequence hibernate_sequence minvalue 80;
         employer_website varchar(255),
         current_job_title varchar(255),
         experience text,
-        is_notified boolean,
+        is_notified boolean not null default false,
         keywords varchar(255),
         primary key (user_id)
     );
@@ -206,7 +206,7 @@ create sequence hibernate_sequence minvalue 80;
                        last_name, password, reported, username,
                        current_job_title, experience, supress_contact, is_notified, keywords) values
                       ('SEEKER', 1, 'New Brunswick', 'NJ', '467 Durham Court',
-                       '08901', 'loc.truong@testemail.com', true, 'Loc',
+                       '08901', 'loc.truong@localhost.localdomain', true, 'Loc',
                        'Truong', 'password@1', false, 'loc',
                        'Software Engineering', '4 years', false, true, 'engineer, assistant, accountant');
 
@@ -215,7 +215,7 @@ create sequence hibernate_sequence minvalue 80;
                        last_name, password, reported, username,
                        current_job_title, experience, supress_contact, is_notified, keywords) values
                       ('SEEKER', 2, 'Henderson', 'KY', '398 Augusta Drive',
-                       '42420', 'steve.shim@testemail.com', true, 'Steve',
+                       '42420', 'steve.shim@localhost.localdomain', true, 'Steve',
                        'Shim', 'password@1', false, 'steve',
                        'Software Engineering', '5 years', false, true, 'receptionist, taxi, driver');
 
@@ -224,7 +224,7 @@ create sequence hibernate_sequence minvalue 80;
                        last_name, password, reported, username,
                        employer_website, employer_name, supress_contact) values
                       ('EMPLOYER', 3, 'Cambridge', 'MA', '852 Ridge Road',
-                       '02138', 'jordan.ton@testemail.com', true, 'Jordan',
+                       '02138', 'jordan.ton@localhost.localdomain', true, 'Jordan',
                        'Ton', 'password@1', false, 'jordan',
                        'www.google.com/career', 'Google', false);
 
@@ -233,7 +233,7 @@ create sequence hibernate_sequence minvalue 80;
                        last_name, password, reported, username,
                        employer_website, employer_name, supress_contact) values
                       ('EMPLOYER', 4, 'Hackensack', 'NJ', '225 Woodland Avenue',
-                       '07601', 'james.sunthonlap@testemail.com', true, 'James',
+                       '07601', 'james.sunthonlap@localhost.localdomain', true, 'James',
                        'Sunthonlap', 'password@1', false, 'james',
                        'www.nasa.gov/career', 'NASA', false);
 

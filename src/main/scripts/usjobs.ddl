@@ -48,6 +48,7 @@ create sequence hibernate_sequence start 1 increment 1
         date_closed timestamp,
         date_posted timestamp,
         enabled boolean not null,
+        new boolean not null,
         job_description text,
         job_title varchar(255),
         location varchar(255),
@@ -100,7 +101,7 @@ create sequence hibernate_sequence start 1 increment 1
         state varchar(255),
         street varchar(255),
         zip varchar(255),
-        email varchar(255),
+        email varchar(255) not null,
         enabled boolean not null,
         first_name varchar(255),
         last_name varchar(255),
@@ -116,6 +117,9 @@ create sequence hibernate_sequence start 1 increment 1
         is_notified boolean,
         primary key (user_id)
     )
+
+    alter table users 
+        add constraint UK_6dotkott2kjsp8vw4d0m25fb7 unique (email)
 
     alter table users 
         add constraint UK_r43af9ap4edm43mmtq01oddj6 unique (username)

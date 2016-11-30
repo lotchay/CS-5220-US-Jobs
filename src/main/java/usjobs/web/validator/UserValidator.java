@@ -68,6 +68,13 @@ public class UserValidator implements Validator {
 
             errors.rejectValue( "username", "error.username.taken" );
         }
+
+        String email = user.getEmail();
+
+        if ( (email != null) && (userDao.getUserByEmail( email ) != null) ) {
+
+            errors.rejectValue( "email", "error.email.taken" );
+        }
     }
 
 }

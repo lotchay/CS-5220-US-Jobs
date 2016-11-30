@@ -30,7 +30,10 @@ public interface JobPostingDao {
         String searchLocation );
 
     JobPosting save( JobPosting jobPosting );
+    
+    JobPosting saveEmail( JobPosting jobPosting );
 
     JobPosting jobFavoritedOrApplied( JobPosting jobPosting );
 
 }
+

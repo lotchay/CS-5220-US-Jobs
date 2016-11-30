@@ -38,47 +38,82 @@ public class EmailTask {
      * there's a match, send an email to that user with a list of all the job
      * postings that match their query.
      */
-    @Scheduled(initialDelay = 1000, fixedDelay = 86400000)
-    public void notifyNewPostings(){
-    	List<JobPosting> jobPostingsSent = new ArrayList<JobPosting>();
-    	List<JobPosting> jobPostingsToBeSent = new ArrayList<JobPosting>();
-		List<User> seekers = userDao.getJobSeekers();
-		String keywordString;
-		String[] keywords;
-		JobSeeker seeker;
-		for(User user : seekers){
-			seeker = (JobSeeker)user;
-			if(seeker.isNotified() && !StringUtils.isEmpty(seeker.getKeywords())){
-				keywordString = seeker.getKeywords();
-				logger.info("Searching relevant postings with '" + keywordString + "' keywords for " + seeker.getEmail());
-				keywords = keywordString.split(",");
-				for(int j = 0; j < keywords.length; j++){
-					// get 3 new relevant postings, 3 by default we can change this if we want.
-					List<JobPosting> jobPostingsSearchedByKeyword = jobPostingDao.searchJobsByKeyword(keywords[j].trim(), 3);
-					for(JobPosting jobPosting : jobPostingsSearchedByKeyword){
-						if(!jobPostingsToBeSent.contains(jobPosting)){
-							jobPostingsToBeSent.add(jobPosting);
-							if(!jobPostingsSent.contains(jobPosting)){
-								jobPostingsSent.add(jobPosting);
-							}
-						}
-					}
-				}
-				logger.info("Sending " + jobPostingsToBeSent.size() + " job postings to " + seeker.getEmail() + ".");
-				sendMail(jobPostingsToBeSent, seeker.getEmail());
-				jobPostingsToBeSent.clear();
-			}
-		}
-		// Set new to false for jobs that have been processed.
-		for(JobPosting jobPosting : jobPostingsSent){
-			jobPosting.setNew(false);
-			jobPostingDao.save(jobPosting);
-		}
+    @Scheduled(cron = "0 0 * * * *")
+    public void notifyNewPostings() {
+
+        List<JobPosting> jobPostingsSent = new ArrayList<JobPosting>();
+        List<JobPosting> jobPostingsToBeSent = new ArrayList<JobPosting>();
+        
+        List<User> seekers = userDao.getJobSeekers();
+        
+        String keywordString;
+        String[] keywords;
+        
+        JobSeeker seeker;
+        
+        for ( User user : seekers ) {
+            
+            seeker = (JobSeeker) user;
+            
+            if ( seeker.isNotified()
+                && !StringUtils.isEmpty( seeker.getKeywords() ) ) {
+                
+                keywordString = seeker.getKeywords();
+                
+                logger.info( "Searching relevant postings with '"
+                    + keywordString + "' keywords for " + seeker.getEmail() );
+                
+                keywords = keywordString.split( "," );
+                
+                for ( int j = 0; j < keywords.length; j++ ) {
+                    // get 3 new relevant postings, 3 by default we can change
+                    // this if we want.
+                    List<JobPosting> jobPostingsSearchedByKeyword = jobPostingDao
+                        .searchJobsByKeyword( keywords[j].trim(), 3 );
+                    
+                    for ( JobPosting jobPosting : jobPostingsSearchedByKeyword ) {
+                        
+                        if ( !jobPostingsToBeSent.contains( jobPosting ) ) {
+                            
+                            jobPostingsToBeSent.add( jobPosting );
+                            
+                            if ( !jobPostingsSent.contains( jobPosting ) ) {
+                                
+                                jobPostingsSent.add( jobPosting );
+                                
+                                logger
+                                    .info( "Adding " + jobPosting.getJobTitle()
+                                        + " to be set to old." );
+                            }
+                        }
+                    }
+                }
+
+                if ( jobPostingsToBeSent.size() > 0 ) {
+
+                    logger.info( "Sending " + jobPostingsToBeSent.size()
+                        + " job postings to " + seeker.getEmail() + "." );
+                    
+                    sendMail( jobPostingsToBeSent, seeker.getEmail() );
+                    
+                    jobPostingsToBeSent.clear();
+                }
+            }
+        }
+        
+        // Set new to false for jobs that have been processed.
+        for ( JobPosting jobPosting : jobPostingsSent ) {
+            
+            jobPosting.setNew( false );
+            
+            logger.info(
+                jobPosting.getJobTitle() + " is new? " + jobPosting.isNew() );
+            
+            jobPostingDao.saveEmail( jobPosting );
+        }
     }
 
-    // Sending an email every minute
-    // @Scheduled(cron = "0 * * * * *")
-    public void sendMail(List<JobPosting> jobPostings, String email){
+    public void sendMail( List<JobPosting> jobPostings, String email ) {
 
         SimpleMailMessage msg = new SimpleMailMessage();
 
@@ -87,13 +122,14 @@ public class EmailTask {
         String content = "There are new job postings on US Jobs that you may be"
             + " interested in. Please go to US Jobs website to view these jobs."
             + " Thank you and have a wonderful day!\n";
-        for(JobPosting job : jobPostings){
-        	content += "Job Title: " + job.getJobTitle() + " @" + job.getLocation() + "\n";
-        	content += "Job Details: " + job.getJobDescription() + "\n";
+
+        for ( JobPosting job : jobPostings ) {
+
+            content += "Job Title: " + job.getJobTitle() + " @"
+                + job.getLocation() + "\n";
+            content += "Job Details: " + job.getJobDescription() + "\n";
         }
-        // emails are fake...
-        // to test this switch to jobseeker@localhost.localdomain;
-        // String to = "jobseeker@localhost.localdomain";
+
         String to = email;
 
         msg.setFrom( from );
@@ -106,5 +142,5 @@ public class EmailTask {
         // Print to console
         logger.info( "An email has been sent by the system." );
     }
-    
+
 }

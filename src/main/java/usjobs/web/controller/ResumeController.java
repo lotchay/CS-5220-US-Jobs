@@ -78,7 +78,7 @@ public class ResumeController {
         User user = userDao.getProfileUser( details.getUsername() );
 
         Integer userId = user.getId();
-        
+
         String filename = resume.getOriginalFilename();
 
         File file = new File( getFileDirectory( userId ), filename );
@@ -93,23 +93,25 @@ public class ResumeController {
             newResume.setFileName( filename );
             newResume.setUser( user );
             newResume.setUploadDate( new Date() );
-            //Full text search
+            // Full text search
             String content = "";
-            try{
-            	if (filename.endsWith(".pdf")){
-            		PDDocument document = PDDocument.load(file);
-            		PDFTextStripper stripper = new PDFTextStripper();
-            		StringWriter sw = new StringWriter();
-            		stripper.writeText(document, sw);
-            		content = sw.toString();
-            	} else if (filename.endsWith(".doc") || filename.endsWith(".docx")){
-            		POITextExtractor extractor = ExtractorFactory.createExtractor(file);
-            		content = extractor.getText();
-            	}
-            } catch (Exception e){
-            	e.printStackTrace();
+            try {
+                if ( filename.endsWith( ".pdf" ) ) {
+                    PDDocument document = PDDocument.load( file );
+                    PDFTextStripper stripper = new PDFTextStripper();
+                    StringWriter sw = new StringWriter();
+                    stripper.writeText( document, sw );
+                    content = sw.toString();
+                } else if ( filename.endsWith( ".doc" )
+                    || filename.endsWith( ".docx" ) ) {
+                    POITextExtractor extractor = ExtractorFactory
+                        .createExtractor( file );
+                    content = extractor.getText();
+                }
+            } catch ( Exception e ) {
+                e.printStackTrace();
             }
-            newResume.setContent(content);
+            newResume.setContent( content );
             resumeDao.saveResume( newResume );
         } else {
             logger.error( "failed to upload file: " + file.getPath() );

@@ -232,5 +232,4 @@ public class JobController {
         models.put( "jobPostings", jobPostingDao.getJobPostings() );
         return "postings";
     }
-    
 }

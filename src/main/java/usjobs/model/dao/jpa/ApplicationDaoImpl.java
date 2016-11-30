@@ -56,5 +56,5 @@ public class ApplicationDaoImpl implements ApplicationDao {
             .setParameter( "resumeId", resumeId )
             .getResultList();
     }
-    
+
 }
