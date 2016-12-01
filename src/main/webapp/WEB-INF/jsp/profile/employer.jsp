@@ -11,9 +11,7 @@
 			Profile</a> <a id="profile" class="list-group-item" href="#"><i
 			class="fa fa-adjust" aria-hidden="true"></i>&nbsp;&nbsp;Update
 			Profile</a> <a id="company" class="list-group-item" href="#">Company
-			Description</a> <a id="newJob" class="list-group-item" href="#"><i
-			class="fa fa-plus-square" aria-hidden="true"></i>&nbsp;&nbsp;Add a
-			New Job Listing</a> <a id="job" class="list-group-item" href="#"> <i
+			Description</a> <a id="job" class="list-group-item" href="#"> <i
 			class="fa fa-tasks" aria-hidden="true"></i>&nbsp;&nbsp;Manage Job
 			Listings
 		</a>
@@ -169,64 +167,6 @@
 			</div>
 			<div class="panel-body">TODO</div>
 		</div>
-		<div id="newJobDetail" class="panel panel-info">
-			<div class="panel-heading">
-				<h3 class="panel-title">
-					<i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp;&nbspPost
-					a New Job
-				</h3>
-			</div>
-			<div class="panel-body">
-				<form:form id="addJobForm" modelAttribute="newJob"
-					class="form-horizontal" action="addJob.html?employerId=${user.id}"
-					method="post">
-					<fieldset>
-						<div class="form-group">
-							<label for="jobTitle" class="col-lg-2 control-label">Title</label>
-							<div class="col-lg-10">
-								<form:input type="text" class="form-control" path="jobTitle"
-									id="jobTitle" name="jobTitle" placeholder="Job Title" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="website" class="col-lg-2 control-label">Website</label>
-							<div class="col-lg-10">
-								<form:input type="text" class="form-control" path="website"
-									id="website" name="website" placeholder="Job posting website" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="location" class="col-lg-2 control-label">Location</label>
-							<div class="col-lg-10">
-								<form:input type="text" class="form-control" path="location"
-									id="location" name="location" placeholder="Job Location" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="description" class="col-lg-2 control-label">Description</label>
-							<div class="col-lg-10">
-								<form:textarea class="form-control" path="jobDescription"
-									rows="3" id="jobDescription" name="jobDescription" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="salary" class="col-lg-2 control-label">Salary</label>
-							<div class="col-lg-10">
-								<form:input type="text" class="form-control" path="salary"
-									id="salary" name="salary" placeholder="Job Salary" />
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-lg-10 col-lg-offset-2">
-								<a href="<c:url value='/user/profile' />"
-									class="btn btn-default">Cancel</a>
-								<button type="submit" class="btn btn-primary">Submit</button>
-							</div>
-						</div>
-					</fieldset>
-				</form:form>
-			</div>
-		</div>
 		<div id="jobDetail" class="panel panel-info">
 			<div class="panel-heading">
 				<h3 class="panel-title">
@@ -235,41 +175,40 @@
 				</h3>
 			</div>
 			<div class="panel-body">
-				<table class="table table-striped table-hover">
+				<button id="addJob" class="btn btn-info top-button"><i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp;&nbsp;
+				Add Job Posting</button>
+				<table id="jobs" class="table table-striped table-hover">
 					<tr class="info">
 						<th>Title</th>
 						<th></th>
 					</tr>
 					<c:forEach items="${user.jobsPosted}" var="jobPosting">
-						<tr>
-							<td>${jobPosting.jobTitle}</td>
+						<tr data-job-id="${jobPosting.id}"
+							data-job-title="${jobPosting.jobTitle }"
+							data-job-website="${jobPosting.website }"
+							data-job-location="${jobPosting.location }"
+							data-job-description="${jobPosting.jobDescription }"
+							data-job-salary="${jobPosting.salary }">
+							<td data-field="jobTitle">${jobPosting.jobTitle}</td>
 							<td><a
 								href="<c:url value='/application/jobApplications?jobId=${jobPosting.id}' />"
 								role="button" class="btn btn-sm btn-primary"><i
 									class="fa fa-shopping-basket" aria-hidden="true"></i>&nbsp;&nbsp;Applications
 							</a> <c:choose>
 									<c:when test="${jobPosting.opened}">
-										<a
-											href="toggleJob?employerId=${user.id}&jobId=${jobPosting.id}"
-											role="button" class="btn btn-sm btn-warning"> <i
-											class="fa fa-level-down" aria-hidden="true"></i>&nbsp;&nbsp;Close
+										<a role="button" class="btn btn-sm btn-warning closeJob">
+											<i class="fa fa-level-down" aria-hidden="true"></i>&nbsp;&nbsp;Close
 										</a>
 									</c:when>
 									<c:otherwise>
-										<a
-											href="toggleJob?employerId=${user.id}&jobId=${jobPosting.id}"
-											role="button" class="btn btn-sm btn-info"> <i
+										<a role="button" class="btn btn-sm btn-info openJob"> <i
 											class="fa fa-level-up" aria-hidden="true"></i>&nbsp;&nbsp;
 											Open
 										</a>
 									</c:otherwise>
-								</c:choose> <a
-								href="editJob?employerId=${user.id}&jobId=${jobPosting.id}"
-								role="button" class="btn btn-sm btn-success"> <i
+								</c:choose> <a role="button" class='btn btn-sm btn-success editJob'> <i
 									class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Edit
-							</a> <a
-								href="deleteJob?employerId=${user.id}&jobId=${jobPosting.id }"
-								role="button" class="btn btn-sm btn-danger"> <i
+							</a> <a role="button" class="btn btn-sm btn-danger deleteJob"> <i
 									class="fa fa-times-circle"></i>&nbsp;&nbsp;Delete
 							</a></td>
 						</tr>
@@ -278,4 +217,45 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+<div id="editJobDialog">
+	<form id="editJobForm" class="form-horizontal">
+		<input type="hidden" name="jobId" />
+		<fieldset>
+			<div class="form-group">
+				<label for="jobtitle" class="col-lg-2 control-label">Title</label>
+				<div class="col-lg-10">
+					<input type="text" class="form-control" id="jobtitle"
+						name="jobtitle" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="website" class="col-lg-2 control-label">Website</label>
+				<div class="col-lg-10">
+					<input type="text" class="form-control" id="website" name="website" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="location" class="col-lg-2 control-label">Location</label>
+				<div class="col-lg-10">
+					<input type="text" class="form-control" id="location"
+						name="location" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="jobdescription" class="col-lg-2 control-label">Description</label>
+				<div class="col-lg-10">
+					<textarea class="form-control" rows="3" id="jobdescription"
+						name="jobdescription"></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="salary" class="col-lg-2 control-label">Salary</label>
+				<div class="col-lg-10">
+					<input type="text" class="form-control" id="salary" name="salary" />
+				</div>
+			</div>
+		</fieldset>
+	</form>
 </div>

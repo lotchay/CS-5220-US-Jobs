@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Error View</title>
-</head>
-<body>
-    <h1>An error has happened!</h1>
-</body>
-</html>
+<div class="animated fadeIn row">
+	<div class="col-md-4 col-md-offset-4">
+		<h1 class="text-danger">Whoops! An error has occured!</h1>
+	</div>
+</div>
