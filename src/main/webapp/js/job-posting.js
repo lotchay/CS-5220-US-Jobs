@@ -56,7 +56,6 @@ function editJob() {
 		statusCode : {
 			200 : function() {
 				var rowToEdit = $("tr[data-job-id='" + jobId + "']");
-				console.log(rowToEdit);
 				rowToEdit.attr("data-job-title", $("input[name='jobtitle']")
 						.val());
 				rowToEdit.attr("data-job-website", $("input[name='website']")
@@ -75,6 +74,28 @@ function editJob() {
 	});
 }
 
+function addJob() {
+	 $.ajax({
+	        url: "/usjobs/service/job",
+	        method: "POST",
+	        dataType: "json",
+	        processData: false,
+	        contentType: "application/json",
+	        data: JSON.stringify({
+				jobTitle : $("input[name='jobtitle']").val(),
+				website : $("input[name='website']").val(),
+				location : $("input[name='location']").val(),
+				jobDescription : $("textarea[name='jobdescription']").val(),
+				salary : $("input[name='salary']").val()
+			}),
+	        success: function(data){
+	        	console.log(JSON.stringify(data));
+	        	var newRow = $("tr[data-job-id]").first().html();
+	            $("#jobs").append(newRow);
+	        }
+	    });
+}
+
 $(function() {
 
 	/**
@@ -85,7 +106,14 @@ $(function() {
 		minWidth: 500,
 		title: "Edit Job",
 		buttons : {
-			"Save" : editJob,
+			"Save" : function() {
+				if (!$("input[name='jobId']").val()) {
+					addJob();
+				} else {
+					editJob();
+				}
+				$("#editJobDialog").dialog("close");
+			},
 			Cancel : function() {
 				$(this).dialog("close");
 			}
@@ -93,17 +121,20 @@ $(function() {
 	});
 
 	/**
-	 * Event handler for when we delete a job posting in the Employer profile
-	 * page
+	 * Event handler for when we delete a job posting in the Employer profile page
 	 */
 	$(".deleteJob").click(deleteJob);
 
 	/**
-	 * Event handler for toggling open/close status job posting in the Employer
-	 * profile
+	 * Event handler for toggling open/close 
+	 * status job posting in the Employer profile
 	 */
 	$(".openJob, .closeJob").click(toggleJob);
 
+	/**
+	 * Event handler for editing a job under 
+	 * 'Manage Job Listings' in the Employer profile
+	 */
 	$(".editJob").click(function() {
 		var id = $(this).closest("tr").attr("data-job-id");
 		var title = $(this).closest("tr").attr("data-job-title");
@@ -120,6 +151,14 @@ $(function() {
 		$("input[name='jobId']").val(id);
 
 		$("#editJobDialog").dialog("open");
-	})
-
+	});
+	
+	/**
+	 * Event handler for adding a job under 'Manage Job Listings'
+	 *  in the Employer profile
+	 */
+	$("#addJob").click(function() {
+		$("#editJobForm")[0].reset();
+		$("#editJobDialog").dialog("open");
+	});
 });

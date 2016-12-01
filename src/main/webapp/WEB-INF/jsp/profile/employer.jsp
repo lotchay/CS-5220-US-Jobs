@@ -175,7 +175,9 @@
 				</h3>
 			</div>
 			<div class="panel-body">
-				<table class="table table-striped table-hover">
+				<button id="addJob" class="btn btn-info top-button"><i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp;&nbsp;
+				Add Job Posting</button>
+				<table id="jobs" class="table table-striped table-hover">
 					<tr class="info">
 						<th>Title</th>
 						<th></th>
