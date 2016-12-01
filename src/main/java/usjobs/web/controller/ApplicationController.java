@@ -10,13 +10,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import usjobs.model.Application;
+import usjobs.model.JobPosting;
 import usjobs.model.dao.ApplicationDao;
+import usjobs.model.dao.JobPostingDao;
 
 @Controller
 public class ApplicationController {
 
     @Autowired
     ApplicationDao applicationDao;
+    
+    @Autowired
+    JobPostingDao jobPostingDao;
 
     @RequestMapping(value = "/application/view",
         method = RequestMethod.GET)
@@ -35,7 +40,9 @@ public class ApplicationController {
 
         List<Application> applications = applicationDao
             .getJobApplications( jobId );
+        JobPosting jobPosting = jobPostingDao.getJobPosting(jobId);
         models.put( "applications", applications );
+        models.put( "jobTitle", jobPosting.getJobTitle());
         return "application/job-applications";
     }
 

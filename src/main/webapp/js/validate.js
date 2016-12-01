@@ -228,7 +228,7 @@ $(document).ready(function() {
 	/* Validate edit job form */
 	$("#editJobForm").validate({
 		rules: {
-			jobTitle: {
+			jobtitle: {
 				required: true,
 				minlength: 1
 			},
@@ -240,7 +240,7 @@ $(document).ready(function() {
 				required: true,
 				minlength: 1
 			},
-			jobDescription: {
+			jobdescription: {
 				required: true,
 				minlength: 5
 			},
