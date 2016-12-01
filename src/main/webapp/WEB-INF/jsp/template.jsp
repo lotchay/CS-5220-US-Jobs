@@ -13,6 +13,7 @@
 <title><tiles:insertAttribute name="title"
 		defaultValue="US Jobs" defaultValueType="string" /></title>
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link href="<c:url value='/css/vendor/bower.css' />" rel="stylesheet" />
 <link href="<c:url value='/css/us-jobs.css' />" rel="stylesheet" />
 <link

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,5 +52,18 @@ public class JobPostingService {
 		}
 		jobPosting.setOpened(!isOpened);
 		jobPostingDao.save(jobPosting);
+	}
+	
+	@RequestMapping(value = "/service/job/{id}", method = RequestMethod.PUT)
+	public void editJob(@PathVariable int id, @RequestBody JobPosting jobPosting) {
+		logger.info(jobPosting.getJobTitle());
+		logger.info("Website: " + jobPosting.getWebsite());
+		JobPosting originalJob = jobPostingDao.getJobPosting(id);
+		originalJob.setJobTitle(jobPosting.getJobTitle());
+		originalJob.setWebsite(jobPosting.getWebsite());
+		originalJob.setLocation(jobPosting.getLocation());
+		originalJob.setJobDescription(jobPosting.getJobDescription());
+		originalJob.setSalary(jobPosting.getSalary());
+		jobPostingDao.save(originalJob);
 	}
 }
