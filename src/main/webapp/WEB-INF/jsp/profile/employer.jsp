@@ -206,7 +206,7 @@
 											Open
 										</a>
 									</c:otherwise>
-								</c:choose> <a role="button" class="btn btn-sm btn-success editJob"> <i
+								</c:choose> <a role="button" class='btn btn-sm btn-success editJob'> <i
 									class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Edit
 							</a> <a role="button" class="btn btn-sm btn-danger deleteJob"> <i
 									class="fa fa-times-circle"></i>&nbsp;&nbsp;Delete

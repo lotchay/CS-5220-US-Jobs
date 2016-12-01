@@ -11,7 +11,7 @@
 			<div class="panel-heading">
 				<h3 class="panel-title">
 					<i class="fa fa-tasks" aria-hidden="true"></i>&nbsp;&nbsp;Applications
-					for ${applications[0].jobApplied.jobTitle }
+					for ${jobTitle }
 				</h3>
 			</div>
 			<div class="panel-body">

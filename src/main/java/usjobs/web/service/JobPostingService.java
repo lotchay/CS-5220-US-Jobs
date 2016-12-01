@@ -64,8 +64,8 @@ public class JobPostingService {
 
 	@RequestMapping(value = "/service/job/{id}", method = RequestMethod.PUT)
 	public void editJob(@PathVariable int id, @RequestBody JobPosting jobPosting) {
-		logger.info(jobPosting.getJobTitle());
-		logger.info("Website: " + jobPosting.getWebsite());
+//		logger.info(jobPosting.getJobTitle());
+//		logger.info("Website: " + jobPosting.getWebsite());
 		JobPosting originalJob = jobPostingDao.getJobPosting(id);
 		originalJob.setJobTitle(jobPosting.getJobTitle());
 		originalJob.setWebsite(jobPosting.getWebsite());
@@ -81,8 +81,8 @@ public class JobPostingService {
 		User user = userDao.getProfileUser(details.getUsername());
 		jobPosting.setCompany((Employer) user);
 		jobPosting.setEnabled(true);
-		logger.info(jobPosting.getJobTitle());
-		logger.info(jobPosting.getCompany().getUsername());
+//		logger.info(jobPosting.getJobTitle());
+//		logger.info(jobPosting.getCompany().getUsername());
 		return jobPostingDao.save(jobPosting);
 	}
 }
