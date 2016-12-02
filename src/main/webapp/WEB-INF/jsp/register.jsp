@@ -19,6 +19,7 @@
 								<form:input type="text" class="form-control" path="username"
 									id="username" placeholder="Username" />
 								<form:errors class="text-danger" path="username" />
+								<span id="takenMessage"></span>
 							</div>
 						</div>
 						<div class="form-group">
