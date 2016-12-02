@@ -21,9 +21,15 @@ public class RegisterService {
 	@Autowired
 	UserDao userDao;
 	
-	@RequestMapping(value = "/service/register", method = RequestMethod.POST)
-	public void checkAvailability(HttpServletResponse response, @RequestParam String username) throws IOException{
+	@RequestMapping(value = "/service/register/username", method = RequestMethod.POST)
+	public void checkUsernameAvailability(HttpServletResponse response, @RequestParam String username) throws IOException{
 		response.setContentType("text/plain");
 		response.getWriter().print(userDao.getUser(username));
+	}
+	
+	@RequestMapping(value = "/service/register/email", method = RequestMethod.POST)
+	public void checkEmailAvailability(HttpServletResponse response, @RequestParam String email) throws IOException{
+		response.setContentType("text/plain");
+		response.getWriter().print(userDao.getUserByEmail(email));
 	}
 }
