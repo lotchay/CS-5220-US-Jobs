@@ -34,19 +34,19 @@
 							<td>${user.userRoles}</td>
 							<td><security:authorize access="hasRole('ROLE_ADMIN')">
 
-									<a data-userid="${user.id}" class="btn btn-info view" role="button">
+									<a data-userId="${user.id}" class="btn btn-info view" role="button">
 										<i class="fa fa-street-view"
 										aria-hidden="true"></i>&nbsp;&nbsp; View</a>
-									<a data-userid="${user.id}" class="btn btn-success edit" role="button"
+									<a data-userId="${user.id}" class="btn btn-success edit" role="button"
 										href="edit?id=${user.id}"><i
 										class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Edit</a>
 									<c:if test="${user.enabled}">
-										<a data-userid="${user.id}" class="btn btn-danger disable" role="button"
+										<a data-userId="${user.id}" class="btn btn-danger disable" role="button"
 											href="disable?id=${user.id}"><i
 											class="fa fa-level-down" aria-hidden="true"></i>&nbsp;&nbsp;Disable</a>
 									</c:if>
 									<c:if test="${not user.enabled}">
-										<a data-userid="${user.id}" class="btn btn-warning enable" role="button"
+										<a data-userId="${user.id}" class="btn btn-warning enable" role="button"
 											href="enable?id=${user.id}"><i
 											class="fa fa-level-up" aria-hidden="true"></i>&nbsp;&nbsp;Enable</a>
 									</c:if>
@@ -109,7 +109,7 @@
                 <div class="col-lg-10">
                     <input type="text" class="form-control" id="lastName" name="lastName" />
                 </div>
-            </div>            
+            </div>
         </fieldset>
     </form>
 </div>
@@ -122,7 +122,7 @@
                 <div class="col-lg-10">
                     <span id="userId"></span>
                 </div>
-            </div>        
+            </div>
             <div class="form-group">
                 <label for="username" class="col-lg-2 control-label">Username</label>
                 <div class="col-lg-10">
@@ -152,7 +152,7 @@
                 <div class="col-lg-10">
                     <span id="lastName"></span>
                 </div>
-            </div>            
+            </div>
         </fieldset>
     </form>
 </div>

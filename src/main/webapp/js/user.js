@@ -37,12 +37,12 @@ function toggleUser() {
 			if ( $(this).hasClass('disable') ) {
 				
 				$(this).removeClass('btn-danger disable').addClass('btn-warning enable');
-				newHtml = "<i class='fa fa-level-up' aria-hidden='true'></i>&nbsp;&nbsp;Enable";
+				newHtml = "<i class=\"fa fa-level-up\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Enable";
 				
 			} else if ( $(this).hasClass('enable') ) {
 				
 				$(this).removeClass('btn-warning enable').addClass('btn-danger disable');
-				newHtml = "<i class='fa fa-level-down' aria-hidden='true'></i>&nbsp;&nbsp;Disable";
+				newHtml = "<i class=\"fa fa-level-down\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Disable";
 				
 			} else {
 				
@@ -151,4 +151,5 @@ $( function() {
 	});
 	
 	$('.view').click( viewUser );
+	$('.disable, .enable').click( toggleUser );
 });
