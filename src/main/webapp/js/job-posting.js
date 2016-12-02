@@ -13,6 +13,57 @@ function deleteJob() {
 	});
 }
 
+function viewJobPosting(){
+    var jobPostingId = $(this).closest("tr").attr("data-job-posting-id");
+    $.ajax({
+        url: "/usjobs/service/job/" + jobPostingId,
+        contentType : "application/json",
+        dataType: "json",
+        success: function(data) {
+            $("#job-posting-display td[data-field='id']").html(data.id);
+            $("#job-posting-display td[data-field='jobTitle']").html(data.jobTitle);
+            $("#job-posting-display td[data-field='employerName']").html(data.company.employerName);
+            $("#job-posting-display td[data-field='jobDescription']").html(data.jobDescription);
+            $("#job-posting-display td[data-field='location']").html(data.location);
+            $("#job-posting-display td[data-field='salary']").html(data.salary);
+            $("#job-posting-display td[data-field='website']").html(data.website);
+        }
+    });
+    $("#job-posting-display").dialog("open");
+}
+
+function disableJobPosting(){
+    var jobPostingId = $(this).closest("tr").attr("data-job-posting-id");
+    var disableEnableDiv = $(this).closest("div");
+    $.ajax({
+        url: "/usjobs/service/job/admin/toggle/" + jobPostingId,
+        method : "PUT",
+        context : $(this),
+        success: function() {
+        	var newHtml = "<a class=\"enablePosting\" role=\"button\" href=\"javascript:void(0)\">|<i class=\"fa fa-level-up\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Enable</a>";
+        	console.log(disableEnableDiv.html());
+        	disableEnableDiv.html(newHtml);
+        	disableEnableDiv.find(".enablePosting").click(enableJobPosting);
+        }
+    });
+}
+
+function enableJobPosting(){
+    var jobPostingId = $(this).closest("tr").attr("data-job-posting-id");
+    var disableEnableDiv = $(this).closest("div");
+    $.ajax({
+        url: "/usjobs/service/job/admin/toggle/" + jobPostingId,
+        method : "PUT",
+        context : $(this),
+        success: function() {
+        	var newHtml = "<a class=\"disablePosting\" role=\"button\" href=\"javascript:void(0)\">|<i class=\"fa fa-level-up\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Disable</a>";
+            console.log(disableEnableDiv.html());
+            disableEnableDiv.html(newHtml);
+            disableEnableDiv.find(".disablePosting").click(disableJobPosting);
+        }
+    });
+}
+
 function toggleJob() {
 	console.log('toggle called: ' + $(this).closest("tr").attr("data-job-id"));
 	var jobId = $(this).closest("tr").attr("data-job-id");
@@ -174,6 +225,15 @@ $(function() {
 			}
 		}
 	});
+	
+	/**
+	 * Dialog config for the view job panel
+	 */
+	$("#job-posting-display").dialog({
+		autoOpen: false,
+		minWidth: 500,
+		title: "View Job Postingb",
+	});
 
 	$(".deleteJob").unbind('click.namespace').bind('click.namespace', deleteJob);
 	$(".openJob, .closeJob").unbind('click.namespace').bind('click.namespace', toggleJob);
@@ -187,4 +247,11 @@ $(function() {
 		$("#editJobForm")[0].reset();
 		$("#editJobDialog").dialog("open");
 	});
+	
+	/**
+	 * Event handler for viewing/enabling/disabling a job under 'Admin Job Listings'
+	 */
+	$(".viewPosting").click(viewJobPosting);
+	$(".enablePosting").click(enableJobPosting);
+	$(".disablePosting").click(disableJobPosting);
 });
