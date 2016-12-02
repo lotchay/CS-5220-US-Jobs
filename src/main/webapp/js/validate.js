@@ -104,7 +104,7 @@ $(document).ready(function() {
 		rules: {
 			username: {
 				required: true,
-				minlength: 1
+				minlength: 4
 			},
 			password : {
 				required: true,
@@ -117,8 +117,7 @@ $(document).ready(function() {
 				nowhitespace: true
 			},
 			email: {
-				required: true,
-				email: true
+				required: true
 			},
 			firstName: {
 				required: true,

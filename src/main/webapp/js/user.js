@@ -74,10 +74,24 @@ function addUser() {
 		data: JSON.stringify( user ),
 		success: function( user ) {
 			
+			/* The reason why the button's were not formatted nicely was because there was
+			 * an extra <td></td>, meaning you had one extra column. I fixed that. However,
+			 * you need to fix the following:
+			 * 
+			 * 1) Remove all the JSP tags, such as <c:if> and <security:authorize>. These tags won't
+			 * work for newly added elements, such as $newRow, until you refresh the page. This is the reason why
+			 * there are two buttons, disable AND enable. The <c:if> tag normally makes it so that we have one 
+			 * or the other, but it doesn't work on this newly added row. Since newly added users are enabled by default,
+			 * you can just remove the disable button html. 
+			 * 
+			 * 2) You have to remove the href from the enable/disable html buttons that you add to
+			 * this new row, otherwise you'll have page refreshes when you click on the enable/disable
+			 * button of this newly added row, unless you refresh the page
+			 **/
 			var $newRow = $("<tr><td>" + user.id + "</td><td>" +
 					user.username + "</td><td>" + user.firstName + "</td><td>" +
 					user.lastName + "</td><td>" + user.email + "</td><td>" +
-					user.userRoles + "</td><td>" + 
+					user.userRoles + "</td>" + 
 					"<td><security:authorize access='hasRole('ROLE_ADMIN')'>" +
 					"<a class='btn btn-info' role='button'" +
 						"href='view/${user.id}'><i class='fa fa-street-view'" +
