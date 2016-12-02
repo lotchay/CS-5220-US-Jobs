@@ -19,6 +19,7 @@
 								<form:input type="text" class="form-control" path="username"
 									id="username" placeholder="Username" />
 								<form:errors class="text-danger" path="username" />
+								<span id="usernameTakenMessage"></span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -62,6 +63,7 @@
 								<form:input type="text" class="form-control" path="email"
 									id="email" placeholder="email" />
 								<form:errors class="text-danger" path="email" />
+								<span id="emailTakenMessage"></span>
 							</div>
 						</div>
 						<div class="form-group">
