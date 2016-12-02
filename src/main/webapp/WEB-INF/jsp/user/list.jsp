@@ -33,24 +33,19 @@
 							<td>${user.email}</td>
 							<td>${user.userRoles}</td>
 							<td><security:authorize access="hasRole('ROLE_ADMIN')">
-
-									<a data-userId="${user.id}" class="btn btn-info view" role="button">
+									<a data-userid="${user.id}" class="btn btn-info view" role="button">
 										<i class="fa fa-street-view"
 										aria-hidden="true"></i>&nbsp;&nbsp; View</a>
-									<a data-userId="${user.id}" class="btn btn-success edit" role="button"
-										href="edit?id=${user.id}"><i
-										class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Edit</a>
+									<a data-userid="${user.id}" class="btn btn-success edit" role="button">
+										<i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Edit</a>
 									<c:if test="${user.enabled}">
-										<a data-userId="${user.id}" class="btn btn-danger disable" role="button"
-											href="disable?id=${user.id}"><i
-											class="fa fa-level-down" aria-hidden="true"></i>&nbsp;&nbsp;Disable</a>
+										<a data-userid="${user.id}" class="btn btn-danger disable" role="button">
+											<i class="fa fa-level-down" aria-hidden="true"></i>&nbsp;&nbsp;Disable</a>
 									</c:if>
 									<c:if test="${not user.enabled}">
-										<a data-userId="${user.id}" class="btn btn-warning enable" role="button"
-											href="enable?id=${user.id}"><i
-											class="fa fa-level-up" aria-hidden="true"></i>&nbsp;&nbsp;Enable</a>
+										<a data-userid="${user.id}" class="btn btn-warning enable" role="button">
+											<i class="fa fa-level-up" aria-hidden="true"></i>&nbsp;&nbsp;Enable</a>
 									</c:if>
-
 								</security:authorize></td>
 						</tr>
 					</c:forEach>

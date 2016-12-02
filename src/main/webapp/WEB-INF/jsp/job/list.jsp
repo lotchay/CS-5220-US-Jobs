@@ -28,23 +28,23 @@
 							<td data-field="salary">${jobPosting.salary}</td>
 							<td data-field="website">${jobPosting.website}</td>
 							<td>
-								<a class="viewPosting" role="button" href="javascript:void(0)">
+								<a class="btn btn-info viewPosting" role="button" href="javascript:void(0)">
 									<i class="fa fa-opencart" aria-hidden="true"></i>&nbsp;&nbsp;View
 								</a>
 								<security:authorize access="hasRole('ROLE_ADMIN')">
 									<c:if test="${jobPosting.enabled}">
-										<div class="disableEnable">
-											<a class="disablePosting" role="button" href="javascript:void(0)">
-												|<i class="fa fa-level-down" aria-hidden="true"></i>&nbsp;&nbsp;Disable
+										<span class="disableEnable">
+											<a class="btn btn-danger disablePosting" role="button" href="javascript:void(0)">
+												<i class="fa fa-level-down" aria-hidden="true"></i>&nbsp;&nbsp;Disable
 											</a>
-										</div>
+										</span>
 									</c:if>
 									<c:if test="${not jobPosting.enabled}">
-										<div class="disableEnable">
-											<a class="enablePosting" role="button" href="javascript:void(0)">
-												|<i class="fa fa-level-up" aria-hidden="true"></i>&nbsp;&nbsp;Enable
+										<span class="disableEnable">
+											<a class="btn btn-success enablePosting" role="button" href="javascript:void(0)">
+												<i class="fa fa-level-up" aria-hidden="true"></i>&nbsp;&nbsp;Enable
 											</a>
-										</div>
+										</span>
 									</c:if>
 								</security:authorize>
 							</td>
