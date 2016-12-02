@@ -31,6 +31,12 @@ public class JobPostingService {
 	
 	@Autowired
 	UserDao userDao;
+	
+	@RequestMapping(value = "/service/jobs", method = RequestMethod.GET)
+    public List<JobPosting> list(){
+        // Get all job postings from database and pass them back as list json objects
+        return jobPostingDao.getJobPostings();
+    }
 
 	@RequestMapping(value = "/service/job/{id}", method = RequestMethod.GET)
 	public JobPosting getJobPosting(@PathVariable int id) {
@@ -59,6 +65,19 @@ public class JobPostingService {
 			jobPosting.setDatePosted(new Date());
 		}
 		jobPosting.setOpened(!isOpened);
+		jobPostingDao.save(jobPosting);
+	}
+	
+	@RequestMapping(value = "/service/job/admin/toggle/{id}", method = RequestMethod.PUT)
+	public void adminToggleJob(@PathVariable int id) {
+		JobPosting jobPosting = jobPostingDao.getJobPosting(id);
+		boolean isEnabled = jobPosting.isEnabled();
+		if(isEnabled){
+			jobPosting.setEnabled(false);
+		}
+		else{
+			jobPosting.setEnabled(true);
+		}
 		jobPostingDao.save(jobPosting);
 	}
 
