@@ -20,10 +20,17 @@ public class UserService {
     
     @Autowired
     UserDao userDao;
+    
+    @RequestMapping(value = "/service/user/{id}", method = RequestMethod.GET)
+    public User getUser( @PathVariable Integer id ) {
+        
+        return userDao.getUser( id );
+    }
 
     @RequestMapping(value = "/service/users", method = RequestMethod.POST)
     public User addUser( @RequestBody User user ) {
 
+        user.getUserRoles().add( "ROLE_ADMIN" );
         return userDao.saveUser( user );
     }
 
@@ -31,6 +38,25 @@ public class UserService {
     public void updateUser( @PathVariable Integer id, @RequestBody User user ) {
 
         user.setId( id );
+        userDao.saveUser( user );
+    }
+    
+    @RequestMapping(value = "/service/user/toggle/{id}", method = RequestMethod.PUT)
+    public void toggleUser( @PathVariable Integer id ) {
+        
+        User user = userDao.getUser( id );
+        
+        boolean enable = user.isEnabled();
+        
+        if ( enable ) {
+            
+            user.setEnabled( false );
+            
+        } else {
+            
+            user.setEnabled( true );
+        }
+        
         userDao.saveUser( user );
     }
 
@@ -42,6 +68,8 @@ public class UserService {
         List<User> users = userDao.getUsers();
 
         for ( User user : users ) {
+            
+            logger.info( "Every username : " + user.getUsername() );
 
             if ( user.getUsername().equalsIgnoreCase( name ) ) {
                 available = false;
