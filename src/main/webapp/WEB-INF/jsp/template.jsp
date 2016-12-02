@@ -127,5 +127,6 @@
 <script src="<c:url value='/js/validate.js' />"></script>
 <script src="<c:url value='/js/job-posting.js' />"></script>
 <script src="<c:url value='/js/user.js' />"></script>
+<script src="<c:url value='/js/register-name.js' />"></script>
 
 </html>
