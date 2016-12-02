@@ -33,24 +33,19 @@
 							<td>${user.email}</td>
 							<td>${user.userRoles}</td>
 							<td><security:authorize access="hasRole('ROLE_ADMIN')">
-
-									<a data-userid="${user.id}" class="btn btn-info view" role="button">
+									<a data-userId="${user.id}" class="btn btn-info view" role="button">
 										<i class="fa fa-street-view"
 										aria-hidden="true"></i>&nbsp;&nbsp; View</a>
-									<a data-userid="${user.id}" class="btn btn-success edit" role="button"
-										href="edit?id=${user.id}"><i
-										class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Edit</a>
+									<a data-userId="${user.id}" class="btn btn-success edit" role="button">
+										<i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Edit</a>
 									<c:if test="${user.enabled}">
-										<a data-userid="${user.id}" class="btn btn-danger disable" role="button"
-											href="disable?id=${user.id}"><i
-											class="fa fa-level-down" aria-hidden="true"></i>&nbsp;&nbsp;Disable</a>
+										<a data-userId="${user.id}" class="btn btn-danger disable" role="button">
+											<i class="fa fa-level-down" aria-hidden="true"></i>&nbsp;&nbsp;Disable</a>
 									</c:if>
 									<c:if test="${not user.enabled}">
-										<a data-userid="${user.id}" class="btn btn-warning enable" role="button"
-											href="enable?id=${user.id}"><i
-											class="fa fa-level-up" aria-hidden="true"></i>&nbsp;&nbsp;Enable</a>
+										<a data-userId="${user.id}" class="btn btn-warning enable" role="button">
+											<i class="fa fa-level-up" aria-hidden="true"></i>&nbsp;&nbsp;Enable</a>
 									</c:if>
-
 								</security:authorize></td>
 						</tr>
 					</c:forEach>
@@ -68,7 +63,7 @@
 </div>
 
 <div id="user-form">
-    <form id="addUserForm" class="form-horizontal">
+    <form id="addForm" class="form-horizontal">
         <input type="hidden" name="userId" />
         <fieldset>
             <div class="form-group">
@@ -109,50 +104,20 @@
                 <div class="col-lg-10">
                     <input type="text" class="form-control" id="lastName" name="lastName" />
                 </div>
-            </div>            
+            </div>
         </fieldset>
     </form>
 </div>
 
 <div id="user-display">
-    <form id="addUserForm" class="form-horizontal">
-        <fieldset>
-            <div class="form-group">
-                <label for="userId" class="col-lg-2 control-label">ID</label>
-                <div class="col-lg-10">
-                    <span id="userId"></span>
-                </div>
-            </div>        
-            <div class="form-group">
-                <label for="username" class="col-lg-2 control-label">Username</label>
-                <div class="col-lg-10">
-                    <span id="username"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="password" class="col-lg-2 control-label">Password</label>
-                <div class="col-lg-10">
-                    <span id="password"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="email" class="col-lg-2 control-label">Email</label>
-                <div class="col-lg-10">
-                    <span id="email"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="name" class="col-lg-2 control-label">FirstName</label>
-                <div class="col-lg-10">
-                    <span id="firstName"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="name" class="col-lg-2 control-label">LastName</label>
-                <div class="col-lg-10">
-                    <span id="lastName"></span>
-                </div>
-            </div>            
-        </fieldset>
-    </form>
+    <table class="table table-striped table-hover">
+        <tr><th>ID</th><td data-field="userId"></td></tr>
+        <tr><th>Username</th><td data-field="username"></td></tr>
+        <tr><th>Password</th><td data-field="password"></td></tr>
+        <tr><th>Email</th><td data-field="email"></td></tr>
+        <tr><th>FirstName</th><td data-field="firstName"></td></tr>
+        <tr><th>LastName</th><td data-field="lastName"></td></tr>
+    </table>
 </div>
+
+

@@ -34,13 +34,13 @@ function viewJobPosting(){
 
 function disableJobPosting(){
     var jobPostingId = $(this).closest("tr").attr("data-job-posting-id");
-    var disableEnableDiv = $(this).closest("div");
+    var disableEnableDiv = $(this).closest("span");
     $.ajax({
         url: "/usjobs/service/job/admin/toggle/" + jobPostingId,
         method : "PUT",
         context : $(this),
         success: function() {
-        	var newHtml = "<a class=\"enablePosting\" role=\"button\" href=\"javascript:void(0)\">|<i class=\"fa fa-level-up\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Enable</a>";
+        	var newHtml = "<a class=\"btn btn-success enablePosting\" role=\"button\" href=\"javascript:void(0)\">|<i class=\"fa fa-level-up\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Enable</a>";
         	console.log(disableEnableDiv.html());
         	disableEnableDiv.html(newHtml);
         	disableEnableDiv.find(".enablePosting").click(enableJobPosting);
@@ -50,13 +50,13 @@ function disableJobPosting(){
 
 function enableJobPosting(){
     var jobPostingId = $(this).closest("tr").attr("data-job-posting-id");
-    var disableEnableDiv = $(this).closest("div");
+    var disableEnableDiv = $(this).closest("span");
     $.ajax({
         url: "/usjobs/service/job/admin/toggle/" + jobPostingId,
         method : "PUT",
         context : $(this),
         success: function() {
-        	var newHtml = "<a class=\"disablePosting\" role=\"button\" href=\"javascript:void(0)\">|<i class=\"fa fa-level-up\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Disable</a>";
+        	var newHtml = "<a class=\"btn btn-danger disablePosting\" role=\"button\" href=\"javascript:void(0)\">|<i class=\"fa fa-level-up\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Disable</a>";
             console.log(disableEnableDiv.html());
             disableEnableDiv.html(newHtml);
             disableEnableDiv.find(".disablePosting").click(disableJobPosting);

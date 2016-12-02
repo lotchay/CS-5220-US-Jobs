@@ -9,12 +9,12 @@ function viewUser() {
 		dataType: 'json',
 		success: function( user ) {
 			
-			$('#user-display #userId').html( user.id ),
-			$('#user-display #username').html( user.username ),
-			$('#user-display #password').html( user.password ),
-			$('#user-display #email').html( user.email ),
-			$('#user-display #firstName').html( user.firstName ),
-			$('#user-display #lastName').html( user.lastName )
+			$('#user-display td[data-field=userId').html( user.id ),
+			$('#user-display td[data-field=username').html( user.username ),
+			$('#user-display td[data-field=password').html( user.password ),
+			$('#user-display td[data-field=email').html( user.email ),
+			$('#user-display td[data-field=firstName').html( user.firstName ),
+			$('#user-display td[data-field=lastName').html( user.lastName )
 		}
 	})
 	
@@ -37,12 +37,12 @@ function toggleUser() {
 			if ( $(this).hasClass('disable') ) {
 				
 				$(this).removeClass('btn-danger disable').addClass('btn-warning enable');
-				newHtml = "<i class='fa fa-level-up' aria-hidden='true'></i>&nbsp;&nbsp;Enable";
+				newHtml = "<i class=\"fa fa-level-up\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Enable";
 				
 			} else if ( $(this).hasClass('enable') ) {
 				
 				$(this).removeClass('btn-warning enable').addClass('btn-danger disable');
-				newHtml = "<i class='fa fa-level-down' aria-hidden='true'></i>&nbsp;&nbsp;Disable";
+				newHtml = "<i class=\"fa fa-level-down\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Disable";
 				
 			} else {
 				
@@ -77,28 +77,19 @@ function addUser() {
 			var $newRow = $("<tr><td>" + user.id + "</td><td>" +
 					user.username + "</td><td>" + user.firstName + "</td><td>" +
 					user.lastName + "</td><td>" + user.email + "</td><td>" +
-					user.userRoles + "</td><td>" + 
-					"<td><security:authorize access='hasRole('ROLE_ADMIN')'>" +
-					"<a class='btn btn-info' role='button'" +
-						"href='view/${user.id}'><i class='fa fa-street-view'" +
+					user.userRoles + "</td>" + 
+					"<a data-userId='" + user.id + "' class='btn btn-info view' role='button'>" +
+						"<i class='fa fa-street-view'" +
 						"aria-hidden='true'></i>&nbsp;&nbsp; View</a>" +
-					"<a class='btn btn-success' role='button'" +
-						"href='edit?id=${user.id}'><i" +
-						"class='fa fa-pencil-square-o' aria-hidden='true'>" +
+					"<a data-userId='" + user.id + "' class='btn btn-success edit' role='button'>" +
+						"<i class='fa fa-pencil-square-o' aria-hidden='true'>" +
 						"</i>&nbsp;&nbsp;Edit</a>" +
-					"<c:if test='${user.enabled}'>" +
-					"<a class='btn btn-danger' role='button'" +
-					"href='disable?id=${user.id}'><i" +
-					"class='fa fa-level-down' aria-hidden='true'>" +
-					"</i>&nbsp;&nbsp;Disable</a>" +
-					"</c:if>" +
-					"<c:if test='${not user.enabled}'>" +
-					"<a class='btn btn-warning' role='button'" +
-					"href='enable?id=${user.id}'><i" +
-					"class='fa fa-level-up' aria-hidden='true'>" +
-					"</i>&nbsp;&nbsp;Enable</a>" + 
-					"</c:if>" +
-					"</security:authorize></td></tr>"					
+/*					"<a data-userid='" + user.id + "' class='btn btn-danger disable' role='button'>" +
+						"<i class='fa fa-level-down' aria-hidden='true'>" +
+						"</i>&nbsp;&nbsp;Disable</a>" +	*/
+					"<a data-userId='" + user.id + "' class='btn btn-warning enable' role='button'>" +
+					"<i class='fa fa-level-up' aria-hidden='true'>" +
+					"</i>&nbsp;&nbsp;Enable</a></td></tr>"				
 			);
 			
 			$('#users').append($newRow);
@@ -146,9 +137,7 @@ $( function() {
 	
 	$('#add').click( function() {
 		
-		$('#addUserForm')[0].reset();
+		$('#addForm')[0].reset();
 		$('#user-form').dialog('open');
 	});
-	
-	$('.view').click( viewUser );
 });
