@@ -41,7 +41,6 @@ function disableJobPosting(){
         context : $(this),
         success: function() {
         	var newHtml = "<a class=\"btn btn-success enablePosting\" role=\"button\" href=\"javascript:void(0)\">|<i class=\"fa fa-level-up\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Enable</a>";
-        	console.log(disableEnableDiv.html());
         	disableEnableDiv.html(newHtml);
         	disableEnableDiv.find(".enablePosting").click(enableJobPosting);
         }
@@ -56,8 +55,7 @@ function enableJobPosting(){
         method : "PUT",
         context : $(this),
         success: function() {
-        	var newHtml = "<a class=\"btn btn-danger disablePosting\" role=\"button\" href=\"javascript:void(0)\">|<i class=\"fa fa-level-up\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Disable</a>";
-            console.log(disableEnableDiv.html());
+        	var newHtml = "<a class=\"btn btn-danger disablePosting\" role=\"button\" href=\"javascript:void(0)\">|<i class=\"fa fa-level-down\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Disable</a>";
             disableEnableDiv.html(newHtml);
             disableEnableDiv.find(".disablePosting").click(disableJobPosting);
         }
