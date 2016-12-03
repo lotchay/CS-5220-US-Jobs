@@ -25,6 +25,8 @@ public interface JobPostingDao {
     List<JobPosting> searchJobs( String searchTerm, String searchLocation );
     
     List<JobPosting> searchJobsByKeyword( String keyword, int maxResults );
+    
+    List<JobPosting> searchJobsForAutocomplete(String keyword, String searchLoc);
 
     List<JobPosting> searchJobSalary( String searchTerm,
         String searchLocation );

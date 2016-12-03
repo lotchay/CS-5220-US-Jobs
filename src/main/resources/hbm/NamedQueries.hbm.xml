@@ -40,4 +40,14 @@ select * from job_postings where
 ]]>
     </sql-query>
     
+        <sql-query name="autocompletejob.search">
+    <return class="usjobs.model.JobPosting" />
+<![CDATA[
+select * from job_postings where 
+	(opened = 't') and
+	(upper(job_title) like '%' || upper(:text) || '%') and
+	(upper(location) like upper(:location) || '%')
+]]>
+    </sql-query>
+    
 </hibernate-mapping>
