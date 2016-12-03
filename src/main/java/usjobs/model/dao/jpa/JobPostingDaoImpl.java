@@ -92,6 +92,13 @@ public class JobPostingDaoImpl implements JobPostingDao {
     	}
         return query.setParameter("text", keyword).getResultList();
     }
+    
+    @Override
+    public List<JobPosting> searchJobsForAutocomplete(String keyword, String searchLoc){
+    	return em.createNamedQuery("autocompletejob.search", JobPosting.class).
+    			setParameter("text", keyword).
+    			setParameter("location", searchLoc).getResultList();
+    }
 
     @Override
     public List<JobPosting> searchJobSalary( String searchTerm,
