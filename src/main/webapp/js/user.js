@@ -119,12 +119,12 @@ function editUser() {
 		success: function() {
 
 			var editRow = $('#users tr[data-user-id=' + userId + ']');
-			alert(editRow);
-			editRow.find('td[data-field=username').html( username );
-			editRow.find('td[data-field=password').html( password );
-			editRow.find('td[data-field=firstName').html( firstName );
-			editRow.find('td[data-field=lastName').html( lastName );
-			editRow.find('td[data-field=email').html( email );
+			
+			editRow.find('td[data-field=username').html( user.username );
+			editRow.find('td[data-field=password').html( user.password );
+			editRow.find('td[data-field=firstName').html( user.firstName );
+			editRow.find('td[data-field=lastName').html( user.lastName );
+			editRow.find('td[data-field=email').html( user.email );
 		}
 	});
 }
