@@ -25,13 +25,13 @@
 						<th>Operations</th>
 					</tr>
 					<c:forEach items="${users}" var="user">
-						<tr>
-							<td>${user.id}</td>
-							<td>${user.username}</td>
-							<td>${user.firstName}</td>
-							<td>${user.lastName}</td>
-							<td>${user.email}</td>
-							<td>${user.userRoles}</td>
+						<tr data-user-id="${user.id}">
+							<td data-field="id">${user.id}</td>
+							<td data-field="username">${user.username}</td>
+							<td data-field="firstName">${user.firstName}</td>
+							<td data-field="lastName">${user.lastName}</td>
+							<td data-field="email">${user.email}</td>
+							<td data-field="userRole">${user.userRoles}</td>
 							<td><security:authorize access="hasRole('ROLE_ADMIN')">
 									<a data-userId="${user.id}" class="btn btn-info view" role="button">
 										<i class="fa fa-street-view"
@@ -119,5 +119,3 @@
         <tr><th>LastName</th><td data-field="lastName"></td></tr>
     </table>
 </div>
-
-
