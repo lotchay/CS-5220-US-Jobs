@@ -12,9 +12,9 @@ function viewUser() {
 			$('#user-display td[data-field=userId').html( user.id ),
 			$('#user-display td[data-field=username').html( user.username ),
 			$('#user-display td[data-field=password').html( user.password ),
-			$('#user-display td[data-field=email').html( user.email ),
 			$('#user-display td[data-field=firstName').html( user.firstName ),
-			$('#user-display td[data-field=lastName').html( user.lastName )
+			$('#user-display td[data-field=lastName').html( user.lastName ),
+			$('#user-display td[data-field=email').html( user.email )
 		}
 	})
 
@@ -59,10 +59,9 @@ function addUser() {
 	var user = {
 			username: $('input[name=username]').val(),
 			password: $('input[name=password]').val(),
-			password2: $('input[name=password2]').val(),
-			email: $('input[name=email]').val(),
 			firstName: $('input[name=firstName]').val(),
-			lastName: $('input[name=lastName]').val()
+			lastName: $('input[name=lastName]').val(),
+			email: $('input[name=email]').val()
 	};
 
 	$.ajax({
@@ -75,8 +74,8 @@ function addUser() {
 		success: function( user ) {
 
 			var newRow = $("<tr><td>" + user.id + "</td><td>" +
-					user.username + "</td><td>" + user.firstName + "</td><td>" +
-					user.lastName + "</td><td>" + user.email + "</td><td>" +
+					user.username + "</td><td>" + user.password + "</td><td>" + user.firstName +
+					"</td><td>" + user.lastName + "</td><td>" + user.email + "</td><td>" +
 					user.userRoles + "</td>" +
 					"<a data-userId='" + user.id + "' class='btn btn-info view' role='button'>" +
 						"<i class='fa fa-street-view'" +
@@ -101,53 +100,49 @@ function addUser() {
 
 function editUser() {
 
-	var userId = $(this).closest('a').attr('data-userId');
+	var userId = $('input[name=userId]').val();
 
 	var user = {
 			username: $('input[name=username]').val(),
 			password: $('input[name=password]').val(),
-			password2: $('input[name=password2]').val(),
-			email: $('input[name=email]').val(),
 			firstName: $('input[name=firstName]').val(),
-			lastName: $('input[name=lastName]').val()
+			lastName: $('input[name=lastName]').val(),
+			email: $('input[name=email]').val()
 	};
 
 	$.ajax({
 
-		url: '/usjobs/service/' + userId,
+		url: '/usjobs/service/user/' + userId,
 		method: 'PUT',
 		contentType: 'application/json',
 		data: JSON.stringify( user ),
-		context: $(this),
 		success: function() {
 
-			var editRow = $(this).closest('tr').attr(data-userId).html( userId );
-			editRow.find('td[data-field=username').html( firstName );
+			var editRow = $('#users tr[data-user-id=' + userId + ']');
+			alert(editRow);
+			editRow.find('td[data-field=username').html( username );
+			editRow.find('td[data-field=password').html( password );
 			editRow.find('td[data-field=firstName').html( firstName );
 			editRow.find('td[data-field=lastName').html( lastName );
 			editRow.find('td[data-field=email').html( email );
-			editRow.find('td[data-field=userRole').html( userRole );
 		}
 	});
 }
 
 function editHandler() {
 
-	var userId = $(this).closest('a').attr('data-userId');
-	alert(userId);
+	var userId = $(this).closest('tr').attr('data-user-id');
 	var username = $(this).closest('tr').children('td[data-field=username]').html();
-	alert(username);
+	var password = $(this).closest('tr').children('td[data-field=password]').html();
 	var firstName = $(this).closest('tr').children('td[data-field=firstName]').html();
 	var lastName = $(this).closest('tr').children('td[data-field=lastName]').html();
 	var email = $(this).closest('tr').children('td[data-field=email]').html();
-	var userRole = $(this).closest('tr').children('td[data-field=userRole]').html();
-	alert(userRole);
-	
+
 	$('#user-form input[name=username').val( username );
+	$('#user-form input[name=password').val( password );
 	$('#user-form input[name=firstName').val( firstName );
 	$('#user-form input[name=lastName').val( lastName );
 	$('#user-form input[name=email').val( email );
-	$('#user-form input[name=userRole').val( userRole );
 
 	$('#user-form input[name=userId').val( userId );
 
@@ -159,7 +154,7 @@ $( function() {
 	$('#user-form').dialog({
 		autoOpen: false,
 		minWidth: 500,
-		title: "Add User",
+		title: "Add User / Edit User",
 		close: function( event, ui ) {
 			$('input[name=userId]').val('')
 		},

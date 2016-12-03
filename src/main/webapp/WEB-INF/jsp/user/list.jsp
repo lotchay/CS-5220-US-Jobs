@@ -28,6 +28,7 @@
 						<tr data-user-id="${user.id}">
 							<td data-field="id">${user.id}</td>
 							<td data-field="username">${user.username}</td>
+							<td data-field="password">${user.password}</td>
 							<td data-field="firstName">${user.firstName}</td>
 							<td data-field="lastName">${user.lastName}</td>
 							<td data-field="email">${user.email}</td>
@@ -80,20 +81,6 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="password2" class="col-lg-2 control-label">Confirm Password</label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="password2"
-                        name="password2" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="email" class="col-lg-2 control-label">Email</label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="email"
-                        name="email" />
-                </div>
-            </div>
-            <div class="form-group">
                 <label for="name" class="col-lg-2 control-label">FirstName</label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control" id="firstName" name="firstName" />
@@ -105,6 +92,12 @@
                     <input type="text" class="form-control" id="lastName" name="lastName" />
                 </div>
             </div>
+            <div class="form-group">
+                <label for="email" class="col-lg-2 control-label">Email</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="email" name="email" />
+                </div>
+            </div>
         </fieldset>
     </form>
 </div>
@@ -113,9 +106,9 @@
     <table class="table table-striped table-hover">
         <tr><th>ID</th><td data-field="userId"></td></tr>
         <tr><th>Username</th><td data-field="username"></td></tr>
-        <tr><th>Password</th><td data-field="password"></td></tr>
-        <tr><th>Email</th><td data-field="email"></td></tr>
+        <tr><th>Password</th><td data-field="password"></td></tr>        
         <tr><th>FirstName</th><td data-field="firstName"></td></tr>
         <tr><th>LastName</th><td data-field="lastName"></td></tr>
+				<tr><th>Email</th><td data-field="email"></td></tr>
     </table>
 </div>
