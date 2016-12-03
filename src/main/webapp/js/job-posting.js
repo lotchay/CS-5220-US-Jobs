@@ -41,7 +41,6 @@ function disableJobPosting(){
         context : $(this),
         success: function() {
         	var newHtml = "<a class=\"btn btn-success enablePosting\" role=\"button\" href=\"javascript:void(0)\">|<i class=\"fa fa-level-up\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Enable</a>";
-        	console.log(disableEnableDiv.html());
         	disableEnableDiv.html(newHtml);
         	disableEnableDiv.find(".enablePosting").click(enableJobPosting);
         }
@@ -56,8 +55,7 @@ function enableJobPosting(){
         method : "PUT",
         context : $(this),
         success: function() {
-        	var newHtml = "<a class=\"btn btn-danger disablePosting\" role=\"button\" href=\"javascript:void(0)\">|<i class=\"fa fa-level-up\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Disable</a>";
-            console.log(disableEnableDiv.html());
+        	var newHtml = "<a class=\"btn btn-danger disablePosting\" role=\"button\" href=\"javascript:void(0)\">|<i class=\"fa fa-level-down\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Disable</a>";
             disableEnableDiv.html(newHtml);
             disableEnableDiv.find(".disablePosting").click(disableJobPosting);
         }
@@ -151,11 +149,11 @@ function addJob() {
 	        	var salary = data.salary;
 	        	var newRow = "<tr " +
 	        			"data-job-id='" + jobId + "' " +
-	        			"data-job-title='" + title + "' " + 
-	        			"data-job-website='" + website + "' " + 
-	        			"data-job-location='" + location + "' " + 
+	        			"data-job-title='" + title + "' " +
+	        			"data-job-website='" + website + "' " +
+	        			"data-job-location='" + location + "' " +
 	        			"data-job-description='" + description + "' " +
-	        			"data-job-salary='" + salary + "' >" + 
+	        			"data-job-salary='" + salary + "' >" +
 	        			"<td data-field='jobTitle'>" + title + "</td>" +
 	        			"<td>" +
 	        			"<a href='/usjobs/application/jobApplications?jobId=" + jobId + "' " +
@@ -168,10 +166,10 @@ function addJob() {
 	        			"<a role='button' class='btn btn-sm btn-danger deleteJob'> " +
 	        			"<i class='fa fa-times-circle'></i>&nbsp;&nbsp;Delete </a>" +
 						"</td></tr>";
-	        	
+
 	        	console.log(newRow);
 	        	$("#jobs").append($(newRow));
-	        	
+
 	        	// Need to re-attach event handlers to account for this newly added row.
 	        	$(".deleteJob").unbind('click.namespace').bind('click.namespace', deleteJob);
 	        	$(".openJob, .closeJob").unbind('click.namespace').bind('click.namespace', toggleJob);
@@ -225,20 +223,20 @@ $(function() {
 			}
 		}
 	});
-	
+
 	/**
 	 * Dialog config for the view job panel
 	 */
 	$("#job-posting-display").dialog({
 		autoOpen: false,
 		minWidth: 500,
-		title: "View Job Postingb",
+		title: "View Job Posting",
 	});
 
 	$(".deleteJob").unbind('click.namespace').bind('click.namespace', deleteJob);
 	$(".openJob, .closeJob").unbind('click.namespace').bind('click.namespace', toggleJob);
 	$(".editJob").unbind('click.namespace').bind('click.namespace', editHandler);
-	
+
 	/**
 	 * Event handler for adding a job under 'Manage Job Listings'
 	 *  in the Employer profile
@@ -247,7 +245,7 @@ $(function() {
 		$("#editJobForm")[0].reset();
 		$("#editJobDialog").dialog("open");
 	});
-	
+
 	/**
 	 * Event handler for viewing/enabling/disabling a job under 'Admin Job Listings'
 	 */
