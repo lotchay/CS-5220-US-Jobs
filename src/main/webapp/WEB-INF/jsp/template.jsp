@@ -128,5 +128,6 @@
 <script src="<c:url value='/js/job-posting.js' />"></script>
 <script src="<c:url value='/js/user.js' />"></script>
 <script src="<c:url value='/js/register-name.js' />"></script>
+<script src="<c:url value='/js/autocomplete.js' />"></script>
 
 </html>

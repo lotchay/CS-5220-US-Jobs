@@ -1,7 +1,5 @@
 package usjobs.web.service;
 
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,29 +56,6 @@ public class UserService {
         }
         
         userDao.saveUser( user );
-    }
-
-    @RequestMapping(value = "/service/users", method = RequestMethod.GET)
-    public String getUsername( String name ) {
-
-        boolean available = true;
-
-        List<User> users = userDao.getUsers();
-
-        for ( User user : users ) {
-            
-            logger.info( "Every username : " + user.getUsername() );
-
-            if ( user.getUsername().equalsIgnoreCase( name ) ) {
-                available = false;
-            }
-        }
-
-        if ( available ) {
-            return "Username is available!";
-        } else {
-            return "Username is not available!";
-        }
     }
 
 }
