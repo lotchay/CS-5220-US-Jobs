@@ -5,7 +5,14 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 <div class="animated fadeIn row">
-	<div class="col-md-8 col-md-offset-2">
+	<div class="col-md-10 col-md-offset-1">
+		<security:authorize access="hasRole('ROLE_ADMIN')">
+			<p>
+				<a id="add" class="btn btn-primary" role="button"><i
+					class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;&nbsp; Add New
+					User</a>
+			</p>
+		</security:authorize>
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h3 class="panel-title">
@@ -35,18 +42,25 @@
 							<td data-field="email">${user.email}</td>
 							<td data-field="userRole">${user.userRoles}</td>
 							<td><security:authorize access="hasRole('ROLE_ADMIN')">
-									<a data-userId="${user.id}" class="btn btn-info view" role="button">
-										<i class="fa fa-street-view"
-										aria-hidden="true"></i>&nbsp;&nbsp; View</a>
-									<a data-userId="${user.id}" class="btn btn-success edit" role="button">
-										<i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Edit</a>
+									<a data-userId="${user.id}" class="btn btn-info view"
+										role="button"> <i class="fa fa-street-view"
+										aria-hidden="true"></i>&nbsp;&nbsp; View
+									</a>
+									<a data-userId="${user.id}" class="btn btn-success edit"
+										role="button"> <i class="fa fa-pencil-square-o"
+										aria-hidden="true"></i>&nbsp;&nbsp;Edit
+									</a>
 									<c:if test="${user.enabled}">
-										<a data-userId="${user.id}" class="btn btn-danger disable" role="button">
-											<i class="fa fa-level-down" aria-hidden="true"></i>&nbsp;&nbsp;Disable</a>
+										<a data-userId="${user.id}" class="btn btn-danger disable"
+											role="button"> <i class="fa fa-level-down"
+											aria-hidden="true"></i>&nbsp;&nbsp;Disable
+										</a>
 									</c:if>
 									<c:if test="${not user.enabled}">
-										<a data-userId="${user.id}" class="btn btn-warning enable" role="button">
-											<i class="fa fa-level-up" aria-hidden="true"></i>&nbsp;&nbsp;Enable</a>
+										<a data-userId="${user.id}" class="btn btn-warning enable"
+											role="button"> <i class="fa fa-level-up"
+											aria-hidden="true"></i>&nbsp;&nbsp;Enable
+										</a>
 									</c:if>
 								</security:authorize></td>
 						</tr>
@@ -54,62 +68,76 @@
 				</table>
 			</div>
 		</div>
-		<security:authorize access="hasRole('ROLE_ADMIN')">
-			<p>
-				<a id="add" class="btn btn-primary" role="button"><i
-					class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;&nbsp; Add New
-					User</a>
-			</p>
-		</security:authorize>
 	</div>
 </div>
 
 <div id="user-form">
-    <form id="addForm" class="form-horizontal">
-        <input type="hidden" name="userId" />
-        <fieldset>
-            <div class="form-group">
-                <label for="username" class="col-lg-2 control-label">Username</label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="username"
-                        name="username" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="password" class="col-lg-2 control-label">Password</label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="password" name="password" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="name" class="col-lg-2 control-label">FirstName</label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="firstName" name="firstName" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="name" class="col-lg-2 control-label">LastName</label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="lastName" name="lastName" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="email" class="col-lg-2 control-label">Email</label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="email" name="email" />
-                </div>
-            </div>
-        </fieldset>
-    </form>
+	<form id="addForm" class="form-horizontal">
+		<input type="hidden" name="userId" />
+		<fieldset>
+			<div class="form-group">
+				<label for="username" class="col-lg-2 control-label">Username</label>
+				<div class="col-lg-10">
+					<input type="text" class="form-control" id="username"
+						name="username" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="password" class="col-lg-2 control-label">Password</label>
+				<div class="col-lg-10">
+					<input type="text" class="form-control" id="password"
+						name="password" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="name" class="col-lg-2 control-label">FirstName</label>
+				<div class="col-lg-10">
+					<input type="text" class="form-control" id="firstName"
+						name="firstName" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="name" class="col-lg-2 control-label">LastName</label>
+				<div class="col-lg-10">
+					<input type="text" class="form-control" id="lastName"
+						name="lastName" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="email" class="col-lg-2 control-label">Email</label>
+				<div class="col-lg-10">
+					<input type="text" class="form-control" id="email" name="email" />
+				</div>
+			</div>
+		</fieldset>
+	</form>
 </div>
 
 <div id="user-display">
-    <table class="table table-striped table-hover">
-        <tr><th>ID</th><td data-field="userId"></td></tr>
-        <tr><th>Username</th><td data-field="username"></td></tr>
-        <tr><th>Password</th><td data-field="password"></td></tr>
-        <tr><th>FirstName</th><td data-field="firstName"></td></tr>
-        <tr><th>LastName</th><td data-field="lastName"></td></tr>
-				<tr><th>Email</th><td data-field="email"></td></tr>
-    </table>
+	<table class="table table-striped table-hover">
+		<tr>
+			<th>ID</th>
+			<td data-field="userId"></td>
+		</tr>
+		<tr>
+			<th>Username</th>
+			<td data-field="username"></td>
+		</tr>
+		<tr>
+			<th>Password</th>
+			<td data-field="password"></td>
+		</tr>
+		<tr>
+			<th>First Name</th>
+			<td data-field="firstName"></td>
+		</tr>
+		<tr>
+			<th>Last Name</th>
+			<td data-field="lastName"></td>
+		</tr>
+		<tr>
+			<th>Email</th>
+			<td data-field="email"></td>
+		</tr>
+	</table>
 </div>
