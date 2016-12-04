@@ -124,11 +124,11 @@ function editUser() {
 
 			var editRow = $('#users tr[data-user-id=' + userId + ']');
 			
-			editRow.find('td[data-field=username').html( user.username );
-			editRow.find('td[data-field=password').html( user.password );
-			editRow.find('td[data-field=firstName').html( user.firstName );
-			editRow.find('td[data-field=lastName').html( user.lastName );
-			editRow.find('td[data-field=email').html( user.email );
+			editRow.find('td[data-field=username]').html( user.username );
+			editRow.find('td[data-field=password]').html( user.password );
+			editRow.find('td[data-field=firstName]').html( user.firstName );
+			editRow.find('td[data-field=lastName]').html( user.lastName );
+			editRow.find('td[data-field=email]').html( user.email );
 		}
 	});
 }
@@ -142,13 +142,13 @@ function editHandler() {
 	var lastName = $(this).closest('tr').children('td[data-field=lastName]').html();
 	var email = $(this).closest('tr').children('td[data-field=email]').html();
 
-	$('#user-form input[name=username').val( username );
-	$('#user-form input[name=password').val( password );
-	$('#user-form input[name=firstName').val( firstName );
-	$('#user-form input[name=lastName').val( lastName );
-	$('#user-form input[name=email').val( email );
+	$('#user-form input[name=username]').val( username );
+	$('#user-form input[name=password]').val( password );
+	$('#user-form input[name=firstName]').val( firstName );
+	$('#user-form input[name=lastName]').val( lastName );
+	$('#user-form input[name=email]').val( email );
 
-	$('#user-form input[name=userId').val( userId );
+	$('#user-form input[name=userId]').val( userId );
 
 	$('#user-form').dialog('open');
 }
