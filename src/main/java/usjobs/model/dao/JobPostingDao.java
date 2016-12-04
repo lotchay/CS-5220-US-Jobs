@@ -36,6 +36,7 @@ public interface JobPostingDao {
     JobPosting saveEmail( JobPosting jobPosting );
 
     JobPosting jobFavoritedOrApplied( JobPosting jobPosting );
-
+    
+    List<String> searchJobNoFTS(String term);
 }
 

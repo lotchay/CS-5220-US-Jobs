@@ -27,16 +27,20 @@ public class UserService {
 
     @RequestMapping(value = "/service/users", method = RequestMethod.POST)
     public User addUser( @RequestBody User user ) {
-
+    	
         user.getUserRoles().add( "ROLE_ADMIN" );
         return userDao.saveUser( user );
     }
 
     @RequestMapping(value = "/service/user/{id}", method = RequestMethod.PUT)
     public void updateUser( @PathVariable Integer id, @RequestBody User user ) {
-
-        user.setId( id );
-        userDao.saveUser( user );
+    	User existingUser = userDao.getUser(id);
+    	existingUser.setUsername(user.getUsername());
+    	existingUser.setPassword(user.getPassword());
+    	existingUser.setFirstName(user.getFirstName());
+    	existingUser.setLastName(user.getLastName());
+    	existingUser.setEmail(user.getEmail());
+        userDao.saveUser( existingUser );
     }
     
     @RequestMapping(value = "/service/user/toggle/{id}", method = RequestMethod.PUT)

@@ -23,18 +23,27 @@ public class SearchService {
 	@Autowired
 	JobPostingDao jobPostingDao;
 	
-	@RequestMapping(value = "/service/search/jobs", method = RequestMethod.POST)
-	public void searchJobTitles(HttpServletResponse response, @RequestParam String searchKey, @RequestParam String searchLoc)
-			throws IOException{
-		response.setContentType("application/json");
-		List<JobPosting> jobsList = jobPostingDao.searchJobsForAutocomplete(searchKey, searchLoc);
-		String jobTitleList = "[";
-		for(JobPosting job:jobsList){
-			jobTitleList += "\"" + job.getJobTitle() + "\",";
-		}
-		jobTitleList = jobTitleList.substring(0, jobTitleList.length()-1);
-		jobTitleList += "]";
-		response.getWriter().write(jobTitleList);
+	/**
+	 * New version
+	 */
+	@RequestMapping(value = "/service/search/jobs", method = RequestMethod.GET)
+	public List<String> suggestJobs(@RequestParam String term) {
+		return jobPostingDao.searchJobNoFTS(term);
 	}
+	
+	//old version
+//	@RequestMapping(value = "/service/search/jobs", method = RequestMethod.POST)
+//	public void searchJobTitles(HttpServletResponse response, @RequestParam String searchKey, @RequestParam String searchLoc)
+//			throws IOException{
+//		response.setContentType("application/json");
+//		List<JobPosting> jobsList = jobPostingDao.searchJobsForAutocomplete(searchKey, searchLoc);
+//		String jobTitleList = "[";
+//		for(JobPosting job:jobsList){
+//			jobTitleList += "\"" + job.getJobTitle() + "\",";
+//		}
+//		jobTitleList = jobTitleList.substring(0, jobTitleList.length()-1);
+//		jobTitleList += "]";
+//		response.getWriter().write(jobTitleList);
+//	}
 
 }
