@@ -9,12 +9,12 @@ function viewUser() {
 		dataType: 'json',
 		success: function( user ) {
 
-			$('#user-display td[data-field=userId').html( user.id ),
-			$('#user-display td[data-field=username').html( user.username ),
-			$('#user-display td[data-field=password').html( user.password ),
-			$('#user-display td[data-field=firstName').html( user.firstName ),
-			$('#user-display td[data-field=lastName').html( user.lastName ),
-			$('#user-display td[data-field=email').html( user.email )
+			$('#user-display td[data-field=userId]').html( user.id ),
+			$('#user-display td[data-field=username]').html( user.username ),
+			$('#user-display td[data-field=password]').html( user.password ),
+			$('#user-display td[data-field=firstName]').html( user.firstName ),
+			$('#user-display td[data-field=lastName]').html( user.lastName ),
+			$('#user-display td[data-field=email]').html( user.email )
 		}
 	})
 
@@ -73,27 +73,31 @@ function addUser() {
 		data: JSON.stringify( user ),
 		success: function( user ) {
 
-			var newRow = $("<tr><td>" + user.id + "</td><td>" +
-					user.username + "</td><td>" + user.password + "</td><td>" + user.firstName +
-					"</td><td>" + user.lastName + "</td><td>" + user.email + "</td><td>" +
-					user.userRoles + "</td>" +
+			var newRow = $("<tr data-user-id='" + user.id + "'><td data-field='id'>" + 
+					user.id + "</td><td data-field='username'>" +
+					user.username + "</td><td data-field='password'>" + user.password + 
+					"</td><td data-field='firstName'>" + user.firstName +
+					"</td><td data-field='lastName'>" + user.lastName + 
+					"</td><td data-field='email'>" + user.email + 
+					"</td><td data-field='userRole'>" + user.userRoles + "</td>" +
 					"<a data-userId='" + user.id + "' class='btn btn-info view' role='button'>" +
 						"<i class='fa fa-street-view'" +
 						"aria-hidden='true'></i>&nbsp;&nbsp; View</a>" +
 					"<a data-userId='" + user.id + "' class='btn btn-success edit' role='button'>" +
 						"<i class='fa fa-pencil-square-o' aria-hidden='true'>" +
 						"</i>&nbsp;&nbsp;Edit</a>" +
-					"<a data-userId='" + user.id + "' class='btn btn-warning enable' role='button'>" +
-					"<i class='fa fa-level-up' aria-hidden='true'>" +
-					"</i>&nbsp;&nbsp;Enable</a></td></tr>"
+					"<a data-userId='" + user.id + "' class='btn btn-danger disable' role='button'>" +
+					"<i class='fa fa-level-down' aria-hidden='true'>" +
+					"</i>&nbsp;&nbsp;Disable</a></td></tr>"
 			);
 
 			$('#users').append(newRow);
 
 			// Need to re-attach event handlers to account for this newly added row.
-		    $(".view").unbind('click.namespace').bind('click.namespace', viewUser);
+		    $('.view').unbind('click.namespace').bind('click.namespace', viewUser);
+		    $('.edit').unbind('click.namespace').bind('click.namespace', editHandler);
 		    $('.disable, .enable').unbind('click.namespace').bind('click.namespace', toggleUser);
-		    $(".edit").unbind('click.namespace').bind('click.namespace', editHandler);
+		    
 		}
 	});
 }
@@ -119,12 +123,12 @@ function editUser() {
 		success: function() {
 
 			var editRow = $('#users tr[data-user-id=' + userId + ']');
-			alert(editRow);
-			editRow.find('td[data-field=username').html( username );
-			editRow.find('td[data-field=password').html( password );
-			editRow.find('td[data-field=firstName').html( firstName );
-			editRow.find('td[data-field=lastName').html( lastName );
-			editRow.find('td[data-field=email').html( email );
+			
+			editRow.find('td[data-field=username]').html( user.username );
+			editRow.find('td[data-field=password]').html( user.password );
+			editRow.find('td[data-field=firstName]').html( user.firstName );
+			editRow.find('td[data-field=lastName]').html( user.lastName );
+			editRow.find('td[data-field=email]').html( user.email );
 		}
 	});
 }
@@ -138,13 +142,13 @@ function editHandler() {
 	var lastName = $(this).closest('tr').children('td[data-field=lastName]').html();
 	var email = $(this).closest('tr').children('td[data-field=email]').html();
 
-	$('#user-form input[name=username').val( username );
-	$('#user-form input[name=password').val( password );
-	$('#user-form input[name=firstName').val( firstName );
-	$('#user-form input[name=lastName').val( lastName );
-	$('#user-form input[name=email').val( email );
+	$('#user-form input[name=username]').val( username );
+	$('#user-form input[name=password]').val( password );
+	$('#user-form input[name=firstName]').val( firstName );
+	$('#user-form input[name=lastName]').val( lastName );
+	$('#user-form input[name=email]').val( email );
 
-	$('#user-form input[name=userId').val( userId );
+	$('#user-form input[name=userId]').val( userId );
 
 	$('#user-form').dialog('open');
 }
@@ -180,9 +184,9 @@ $( function() {
 	});
 
 	// Need to re-attach event handlers to account for this newly added row.
-    $(".view").unbind('click.namespace').bind('click.namespace', viewUser);
+    $('.view').unbind('click.namespace').bind('click.namespace', viewUser);
+    $('.edit').unbind('click.namespace').bind('click.namespace', editHandler);
     $('.disable, .enable').unbind('click.namespace').bind('click.namespace', toggleUser);
-    $(".edit").unbind('click.namespace').bind('click.namespace', editHandler);
 
 	$('#add').click( function() {
 
