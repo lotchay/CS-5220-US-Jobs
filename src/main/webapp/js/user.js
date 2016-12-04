@@ -80,7 +80,7 @@ function addUser() {
 					"</td><td data-field='lastName'>" + user.lastName + 
 					"</td><td data-field='email'>" + user.email + 
 					"</td><td data-field='userRole'>" + user.userRoles + "</td>" +
-					"<a data-userId='" + user.id + "' class='btn btn-info view' role='button'>" +
+					"<td><a data-userId='" + user.id + "' class='btn btn-info view' role='button'>" +
 						"<i class='fa fa-street-view'" +
 						"aria-hidden='true'></i>&nbsp;&nbsp; View</a>" +
 					"<a data-userId='" + user.id + "' class='btn btn-success edit' role='button'>" +

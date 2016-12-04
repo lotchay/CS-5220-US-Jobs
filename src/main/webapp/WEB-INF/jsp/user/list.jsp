@@ -18,6 +18,7 @@
 					<tr class="info">
 						<th>ID</th>
 						<th>Username</th>
+						<th>password</th>
 						<th>First Name</th>
 						<th>Last Name</th>
 						<th>Email</th>
@@ -106,7 +107,7 @@
     <table class="table table-striped table-hover">
         <tr><th>ID</th><td data-field="userId"></td></tr>
         <tr><th>Username</th><td data-field="username"></td></tr>
-        <tr><th>Password</th><td data-field="password"></td></tr>        
+        <tr><th>Password</th><td data-field="password"></td></tr>
         <tr><th>FirstName</th><td data-field="firstName"></td></tr>
         <tr><th>LastName</th><td data-field="lastName"></td></tr>
 				<tr><th>Email</th><td data-field="email"></td></tr>
