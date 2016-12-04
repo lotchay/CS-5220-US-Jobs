@@ -80,7 +80,7 @@ function addUser() {
 					"</td><td data-field='lastName'>" + user.lastName + 
 					"</td><td data-field='email'>" + user.email + 
 					"</td><td data-field='userRole'>" + user.userRoles + "</td>" +
-					"<a data-userId='" + user.id + "' class='btn btn-info view' role='button'>" +
+					"<td><a data-userId='" + user.id + "' class='btn btn-info view' role='button'>" +
 						"<i class='fa fa-street-view'" +
 						"aria-hidden='true'></i>&nbsp;&nbsp; View</a>" +
 					"<a data-userId='" + user.id + "' class='btn btn-success edit' role='button'>" +
@@ -94,10 +94,9 @@ function addUser() {
 			$('#users').append(newRow);
 
 			// Need to re-attach event handlers to account for this newly added row.
-		    $('.view').unbind('click.namespace').bind('click.namespace', viewUser);
-		    $('.edit').unbind('click.namespace').bind('click.namespace', editHandler);
-		    $('.disable, .enable').unbind('click.namespace').bind('click.namespace', toggleUser);
-		    
+			newRow.find('.view').click(viewUser);
+			newRow.find('.edit').click(initEditUser);
+			newRow.find('.disable, .enable').click(toggleUser);
 		}
 	});
 }
@@ -133,7 +132,7 @@ function editUser() {
 	});
 }
 
-function editHandler() {
+function initEditUser() {
 
 	var userId = $(this).closest('tr').attr('data-user-id');
 	var username = $(this).closest('tr').children('td[data-field=username]').html();
@@ -184,9 +183,9 @@ $( function() {
 	});
 
 	// Need to re-attach event handlers to account for this newly added row.
-    $('.view').unbind('click.namespace').bind('click.namespace', viewUser);
-    $('.edit').unbind('click.namespace').bind('click.namespace', editHandler);
-    $('.disable, .enable').unbind('click.namespace').bind('click.namespace', toggleUser);
+    $('.view').click(viewUser);
+    $('.edit').click(initEditUser);
+    $('.disable, .enable').click(toggleUser);
 
 	$('#add').click( function() {
 

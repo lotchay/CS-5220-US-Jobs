@@ -40,7 +40,7 @@ function disableJobPosting(){
         method : "PUT",
         context : $(this),
         success: function() {
-        	var newHtml = "<a class=\"btn btn-success enablePosting\" role=\"button\" href=\"javascript:void(0)\">|<i class=\"fa fa-level-up\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Enable</a>";
+        	var newHtml = "<a class=\"btn btn-success enablePosting\" role=\"button\" href=\"javascript:void(0)\"><i class=\"fa fa-level-up\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Enable</a>";
         	disableEnableDiv.html(newHtml);
         	disableEnableDiv.find(".enablePosting").click(enableJobPosting);
         }
@@ -55,7 +55,7 @@ function enableJobPosting(){
         method : "PUT",
         context : $(this),
         success: function() {
-        	var newHtml = "<a class=\"btn btn-danger disablePosting\" role=\"button\" href=\"javascript:void(0)\">|<i class=\"fa fa-level-down\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Disable</a>";
+        	var newHtml = "<a class=\"btn btn-danger disablePosting\" role=\"button\" href=\"javascript:void(0)\"><i class=\"fa fa-level-down\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Disable</a>";
             disableEnableDiv.html(newHtml);
             disableEnableDiv.find(".disablePosting").click(disableJobPosting);
         }
@@ -147,7 +147,7 @@ function addJob() {
 	        	var location = data.location;
 	        	var description = data.jobDescription;
 	        	var salary = data.salary;
-	        	var newRow = "<tr " +
+	        	var $newRow = $("<tr " +
 	        			"data-job-id='" + jobId + "' " +
 	        			"data-job-title='" + title + "' " +
 	        			"data-job-website='" + website + "' " +
@@ -165,21 +165,18 @@ function addJob() {
 	        			"<i class='fa fa-pencil-square-o' aria-hidden='true'></i>&nbsp;&nbsp;Edit </a> " +
 	        			"<a role='button' class='btn btn-sm btn-danger deleteJob'> " +
 	        			"<i class='fa fa-times-circle'></i>&nbsp;&nbsp;Delete </a>" +
-						"</td></tr>";
+						"</td></tr>");
 
-	        	console.log(newRow);
-	        	$("#jobs").append($(newRow));
-
-	        	// Need to re-attach event handlers to account for this newly added row.
-	        	$(".deleteJob").unbind('click.namespace').bind('click.namespace', deleteJob);
-	        	$(".openJob, .closeJob").unbind('click.namespace').bind('click.namespace', toggleJob);
-	        	$(".editJob").unbind('click.namespace').bind('click.namespace', editHandler);
+	        	$("#jobs").append($newRow);
+	        	// In this newly added row, attach event handlers to the appropriate <a> elements.
+	        	$newRow.find('.deleteJob').click(deleteJob);
+	        	$newRow.find('.openJob, .closeJob').click(toggleJob);
+	        	$newRow.find('.editJob').click(initEditJob);
 	        }
 	    });
 }
 
-function editHandler() {
-	console.log('editHndler called');
+function initEditJob() {
 	var id = $(this).closest("tr").attr("data-job-id");
 	var title = $(this).closest("tr").attr("data-job-title");
 	var website = $(this).closest("tr").attr("data-job-website");
@@ -233,9 +230,9 @@ $(function() {
 		title: "View Job Posting",
 	});
 
-	$(".deleteJob").unbind('click.namespace').bind('click.namespace', deleteJob);
-	$(".openJob, .closeJob").unbind('click.namespace').bind('click.namespace', toggleJob);
-	$(".editJob").unbind('click.namespace').bind('click.namespace', editHandler);
+	$(".deleteJob").click(deleteJob);
+	$(".openJob, .closeJob").click(toggleJob);
+	$(".editJob").click(initEditJob);
 
 	/**
 	 * Event handler for adding a job under 'Manage Job Listings'
