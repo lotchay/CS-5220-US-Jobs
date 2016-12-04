@@ -86,9 +86,9 @@ function addUser() {
 					"<a data-userId='" + user.id + "' class='btn btn-success edit' role='button'>" +
 						"<i class='fa fa-pencil-square-o' aria-hidden='true'>" +
 						"</i>&nbsp;&nbsp;Edit</a>" +
-					"<a data-userId='" + user.id + "' class='btn btn-warning enable' role='button'>" +
-					"<i class='fa fa-level-up' aria-hidden='true'>" +
-					"</i>&nbsp;&nbsp;Enable</a></td></tr>"
+					"<a data-userId='" + user.id + "' class='btn btn-danger disable' role='button'>" +
+					"<i class='fa fa-level-down' aria-hidden='true'>" +
+					"</i>&nbsp;&nbsp;Disable</a></td></tr>"
 			);
 
 			$('#users').append(newRow);
