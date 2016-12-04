@@ -9,12 +9,12 @@ function viewUser() {
 		dataType: 'json',
 		success: function( user ) {
 
-			$('#user-display td[data-field=userId').html( user.id ),
-			$('#user-display td[data-field=username').html( user.username ),
-			$('#user-display td[data-field=password').html( user.password ),
-			$('#user-display td[data-field=firstName').html( user.firstName ),
-			$('#user-display td[data-field=lastName').html( user.lastName ),
-			$('#user-display td[data-field=email').html( user.email )
+			$('#user-display td[data-field=userId]').html( user.id ),
+			$('#user-display td[data-field=username]').html( user.username ),
+			$('#user-display td[data-field=password]').html( user.password ),
+			$('#user-display td[data-field=firstName]').html( user.firstName ),
+			$('#user-display td[data-field=lastName]').html( user.lastName ),
+			$('#user-display td[data-field=email]').html( user.email )
 		}
 	})
 
