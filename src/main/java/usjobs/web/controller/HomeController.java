@@ -23,7 +23,7 @@ public class HomeController {
     @Autowired
     private ResumeDao resumeDao;
 
-    @RequestMapping(value = { "/index", "/home" },
+    @RequestMapping(value = {"/","/index","/home"},
         method = RequestMethod.GET)
     public String home( ModelMap models ) {
 
@@ -31,7 +31,7 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping(value = { "/index", "/home" },
+    @RequestMapping(value = {"/","/index","/home"},
         method = RequestMethod.POST)
     public String home( @RequestParam String searchBar,
         @RequestParam String searchLoc, @RequestParam String searchType,
