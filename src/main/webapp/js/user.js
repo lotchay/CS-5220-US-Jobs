@@ -73,10 +73,13 @@ function addUser() {
 		data: JSON.stringify( user ),
 		success: function( user ) {
 
-			var newRow = $("<tr><td>" + user.id + "</td><td>" +
-					user.username + "</td><td>" + user.password + "</td><td>" + user.firstName +
-					"</td><td>" + user.lastName + "</td><td>" + user.email + "</td><td>" +
-					user.userRoles + "</td>" +
+			var newRow = $("<tr data-user-id='" + user.id + "'><td data-field='id'>" + 
+					user.id + "</td><td data-field='username'>" +
+					user.username + "</td><td data-field='password'>" + user.password + 
+					"</td><td data-field='firstName'>" + user.firstName +
+					"</td><td data-field='lastName'>" + user.lastName + 
+					"</td><td data-field='email'>" + user.email + 
+					"</td><td data-field='userRole'>" + user.userRoles + "</td>" +
 					"<a data-userId='" + user.id + "' class='btn btn-info view' role='button'>" +
 						"<i class='fa fa-street-view'" +
 						"aria-hidden='true'></i>&nbsp;&nbsp; View</a>" +
@@ -91,9 +94,10 @@ function addUser() {
 			$('#users').append(newRow);
 
 			// Need to re-attach event handlers to account for this newly added row.
-		    $(".view").unbind('click.namespace').bind('click.namespace', viewUser);
+		    $('.view').unbind('click.namespace').bind('click.namespace', viewUser);
+		    $('.edit').unbind('click.namespace').bind('click.namespace', editHandler);
 		    $('.disable, .enable').unbind('click.namespace').bind('click.namespace', toggleUser);
-		    $(".edit").unbind('click.namespace').bind('click.namespace', editHandler);
+		    
 		}
 	});
 }
@@ -180,9 +184,9 @@ $( function() {
 	});
 
 	// Need to re-attach event handlers to account for this newly added row.
-    $(".view").unbind('click.namespace').bind('click.namespace', viewUser);
+    $('.view').unbind('click.namespace').bind('click.namespace', viewUser);
+    $('.edit').unbind('click.namespace').bind('click.namespace', editHandler);
     $('.disable, .enable').unbind('click.namespace').bind('click.namespace', toggleUser);
-    $(".edit").unbind('click.namespace').bind('click.namespace', editHandler);
 
 	$('#add').click( function() {
 
